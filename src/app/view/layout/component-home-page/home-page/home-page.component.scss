@@ -1,12 +1,10 @@
 .background{
     background-image: url(/assets/img/parallax-2.jpg);
     background-size: cover;
-    min-height: 500;
+    //min-height: 500;
 }
 
 .titulo {
-    width: 512px;
-    height: 96px;
     font-size: 40px;
     font-weight: normal;
     font-stretch: normal;
@@ -17,8 +15,6 @@
   }
 
 .parrafo {
-    width: 555px;
-    height: 48px;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -32,7 +28,7 @@
     width: 209px;
     height: 48px;
     border-radius: 8px;
-    background-color: #0A9BC9;
+    background-color: #0079a8;
     color: #ffffff;
     font-size: 14px;
     font-weight: 600;
@@ -43,8 +39,13 @@
     text-align: center;
 }
 
+.trabajamos-con{
+  text-align: center;
+  margin-top: 120px;
+}
+
 .boton:hover{
-  background-color: #CB4190;
+  background-color: #092AB5;
 }
 
 .titulo2 {
@@ -69,12 +70,14 @@
 
 .sidebar {
   height: 500px;
-  background-color: #0A9BC9;
+  background-color: #0078A9;
 }
 
 .texto {
-  width: 236px;
-  font-size: 17px;
+  font-family: Poppins-SemiBold;
+  margin-bottom: 40px;
+  padding: 0px 45px;
+  font-size: 16px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -83,6 +86,14 @@
   text-align: center;
   color: #ffffff;
   margin-top: 40px;
+}
+
+.contenedor-calculadora{
+  padding: 0px 40px;
+}
+
+.contenedor-opciones-servicio{
+  padding: 0px 40px;
 }
 
 .pasos {
@@ -106,11 +117,17 @@
   border-radius: 15px;
   border-color: white;
   color: white;
-  background-color: #0A9BC9;
+  background-color: #0078A9;
+}
+
+.slide-image{
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
 .Que-ests-buscando {
   font-size: 18px;
+  font-family: Poppins-SemiBold;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -118,12 +135,11 @@
   letter-spacing: normal;
   color: #000000;
   margin-top: 40px;
+  margin-bottom: 12px;
 }
 
 .ASESORI-pone-a-tu-di {
-  width: 783px;
-  height: 22px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -136,10 +152,10 @@
   height: 91px;
   margin-right: 10px;
   border-radius: 4px;
-  border: solid 2px #0A9BC9;
+  border: solid 2px #0078A9;
   background-color: #ffffff;
   width: 23%;
-  color: #0079ab;
+  color: #0078A9;
   padding: 28px 35px;
   font-size: 14px;
 }
@@ -198,9 +214,7 @@
 }
 
 .header-slider {
-  width: 246px;
-  height: 16px;
-  font-weight: bold;
+  font-family: Poppins-SemiBold;
   font-size: 14px;
   font-weight: 600;
   font-stretch: normal;
@@ -211,6 +225,7 @@
 }
 
 .pie-slider {
+  font-family: Poppins-Medium;
   text-align: right;
   margin-top: 5px;
   margin-bottom: 0px;
@@ -225,51 +240,57 @@
 }
 
 .Ranking-Asesori {
-font-family: Poppins-SemiBold;
-font-size: 30px;
-font-weight: normal;
-font-stretch: normal;
-font-style: normal;
-line-height: 1.39;
-letter-spacing: normal;
-color: #333337;
-margin-top: 70px;
+  font-family: Poppins-SemiBold;
+  font-size: 30px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.39;
+  letter-spacing: normal;
+  color: #333337;
+  margin-top: 70px;
 }
 
 .Te-enseamos-una-cal {
-font-size: 16px;
-font-weight: normal;
-font-stretch: normal;
-font-style: normal;
-line-height: 1.69;
-letter-spacing: normal;
-color: #333337;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.69;
+  letter-spacing: normal;
+  color: #333337;
+}
+
+.contenedor-calificaciones{
+  margin-top: 70px;
 }
 
 .Tasa-de-inters {
-font-size: 9.6px;
-font-weight: normal;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: normal;
-text-align: center;
-color: #333337;
+  font-size: 9.6px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #333337;
 }
 
 .interes{
-font-size: 16px;
-font-weight: bold;
-font-stretch: normal;
-font-style: normal;
-line-height: normal;
-letter-spacing: normal;
-text-align: center;
-color: #333337;
+  font-family: Poppins-SemiBold;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #333337;
 }
 
 .Mask {
   height: 500px;
+  width: 100%;
   background-color: #333337;
 }
 
@@ -278,6 +299,7 @@ color: #333337;
 }
 
 .Los-Servicios {
+  font-family: Poppins-SemiBold;
   text-align: center;
   font-size: 18px;
   font-weight: 600;
@@ -493,8 +515,7 @@ nav > a:hover {
   background:#fff;
   padding:2.2em;
   display:flex;
-  align-items:center;
-  z-index:8000;
+  align-items:center;  
   flex:none;
 }
 
@@ -610,19 +631,242 @@ nav > a:hover {
   border-bottom: 1px solid #0A9BC9;
 }
 
-.legal-nav li:last-child:hover a {color: #0A9BC9;}
-.social-nav {margin-bottom: 2.5em;}
-.social-nav .icon-bubble:hover:before {box-shadow: inset 0 0 0 2px #0A9BC9;transform: scale3d(1, 1, 1);}
-.social-nav .icon-bubble:hover a {border-bottom: none;color: #0A9BC9;}
+.legal-nav li:last-child:hover a {
+  color: #0A9BC9;
+}
 
-@media screen and (max-width: 767px) {
-#mainFooter {box-lines: multiple;flex-wrap: wrap;box-align: start; align-items: flex-start;padding: 2.2em 2.2em 5rem;}
-#mainFooter .footer-left,
-#mainFooter .footer-right {width: 50%;}}
+.social-nav {
+  margin-bottom: 2.5em;
+}
 
-@media screen and (max-width: 767px) {
-#mainFooter .social-nav {display: none;}
-#mainFooter .legal-nav {margin-top: -5px;}
-#mainFooter .legal-nav li {display: block;margin: 0 auto;text-align: right;font-size: 1.25em;line-height: 2;}}
+.social-nav .icon-bubble:hover:before {
+  box-shadow: inset 0 0 0 2px #0A9BC9;
+  transform: scale3d(1, 1, 1);
+}
 
-@media screen and (max-width: 767px) {.legal-nav li:last-child {border-left: none;padding-left: 0;}}
+.social-nav .icon-bubble:hover a {
+  border-bottom: none;
+  color: #0A9BC9;
+}
+
+/* Media Querys */
+
+// Extra small devices (portrait phones, less than 576px)
+@media screen and (max-width: 575.98px) {
+  
+  .icon-first-section{
+    text-align: center;
+  }
+
+  .icon-first-section img{
+    width: 115px;
+    height: 115px;
+  }
+
+  .contenedor{
+    padding: 20px 20px;
+    overflow: hidden;
+  }
+
+  .titulo {
+    font-size: 30px;
+  }
+
+  .parrafo {
+    margin-top: 30px;
+    margin-bottom: 48px;
+  }
+
+  .boton {
+    width: 100%;
+    height: 48px;
+  }
+
+  .background{
+    margin-top: 50px;
+    height: 280px;
+    margin-left: 0px;
+  }
+
+  .trabajamos-con{
+    text-align: center;
+    margin-top: 85px;
+    font-size: 22px;
+    margin-bottom: 25px;
+  }
+
+  .slide-image img{
+    width: 100%;
+  }
+
+  .col-beneficios{
+    margin-top: 30px;
+  }
+
+  .col-number{
+    width: 15%;
+  }
+
+  .col-text{
+    width: 80%;
+  }
+
+  .sidebar {
+    height: 400px;
+  }
+
+  .contenedor-calculadora{
+    padding: 0px 50px;
+  }
+  
+  .contenedor-opciones-servicio{
+    padding: 0px 0px;
+    text-align: center;
+  }
+
+  .options-active {
+    height: 91px;
+    margin-right: 0px;
+    width: 100%;
+    padding: 28px 45px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .options-no-active {
+    height: 91px;
+    margin-right: 0px;
+    width: 100%;
+    padding: 28px 45px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .col-icon{
+    width: 25%;
+  }
+
+  .col-icon-text{
+    width: 75%;
+  }
+
+  .cuadro-valor {
+    padding: 15px 20px;
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 15px;
+  }
+
+  .Ranking-Asesori {
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .Te-enseamos-una-cal {
+    font-size: 16px;
+    text-align: center;
+  }
+  .contenedor-calificaciones{
+    margin-top: 10px;
+  }
+
+  .calificacion-img{
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .calificacion-img img{
+    width: 220px;
+  }
+
+  .col-Tasa-de-inters{
+    width: 50%;
+  }
+
+  .Mask{
+    margin-top: 50px;
+    height: 200px;
+  }
+
+  .video video{
+    width: 100%;
+    height: auto;
+  }
+
+  .PODEMOS-AYUDARTE {
+    font-size: 30px;
+  }
+
+  .El-crdito-puede-ser {
+    margin-top: 20px;
+    padding: 0px 20px;
+  }
+
+  .card-service{
+    margin-bottom: 25px;
+  }
+
+  .Qu-beneficios-obten {
+    margin-top: 36px;
+    font-size: 28px;
+  }
+
+  .vertical-logo {
+    top: 70px;
+    left: 0px;
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media screen and (max-width: 767.98px) {
+  
+
+  .icon-first-section{
+    text-align: center;
+  }
+
+  .icon-first-section img{
+    width: 115px;
+    height: 115px;
+  }
+
+  #mainFooter {
+    box-lines: multiple;
+    flex-wrap: wrap;
+    box-align: start;
+    align-items: flex-start;
+    padding: 2.2em 2.2em 5rem;
+  }
+
+  #mainFooter .footer-left,
+  #mainFooter .footer-right {
+    width: 50%;
+  }
+
+  #mainFooter .social-nav {
+    display: none;
+  }
+  
+  #mainFooter .legal-nav {
+    margin-top: -5px;
+  }
+  
+  #mainFooter .legal-nav li {
+    display: block;
+    margin: 0 auto;
+    text-align: right;
+    font-size: 1.25em;
+    line-height: 2;
+  }
+
+  .legal-nav li:last-child {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+// Medium devices (tablets, less than 992px)
+@media screen and (max-width: 991.98px) {  }
+
+// Large devices (desktops, less than 1200px)
+@media screen and (max-width: 1199.98px) {  }

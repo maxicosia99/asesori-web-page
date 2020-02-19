@@ -57,13 +57,9 @@ export class HomePageComponent implements OnInit {
     }
   };
 
-
-
   max: number = 4;
   rate: number = 4;
   isReadonly: boolean = true;
-
-
 
   itemsPerSlide = 4;
   singleSlideOffset = true;

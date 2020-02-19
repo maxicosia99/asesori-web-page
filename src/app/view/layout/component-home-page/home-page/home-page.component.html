@@ -17,26 +17,27 @@
                 style="stroke: none; fill: #fff;"></path>
         </svg></div>
 </header> -->
+
 <main>
     <section class="container contenedor">
         <div class="row">
-            <div class="col-md-6">
-                <img src="/assets/img/logo-small.png" width="90px" height="82px" class="mt-4" alt="">
-                <br><br>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="container icon-first-section">
+                    <img src="/assets/img/logo-small.png" width="90px" height="90px" class="mt-4 mb-4" alt="">
+                </div>
                 <h2 class="titulo"><b>¿Necesitas un crédito para tu casa?</b></h2>
                 <p class="parrafo">Asesori te facilita las mejores opciones para que puedas acceder rápido y seguro al
                     crédito que necesites. </p>
-                <button type="button" class="btn boton mt-4">
+                <button type="button" class="btn boton">
                     INICIA UNA SOLICITUD
                 </button>
             </div>
-            <div class="col-md-6 background">
-                <h3 class="text-white" style="text-align: center; margin-top: 120px;">Trabajamos con</h3>
+            <div class="col-md-6 col-sm-12 col-xs-12 background">
+                <h3 class="text-white trabajamos-con">Trabajamos con</h3>
                 <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="noWrap"
                     [interval]="false" [startFromIndex]="1" (slideRangeChange)="onSlideRangeChange($event)"
                     [showIndicators]="false">
-                    <slide *ngFor="let slide of slides; let index=index" class="mr-3"
-                        style="background-color: white; border-radius: 8px;">
+                    <slide *ngFor="let slide of slides; let index=index" class="mr-3 slide-image">
                         <img [src]="slide.image" alt="image slide" style="display: block; width: 100%;">
                     </slide>
                 </carousel>
@@ -47,7 +48,7 @@
     <section class="container-fluid contenedor beneficios">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 col-beneficios">
                     <h4 class="titulo2"><i class="fas fa-stopwatch"></i><b> Reduce el tiempo</b></h4>
                     <p class="parrafo2">Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una tasa
                         menor
@@ -55,14 +56,14 @@
                         interés
                     </p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-beneficios">
                     <h4 class="titulo2"><i class="fas fa-money-bill-alt"></i><b> Ahorra dinero</b></h4>
                     <p class="parrafo2">Comparamos el costo de un crédito, sus plazos y requisitos adicionales. Por lo
                         que
                         podrás elegir el préstamo.
                     </p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-beneficios">
                     <h4 class="titulo2"><i class="fas fa-clipboard"></i><b> Transparencia</b></h4>
                     <p class="parrafo2">Actuamos de forma independiente al no ser una entidad financiera, ofreciéndote
                         información gratuita.
@@ -76,119 +77,117 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 sidebar">
-                    <h3 class="texto mb-5">¿CÓMO TRABAJA ASESORI?</h3>
-
+                    <h3 class="texto">¿CÓMO TRABAJA ASESORI?</h3>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-number">
                             <button type="button" class="btn btn-circle">1</button>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-text">
                             <p class="pasos">Selecciona el crédito al que deseas aplicar.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-number">
                             <button type="button" class="btn btn-circle">2</button>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-text">
                             <p class="pasos">Selecciona el crédito al que deseas
                                 aplicar.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-number">
                             <button type="button" class="btn btn-circle">3</button>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-text">
                             <p class="pasos">Ingresa tus datos para obtener beneficios.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-number">
                             <button type="button" class="btn btn-circle">4</button>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-text">
                             <p class="pasos">Asesori te muestra las mejores opciones de crédito, tanto por tiempo como
                                 por su
                                 tasa de interés.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9" style="padding: 0px 40px;">
-                    <h4 class="Que-ests-buscando"><b>QUÉ ESTAS BUSCANDO?</b></h4>
-                    <p class="ASESORI-pone-a-tu-di">ASESORI pone a tu disposición diferentes opciones de crédito cerca
-                        de tu
-                        ubicación a través de nuestros socios.</p>
-                    <div class="container">
+                <div class="col-md-9">
+                    <div class="contenedor-opciones-servicio">
+                        <h4 class="Que-ests-buscando"><b>¿QUÉ ESTÁS BUSCANDO?</b></h4>
+                        <p class="ASESORI-pone-a-tu-di">ASESORI pone a tu disposición diferentes opciones de crédito
+                            cerca de tu ubicación a través de nuestros socios.</p>
+                    </div>
+                    <div class="contenedor-calculadora">
+                        
                         <div class="row mt-4">
                             <div class="options-active">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-icon">
                                         <img src="/assets/img/iconos/dinero.png" width="40px" height="40px" alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-icon-text">
                                         <p>Crédito</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="options-no-active">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-icon">
                                         <img src="/assets/img/iconos/children-parents@3x.png" width="40px" height="40px"
                                             alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-icon-text">
                                         <p>Seguros</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="options-no-active">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-icon">
                                         <img src="/assets/img/iconos/master-card.png" width="40px" height="30px" alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-icon-text">
                                         <p>Tarjetas crédito</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="options-no-active">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-icon">
                                         <img src="/assets/img/iconos/bar@3x.png" width="40px" height="35px" alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-icon-text">
                                         <p>Póliza de inversión</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
-
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="custom-slider cuadro-valor">
-                                <p class="header-slider mb-4"><b>MONTO A SOLICITAR *</b></p>
-                                <ng5-slider [(value)]="monto.minValue" [options]="monto.options"></ng5-slider>
-                                <p class="pie-slider">Dólares americanos</p>
-                            </div>
-                            <div class="custom-slider cuadro-valor">
-                                <p class="header-slider mb-4"><b>ENTRADA</b></p>
-                                <ng5-slider [(value)]="entrada.minValue" [options]="entrada.options"></ng5-slider>
-                                <p class="pie-slider">Valor opcional</p>
-                            </div>
-                            <div class="custom-slider cuadro-valor">
-                                <p class="header-slider mb-4"><b>TIEMPO PLAZO *</b></p>
-                                <ng5-slider [(value)]="tiempo.minValue" [options]="tiempo.options"></ng5-slider>
-                                <p class="pie-slider">Meses</p>
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="custom-slider cuadro-valor">
+                                    <p class="header-slider mb-4"><b>MONTO A SOLICITAR *</b></p>
+                                    <ng5-slider [(value)]="monto.minValue" [options]="monto.options"></ng5-slider>
+                                    <p class="pie-slider">Dólares americanos</p>
+                                </div>
+                                <div class="custom-slider cuadro-valor">
+                                    <p class="header-slider mb-4"><b>ENTRADA</b></p>
+                                    <ng5-slider [(value)]="entrada.minValue" [options]="entrada.options"></ng5-slider>
+                                    <p class="pie-slider">Valor opcional</p>
+                                </div>
+                                <div class="custom-slider cuadro-valor">
+                                    <p class="header-slider mb-4"><b>TIEMPO PLAZO *</b></p>
+                                    <ng5-slider [(value)]="tiempo.minValue" [options]="tiempo.options"></ng5-slider>
+                                    <p class="pie-slider">Meses</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container mt-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="button" class="btn boton" style="margin-left: 520px;">CALCULAR</button>
+                        <div class="container mt-4">
+                            <div class="row">
+                                <button type="button" class="btn boton">CALCULAR</button>
                             </div>
                         </div>
                     </div>
@@ -207,25 +206,25 @@
                     solicitud
                 </p>
             </div>
-            <div class="col-md-8" style="margin-top: 70px;">
+            <div class="col-md-8 contenedor-calificaciones">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 calificacion-img">
                         <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png" class="img-responsive"
                             width="155px" alt="">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tasa de interés</p>
                         <p class="interes">9.81%</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tiempo de aprobación</p>
                         <p class="interes">72 horas</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Cantidad de trámites</p>
                         <p class="interes">CORTO</p>
                     </div>
-                    <div class="col-md-3" style="text-align: center;">
+                    <div class="col-md-3 col-Tasa-de-inters" style="text-align: center;">
                         <p class="Tasa-de-inters">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" style="color: #ffc80a;font-size: 20px;"
                             [readonly]="isReadonly"></rating>
@@ -234,23 +233,23 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 calificacion-img">
                         <img src="/assets/img/financial-entities/banco-pichincha-188x100.png" class="img-responsive"
                             width="155px" alt="">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tasa de interés</p>
                         <p class="interes">9.81%</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tiempo de aprobación</p>
                         <p class="interes">72 horas</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Cantidad de trámites</p>
                         <p class="interes">CORTO</p>
                     </div>
-                    <div class="col-md-3" style="text-align: center;">
+                    <div class="col-md-3 col-Tasa-de-inters" style="text-align: center;">
                         <p class="Tasa-de-inters">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" style="color: #ffc80a;font-size: 20px;"
                             [readonly]="isReadonly"></rating>
@@ -259,23 +258,23 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 calificacion-img">
                         <img src="/assets/img/financial-entities/banco-austro-188x100.png" class="img-responsive"
                             width="155px" alt="">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tasa de interés</p>
                         <p class="interes">9.81%</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tiempo de aprobación</p>
                         <p class="interes">72 horas</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Cantidad de trámites</p>
                         <p class="interes">CORTO</p>
                     </div>
-                    <div class="col-md-3" style="text-align: center;">
+                    <div class="col-md-3 col-Tasa-de-inters" style="text-align: center;">
                         <p class="Tasa-de-inters">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" style="color: #ffc80a;font-size: 20px;"
                             [readonly]="isReadonly"></rating>
@@ -284,23 +283,23 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 calificacion-img">
                         <img src="/assets/img/financial-entities/cooperativa-jardinAzuayo-188x100.png"
                             class="img-responsive" width="155px" alt="">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tasa de interés</p>
                         <p class="interes">9.81%</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tiempo de aprobación</p>
                         <p class="interes">72 horas</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Cantidad de trámites</p>
                         <p class="interes">CORTO</p>
                     </div>
-                    <div class="col-md-3" style="text-align: center;">
+                    <div class="col-md-3 col-Tasa-de-inters" style="text-align: center;">
                         <p class="Tasa-de-inters">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" style="color: #ffc80a;font-size: 20px;"
                             [readonly]="isReadonly"></rating>
@@ -308,20 +307,20 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row" style="margin-bottom: 0px; padding-bottom: 0px;">
-                    <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-3 calificacion-img">
                         <img src="/assets/img/financial-entities/banco-pacifico-188x100.png" class="img-responsive"
                             width="155px" alt="">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tasa de interés</p>
                         <p class="interes">9.81%</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Tiempo de aprobación</p>
                         <p class="interes">72 horas</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-Tasa-de-inters">
                         <p class="Tasa-de-inters">Cantidad de trámites</p>
                         <p class="interes">CORTO</p>
                     </div>
@@ -395,7 +394,7 @@
 
             <div class="row mt-5">
                 <div class="col-md-12">
-                    <button type="button" class="btn boton" style="margin-left: 450px;">VER TODOS</button>
+                    <button type="button" class="btn boton">VER TODOS</button>
                 </div>
             </div>
         </div>
@@ -439,16 +438,18 @@
 <footer id="mainFooter">
     <div class="footer-left">
         <a class="vertical-logo-container">
-            <img class="vertical-logo" width="85px" height="85px"
-                src="/assets/img/logo-small.png">
+            <img class="vertical-logo" width="85px" height="85px" src="/assets/img/logo-small.png">
         </a>
     </div>
     <div class="footer-right">
         <ul class="social-nav">
             <li>Siguenos</li>
-            <li class="icon-bubble"><a href="#"><i class="fab fa-facebook-f"></i><span class="hidden">Netflix on Facebook</span></a></li>
-            <li class="icon-bubble"><a href="#"><i class="fab fa-twitter"></i><span class="hidden">Netflix on Twitter</span></a></li>
-            <li class="icon-bubble"><a href="#"><i class="fab fa-instagram"></i><span class="hidden">Netflix on Instagram</span></a></li>
+            <li class="icon-bubble"><a href="#"><i class="fab fa-facebook-f"></i><span class="hidden">Netflix on
+                        Facebook</span></a></li>
+            <li class="icon-bubble"><a href="#"><i class="fab fa-twitter"></i><span class="hidden">Netflix on
+                        Twitter</span></a></li>
+            <li class="icon-bubble"><a href="#"><i class="fab fa-instagram"></i><span class="hidden">Netflix on
+                        Instagram</span></a></li>
         </ul>
         <ul class="legal-nav">
             <li><a href="#">Inicio</a></li>
