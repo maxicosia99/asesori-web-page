@@ -1,47 +1,32 @@
-.background{
-    background-image: url(/assets/img/parallax-2.jpg);
-    background-size: cover;
-    //min-height: 500;
+.titulo {
+  font-size: 40px;
+  font-weight: normal;
+  line-height: 1.2;
+  color: #0b1824;
 }
 
-.titulo {
-    font-size: 40px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    color: #0b1824;
-  }
-
 .parrafo {
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    color: #8c8b8d;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.5;  
+  color: #8c8b8d;
 }
 
 .boton {
-    width: 209px;
-    height: 48px;
-    border-radius: 8px;
-    background-color: #0079a8;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
+  //width: 209px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #0079a8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;  
+  text-align: center;
 }
 
 .trabajamos-con{
   text-align: center;
-  margin-top: 120px;
+  margin-top: 100px;
 }
 
 .boton:hover{
@@ -49,28 +34,24 @@
 }
 
 .titulo2 {
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.5;
-    letter-spacing: normal;
-    color: #333337;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #333337;
 }
 
 .parrafo2 {
   font-size: 14px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.57;
-  letter-spacing: normal;
   color: #77777d;
 }
 
 .sidebar {
-  height: 500px;
   background-color: #0078A9;
+  display:inline-block;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .texto {
@@ -79,17 +60,11 @@
   padding: 0px 45px;
   font-size: 16px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1;
   letter-spacing: 1.33px;
   text-align: center;
   color: #ffffff;
   margin-top: 40px;
-}
-
-.contenedor-calculadora{
-  padding: 0px 40px;
 }
 
 .contenedor-opciones-servicio{
@@ -99,10 +74,7 @@
 .pasos {
   font-size: 14px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
   color: #ffffff;
   text-align: justify;
 }
@@ -129,10 +101,7 @@
   font-size: 18px;
   font-family: Poppins-SemiBold;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 0.89;
-  letter-spacing: normal;
   color: #000000;
   margin-top: 40px;
   margin-bottom: 12px;
@@ -141,42 +110,16 @@
 .ASESORI-pone-a-tu-di {
   font-size: 15px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.57;
-  letter-spacing: normal;
   color: #77777d;
-}
-
-.options-active {
-  height: 91px;
-  margin-right: 10px;
-  border-radius: 4px;
-  border: solid 2px #0078A9;
-  background-color: #ffffff;
-  width: 23%;
-  color: #0078A9;
-  padding: 28px 35px;
-  font-size: 14px;
-}
-
-.options-no-active {
-  height: 91px;
-  margin-right: 10px;
-  border-radius: 4px;
-  border: solid 1px #e6e6ed;
-  background-color: #fcfcfc;
-  width: 23%;
-  padding: 28px 35px;
-  font-size: 14px;
 }
 
 .cuadro-valor {
   border-radius: 9px;
   background-color: #f3f3f3;
   padding: 15px 20px;
-  width: 31%;
-  margin-right: 11px;
+  // width: 31%;
+  // margin-right: 11px;
 }
 
 ::ng-deep {
@@ -204,10 +147,7 @@
     bottom: 25px;
     font-size: 30px;
     font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
     line-height: 0.4;
-    letter-spacing: normal;
     text-align: right;
     color: #333337;
   }
@@ -217,8 +157,6 @@
   font-family: Poppins-SemiBold;
   font-size: 14px;
   font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.14;
   letter-spacing: 1.17px;
   color: #333337;
@@ -231,8 +169,6 @@
   margin-bottom: 0px;
   font-size: 10px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.2;
   letter-spacing: 2px;
   text-align: right;
@@ -243,10 +179,7 @@
   font-family: Poppins-SemiBold;
   font-size: 30px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.39;
-  letter-spacing: normal;
   color: #333337;
   margin-top: 70px;
 }
@@ -254,10 +187,7 @@
 .Te-enseamos-una-cal {
   font-size: 16px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.69;
-  letter-spacing: normal;
   color: #333337;
 }
 
@@ -268,10 +198,7 @@
 .Tasa-de-inters {
   font-size: 9.6px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
   text-align: center;
   color: #333337;
 }
@@ -280,10 +207,7 @@
   font-family: Poppins-SemiBold;
   font-size: 16px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
   text-align: center;
   color: #333337;
 }
@@ -303,10 +227,7 @@
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
   text-align: center;
   color: #1f4a77;
 }
@@ -316,10 +237,7 @@
   text-align: center;
   font-size: 48px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: normal;
-  letter-spacing: normal;
   text-align: center;
   color: #333337;
 }
@@ -330,10 +248,7 @@
   padding: 0px 200px;
   font-size: 16px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.5;
-  letter-spacing: normal;
   text-align: center;
   color: #93939c;
 }
@@ -347,20 +262,14 @@
   font-size: 18px;
   font-family: Poppins-Medium;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 2.67;
-  letter-spacing: normal;
   color: #4a4a4a;
 }
 
 .card-service-text{
   font-size: 15px;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.6;
-  letter-spacing: normal;
   text-align: center;
   color: #93939c;
 }
@@ -369,8 +278,6 @@
   font-family: Poppins-Medium;
   font-size: 14px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.71;
   letter-spacing: 1px;
   text-align: center;
@@ -384,10 +291,7 @@
   font-family: Poppins-SemiBold;
   font-size: 36px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.33;
-  letter-spacing: normal;
   text-align: center;
   color: #28272b;
 }
@@ -402,22 +306,16 @@
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.33;
-  letter-spacing: normal;
   color: #28272b;
-  text-align: center;
+  
 }
 
 .Tu-solicitud-ser-re {
   font-size: 14px;
   text-align: justify;
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.71;
-  letter-spacing: normal;
   color: #72727f;
 }
 
@@ -554,7 +452,6 @@ nav > a:hover {
 .social-nav li:first-child {
   text-transform: uppercase;  
   font-weight: 700;
-  font-style: normal;
   font-size: 1em;
   vertical-align: middle;
   word-wrap: initial;
@@ -652,7 +549,7 @@ nav > a:hover {
 /* Media Querys */
 
 // Extra small devices (portrait phones, less than 576px)
-@media screen and (max-width: 575.98px) {
+@media only screen and (max-width: 575.98px) {
   
   .icon-first-section{
     text-align: center;
@@ -684,15 +581,8 @@ nav > a:hover {
 
   .background{
     margin-top: 50px;
-    height: 280px;
-    margin-left: 0px;
-  }
-
-  .trabajamos-con{
-    text-align: center;
-    margin-top: 85px;
-    font-size: 22px;
-    margin-bottom: 25px;
+    //height: 280px;
+    //margin-left: 0px;
   }
 
   .slide-image img{
@@ -709,14 +599,6 @@ nav > a:hover {
 
   .col-text{
     width: 80%;
-  }
-
-  .sidebar {
-    height: 400px;
-  }
-
-  .contenedor-calculadora{
-    padding: 0px 50px;
   }
   
   .contenedor-opciones-servicio{
@@ -766,6 +648,7 @@ nav > a:hover {
     font-size: 16px;
     text-align: center;
   }
+  
   .contenedor-calificaciones{
     margin-top: 10px;
   }
@@ -790,7 +673,7 @@ nav > a:hover {
 
   .video video{
     width: 100%;
-    height: auto;
+    height: 240px;
   }
 
   .PODEMOS-AYUDARTE {
@@ -818,17 +701,7 @@ nav > a:hover {
 }
 
 // Small devices (landscape phones, less than 768px)
-@media screen and (max-width: 767.98px) {
-  
-
-  .icon-first-section{
-    text-align: center;
-  }
-
-  .icon-first-section img{
-    width: 115px;
-    height: 115px;
-  }
+@media only screen and (max-width: 767.98px) {
 
   #mainFooter {
     box-lines: multiple;
@@ -863,10 +736,726 @@ nav > a:hover {
     border-left: none;
     padding-left: 0;
   }
+
+  .Mask{
+    margin-top: 50px;
+    height: 200px;
+  }
+
+  .video video{
+    width: 100%;
+    height: 240px;
+  }
+
+  .icon-first-section{
+    text-align: center;
+  }
+
+  .icon-first-section img{
+    width: 90px;
+    height: 90px;
+  }
+
+  .contenedor{
+    padding: 20px 20px;
+    overflow: hidden;
+  }
+
+  .titulo {
+    font-size: 30px;
+  }
+
+  .parrafo {
+    margin-top: 30px;
+    margin-bottom: 38px;
+  }
+
+  .boton {
+    width: 100%;
+    height: 48px;
+  }
+
+  .background{
+    margin-top: 50px;
+    //height: 350px;
+    //margin-left: 0px;
+  }
+
+  // .trabajamos-con{
+  //   text-align: center;
+  //   margin-top: 50px;
+  //   font-size: 22px;
+  //   margin-bottom: 25px;
+  // }
+
+  .slide-image img{
+    width: 100%;
+  }
+
+  .col-beneficios{
+    margin-top: 30px;
+  }
+
+  .col-number{
+    width: 15%;
+  }
+
+  .col-text{
+    width: 80%;
+  }
+
+  // .sidebar {
+  //   height: 400px;
+  // }
+  
+  .contenedor-opciones-servicio{
+    padding: 0px 50px;
+    text-align: center;
+  }
+
+  .options-active {
+    height: 91px;
+    margin-right: 0px;
+    width: 100%;
+    padding: 28px 45px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .options-no-active {
+    height: 91px;
+    margin-right: 0px;
+    width: 100%;
+    padding: 28px 45px;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .col-icon{
+    width: 25%;
+  }
+
+  .col-icon-text{
+    width: 75%;
+  }
+
+  .cuadro-valor {
+    padding: 15px 20px;
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 15px;
+  }
+
+  .Ranking-Asesori {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 25px;
+  }
+
+  .Te-enseamos-una-cal {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .contenedor-calificaciones{
+    margin-top: 10px;
+  }
+
+  .calificacion-img{
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .calificacion-img img{
+    width: 220px;
+  }
+
+  .col-Tasa-de-inters{
+    width: 50%;
+  }
+
+  .PODEMOS-AYUDARTE {
+    font-size: 30px;
+  }
+
+  .El-crdito-puede-ser {
+    margin-top: 20px;
+    padding: 0px 20px;
+  }
+
+  .card-service{
+    margin-bottom: 25px;
+  }
+
+  .vertical-logo {
+    top: 70px;
+    left: 0px;
+  }
 }
 
-// Medium devices (tablets, less than 992px)
-@media screen and (max-width: 991.98px) {  }
+@media screen and (max-width: 991.98px) {
+
+  #mainFooter {
+    box-lines: multiple;
+    flex-wrap: wrap;
+    box-align: start;
+    align-items: flex-start;
+    padding: 2.2em 2.2em 5rem;
+  }
+
+  #mainFooter .footer-left,
+  #mainFooter .footer-right {
+    width: 50%;
+  }
+
+  #mainFooter .social-nav {
+    display: none;
+  }
+  
+  #mainFooter .legal-nav {
+    margin-top: -5px;
+  }
+  
+  #mainFooter .legal-nav li {
+    display: block;
+    margin: 0 auto;
+    text-align: right;
+    font-size: 1.25em;
+    line-height: 2;
+  }
+
+  .legal-nav li:last-child {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .Mask{
+    margin-top: 50px;
+    height: 200px;
+  }
+
+  .video video{
+    width: 100%;
+    height: 240px;
+  }
+
+  .icon-first-section{
+    text-align: center;
+  }
+
+  .icon-first-section img{
+    width: 90px;
+    height: 90px;
+  }
+
+  .contenedor{
+    padding: 20px 20px;
+    overflow: hidden;
+  }
+
+  .titulo {
+    font-size: 30px;
+  }
+
+  .parrafo {
+    margin-top: 30px;
+    margin-bottom: 38px;
+  }
+
+  .boton {
+    width: 100%;
+    height: 48px;
+  }
+
+  .background{
+    margin-top: 50px;
+    //height: 350px;
+    //margin-left: 0px;
+  }
+
+  // .trabajamos-con{
+  //   text-align: center;
+  //   margin-top: 50px;
+  //   font-size: 22px;
+  //   margin-bottom: 25px;
+  // }
+
+  .slide-image img{
+    width: 100%;
+  }
+
+  .col-beneficios{
+    margin-top: 30px;
+  }
+
+  // .col-number{
+  //   width: 15%;
+  // }
+
+  // .col-text{
+  //   width: 80%;
+  // }
+
+  // .sidebar {
+  //   height: 490px;
+  // }
+  
+  // .contenedor-opciones-servicio{
+  //   padding: 0px 0px;
+  //   text-align: center;
+  // }
+
+  // .options-active {
+  //   height: 91px;
+  //   margin-right: 10px;
+  //   width: 47%;
+  //   padding: 28px 45px;
+  //   font-size: 14px;
+  //   margin-bottom: 15px;
+  // }
+  
+  // .options-no-active {
+  //   height: 91px;
+  //   margin-right: 10px;
+  //   width: 47%;
+  //   padding: 28px 45px;
+  //   font-size: 14px;
+  //   margin-bottom: 15px;
+  // }
+
+  // .col-icon{
+  //   width: 25%;
+  // }
+
+  // .col-icon-text{
+  //   width: 75%;
+  // }
+
+  // .cuadro-valor {
+  //   padding: 15px 20px;
+  //   width: 100%;
+  //   margin-right: 0px;
+  //   margin-bottom: 15px;
+  // }
+
+  .Ranking-Asesori {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 25px;
+  }
+
+  .Te-enseamos-una-cal {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .contenedor-calificaciones{
+    margin-top: 10px;
+  }
+
+  .calificacion-img{
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  // .calificacion-img img{
+  //   width: 100px;
+  // }
+
+  // .col-Tasa-de-inters{
+  //   width: 70%;
+  // }
+
+  .PODEMOS-AYUDARTE {
+    font-size: 30px;
+  }
+
+  .El-crdito-puede-ser {
+    margin-top: 20px;
+    padding: 0px 20px;
+  }
+
+  .card-service{
+    margin-bottom: 25px;
+  }
+
+  .Qu-beneficios-obten {
+    margin-top: 36px;
+    font-size: 28px;
+  }
+
+  .vertical-logo {
+    top: 70px;
+    left: 0px;
+  }
+}
 
 // Large devices (desktops, less than 1200px)
-@media screen and (max-width: 1199.98px) {  }
+@media screen and (max-width: 1199.98px) {
+  
+  // #mainFooter {
+  //   box-lines: multiple;
+  //   flex-wrap: wrap;
+  //   box-align: start;
+  //   align-items: flex-start;
+  //   padding: 2.2em 2.2em 5rem;
+  // }
+
+  // #mainFooter .footer-left,
+  // #mainFooter .footer-right {
+  //   width: 50%;
+  // }
+
+  // #mainFooter .social-nav {
+  //   display: none;
+  // }
+  
+  // #mainFooter .legal-nav {
+  //   margin-top: -5px;
+  // }
+  
+  // #mainFooter .legal-nav li {
+  //   display: block;
+  //   margin: 0 auto;
+  //   text-align: right;
+  //   font-size: 1.25em;
+  //   line-height: 2;
+  // }
+
+  // .legal-nav li:last-child {
+  //   border-left: none;
+  //   padding-left: 0;
+  // }
+
+  .Mask{
+    margin-top: 50px;
+    height: 280px;
+  }
+
+  .video video{
+    width: 100%;
+    height: 320px;
+  }
+
+  // .col-beneficios{
+  //   margin-top: 30px;
+  // }
+
+  // .col-number{
+  //   width: 15%;
+  // }
+
+  // .col-text{
+  //   width: 80%;
+  // }
+
+  // .sidebar {
+  //   height: 450px;
+  // }
+  
+  // .contenedor-opciones-servicio{
+  //   padding: 0px 0px;
+  //   text-align: center;
+  // }
+
+  // .options-active {
+  //   height: 91px;
+  //   margin-right: 10px;
+  //   width: 47%;
+  //   padding: 28px 45px;
+  //   font-size: 14px;
+  //   margin-bottom: 15px;
+  // }
+  
+  // .options-no-active {
+  //   height: 91px;
+  //   margin-right: 10px;
+  //   width: 47%;
+  //   padding: 28px 45px;
+  //   font-size: 14px;
+  //   margin-bottom: 15px;
+  // }
+
+  // .col-icon{
+  //   width: 25%;
+  // }
+
+  // .col-icon-text{
+  //   width: 75%;
+  // }
+
+  // .cuadro-valor {
+  //   padding: 15px 20px;
+  //   width: 32%;
+  //   margin-right: 5px;
+  //   margin-bottom: 15px;
+  // }
+
+  // .Ranking-Asesori {
+  //   margin-top: 50px;
+  //   text-align: center;
+  //   font-size: 25px;
+  // }
+
+  // .Te-enseamos-una-cal {
+  //   font-size: 16px;
+  //   text-align: center;
+  // }
+
+  // .contenedor-calificaciones{
+  //   margin-top: 10px;
+  // }
+
+  // .calificacion-img{
+  //   text-align: center;
+  //   margin-bottom: 15px;
+  // }
+
+  // .calificacion-img img{
+  //   width: 100px;
+  // }
+
+  // .col-Tasa-de-inters{
+  //   width: 70%;
+  // }
+
+  // .PODEMOS-AYUDARTE {
+  //   font-size: 30px;
+  // }
+
+  // .El-crdito-puede-ser {
+  //   margin-top: 20px;
+  //   padding: 0px 20px;
+  // }
+
+  // .card-service{
+  //   margin-bottom: 25px;
+  // }
+
+  // .Qu-beneficios-obten {
+  //   margin-top: 36px;
+  //   font-size: 28px;
+  // }
+
+  // .vertical-logo {
+  //   top: 70px;
+  //   left: 0px;
+  // }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#desarrollofrontend{
+	padding: 10px 0px 10px 0px;
+}
+
+.portada{
+  background: url(/assets/img/parallax-2.jpg) no-repeat fixed center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100% ;
+  text-align: center;
+}
+
+.text{
+  padding-left: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.padding20 {
+  padding-top:23px;
+  padding-right: 10px;
+  padding-bottom: 23px;
+}
+
+.quick-btn-active {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #0078A9;
+}
+
+.quick-btn {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #e6e6ed;
+}
+
+.quick-btn-active .badge {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  background-color: #0078A9;
+}
+
+
+
+
+
+
+
+
+
+
+.contenedor-opcion-credito{
+  //box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+}
+
+
+.bg-sidebar-estimate{
+  background-color: #0078A9;
+}
+
+.cuota-estimada{
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.14;
+  letter-spacing: 1.17px;
+  text-align: center;
+}
+
+.texto-valor-cuota{
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 0.33;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.texto-mensual-cuota{
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.texto-mas-informacion{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #fff;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.texto-monto-solicitar{
+  font-family: Poppins-SemiBold;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: 1.17px;
+  color: #333337;
+}
+
+.texto-valor-solicitar{
+  // font-family: Poppins-SemiBold;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 0.4;
+  letter-spacing: normal;
+  color: #333337;
+}
+
+.texto-pie-solicitar {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  color: #333337;
+}
+
+.texto-pie-solicitar-2{
+  font-family: Poppins-SemiBold;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 0.57;
+  letter-spacing: normal;
+  color: #737373;
+}
+
+.boton-negativo{
+  height: 48px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #0079a8;
+  color: #0079a8;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;  
+  text-align: center;
+}
+
+.barra-aplicar{
+  height: 100px;
+  border-radius: 8px;
+  background-color: #0079ab;
+}
+
+.texto-cantidad-seleccionados{
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: 1.33px;
+  color: #ffffff;
+}
+
+.texto-aplicar {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.9px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.texto-aplicar:hover {
+  text-decoration: underline;
+}
+
+.texto-volver-calcular{
+  font-family: Poppins-SemiBold;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #0079ab;
+}

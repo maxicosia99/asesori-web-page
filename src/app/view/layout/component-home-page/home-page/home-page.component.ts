@@ -48,11 +48,11 @@ export class HomePageComponent implements OnInit {
     minValue: 0,
     options: {
       floor: 0,
-      ceil: 99999,
+      ceil: 360,
       enforceStep: false,
       hideLimitLabels: true,
       translate: (value: number): string => {
-        return '$' + value;
+        return '' + value;
       }
     }
   };
