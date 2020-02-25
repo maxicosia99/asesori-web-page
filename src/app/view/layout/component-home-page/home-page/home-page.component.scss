@@ -1,82 +1,186 @@
-.titulo {
-  font-size: 40px;
-  font-weight: normal;
-  line-height: 1.2;
-  color: #0b1824;
+/*------------------------------------*\
+    GENERAL
+\*------------------------------------*/
+
+
+
+/* CONTAINER */
+.container{
+  padding: 30px 0px;
+  margin: auto;
+  overflow: hidden;
+}
+/* END - CONTAINER */
+
+
+
+/* TITTLES */
+.tittle-0 {
+  font-family: 'Poppins-Medium';
+  font-size: 45px;
 }
 
-.parrafo {
+.tittle-1 {
+  font-family: 'Poppins-Medium';
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+.tittle-2 {
+  font-family: 'Poppins-Medium';
+  font-size: 18px;
+}
+
+.tittle-3,
+.tittle-3-spacing {
+  font-family: 'Poppins-Medium';
   font-size: 16px;
-  font-weight: normal;
-  line-height: 1.5;  
+}
+
+.tittle-3 {
+  line-height: 1.5;
+}
+
+.tittle-4 {
+  font-size: 16px;
+  font-family: 'Poppins-SemiBold';
+}
+
+.tittle-3-spacing {
+  letter-spacing: 1.33px;
+}
+
+.tittle-5{
+  font-family: 'Poppins-Medium';
+  font-size: 14px;
+  letter-spacing: 1.17px;
+}
+
+.tittle-6{
+  font-size: 30px;
+  font-family: 'Poppins-Medium';
+  line-height: 0.4;
+}
+
+.tittle-7 {
+  font-family: 'Poppins-Medium';
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.tittle-8{
+  font-family: 'Poppins-Medium';
+  font-size: 21px;
+  line-height: 0.57;
+  color: #737373;
+}
+
+.tittle-9{
+  font-size: 36px;
+  font-family: 'Poppins-SemiBold';
+}
+
+.tittle-10 {
+  font-size: 20px;
+  font-family: 'Poppins-SemiBold';
+  letter-spacing: 0.9px;
+}
+
+.tittle-11 {
+  font-family: 'Poppins-SemiBold';
+  font-size: 30px;
+}
+
+.tittle-12 {
+  font-size: 10px;
+}
+/* END - TITTLES */
+
+
+
+/* TEXTS */
+.text-light-14 {
+  font-size: 14px;
+}
+
+.text-light-16 {
+  font-size: 16px;
+}
+
+.text-14 {
+  font-size: 14px;
+}
+
+.text-light-14,
+.text-light-16{
+  line-height: 1.5;
   color: #8c8b8d;
 }
+/* END - TEXTS */
 
-.boton {
-  //width: 209px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: #0079a8;
+
+
+/* BACKGROUNDS */
+.bg-0 {
+  background-color: #ffffff;
+}
+
+.bg-1 {
+  background-color: #f4f4f4;
+}
+
+.bg-2 {
+  background-color: #0078A9;
+}
+
+.bg-3 {
+  background-color: #333337;
+}
+/* END - BACKGROUNDS */
+
+
+
+/* CORPORATIVE COLORS */
+.color-0 {
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: normal;  
-  text-align: center;
 }
 
-.trabajamos-con{
-  text-align: center;
-  margin-top: 100px;
+.color-1 {
+  color: #0079ab;
 }
 
-.boton:hover{
-  background-color: #092AB5;
+.color-2 {
+  color: #1f4a77;
+}
+/* END - CORPORATIVE COLORS */
+
+
+
+/* OTHER ELEMENTS*/
+.carousel-image{
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
-.titulo2 {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: #333337;
-}
-
-.parrafo2 {
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.57;
-  color: #77777d;
-}
-
-.sidebar {
+.sidebar-steps {
   background-color: #0078A9;
   display:inline-block;
   margin-left:auto;
   margin-right:auto;
 }
 
-.texto {
-  font-family: Poppins-SemiBold;
-  margin-bottom: 40px;
-  padding: 0px 45px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 1.33px;
-  text-align: center;
+.button {
+  height: 48px;
+  border-radius: 8px;
+  background-color: #0079a8;
   color: #ffffff;
-  margin-top: 40px;
-}
-
-.contenedor-opciones-servicio{
-  padding: 0px 40px;
-}
-
-.pasos {
   font-size: 14px;
-  font-weight: normal;
-  line-height: normal;
-  color: #ffffff;
-  text-align: justify;
+  font-family: 'Poppins-Regular';  
+  text-align: center;
+}
+
+.button:hover{
+  background-color: #092AB5;
 }
 
 .btn-circle {
@@ -85,41 +189,36 @@
   text-align: center;
   padding: 6px 0;
   font-size: 12px;
-  line-height: 1.428571429;
   border-radius: 15px;
   border-color: white;
   color: white;
   background-color: #0078A9;
 }
 
-.slide-image{
-  background-color: #ffffff;
-  border-radius: 8px;
+.btn-selection-active {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #0078A9;
 }
 
-.Que-ests-buscando {
-  font-size: 18px;
-  font-family: Poppins-SemiBold;
-  font-weight: normal;
-  line-height: 0.89;
-  color: #000000;
-  margin-top: 40px;
-  margin-bottom: 12px;
+.btn-selection-active .badge {
+  position: absolute;
+  border-radius: 15px;
+  top: -2px;
+  right: 0px;
+  background-color: #0078A9;
 }
 
-.ASESORI-pone-a-tu-di {
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 1.57;
-  color: #77777d;
+.btn-selection {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #e6e6ed;
 }
 
-.cuadro-valor {
+.box-values-slider {
   border-radius: 9px;
   background-color: #f3f3f3;
   padding: 15px 20px;
-  // width: 31%;
-  // margin-right: 11px;
 }
 
 ::ng-deep {
@@ -146,1121 +245,74 @@
   .custom-slider .ng5-slider .ng5-slider-bubble {
     bottom: 25px;
     font-size: 30px;
-    font-weight: bold;
+    font-family: 'Poppins-SemiBold';
     line-height: 0.4;
     text-align: right;
     color: #333337;
   }
 }
 
-.header-slider {
-  font-family: Poppins-SemiBold;
+.header-box-values-slider {
+  font-family: 'Poppins-SemiBold';
   font-size: 14px;
-  font-weight: 600;
-  line-height: 1.14;
   letter-spacing: 1.17px;
-  color: #333337;
 }
 
-.pie-slider {
-  font-family: Poppins-Medium;
-  text-align: right;
-  margin-top: 5px;
-  margin-bottom: 0px;
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 2px;
-  text-align: right;
-  color: #333337;
-}
-
-.Ranking-Asesori {
-  font-family: Poppins-SemiBold;
-  font-size: 30px;
-  font-weight: normal;
-  line-height: 1.39;
-  color: #333337;
-  margin-top: 70px;
-}
-
-.Te-enseamos-una-cal {
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 1.69;
-  color: #333337;
-}
-
-.contenedor-calificaciones{
-  margin-top: 70px;
-}
-
-.Tasa-de-inters {
-  font-size: 9.6px;
-  font-weight: normal;
-  line-height: normal;
+.button-negative{
+  height: 48px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #0079a8;
+  color: #0079a8;
+  font-size: 14px;
+  font-family: 'Poppins-SemiBold';
   text-align: center;
-  color: #333337;
 }
 
-.interes{
-  font-family: Poppins-SemiBold;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: normal;
-  text-align: center;
-  color: #333337;
+.button-negative:hover{
+  background-color: #0079a8;
+  border: 1px solid #0079a8;
+  color: #fff;
 }
 
-.Mask {
-  height: 500px;
-  width: 100%;
-  background-color: #333337;
+.result-container{
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
 }
 
-.video{
-  top: -20px;
+.aplication-bar{
+  height: 90px;
 }
 
-.Los-Servicios {
-  font-family: Poppins-SemiBold;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: normal;
-  text-align: center;
-  color: #1f4a77;
-}
-
-.PODEMOS-AYUDARTE {
-  font-family: Poppins-SemiBold;
-  text-align: center;
-  font-size: 48px;
-  font-weight: normal;
-  line-height: normal;
-  text-align: center;
-  color: #333337;
-}
-
-.El-crdito-puede-ser {
-  text-align: center;
-  margin-top: 20px;
-  padding: 0px 200px;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 1.5;
-  text-align: center;
-  color: #93939c;
+.rating{
+  color: #ffc80a;
+  font-size: 20px;
 }
 
 .card-service{
   box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
 }
 
-.card-service-tittle{
-  font-size: 18px;
-  font-family: Poppins-Medium;
-  font-weight: normal;
-  line-height: 2.67;
-  color: #4a4a4a;
-}
-
-.card-service-text{
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 1.6;
-  text-align: center;
-  color: #93939c;
-}
-
-.ver-mas{
-  font-family: Poppins-Medium;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.71;
-  letter-spacing: 1px;
-  text-align: center;
-  color: #8c8b8d;
-  text-decoration: underline;
-}
-
-
-.Qu-beneficios-obten {
-  margin-top: 46px;
-  font-family: Poppins-SemiBold;
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 1.33;
-  text-align: center;
-  color: #28272b;
-}
-
-.icono{
+.icon{
   font-size: 35px;
   color: #0A9BC9;
 }
-
-.opciones-d {
-  font-family: Poppins-SemiBold;
-  margin-bottom: 20px;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.33;
-  color: #28272b;
-  
-}
-
-.Tu-solicitud-ser-re {
-  font-size: 14px;
-  text-align: justify;
-  font-weight: normal;
-  line-height: 1.71;
-  color: #72727f;
-}
-
-/*Nuevo estilo para la page*/
-
-.contenedor{
-  padding: 30px 0px;
-  margin: auto;
-  overflow: hidden;
-}
-
-/* Header */
-
-header{
-  width: 100%;
-  height: 600px;
-  background: #CB4190;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, hsla(194, 91%, 41%, 0.657), hsla(326, 57%, 53%, 0.50)), url(/assets/img/slider-bg-3.jpg);
-  background: linear-gradient(to right, hsla(194, 91%, 41%, 0.657), hsla(326, 57%, 53%, 0.50)), url(/assets/img/slider-bg-3.jpg);
-  background-size: cover;
-  background-attachment: fixed;
-  position: relative; 
-}
-
-header .textos-header{
-  display: flex;
-  height: 430px;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-.textos-header h1{
-  font-size: 50px;
-  color: #ffffff;
-}
-
-.textos-header h2{
-  font-size: 30px;
-  font-weight: 300;
-  color: #ffffff;
-}
-
-nav{
-  text-align: right;
-  padding: 30px 50px 0px 0px;
-}
-
-nav > a {
-  color: #ffffff;
-  font-weight: 300;
-  text-decoration: none;
-  font-size: 16px;
-  margin-right: 10px;
-}
-
-nav > a:hover {
-  text-decoration: underline;
-}
-
-.wave{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.beneficios {
-  background-color: #f4f4f4;
-}
-
-.calculadora{
-  background-color: #ffffff;
-}
-
-.ranking{
-  background-color: #ffffff;
-  padding-bottom: 80px;
-}
-
-.services{
-  padding: 100px 0px;
-  background-color: #ffffff;
-}
-
-@media screen and (max-width:900px){
-  header{
-    background-position: center;
-  }
-}
+/* END - OTHER ELEMENTS*/
 
 
-#mainFooter {
-  background:#fff;
-  padding:2.2em;
-  display:flex;
-  align-items:center;  
-  flex:none;
-}
 
-#mainFooter .footer-left {
-  display: block;
-  float: left;
-}
+/*------------------------------------*\
+    FOOTER
+\*------------------------------------*/
 
-.vertical-logo-container {
-  padding-top: 55px;
-  position: relative;
-  display: inline-block;
-}
-
-.vertical-logo {
-  transition: all 150ms linear;
-  position: absolute;
-  top: -40px;
-  left: 120px;
-}
-
-#mainFooter .footer-right {
-  width: calc(100% - 126px);
-  display: block;
-  float: right;
-  text-align: right;
-}
-
-.social-nav {
-  margin-bottom: 2.5em;
-  list-style:none;
-  padding: 0;
-  margin: 0;
-}
-
-.social-nav li:first-child {
-  text-transform: uppercase;  
-  font-weight: 700;
-  font-size: 1em;
-  vertical-align: middle;
-  word-wrap: initial;
-}
-
-.social-nav li, .legal-nav li {
-  display: inline-block;
-  margin-left: 2.8em;
-  color: #221f1f;
-  transition: all 150ms linear;
-  line-height: 1;
-  font-size: 1em;
-  margin-bottom: 0;
-}
-
-.social-nav .icon-bubble {
-  width: 3em;
-  height: 3em;
-  border-radius: 50%;
-  text-align: center;
-  margin-left: 1.25em;
-  border: none;
-  background: none;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
-  backface-visibility:hidden;
-  transition: color 0.3s;
-  font-size: 1.25em;
-  line-height: 3em;
-}
-
-.social-nav .icon-bubble::before {
-  content: '';
-  position: absolute;
-  top: 0;left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  z-index: -1;
-  box-shadow: inset 0 0 0 35px #221f1f;
-  transform: scale3d(0.9, 0.9, 1);
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.social-nav .icon-bubble a {
-  display: block;
+.footer-copyright{
+  background-color: #333337;
   color: #fff;
-  outline: 0;
 }
 
-.social-nav li a, .legal-nav li a {
-  color:#8c8c8c;
-  text-decoration: none;
-  padding-bottom: 1em;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.legal-nav li:last-child {
-  font-weight:700;
-  border-left: 1px solid #8c8c8c;
-  padding-left: 2.8em;
-}
-
-.legal-nav li:last-child a {
-  color:#221f1f;
-}
-
-.social-nav li:hover a, .legal-nav li:hover a {
-  color: #0A9BC9;
-  border-bottom: 1px solid #0A9BC9;
-}
-
-.legal-nav li:last-child:hover a {
-  color: #0A9BC9;
-}
-
-.social-nav {
-  margin-bottom: 2.5em;
-}
-
-.social-nav .icon-bubble:hover:before {
-  box-shadow: inset 0 0 0 2px #0A9BC9;
-  transform: scale3d(1, 1, 1);
-}
-
-.social-nav .icon-bubble:hover a {
-  border-bottom: none;
-  color: #0A9BC9;
-}
-
-/* Media Querys */
-
-// Extra small devices (portrait phones, less than 576px)
-@media only screen and (max-width: 575.98px) {
-  
-  .icon-first-section{
-    text-align: center;
-  }
-
-  .icon-first-section img{
-    width: 115px;
-    height: 115px;
-  }
-
-  .contenedor{
-    padding: 20px 20px;
-    overflow: hidden;
-  }
-
-  .titulo {
-    font-size: 30px;
-  }
-
-  .parrafo {
-    margin-top: 30px;
-    margin-bottom: 48px;
-  }
-
-  .boton {
-    width: 100%;
-    height: 48px;
-  }
-
-  .background{
-    margin-top: 50px;
-    //height: 280px;
-    //margin-left: 0px;
-  }
-
-  .slide-image img{
-    width: 100%;
-  }
-
-  .col-beneficios{
-    margin-top: 30px;
-  }
-
-  .col-number{
-    width: 15%;
-  }
-
-  .col-text{
-    width: 80%;
-  }
-  
-  .contenedor-opciones-servicio{
-    padding: 0px 0px;
-    text-align: center;
-  }
-
-  .options-active {
-    height: 91px;
-    margin-right: 0px;
-    width: 100%;
-    padding: 28px 45px;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  
-  .options-no-active {
-    height: 91px;
-    margin-right: 0px;
-    width: 100%;
-    padding: 28px 45px;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-
-  .col-icon{
-    width: 25%;
-  }
-
-  .col-icon-text{
-    width: 75%;
-  }
-
-  .cuadro-valor {
-    padding: 15px 20px;
-    width: 100%;
-    margin-right: 0px;
-    margin-bottom: 15px;
-  }
-
-  .Ranking-Asesori {
-    margin-top: 50px;
-    text-align: center;
-  }
-
-  .Te-enseamos-una-cal {
-    font-size: 16px;
-    text-align: center;
-  }
-  
-  .contenedor-calificaciones{
-    margin-top: 10px;
-  }
-
-  .calificacion-img{
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .calificacion-img img{
-    width: 220px;
-  }
-
-  .col-Tasa-de-inters{
-    width: 50%;
-  }
-
-  .Mask{
-    margin-top: 50px;
-    height: 200px;
-  }
-
-  .video video{
-    width: 100%;
-    height: 240px;
-  }
-
-  .PODEMOS-AYUDARTE {
-    font-size: 30px;
-  }
-
-  .El-crdito-puede-ser {
-    margin-top: 20px;
-    padding: 0px 20px;
-  }
-
-  .card-service{
-    margin-bottom: 25px;
-  }
-
-  .Qu-beneficios-obten {
-    margin-top: 36px;
-    font-size: 28px;
-  }
-
-  .vertical-logo {
-    top: 70px;
-    left: 0px;
-  }
-}
-
-// Small devices (landscape phones, less than 768px)
-@media only screen and (max-width: 767.98px) {
-
-  #mainFooter {
-    box-lines: multiple;
-    flex-wrap: wrap;
-    box-align: start;
-    align-items: flex-start;
-    padding: 2.2em 2.2em 5rem;
-  }
-
-  #mainFooter .footer-left,
-  #mainFooter .footer-right {
-    width: 50%;
-  }
-
-  #mainFooter .social-nav {
-    display: none;
-  }
-  
-  #mainFooter .legal-nav {
-    margin-top: -5px;
-  }
-  
-  #mainFooter .legal-nav li {
-    display: block;
-    margin: 0 auto;
-    text-align: right;
-    font-size: 1.25em;
-    line-height: 2;
-  }
-
-  .legal-nav li:last-child {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  .Mask{
-    margin-top: 50px;
-    height: 200px;
-  }
-
-  .video video{
-    width: 100%;
-    height: 240px;
-  }
-
-  .icon-first-section{
-    text-align: center;
-  }
-
-  .icon-first-section img{
-    width: 90px;
-    height: 90px;
-  }
-
-  .contenedor{
-    padding: 20px 20px;
-    overflow: hidden;
-  }
-
-  .titulo {
-    font-size: 30px;
-  }
-
-  .parrafo {
-    margin-top: 30px;
-    margin-bottom: 38px;
-  }
-
-  .boton {
-    width: 100%;
-    height: 48px;
-  }
-
-  .background{
-    margin-top: 50px;
-    //height: 350px;
-    //margin-left: 0px;
-  }
-
-  // .trabajamos-con{
-  //   text-align: center;
-  //   margin-top: 50px;
-  //   font-size: 22px;
-  //   margin-bottom: 25px;
-  // }
-
-  .slide-image img{
-    width: 100%;
-  }
-
-  .col-beneficios{
-    margin-top: 30px;
-  }
-
-  .col-number{
-    width: 15%;
-  }
-
-  .col-text{
-    width: 80%;
-  }
-
-  // .sidebar {
-  //   height: 400px;
-  // }
-  
-  .contenedor-opciones-servicio{
-    padding: 0px 50px;
-    text-align: center;
-  }
-
-  .options-active {
-    height: 91px;
-    margin-right: 0px;
-    width: 100%;
-    padding: 28px 45px;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  
-  .options-no-active {
-    height: 91px;
-    margin-right: 0px;
-    width: 100%;
-    padding: 28px 45px;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-
-  .col-icon{
-    width: 25%;
-  }
-
-  .col-icon-text{
-    width: 75%;
-  }
-
-  .cuadro-valor {
-    padding: 15px 20px;
-    width: 100%;
-    margin-right: 0px;
-    margin-bottom: 15px;
-  }
-
-  .Ranking-Asesori {
-    margin-top: 50px;
-    text-align: center;
-    font-size: 25px;
-  }
-
-  .Te-enseamos-una-cal {
-    font-size: 16px;
-    text-align: center;
-  }
-
-  .contenedor-calificaciones{
-    margin-top: 10px;
-  }
-
-  .calificacion-img{
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .calificacion-img img{
-    width: 220px;
-  }
-
-  .col-Tasa-de-inters{
-    width: 50%;
-  }
-
-  .PODEMOS-AYUDARTE {
-    font-size: 30px;
-  }
-
-  .El-crdito-puede-ser {
-    margin-top: 20px;
-    padding: 0px 20px;
-  }
-
-  .card-service{
-    margin-bottom: 25px;
-  }
-
-  .vertical-logo {
-    top: 70px;
-    left: 0px;
-  }
-}
-
-@media screen and (max-width: 991.98px) {
-
-  #mainFooter {
-    box-lines: multiple;
-    flex-wrap: wrap;
-    box-align: start;
-    align-items: flex-start;
-    padding: 2.2em 2.2em 5rem;
-  }
-
-  #mainFooter .footer-left,
-  #mainFooter .footer-right {
-    width: 50%;
-  }
-
-  #mainFooter .social-nav {
-    display: none;
-  }
-  
-  #mainFooter .legal-nav {
-    margin-top: -5px;
-  }
-  
-  #mainFooter .legal-nav li {
-    display: block;
-    margin: 0 auto;
-    text-align: right;
-    font-size: 1.25em;
-    line-height: 2;
-  }
-
-  .legal-nav li:last-child {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  .Mask{
-    margin-top: 50px;
-    height: 200px;
-  }
-
-  .video video{
-    width: 100%;
-    height: 240px;
-  }
-
-  .icon-first-section{
-    text-align: center;
-  }
-
-  .icon-first-section img{
-    width: 90px;
-    height: 90px;
-  }
-
-  .contenedor{
-    padding: 20px 20px;
-    overflow: hidden;
-  }
-
-  .titulo {
-    font-size: 30px;
-  }
-
-  .parrafo {
-    margin-top: 30px;
-    margin-bottom: 38px;
-  }
-
-  .boton {
-    width: 100%;
-    height: 48px;
-  }
-
-  .background{
-    margin-top: 50px;
-    //height: 350px;
-    //margin-left: 0px;
-  }
-
-  // .trabajamos-con{
-  //   text-align: center;
-  //   margin-top: 50px;
-  //   font-size: 22px;
-  //   margin-bottom: 25px;
-  // }
-
-  .slide-image img{
-    width: 100%;
-  }
-
-  .col-beneficios{
-    margin-top: 30px;
-  }
-
-  // .col-number{
-  //   width: 15%;
-  // }
-
-  // .col-text{
-  //   width: 80%;
-  // }
-
-  // .sidebar {
-  //   height: 490px;
-  // }
-  
-  // .contenedor-opciones-servicio{
-  //   padding: 0px 0px;
-  //   text-align: center;
-  // }
-
-  // .options-active {
-  //   height: 91px;
-  //   margin-right: 10px;
-  //   width: 47%;
-  //   padding: 28px 45px;
-  //   font-size: 14px;
-  //   margin-bottom: 15px;
-  // }
-  
-  // .options-no-active {
-  //   height: 91px;
-  //   margin-right: 10px;
-  //   width: 47%;
-  //   padding: 28px 45px;
-  //   font-size: 14px;
-  //   margin-bottom: 15px;
-  // }
-
-  // .col-icon{
-  //   width: 25%;
-  // }
-
-  // .col-icon-text{
-  //   width: 75%;
-  // }
-
-  // .cuadro-valor {
-  //   padding: 15px 20px;
-  //   width: 100%;
-  //   margin-right: 0px;
-  //   margin-bottom: 15px;
-  // }
-
-  .Ranking-Asesori {
-    margin-top: 50px;
-    text-align: center;
-    font-size: 25px;
-  }
-
-  .Te-enseamos-una-cal {
-    font-size: 16px;
-    text-align: center;
-  }
-
-  .contenedor-calificaciones{
-    margin-top: 10px;
-  }
-
-  .calificacion-img{
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  // .calificacion-img img{
-  //   width: 100px;
-  // }
-
-  // .col-Tasa-de-inters{
-  //   width: 70%;
-  // }
-
-  .PODEMOS-AYUDARTE {
-    font-size: 30px;
-  }
-
-  .El-crdito-puede-ser {
-    margin-top: 20px;
-    padding: 0px 20px;
-  }
-
-  .card-service{
-    margin-bottom: 25px;
-  }
-
-  .Qu-beneficios-obten {
-    margin-top: 36px;
-    font-size: 28px;
-  }
-
-  .vertical-logo {
-    top: 70px;
-    left: 0px;
-  }
-}
-
-// Large devices (desktops, less than 1200px)
-@media screen and (max-width: 1199.98px) {
-  
-  // #mainFooter {
-  //   box-lines: multiple;
-  //   flex-wrap: wrap;
-  //   box-align: start;
-  //   align-items: flex-start;
-  //   padding: 2.2em 2.2em 5rem;
-  // }
-
-  // #mainFooter .footer-left,
-  // #mainFooter .footer-right {
-  //   width: 50%;
-  // }
-
-  // #mainFooter .social-nav {
-  //   display: none;
-  // }
-  
-  // #mainFooter .legal-nav {
-  //   margin-top: -5px;
-  // }
-  
-  // #mainFooter .legal-nav li {
-  //   display: block;
-  //   margin: 0 auto;
-  //   text-align: right;
-  //   font-size: 1.25em;
-  //   line-height: 2;
-  // }
-
-  // .legal-nav li:last-child {
-  //   border-left: none;
-  //   padding-left: 0;
-  // }
-
-  .Mask{
-    margin-top: 50px;
-    height: 280px;
-  }
-
-  .video video{
-    width: 100%;
-    height: 320px;
-  }
-
-  // .col-beneficios{
-  //   margin-top: 30px;
-  // }
-
-  // .col-number{
-  //   width: 15%;
-  // }
-
-  // .col-text{
-  //   width: 80%;
-  // }
-
-  // .sidebar {
-  //   height: 450px;
-  // }
-  
-  // .contenedor-opciones-servicio{
-  //   padding: 0px 0px;
-  //   text-align: center;
-  // }
-
-  // .options-active {
-  //   height: 91px;
-  //   margin-right: 10px;
-  //   width: 47%;
-  //   padding: 28px 45px;
-  //   font-size: 14px;
-  //   margin-bottom: 15px;
-  // }
-  
-  // .options-no-active {
-  //   height: 91px;
-  //   margin-right: 10px;
-  //   width: 47%;
-  //   padding: 28px 45px;
-  //   font-size: 14px;
-  //   margin-bottom: 15px;
-  // }
-
-  // .col-icon{
-  //   width: 25%;
-  // }
-
-  // .col-icon-text{
-  //   width: 75%;
-  // }
-
-  // .cuadro-valor {
-  //   padding: 15px 20px;
-  //   width: 32%;
-  //   margin-right: 5px;
-  //   margin-bottom: 15px;
-  // }
-
-  // .Ranking-Asesori {
-  //   margin-top: 50px;
-  //   text-align: center;
-  //   font-size: 25px;
-  // }
-
-  // .Te-enseamos-una-cal {
-  //   font-size: 16px;
-  //   text-align: center;
-  // }
-
-  // .contenedor-calificaciones{
-  //   margin-top: 10px;
-  // }
-
-  // .calificacion-img{
-  //   text-align: center;
-  //   margin-bottom: 15px;
-  // }
-
-  // .calificacion-img img{
-  //   width: 100px;
-  // }
-
-  // .col-Tasa-de-inters{
-  //   width: 70%;
-  // }
-
-  // .PODEMOS-AYUDARTE {
-  //   font-size: 30px;
-  // }
-
-  // .El-crdito-puede-ser {
-  //   margin-top: 20px;
-  //   padding: 0px 20px;
-  // }
-
-  // .card-service{
-  //   margin-bottom: 25px;
-  // }
-
-  // .Qu-beneficios-obten {
-  //   margin-top: 36px;
-  //   font-size: 28px;
-  // }
-
-  // .vertical-logo {
-  //   top: 70px;
-  //   left: 0px;
-  // }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#desarrollofrontend{
-	padding: 10px 0px 10px 0px;
-}
+/*------------------------------------*\
+    END - FOOTER
+\*------------------------------------*/
 
 .portada{
   background: url(/assets/img/parallax-2.jpg) no-repeat fixed center;
@@ -1270,192 +322,38 @@ nav > a:hover {
   background-size: cover;
   height: 100%;
   width: 100% ;
-  text-align: center;
 }
 
-.text{
-  padding-left: 20px;
+/*------------------------------------*\
+    MEDIA QUERIES
+\*------------------------------------*/
+
+// Extra small devices (portrait phones, less than 576px)
+@media only screen and (max-width: 575.98px) {
+  
 }
 
+// Small devices (landscape phones, less than 768px)
+@media only screen and (max-width: 767.98px) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.padding20 {
-  padding-top:23px;
-  padding-right: 10px;
-  padding-bottom: 23px;
 }
 
-.quick-btn-active {
-  position: relative;
-  display: inline-block;
-  border: 2px solid #0078A9;
+@media screen and (max-width: 991.98px) {
+
+  .column-space-responsive-20{
+    margin: 20px 0;
+  }
+
+  .column-space-responsive-50{
+    margin: 50px 0;
+  }
 }
 
-.quick-btn {
-  position: relative;
-  display: inline-block;
-  border: 2px solid #e6e6ed;
+// Large devices (desktops, less than 1200px)
+@media screen and (max-width: 1199.98px) {
+
 }
 
-.quick-btn-active .badge {
-  position: absolute;
-  top: -2px;
-  right: 0px;
-  background-color: #0078A9;
-}
-
-
-
-
-
-
-
-
-
-
-.contenedor-opcion-credito{
-  //box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.08);
-  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
-}
-
-
-.bg-sidebar-estimate{
-  background-color: #0078A9;
-}
-
-.cuota-estimada{
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.14;
-  letter-spacing: 1.17px;
-  text-align: center;
-}
-
-.texto-valor-cuota{
-  font-size: 36px;
-  font-weight: bold;
-  line-height: 0.33;
-  letter-spacing: normal;
-  text-align: center;
-}
-
-.texto-mensual-cuota{
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 2px;
-  text-align: center;
-}
-
-.texto-mas-informacion{
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.71;
-  letter-spacing: normal;
-  color: #fff;
-  text-decoration: underline;
-  text-align: center;
-}
-
-.texto-monto-solicitar{
-  font-family: Poppins-SemiBold;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.14;
-  letter-spacing: 1.17px;
-  color: #333337;
-}
-
-.texto-valor-solicitar{
-  // font-family: Poppins-SemiBold;
-  font-size: 30px;
-  font-weight: bold;
-  line-height: 0.4;
-  letter-spacing: normal;
-  color: #333337;
-}
-
-.texto-pie-solicitar {
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 2px;
-  color: #333337;
-}
-
-.texto-pie-solicitar-2{
-  font-family: Poppins-SemiBold;
-  font-size: 21px;
-  font-weight: bold;
-  line-height: 0.57;
-  letter-spacing: normal;
-  color: #737373;
-}
-
-.boton-negativo{
-  height: 48px;
-  border-radius: 8px;
-  background-color: #fff;
-  border: 1px solid #0079a8;
-  color: #0079a8;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: normal;  
-  text-align: center;
-}
-
-.barra-aplicar{
-  height: 100px;
-  border-radius: 8px;
-  background-color: #0079ab;
-}
-
-.texto-cantidad-seleccionados{
-  font-size: 15px;
-  font-weight: 600;
-  font-stretch: normal;
-  line-height: 1;
-  letter-spacing: 1.33px;
-  color: #ffffff;
-}
-
-.texto-aplicar {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: 0.9px;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.texto-aplicar:hover {
-  text-decoration: underline;
-}
-
-.texto-volver-calcular{
-  font-family: Poppins-SemiBold;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1.5;
-  letter-spacing: normal;
-  color: #0079ab;
-}
+/*------------------------------------*\
+    END - MEDIA QUERIES
+\*------------------------------------*/

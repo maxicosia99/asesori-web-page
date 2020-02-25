@@ -1,15 +1,78 @@
+/*------------------------------------*\
+    IMPORTS
+\*------------------------------------*/
+
 @import "./assets/css/font.scss";
 
+/*------------------------------------*\
+    END - IMPORTS
+\*------------------------------------*/
+
+
+
+/*------------------------------------*\
+    RESET
+\*------------------------------------*/
+
+/*p: revisar el p en el reset*/
+
 *{
-    margin: 0px;
-    padding: 0px;
     box-sizing: border-box;
 }
 
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6,  blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+}
+  
 body {
-    font-family: 'Poppins';
-    font-stretch: normal;
-    font-style: normal;
-    letter-spacing: normal;
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+:focus {
+    outline: 0;
+}
+
+ins {
+    text-decoration: none;
+}
+del {
+    text-decoration: line-through;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*------------------------------------*\
+    END - RESET
+\*------------------------------------*/
+
+body {
+    font-family: 'Poppins-ExtraLight';      //letra por defecto para la página
+    font-stretch: normal;                   //permite hacer el texto más angosto (condensado) o más ancho (expandido).
+    font-style: normal;                     //especifica el estilo de fuente para un texto.
+    letter-spacing: normal;                 //aumenta o disminuye el espacio entre caracteres en un texto.
+    font-weight: normal;                    //establece cómo se deben mostrar los caracteres gruesos o delgados en el texto.
+    line-height: normal;                    //especifica la altura de una línea.
     //background-color: #fafafa;
 }
