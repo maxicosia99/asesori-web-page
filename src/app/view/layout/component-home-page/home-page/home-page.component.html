@@ -1,12 +1,54 @@
+<!-- <header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand tittle-9" href="#">ASESORI</a>
+
+        <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link tittle-10" href="#">INICIO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tittle-10" href="#">COMPAÑÍA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tittle-10" href="#">NUESTRO TRABAJO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link tittle-10" href="#">CONTACTANOS</a>
+                </li>
+                <li class="nav-item btn-group" dropdown [insideClick]="true">
+                    <a id="button-basic" dropdownToggle type="button"
+                        class="btn dropdown-toggle nav-link tittle-10 " aria-controls="dropdown-animated">
+                        INGRESAR <span class="caret"></span>
+                    </a>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                        aria-labelledby="button-basic"> 
+                        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li class="divider dropdown-divider"></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header> -->
+
 <main>
 
     <!-- INITIAL SECTION -->
 
-    <section class="container">
+    <section class="container pt-0">
         <div class="row">
             <div class="col-12 col-md-6 px-4">
                 <div class="text-center text-lg-left">
-                    <img src="/assets/img/logo-small.png" width="95px" height="95px" class="my-4" alt="">
+                    <img src="/assets/img/asesori-logo-negative.png" width="95px" height="95px" class="my-4" alt="">
                 </div>
                 <h1 class="tittle-1 mb-4">¿Necesitas un crédito para tu casa?</h1>
                 <p class="text-light-16">Asesori te facilita las mejores opciones para que puedas acceder rápido y
@@ -17,16 +59,42 @@
                     </div>
                 </div>
             </div>
-            <!-- Arreglar imagen de fondo en carousel -->
-            <div class="col-12 col-md-6 px-4 portada column-space-responsive-50">
-                <h3 class="text-white text-center">Trabajamos con</h3>
-                <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="noWrap"
-                    [interval]="false" [startFromIndex]="1" (slideRangeChange)="onSlideRangeChange($event)"
-                    [showIndicators]="false">
-                    <slide *ngFor="let slide of slides; let index=index" class="mr-3 carousel-image">
-                        <img [src]="slide.image" alt="image slide" style="display: block; width: 100%;">
-                    </slide>
-                </carousel>
+
+            <div class="col-12 col-md-6 my-4 my-lg-0">
+                <div class="row bg-img align-items-center mx-0">
+                    <div class="col">
+                        <h3 class="text-white text-center pb-4">Trabajamos con</h3>
+
+                        <owl-carousel-o [options]="customOptions">
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-austro-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-biess-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-bolivariano-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-dinnersClub-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png">
+                                </div>
+                            </ng-template>
+                        </owl-carousel-o>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -36,8 +104,8 @@
     <section class="container-fluid bg-1">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 column-space-responsive-20">
-                    <h3 class="tittle-3 mb-2"><i class="fas fa-stopwatch"></i> Reduce el tiempo</h3>
+                <div class="col-md-4 my-3 my-lg-0">
+                    <h3 class="tittle-8 mb-2"><i class="fas fa-stopwatch"></i> Reduce el tiempo</h3>
                     <p class="text-light-14">Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una
                         tasa
                         menor
@@ -45,16 +113,16 @@
                         interés
                     </p>
                 </div>
-                <div class="col-md-4 column-space-responsive-20">
-                    <h4 class="tittle-3 mb-2"><i class="fas fa-money-bill-alt"></i> Ahorra dinero</h4>
+                <div class="col-md-4 my-3 my-lg-0">
+                    <h4 class="tittle-8 mb-2"><i class="fas fa-money-bill-alt"></i> Ahorra dinero</h4>
                     <p class="text-light-14">Comparamos el costo de un crédito, sus plazos y requisitos adicionales. Por
                         lo
                         que
                         podrás elegir el préstamo.
                     </p>
                 </div>
-                <div class="col-md-4 column-space-responsive-20">
-                    <h4 class="tittle-3 mb-2"><i class="fas fa-clipboard"></i> Transparencia</h4>
+                <div class="col-md-4 my-3 my-lg-0">
+                    <h4 class="tittle-8 mb-2"><i class="fas fa-clipboard"></i> Transparencia</h4>
                     <p class="text-light-14">Actuamos de forma independiente al no ser una entidad financiera,
                         ofreciéndote
                         información gratuita.
@@ -70,10 +138,11 @@
         <div class="row">
 
             <!-- SIDEBAR -->
-            <aside class="col-12 col-lg-3 sidebar-steps text-white text-justify">
+            <aside class="col-12 col-lg-3 sidebar-steps text-white text-justify my-2 my-lg-0">
                 <div class="row">
                     <div class="col">
-                        <h3 class="text-white text-center my-5 px-4 tittle-3-spacing">¿CÓMO TRABAJA ASESORI?</h3>
+                        <h3 class="text-white text-center my-4 my-lg-5 px-4 tittle-3-spacing">¿CÓMO TRABAJA ASESORI?
+                        </h3>
                     </div>
                 </div>
                 <div class="px-3">
@@ -116,19 +185,18 @@
             </aside>
 
             <!-- MAIN CONTENT -->
-            <main class="col-12 col-lg-9">
+            <main class="col-12 col-lg-9 my-2 my-lg-0">
 
                 <!-- SERVICES TAGS -->
                 <div class="row justify-content-between mx-5">
 
                     <div class="col-12">
-                        <h4 class="tittle-4 mt-4 mb-2"><b>¿QUÉ ESTÁS BUSCANDO?</b></h4>
+                        <h4 class="tittle-9 mt-4 mb-2"><b>¿QUÉ ESTÁS BUSCANDO?</b></h4>
                         <p class="text-light-14">ASESORI pone a tu disposición diferentes opciones de crédito cerca de
                             tu ubicación a través de nuestros socios.</p>
                     </div>
 
-                    <div
-                        class="col-12 col-md-5 col-lg-3 align-self-center column-space-responsive-20 btn-selection-active ">
+                    <div class="col-12 col-md-5 col-lg-3 align-self-center my-2 my-lg-0 btn-selection-active ">
                         <div class="media py-4">
                             <div class="media">
                                 <img src="/assets/img/iconos/dinero.png" width="40px" height="40px" alt="">
@@ -140,7 +208,7 @@
                         <span class="badge badge-secondary">✓</span>
                     </div>
 
-                    <div class="col-12 col-md-5 col-lg-3 align-self-center column-space-responsive-20 btn-selection">
+                    <div class="col-12 col-md-5 col-lg-3 align-self-center my-2 my-lg-0 btn-selection">
                         <div class="media py-4">
                             <div class="media">
                                 <img src="/assets/img/iconos/children-parents@3x.png" width="40px" height="40px" alt="">
@@ -151,7 +219,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-5 col-lg-3 align-self-center column-space-responsive-20 btn-selection">
+                    <div class="col-12 col-md-5 col-lg-3 align-self-center my-2 my-lg-0 btn-selection">
                         <div class="media py-3">
                             <div class="media">
                                 <img src="/assets/img/iconos/master-card.png" width="40px" height="30px" alt="">
@@ -163,7 +231,7 @@
                     </div>
 
 
-                    <div class="col-12 col-md-5 col-lg-3 align-self-center column-space-responsive-20 btn-selection">
+                    <div class="col-12 col-md-5 col-lg-3 align-self-center my-2 my-lg-0 btn-selection">
                         <div class="media py-3">
                             <div class="media">
                                 <img src="/assets/img/iconos/bar@3x.png" width="40px" height="35px" alt="">
@@ -178,21 +246,21 @@
 
                 <!-- VALUES BOX -->
                 <div class="row justify-content-between mx-5 mt-4">
-                    <div class="col-12 col-md-5 col-lg-4 column-space-responsive-20 box-values-slider">
+                    <div class="col-12 col-md-5 col-lg-4 my-2 my-lg-0 box-values-slider">
                         <div class="custom-slider">
                             <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
                             <ng5-slider [(value)]="monto.minValue" [options]="monto.options"></ng5-slider>
                             <p class="tittle-7 text-right mt-2 mb-0">Dólares americanos</p>
                         </div>
                     </div>
-                    <div class="col-12 col-md-5 col-lg-4 column-space-responsive-20 box-values-slider">
+                    <div class="col-12 col-md-5 col-lg-4 my-2 my-lg-0 box-values-slider">
                         <div class="custom-slider">
                             <p class="header-box-values-slider mb-4 text-uppercase"><b>entrada</b></p>
                             <ng5-slider [(value)]="entrada.minValue" [options]="entrada.options"></ng5-slider>
                             <p class="tittle-7 text-right mt-2 mb-0">Valor opcional</p>
                         </div>
                     </div>
-                    <div class="col-12 col-md-5 col-lg-3 column-space-responsive-20 box-values-slider">
+                    <div class="col-12 col-md-5 col-lg-3 my-2 my-lg-0 box-values-slider">
                         <div class="custom-slider">
                             <p class="header-box-values-slider mb-4 text-uppercase"><b>tiempo plazo*</b></p>
                             <ng5-slider [(value)]="tiempo.minValue" [options]="tiempo.options"></ng5-slider>
@@ -212,22 +280,108 @@
         </div>
     </section>
 
+    <!-- EMAIL & STEPS SECTION -->
+
+    <section class="container">
+        <div class="row align-items-center">
+
+            <!-- SIDEBAR -->
+            <aside class="col-12 col-lg-3 sidebar-steps text-white text-justify my-2 my-lg-0">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="text-white text-center my-4 my-lg-5 px-4 tittle-3-spacing">¿CÓMO TRABAJA ASESORI?
+                        </h3>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">1</button>
+                        </div>
+                        <div class="col-11 col-lg-10">
+                            <p class="text-14">Selecciona el crédito al que deseas aplicar.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">2</button>
+                        </div>
+                        <div class="col-11  col-lg-10">
+                            <p class="text-14">Selecciona el crédito al que deseas
+                                aplicar.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">3</button>
+                        </div>
+                        <div class="col-11  col-lg-10">
+                            <p class="text-14">Ingresa tus datos para obtener beneficios.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">4</button>
+                        </div>
+                        <div class="col-11 col-lg-10">
+                            <p class="text-14">Asesori te muestra las mejores opciones de crédito, tanto por tiempo como
+                                por su
+                                tasa de interés.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="col-12 col-lg-9 my-2 my-lg-0">
+
+                <!-- SERVICES TAGS -->
+                <div class="row mx-4">
+
+                    <div class="col-12">
+                        <h4 class="tittle-9 mt-4 mb-2 text-uppercase"><b>Estas a un solo paso, ingresa tu email </b>
+                        </h4>
+                        <p class="text-center text-md-left text-light-14">Antes de conocer las mejores opciones de
+                            crédito es importante que ingreses tu email.</p>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <input type="text" required>
+                            <span class="floating-label text-uppercase">correo electronico*</span>
+                            <i class="fa fa-user-o input-icon"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CALCULATE BUTTON -->
+                <div class="row mt-4 mx-4 justify-content-end">
+                    <div class="col-lg-4">
+                        <button type="button" class="btn button btn-block">CONTINUAR</button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </section>
+
     <!-- RESULTS SECTION -->
 
     <section class="container">
 
         <div class="row px-3">
-            <div class="col-12 col-lg-12 text-right tittle-4 color-1">
+            <div class="col-12 col-lg-12 text-right tittle-9 color-1">
                 <span><i class="fas fa-redo-alt"></i></span><span class="text-uppercase ml-3">volver a calcular</span>
             </div>
             <div class="col-12 col-lg-12 text-left mt-4">
-                <p class="text-uppercase tittle-2">Instituciones Financieras en donde puedes aplicar</p>
+                <p class="text-uppercase tittle-7">Instituciones Financieras en donde puedes aplicar</p>
                 <p class="text-light-16">Puedes aplicar a todas las opciones o a las que tú seleciones</p>
             </div>
         </div>
 
         <!-- CREDIT OPTION -->
-        <div class="row result-container mt-4">
+        <div class="row mx-0 result-container mt-4">
             <div class="col-12 col-lg-10">
                 <div class="row align-items-center mt-4">
                     <div class="col-lg-3">
@@ -246,53 +400,53 @@
                     <div class="col-lg-9">
                         <div class="row text-center justify-content-center">
                             <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-5">Monto a solicitar</p>
-                                <p class="tittle-6">$10.000,00</p>
-                                <p class="text-uppercase tittle-7">Dólares americanos</p>
+                                <p class="text-uppercase tittle-10">Monto a solicitar</p>
+                                <p class="tittle-3">$10.000,00</p>
+                                <p class="text-uppercase tittle-11">Dólares americanos</p>
                             </div>
                             <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-5">Entrada</p>
-                                <p class="tittle-6">$0,00</p>
-                                <p class="text-uppercase tittle-7">valor opcional</p>
+                                <p class="text-uppercase tittle-10">Entrada</p>
+                                <p class="tittle-3">$0,00</p>
+                                <p class="text-uppercase tittle-11">valor opcional</p>
                             </div>
                             <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-5">tiempo plazo</p>
-                                <p class="tittle-6">12</p>
-                                <p class="text-uppercase tittle-7">meses</p>
+                                <p class="text-uppercase tittle-10">tiempo plazo</p>
+                                <p class="tittle-3">12</p>
+                                <p class="text-uppercase tittle-11">meses</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row text-center">
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">tasa anual</p>
-                                <p class="tittle-8">16.75%</p>
+                                <p class="text-uppercase tittle-11">tasa anual</p>
+                                <p class="tittle-5 color-3">16.75%</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">financiamiento</p>
-                                <p class="tittle-8">100%</p>
+                                <p class="text-uppercase tittle-11">financiamiento</p>
+                                <p class="tittle-5 color-3">100%</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">monto de crédito</p>
-                                <p class="tittle-8">$10.000,00</p>
+                                <p class="text-uppercase tittle-11">monto de crédito</p>
+                                <p class="tittle-5 color-3">$10.000,00</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">credito bancario</p>
-                                <p class="tittle-8">$10.000,00</p>
+                                <p class="text-uppercase tittle-11">credito bancario</p>
+                                <p class="tittle-5 color-3">$10.000,00</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-2 text-white text-center bg-2">
+            <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
                 <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
-                <h2 class="tittle-9 mt-4">$1.100</h2>
-                <p class="tittle-7 mt-2 mb-5 text-uppercase">mensual</p>
-                <p><a class="tittle-5 color-0" href="#">Más información</a></p>
+                <h2 class="tittle-2 mt-4">$1.100</h2>
+                <p class="tittle-11 mt-2 mb-3 mb-lg-5 text-uppercase">mensual</p>
+                <p><a class="tittle-10 color-0" href="#">Más información</a></p>
             </div>
         </div>
 
         <!-- CREDIT OPTION - SELECTED -->
-        <div class="row result-container mt-4">
+        <div class="row mx-0 result-container mt-4">
             <div class="col-12 col-lg-10">
                 <div class="row align-items-center mt-4">
                     <div class="col-lg-3">
@@ -311,56 +465,56 @@
                     <div class="col-lg-9">
                         <div class="row text-center justify-content-center">
                             <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-5">Monto a solicitar</p>
-                                <p class="tittle-6">$10.000,00</p>
-                                <p class="text-uppercase tittle-7">Dólares americanos</p>
+                                <p class="text-uppercase tittle-10">Monto a solicitar</p>
+                                <p class="tittle-3">$10.000,00</p>
+                                <p class="text-uppercase tittle-11">Dólares americanos</p>
                             </div>
                             <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-5">Entrada</p>
-                                <p class="tittle-6">$0,00</p>
-                                <p class="text-uppercase tittle-7">valor opcional</p>
+                                <p class="text-uppercase tittle-10">Entrada</p>
+                                <p class="tittle-3">$0,00</p>
+                                <p class="text-uppercase tittle-11">valor opcional</p>
                             </div>
                             <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-5">tiempo plazo</p>
-                                <p class="tittle-6">12</p>
-                                <p class="text-uppercase tittle-7">meses</p>
+                                <p class="text-uppercase tittle-10">tiempo plazo</p>
+                                <p class="tittle-3">12</p>
+                                <p class="text-uppercase tittle-11">meses</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row text-center">
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">tasa anual</p>
-                                <p class="tittle-8">16.75%</p>
+                                <p class="text-uppercase tittle-11">tasa anual</p>
+                                <p class="tittle-5 color-3">16.75%</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">financiamiento</p>
-                                <p class="tittle-8">100%</p>
+                                <p class="text-uppercase tittle-11">financiamiento</p>
+                                <p class="tittle-5 color-3">100%</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">monto de crédito</p>
-                                <p class="tittle-8">$10.000,00</p>
+                                <p class="text-uppercase tittle-11">monto de crédito</p>
+                                <p class="tittle-5 color-3">$10.000,00</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-7">credito bancario</p>
-                                <p class="tittle-8">$10.000,00</p>
+                                <p class="text-uppercase tittle-11">credito bancario</p>
+                                <p class="tittle-5 color-3">$10.000,00</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-2 text-white text-center bg-2">
+            <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
                 <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
-                <h2 class="tittle-9 mt-4">$1.100</h2>
-                <p class="tittle-7 mt-2 mb-5 text-uppercase">mensual</p>
-                <p><a class="tittle-5 color-0" href="#">Más información</a></p>
+                <h2 class="tittle-2 mt-4">$1.100</h2>
+                <p class="tittle-11 mt-2 mb-3 mb-lg-5 text-uppercase">mensual</p>
+                <p><a class="tittle-10 color-0" href="#">Más información</a></p>
             </div>
         </div>
 
         <!-- APLICATION BAR -->
         <div class="row mt-5 text-right text-white aplication-bar bg-2 align-items-center">
             <div class="col">
-                <span class="tittle-5 mr-5">1 seleccionado</span>
-                <summary class="tittle-10 d-inline-block text-uppercase mr-4"><a class="mr-5">aplicar</a>></summary>
+                <span class="tittle-10 mr-5">1 seleccionado</span>
+                <summary class="tittle-6 d-inline-block text-uppercase mr-4"><a class="mr-5">aplicar</a>></summary>
             </div>
         </div>
 
@@ -373,8 +527,8 @@
         <div class="row align-items-start">
 
             <!-- RANKING TEXT -->
-            <div class="col-12 col-lg-3 column-space-responsive-20">
-                <h2 class="tittle-11">Ranking Asesori</h2>
+            <div class="col-12 col-lg-3 my-2 my-lg-0">
+                <h2 class="tittle-4">Ranking Asesori</h2>
                 <p class="text-light-16 mt-5">Te enseñamos una calificación de Asesori hacia las instituciones
                     financieras en base a su tasa de interés, Cantidad de trámites y tiempo en aprobación de tu
                     solicitud
@@ -382,27 +536,27 @@
             </div>
 
             <!-- RATING FINANCIAL ENTITY -->
-            <div class="col-12 col-lg-9 column-space-responsive-20">
+            <div class="col-12 col-lg-9 my-2 my-lg-0">
                 <div class="row  text-center">
                     <div class="col-lg-3">
                         <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tasa de interés</p>
-                        <p class="tittle-4">9.81%</p>
+                        <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tiempo de aprobación</p>
-                        <p class="tittle-4">72 horas</p>
+                        <p class="tittle-9">72 horas</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Cantidad de trámites</p>
-                        <p class="tittle-4">CORTO</p>
+                        <p class="tittle-9">CORTO</p>
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
-                        <span class="tittle-4">99/100</span>
+                        <span class="tittle-9">99/100</span>
                     </div>
                 </div>
                 <hr>
@@ -412,20 +566,20 @@
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tasa de interés</p>
-                        <p class="tittle-4">9.81%</p>
+                        <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tiempo de aprobación</p>
-                        <p class="tittle-4">72 horas</p>
+                        <p class="tittle-9">72 horas</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Cantidad de trámites</p>
-                        <p class="tittle-4">CORTO</p>
+                        <p class="tittle-9">CORTO</p>
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
-                        <span class="tittle-4">99/100</span>
+                        <span class="tittle-9">99/100</span>
                     </div>
                 </div>
                 <hr>
@@ -435,20 +589,20 @@
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tasa de interés</p>
-                        <p class="tittle-4">9.81%</p>
+                        <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tiempo de aprobación</p>
-                        <p class="tittle-4">72 horas</p>
+                        <p class="tittle-9">72 horas</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Cantidad de trámites</p>
-                        <p class="tittle-4">CORTO</p>
+                        <p class="tittle-9">CORTO</p>
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
-                        <span class="tittle-4">99/100</span>
+                        <span class="tittle-9">99/100</span>
                     </div>
                 </div>
                 <hr>
@@ -458,20 +612,20 @@
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tasa de interés</p>
-                        <p class="tittle-4">9.81%</p>
+                        <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Tiempo de aprobación</p>
-                        <p class="tittle-4">72 horas</p>
+                        <p class="tittle-9">72 horas</p>
                     </div>
                     <div class="col-6 col-lg-2">
                         <p class="tittle-12">Cantidad de trámites</p>
-                        <p class="tittle-4">CORTO</p>
+                        <p class="tittle-9">CORTO</p>
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
                         <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
-                        <span class="tittle-4">99/100</span>
+                        <span class="tittle-9">99/100</span>
                     </div>
                 </div>
                 <hr>
@@ -483,7 +637,7 @@
 
     <section class="container-fluid">
         <div class="row justify-content-center align-self-center bg-3">
-            <div class="col-9">
+            <div class="col-12 col-md-9">
                 <div class="embed-responsive embed-responsive-16by9">
                     <video class="embed-responsive-item" src="assets/video/video.mp4" controls muted loop
                         type="video/mp4"></video>
@@ -498,7 +652,7 @@
 
         <div class="row justify-content-center text-center">
             <div class="col-8">
-                <p class="tittle-2 color-2 text-uppercase">Los servicios</p>
+                <p class="tittle-7 color-2 text-uppercase">Los servicios</p>
                 <p class="tittle-0 text-uppercase">podemos ayudarte</p>
                 <p class="text-light-16">El crédito puede ser complicado. Pero no tiene que ser así. ASESORI pone a tu
                     disposición diferentes opciones cerca de tu ubicación a través de nuestros socios.</p>
@@ -506,39 +660,39 @@
         </div>
 
         <div class="row mt-4 text-center">
-            <div class="col-md-4 d-flex align-items-stretch">
+            <div class="col-md-4 d-flex align-items-stretch my-2 my-lg-0">
                 <div class="card text-center card-service">
                     <img class="card-img-top" src="/assets/img/services/deudas-credit370x245.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-title tittle-2">CRÉDITOS</p>
+                        <p class="card-title tittle-7">CRÉDITOS</p>
                         <p class="card-text  text-light-16">Obtén el crédito que
                             necesitas en donde tu eligas de manera más rápida y ágil, asegurando confianza y
                             confiabilidad.</p>
-                        <a href="#" class="tittle-5">VER MÁS</a>
+                        <a href="#" class="tittle-10">VER MÁS</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 d-flex align-items-stretch">
+            <div class="col-md-4 d-flex align-items-stretch my-2 my-lg-0">
                 <div class="card text-center card-service">
                     <img class="card-img-top" src="/assets/img/services/house-credit370x245.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-title tittle-2">TARJETAS DE CRÉDITO</p>
+                        <p class="card-title tittle-7">TARJETAS DE CRÉDITO</p>
                         <p class="card-text  text-light-16">Deja atrás lo lento y
                             tedioso que resulta el trámite para poder contar con tu tarjeta de crédito.</p>
-                        <a href="#" class="tittle-5">VER MÁS</a>
+                        <a href="#" class="tittle-10">VER MÁS</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 d-flex align-items-stretch">
+            <div class="col-md-4 d-flex align-items-stretch my-2 my-lg-0">
                 <div class="card text-center card-service">
                     <img class="card-img-top" src="/assets/img/services/prestamo-credit370x245.jpg"
                         alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-title tittle-2">INVERSIONES</p>
+                        <p class="card-title tittle-7">INVERSIONES</p>
                         <p class="card-text  text-light-16">Sabias que puedes obtener
                             dinero al acumular tus ahorros a plazo fijo, obtén información de las tasas más seguras
                             y efectivas para ti.</p>
-                        <a href="#" class="tittle-5">VER MÁS</a>
+                        <a href="#" class="tittle-10">VER MÁS</a>
                     </div>
                 </div>
             </div>
@@ -559,7 +713,7 @@
         <div class="container">
             <div class="row pt-5 text-center justify-content-center">
                 <div class="col-9 col-md-6">
-                    <h1 class="tittle-9">Qué beneficios obtengo?</h1>
+                    <h1 class="tittle-2">Qué beneficios obtengo?</h1>
                 </div>
             </div>
 
@@ -568,7 +722,7 @@
                     <div class="p-5">
                         <i class="fas fa-clipboard icon"></i>
                     </div>
-                    <h4 class="tittle-2 mb-3">Múltiples opciones de créditos</h4>
+                    <h4 class="tittle-7 mb-3">Múltiples opciones de créditos</h4>
                     <p class="text-light-14">Tu solicitud será revisada por las insituciones Financieras, y
                         Asesori te mostrará cual es la mejor para ti</p>
                 </div>
@@ -576,7 +730,7 @@
                     <div class="p-5">
                         <i class="fas fa-money-bill-alt icon"></i>
                     </div>
-                    <h4 class="tittle-2 mb-3">Transparencia con tus créditos</h4>
+                    <h4 class="tittle-7 mb-3">Transparencia con tus créditos</h4>
                     <p class="text-light-14">Asesori es transparente, no te cobramos por nuestro servicio,
                         nosotros queremos que siempre obtengas la mejor tasa de interés</p>
                 </div>
@@ -584,10 +738,70 @@
                     <div class="p-5">
                         <i class="fas fa-clipboard icon"></i>
                     </div>
-                    <h4 class="tittle-2 mb-3">Rapidez de respuesta</h4>
+                    <h4 class="tittle-7 mb-3">Rapidez de respuesta</h4>
                     <p class="text-light-14">Cuando dejes tu solicitud en línea, aproximadamente tendrás un tiempo
                         de respuesta de unas 48horas, luego nosotros te enviaremos un email con las diferentes opciones
                         de insituciones financieras a las que ya puedes aplicar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODALS SECTION -->
+
+    <section class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary" (click)="openModal(template)">MODAL ACEPTACION
+                    TERMINOS</button>
+
+                <ng-template #template>
+                    <div class="modal-header">
+                        <h4 class="modal-title tittle-6">Aceptación de términos</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-4 text-justify text-light-14">
+                        Estimado usuario, al aceptar los términos, trataremos sus datos única y exclusivamente para: (i)
+                        la potencial obtención de créditos, así como comunicación relacionada con la misma; y (ii) ser
+                        transferidos a Crédito Real, S.A.B. de C.V., SOFOM, E.R., para la consulta, a través de
+                        Sociedades de Información Crediticia sobre sus antecedentes crediticios; cumplimiento de sus
+                        obligaciones derivadas de cualquier relación jurídica con Entidades Financieras; calificaciones
+                        de crédito o riesgos; y, el comportamiento de su historial crediticio. Asimismo, usted dispone
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button type="button" class="btn btn-primary" (click)="confirm()">SI</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">NO</button>
+                    </div>
+                </ng-template>
+            </div>
+
+
+
+
+            <div class="col-12">
+
+                <div class="position-relative mt-4">
+                    <input type="text" required>
+                    <span class="floating-label text-uppercase">nombre de empresa*</span>
+                    <i class="fa fa-user-o input-icon"></i>
+                </div>
+                <div class="position-relative mt-4">
+                    <input type="text" required>
+                    <span class="floating-label text-uppercase">nombres*</span>
+                    <i class="fa fa-user-o input-icon"></i>
+                </div>
+                <div class="position-relative mt-4">
+                    <input type="text" required>
+                    <span class="floating-label text-uppercase">apellidos*</span>
+                    <i class="fa fa-envelope-o input-icon"></i>
+                </div>
+                <div class="position-relative mt-4">
+                    <input type="text" required />
+                    <span class="floating-label text-uppercase">cedula de identidad*</span>
+                    <i class="fa fa-globe input-icon"></i>
                 </div>
             </div>
         </div>
@@ -597,52 +811,33 @@
 
 <!-- FOOTER -->
 <footer class="pt-4">
-    <!-- Footer Links -->
-    <div class="container text-center text-md-left">
-        <!-- Grid row -->
+    <div class="container py-0 text-center text-md-left">
         <div class="row">
-            <!-- Grid column -->
             <div class="col-md-4 mx-auto">
-                <!-- Content -->
-                <img class="img-fluid" width="95px" height="95px" src="/assets/img/logo-small.png">
-                <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit.</p>
+                <img class="img-fluid" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
+                <p class="text-light-16 text-justify">Asesori te facilita las mejores opciones para que puedas acceder
+                    rápido y seguro al crédito que necesites.</p>
             </div>
-
-            <hr class="clearfix w-100 d-md-none">
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1">
-                <!-- Links -->
-                <h5 class="text-uppercase mb-4">ACERCA DE</h5>
-                <ul class="">
+            <div class="col-md-3 col-lg-2 mx-auto my-md-4 my-0 mt-4">
+                <h5 class="text-uppercase mb-4 tittle-7">ACERCA DE</h5>
+                <ul>
                     <li>
-                        <p>
-                            <a href="#!">INICIO</a>
-                        </p>
+                        <p><a href="#!" class="tittle-10">INICIO</a></p>
                     </li>
                     <li>
-                        <p>
-                            <a href="#!">COMPAÑÍA</a>
-                        </p>
+                        <p><a href="#!" class="tittle-10">COMPAÑÍA</a></p>
                     </li>
                     <li>
-                        <p>
-                            <a href="#!">NUESTRO TRABAJO</a>
-                        </p>
+                        <p><a href="#!" class="tittle-10">NUESTRO TRABAJO</a></p>
                     </li>
                     <li>
-                        <p>
-                            <a href="#!">CONTACTANOS</a>
-                        </p>
+                        <p><a href="#!" class="tittle-10">CONTACTANOS</a></p>
                     </li>
                 </ul>
             </div>
-            <!-- Grid column -->
-            <hr class="clearfix w-100 d-md-none">
-            <div class="col-md-5 col-lg-5 mx-auto my-md-4 my-0 mt-4 mb-1">
-                <!-- Contact details -->
-                <h5 class="text-uppercase mb-4">Información</h5>
-                <ul class="">
+            <div class="col-md-5 col-lg-5 mx-auto my-md-4 my-0 mt-4">
+                <h5 class="text-uppercase mb-4 tittle-7">Información</h5>
+                <ul>
                     <li>
                         <p>
                             <i class="fas fa-home mr-3"></i> Avenida 24 de Enero y Francisco Cevallos.</p>
@@ -657,47 +852,34 @@
                     </li>
                 </ul>
             </div>
-
         </div>
-        <!-- Grid row -->
     </div>
-    <!-- Footer Links -->
-
     <hr>
-    <!-- Call to action -->
     <ul class="text-center py-2">
         <li class="list-inline-item">
-            <h5 class="mb-1">Registrate ahora!</h5>
+            <h5 class="mb-1 tittle-10">Registrate ahora!</h5>
         </li>
         <li class="list-inline-item">
-            <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+            <a href="#!" class="btn btn-rounded text-white bg-2">Sign up!</a>
         </li>
     </ul>
-    <!-- Call to action -->
     <hr>
 
     <!-- Social buttons -->
-    <ul class="text-center my-4">
+    <ul class="text-center my-4 text-white">
         <li class="list-inline-item">
-            <a class="mx-1">
-                <i class="fab fa-facebook-f"> </i>
-            </a>
+            <a class="fab fa-facebook-f"></a>
         </li>
         <li class="list-inline-item">
-            <a class="mx-1">
-                <i class="fab fa-twitter"> </i>
-            </a>
+            <a class="fab fa-twitter"></a>
         </li>
         <li class="list-inline-item">
-            <a class="mx-1">
-                <i class="fab fa-google-plus-g"> </i>
-            </a>
+            <a class="fab fa-instagram"></a>
         </li>
     </ul>
     <!-- Social buttons -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 Copyright ASESORI</div>
+    <div class="text-white bg-3 text-center py-3 tittle-10">© 2020 Copyright ASESORI</div>
     <!-- Copyright -->
 </footer>
-<!-- Footer -->

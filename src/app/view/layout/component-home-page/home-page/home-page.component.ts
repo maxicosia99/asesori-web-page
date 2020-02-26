@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Options } from 'ng5-slider';
+
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 
 interface SimpleSliderModel {
   minValue: number;
@@ -13,7 +16,7 @@ interface SimpleSliderModel {
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
   }
@@ -61,30 +64,53 @@ export class HomePageComponent implements OnInit {
   rate: number = 4;
   isReadonly: boolean = true;
 
-  itemsPerSlide = 4;
-  singleSlideOffset = true;
-  noWrap = false;
 
-  slidesChangeMessage = '';
+  navbarOpen = false;
 
-  slides = [
-    { image: 'assets/img/financial-entities/banco-austro-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-biess-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-bolivariano-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-dinnersClub-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-guayaquil-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-pacifico-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-pichincha-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-produbanco-188x100.png' },
-    { image: 'assets/img/financial-entities/banco-rumiñahui-188x100.png' },
-    { image: 'assets/img/financial-entities/cooperativa-crea-188x100.png' },
-    { image: 'assets/img/financial-entities/cooperativa-jardinAzuayo-188x100.png' },
-    { image: 'assets/img/financial-entities/cooperativa-jep-188x100.png' },
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 
-  ];
+  customOptions: OwlOptions = {
+    loop: true,
+    freeDrag: true,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 4
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    }
+  } 
 
-  onSlideRangeChange(indexes: number[]): void {
-    this.slidesChangeMessage = `Slides have been switched: ${indexes}`;
+  /* MODAL */
+
+  message: string;
+  modalRef: BsModalRef;
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  confirm(): void {
+    this.message = 'Confirmed!';
+    this.modalRef.hide();
+  }
+ 
+  decline(): void {
+    this.message = 'Declined!';
+    this.modalRef.hide();
   }
 
 }

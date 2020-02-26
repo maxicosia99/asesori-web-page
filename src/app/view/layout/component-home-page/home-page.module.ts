@@ -3,24 +3,31 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HomePageRoutingModule } from './home-page-routing.module';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { Ng5SliderModule } from 'ng5-slider';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap';
+
+/* CarouselModule  */
+import { CarouselModule } from 'ngx-owl-carousel-o';
+/* END - CarouselModule */
 
 @NgModule({
   declarations: [
-    HomePageComponent
+    HomePageComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HomePageRoutingModule,
-    CarouselModule.forRoot(),
+    CarouselModule,
     ButtonsModule.forRoot(),
     RatingModule.forRoot(),
-    Ng5SliderModule
+    Ng5SliderModule,
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     
