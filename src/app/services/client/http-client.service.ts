@@ -15,8 +15,8 @@ const httpOptions = {
 })
 export class HttpClientService {
 
-  private SEVER_URL: string = 'https://asesori-creditrequest-server.herokuapp.com';
-  //private SEVER_URL: string = 'http://192.168.137.225:8001';
+  //private SEVER_URL: string = 'http://10.101.214.140:8080';
+  private SEVER_URL: string = 'https://asesori-server-demo.herokuapp.com';
 
   constructor(private httpClient:HttpClient) { }
 
@@ -57,28 +57,29 @@ export class HttpClientService {
     return this.doGetRequest(url);
   }
 
-  checkUsernameAvailability(username: string): Observable<any> {
-    let url = this.getEndUrl(`/api/user/checkUsernameAvailability?username=${username}`);
+  /*  Start - Search by location. */
+  getCurrentCity(): Observable<any> {
+    let url = `https://ipapi.co/json/`;
     return this.doGetRequest(url);
   }
+  /*  End - Search by location. */
 
-  checkEmailAvailability(email: string): Observable<any> {
-    let url = this.getEndUrl(`/api/user/checkEmailAvailability?email=${email}`);
-    return this.doGetRequest(url);
-  }
-  
-  /* Get Financial Request */
-  getAllFinancialRequest(user_id: number): Observable<any> {
-    let url = this.getEndUrl(`/api/v1/credit-applications/findapplications?user_id=${user_id}`);
-    return this.doGetRequest(url);
-  }
-  /* End - Get Financial Request */
+  /* Get all credit options  */
+  getAllCreditOptions(region_name: string, entityType: number, id_credit: number, loan_amount: number, montly_income: number, credit_term: number, initial_amount: number): Observable<any> {
+    let url;
 
-  /* Put Update Status Financial Request */
-  updateStatusFinancialRequest(application_id: number): Observable<any> {
-    let url = this.getEndUrl(`/api/v1/credit-applications/putreaded?application_id=${application_id}`);
-    return this.doPutRequest(url);
+    if (entityType === undefined) {
+      entityType = 0;
+    }
+
+    if (initial_amount === null || initial_amount === 0) {
+      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&type=${entityType}&region_name=${region_name}`);
+    } else {
+      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&initial_amount=${initial_amount}&type=${entityType}&region_name=${region_name}`);
+    }
+
+    return this.doGetRequest(url);
   }
-  /* End - Put Update Status Financial Request */
+  /* End - Get all credit options  */
 
 }

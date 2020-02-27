@@ -132,9 +132,96 @@
         </div>
     </section>
 
-    <!-- CALCULATOR & STEPS SECTION -->
+    <!-- EMAIL & STEPS SECTION -->
 
     <section class="container">
+        <div class="row align-items-center">
+
+            <!-- SIDEBAR -->
+            <aside class="col-12 col-lg-3 sidebar-steps text-white text-justify my-2 my-lg-0">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="text-white text-center my-4 my-lg-5 px-4 tittle-3-spacing">¿CÓMO TRABAJA ASESORI?
+                        </h3>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">1</button>
+                        </div>
+                        <div class="col-11 col-lg-10">
+                            <p class="text-14">Selecciona el crédito al que deseas aplicar.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">2</button>
+                        </div>
+                        <div class="col-11  col-lg-10">
+                            <p class="text-14">Selecciona el crédito al que deseas
+                                aplicar.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">3</button>
+                        </div>
+                        <div class="col-11  col-lg-10">
+                            <p class="text-14">Ingresa tus datos para obtener beneficios.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 col-lg-2">
+                            <button type="button" class="btn btn-circle">4</button>
+                        </div>
+                        <div class="col-11 col-lg-10">
+                            <p class="text-14">Asesori te muestra las mejores opciones de crédito, tanto por tiempo como
+                                por su
+                                tasa de interés.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="col-12 col-lg-9 my-2 my-lg-0">
+
+                <!-- SERVICES TAGS -->
+                <div class="row mx-4">
+
+                    <div class="col-12">
+                        <h4 class="tittle-9 mt-4 mb-2 text-uppercase"><b>Estas a un solo paso, ingresa tu email </b>
+                        </h4>
+                        <p class="text-center text-md-left text-light-14">Antes de conocer las mejores opciones de
+                            crédito es importante que ingreses tu email.</p>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <input type="text" required>
+                            <span class="floating-label text-uppercase">correo electronico*</span>
+                            <i class="fa fa-user-o input-icon"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CALCULATE BUTTON -->
+                <div class="row mt-4 mx-4 justify-content-end">
+                    <div class="col-lg-4">
+                        <button type="button" class="btn button btn-block">CONTINUAR</button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </section>
+
+
+    <!-- CALCULATOR & STEPS SECTION -->
+
+    <section #calculator class="container">
         <div class="row">
 
             <!-- SIDEBAR -->
@@ -249,22 +336,22 @@
                     <div class="col-12 col-md-5 col-lg-4 my-2 my-lg-0 box-values-slider">
                         <div class="custom-slider">
                             <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
-                            <ng5-slider [(value)]="monto.minValue" [options]="monto.options"></ng5-slider>
-                            <p class="tittle-7 text-right mt-2 mb-0">Dólares americanos</p>
+                            <ng5-slider [(value)]="amountRequest.value" [options]="amountRequest.options"></ng5-slider>
+                            <p class="tittle-11 text-right mt-2 mb-0">Dólares americanos</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-5 col-lg-4 my-2 my-lg-0 box-values-slider">
                         <div class="custom-slider">
                             <p class="header-box-values-slider mb-4 text-uppercase"><b>entrada</b></p>
-                            <ng5-slider [(value)]="entrada.minValue" [options]="entrada.options"></ng5-slider>
-                            <p class="tittle-7 text-right mt-2 mb-0">Valor opcional</p>
+                            <ng5-slider [(value)]="entryAmount.value" [options]="entryAmount.options"></ng5-slider>
+                            <p class="tittle-11 text-right mt-2 mb-0">Valor opcional</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-5 col-lg-3 my-2 my-lg-0 box-values-slider">
                         <div class="custom-slider">
                             <p class="header-box-values-slider mb-4 text-uppercase"><b>tiempo plazo*</b></p>
-                            <ng5-slider [(value)]="tiempo.minValue" [options]="tiempo.options"></ng5-slider>
-                            <p class="tittle-7 text-right mt-2 mb-0">Meses</p>
+                            <ng5-slider [(value)]="term.value" [options]="term.options"></ng5-slider>
+                            <p class="tittle-11 text-right mt-2 mb-0">Meses</p>
                         </div>
                     </div>
                 </div>
@@ -272,7 +359,8 @@
                 <!-- CALCULATE BUTTON -->
                 <div class="row mt-4 mx-4 justify-content-end">
                     <div class="col-lg-4">
-                        <button type="button" class="btn button btn-block">CALCULAR</button>
+                        <button type="submit" class="btn button btn-block"
+                            (click)="onSubmitEstimateForm(target)">CALCULAR</button>
                     </div>
                 </div>
 
@@ -280,245 +368,257 @@
         </div>
     </section>
 
-    <!-- EMAIL & STEPS SECTION -->
 
-    <section class="container">
-        <div class="row align-items-center">
 
-            <!-- SIDEBAR -->
-            <aside class="col-12 col-lg-3 sidebar-steps text-white text-justify my-2 my-lg-0">
-                <div class="row">
-                    <div class="col">
-                        <h3 class="text-white text-center my-4 my-lg-5 px-4 tittle-3-spacing">¿CÓMO TRABAJA ASESORI?
-                        </h3>
-                    </div>
+
+
+    <!-- RESULTS SECTION TEST -->
+    <form #target [formGroup]="contactform">
+
+        <section class="container" *ngIf="creditOptions">
+
+            <div class="row">
+                <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text" (click)="recalculate(calculator)">
+                    <span><i class="fas fa-redo-alt"></i></span><span class="text-uppercase ml-3">volver a
+                        calcular</span>
                 </div>
-                <div class="px-3">
-                    <div class="row">
-                        <div class="col-1 col-lg-2">
-                            <button type="button" class="btn btn-circle">1</button>
-                        </div>
-                        <div class="col-11 col-lg-10">
-                            <p class="text-14">Selecciona el crédito al que deseas aplicar.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1 col-lg-2">
-                            <button type="button" class="btn btn-circle">2</button>
-                        </div>
-                        <div class="col-11  col-lg-10">
-                            <p class="text-14">Selecciona el crédito al que deseas
-                                aplicar.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1 col-lg-2">
-                            <button type="button" class="btn btn-circle">3</button>
-                        </div>
-                        <div class="col-11  col-lg-10">
-                            <p class="text-14">Ingresa tus datos para obtener beneficios.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-1 col-lg-2">
-                            <button type="button" class="btn btn-circle">4</button>
-                        </div>
-                        <div class="col-11 col-lg-10">
-                            <p class="text-14">Asesori te muestra las mejores opciones de crédito, tanto por tiempo como
-                                por su
-                                tasa de interés.</p>
-                        </div>
-                    </div>
+                <div class="col-12 col-lg-12 text-left mt-4">
+                    <p class="text-uppercase tittle-7">Instituciones Financieras en donde puedes aplicar</p>
+                    <p class="text-light-16">Puedes aplicar a todas las opciones o a las que tú seleciones</p>
                 </div>
-            </aside>
+            </div>
 
-            <!-- MAIN CONTENT -->
-            <main class="col-12 col-lg-9 my-2 my-lg-0">
 
-                <!-- SERVICES TAGS -->
-                <div class="row mx-4">
 
+
+            <!-- can_access_credit OPTIONS -->
+            <div class="row mt-4" *ngIf="can_access_credit?.length > 0">
+                <div class="col-12">
+                    <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE PUEDES OBTENER TU CRÉDITO</h2>
+                </div>
+            </div>
+
+            <div class="result-container mt-4 kudos-wrap" formArrayName="can_access_credit_userSelected"
+                *ngFor="let credit of can_access_credit_userSelected.controls; let i=index">
+                <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i"
+                    id="{{can_access_credit[i].id}}">
+                <label for="{{can_access_credit[i].id}}">
+                    <div class="row m-0 p-0">
+                        <div class="col-12 col-lg-10">
+                            <div class="row align-items-center mt-4">
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="selected">✓ Seleccionado</p>
+                                            <p class="no-selected">Seleccionar</p>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center justify-content-center">
+                                        <div class="col-6 col-lg-12">
+                                            <img class="img-fluid" [src]="can_access_credit[i].url_photo" alt="Image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="row text-center justify-content-center">
+                                        <div class="col-6 col-md-4">
+                                            <p class="text-uppercase tittle-10">Monto a solicitar</p>
+                                            <p class="tittle-3">
+                                                ${{can_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                            <p class="text-uppercase tittle-11">Dólares americanos</p>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <p class="text-uppercase tittle-10">Entrada</p>
+                                            <p class="tittle-3">
+                                                ${{can_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}</p>
+                                            <p class="text-uppercase tittle-11">valor opcional</p>
+                                        </div>
+                                        <div class="col-6 col-md-4 d-none d-md-block">
+                                            <p class="text-uppercase tittle-10">tiempo plazo</p>
+                                            <p class="tittle-3">12</p>
+                                            <p class="text-uppercase tittle-11">meses</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row text-center">
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">tasa anual</p>
+                                            <p class="tittle-5 color-3">
+                                                {{can_access_credit[i].loan_rate | number : '1.2-2' }}%</p>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">financiamiento</p>
+                                            <p class="tittle-5 color-3">{{can_access_credit[i].financing | number }}%
+                                            </p>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">monto de crédito</p>
+                                            <p class="tittle-5 color-3">
+                                                ${{can_access_credit[i].loan_amount | number : '1.2-2':'fr' }}</p>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">credito bancario</p>
+                                            <p class="tittle-5 color-3">
+                                                ${{can_access_credit[i].bank_borrow | number : '1.2-2':'fr' }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
+                            <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
+                            <h2 class="tittle-2 mt-4">${{can_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
+                            </h2>
+                            <p class="tittle-11 mt-2 mb-3 mb-lg-5 text-uppercase">mensual</p>
+                            <p><a class="tittle-10 color-0" href="#">Más información</a></p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+            <!-- END - can_access_credit OPTIONS -->
+
+
+
+            <!-- cannot_access_credit OPTIONS -->
+            <div class="row mt-4" *ngIf="cannot_access_credit?.length > 0">
+                <div class="col-12">
+                    <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE NO TIENES LOS NECESARIO PARA OBTENER TU CRÉDITO
+                    </h2>
+                </div>
+            </div>
+
+            <div class="result-container mt-4 kudos-wrap" formArrayName="cannot_access_credit_userSelected"
+                *ngFor="let credit of cannot_access_credit_userSelected.controls; let i=index">
+                <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i"
+                    id="{{cannot_access_credit[i].id}}">
+                <label for="{{cannot_access_credit[i].id}}">
+                    <div class="row m-0 p-0">
+                        <div class="col-12 col-lg-10">
+                            <div class="row align-items-center mt-4">
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="selected">✓ Seleccionado</p>
+                                            <p class="no-selected">Seleccionar</p>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center justify-content-center">
+                                        <div class="col-6 col-lg-12">
+                                            <img class="img-fluid" [src]="cannot_access_credit[i].url_photo"
+                                                alt="Image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="row text-center justify-content-center">
+                                        <div class="col-6 col-md-4">
+                                            <p class="text-uppercase tittle-10">Monto a solicitar</p>
+                                            <p class="tittle-3">
+                                                ${{cannot_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                            <p class="text-uppercase tittle-11">Dólares americanos</p>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <p class="text-uppercase tittle-10">Entrada</p>
+                                            <p class="tittle-3">
+                                                ${{cannot_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}
+                                            </p>
+                                            <p class="text-uppercase tittle-11">valor opcional</p>
+                                        </div>
+                                        <div class="col-6 col-md-4 d-none d-md-block">
+                                            <p class="text-uppercase tittle-10">tiempo plazo</p>
+                                            <p class="tittle-3">12</p>
+                                            <p class="text-uppercase tittle-11">meses</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row text-center">
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">tasa anual</p>
+                                            <p class="tittle-5 color-3">
+                                                {{cannot_access_credit[i].loan_rate | number : '1.2-2' }}%</p>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">financiamiento</p>
+                                            <p class="tittle-5 color-3">{{cannot_access_credit[i].financing | number }}%
+                                            </p>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">monto de crédito</p>
+                                            <p class="tittle-5 color-3">
+                                                ${{cannot_access_credit[i].loan_amount | number : '1.2-2':'fr' }}</p>
+                                        </div>
+                                        <div class="col-6 col-md-3">
+                                            <p class="text-uppercase tittle-11">credito bancario</p>
+                                            <p class="tittle-5 color-3">
+                                                ${{cannot_access_credit[i].bank_borrow | number : '1.2-2':'fr' }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
+                            <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
+                            <h2 class="tittle-2 mt-4">
+                                ${{cannot_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
+                            </h2>
+                            <p class="tittle-11 mt-2 mb-3 mb-lg-5 text-uppercase">mensual</p>
+                            <p><a class="tittle-10 color-0" href="#">Más información</a></p>
+                        </div>
+                    </div>
+                </label>
+            </div>
+            <!-- END - can_access_credit OPTIONS -->
+
+
+            <!-- credit_unavailable OPTIONS -->
+            <div class="row mt-4" *ngIf="credit_unavailable?.length > 0">
+                <div class="col-12">
+                    <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE NO PUEDES OBTENER TU CRÉDITO</h2>
+                </div>
+            </div>
+
+            <div class="result-container mt-4 kudos-wrap" *ngFor="let credit of credit_unavailable; let i=index">
+                <div class="row m-0 p-0">
                     <div class="col-12">
-                        <h4 class="tittle-9 mt-4 mb-2 text-uppercase"><b>Estas a un solo paso, ingresa tu email </b>
-                        </h4>
-                        <p class="text-center text-md-left text-light-14">Antes de conocer las mejores opciones de
-                            crédito es importante que ingreses tu email.</p>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="position-relative">
-                            <input type="text" required>
-                            <span class="floating-label text-uppercase">correo electronico*</span>
-                            <i class="fa fa-user-o input-icon"></i>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- CALCULATE BUTTON -->
-                <div class="row mt-4 mx-4 justify-content-end">
-                    <div class="col-lg-4">
-                        <button type="button" class="btn button btn-block">CONTINUAR</button>
-                    </div>
-                </div>
-
-            </main>
-        </div>
-    </section>
-
-    <!-- RESULTS SECTION -->
-
-    <section class="container">
-
-        <div class="row px-3">
-            <div class="col-12 col-lg-12 text-right tittle-9 color-1">
-                <span><i class="fas fa-redo-alt"></i></span><span class="text-uppercase ml-3">volver a calcular</span>
-            </div>
-            <div class="col-12 col-lg-12 text-left mt-4">
-                <p class="text-uppercase tittle-7">Instituciones Financieras en donde puedes aplicar</p>
-                <p class="text-light-16">Puedes aplicar a todas las opciones o a las que tú seleciones</p>
-            </div>
-        </div>
-
-        <!-- CREDIT OPTION -->
-        <div class="row mx-0 result-container mt-4">
-            <div class="col-12 col-lg-10">
-                <div class="row align-items-center mt-4">
-                    <div class="col-lg-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <button class="btn button-negative">Seleccionar</button>
+                        <div class="row align-items-center mt-4">
+                            <div class="col-lg-3">
+                                <div class="row text-center justify-content-center">
+                                    <div class="col-6 col-lg-12">
+                                        <img class="img-fluid" [src]="credit.url_photo" alt="Image">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col-12">
-                                <img class="img-fluid" src="/assets/img/financial-entities/banco-austro-188x100.png"
-                                    alt="Entidad FInanciera">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row text-center justify-content-center">
-                            <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-10">Monto a solicitar</p>
-                                <p class="tittle-3">$10.000,00</p>
-                                <p class="text-uppercase tittle-11">Dólares americanos</p>
-                            </div>
-                            <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-10">Entrada</p>
-                                <p class="tittle-3">$0,00</p>
-                                <p class="text-uppercase tittle-11">valor opcional</p>
-                            </div>
-                            <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-10">tiempo plazo</p>
-                                <p class="tittle-3">12</p>
-                                <p class="text-uppercase tittle-11">meses</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-center">
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">tasa anual</p>
-                                <p class="tittle-5 color-3">16.75%</p>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">financiamiento</p>
-                                <p class="tittle-5 color-3">100%</p>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">monto de crédito</p>
-                                <p class="tittle-5 color-3">$10.000,00</p>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">credito bancario</p>
-                                <p class="tittle-5 color-3">$10.000,00</p>
+                            <div class="col-lg-9">
+                                <p class="text-light-14">{{credit.info}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
-                <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
-                <h2 class="tittle-2 mt-4">$1.100</h2>
-                <p class="tittle-11 mt-2 mb-3 mb-lg-5 text-uppercase">mensual</p>
-                <p><a class="tittle-10 color-0" href="#">Más información</a></p>
-            </div>
-        </div>
+            <!-- END - credit_unavailable OPTIONS -->
+           
 
-        <!-- CREDIT OPTION - SELECTED -->
-        <div class="row mx-0 result-container mt-4">
-            <div class="col-12 col-lg-10">
-                <div class="row align-items-center mt-4">
-                    <div class="col-lg-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <button class="btn button">✓ Seleccionado</button>
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col-12">
-                                <img class="img-fluid" src="/assets/img/financial-entities/banco-guayaquil-188x100.png"
-                                    alt="Entidad FInanciera">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row text-center justify-content-center">
-                            <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-10">Monto a solicitar</p>
-                                <p class="tittle-3">$10.000,00</p>
-                                <p class="text-uppercase tittle-11">Dólares americanos</p>
-                            </div>
-                            <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-10">Entrada</p>
-                                <p class="tittle-3">$0,00</p>
-                                <p class="text-uppercase tittle-11">valor opcional</p>
-                            </div>
-                            <div class="col-6 col-md-4">
-                                <p class="text-uppercase tittle-10">tiempo plazo</p>
-                                <p class="tittle-3">12</p>
-                                <p class="text-uppercase tittle-11">meses</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-center">
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">tasa anual</p>
-                                <p class="tittle-5 color-3">16.75%</p>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">financiamiento</p>
-                                <p class="tittle-5 color-3">100%</p>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">monto de crédito</p>
-                                <p class="tittle-5 color-3">$10.000,00</p>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <p class="text-uppercase tittle-11">credito bancario</p>
-                                <p class="tittle-5 color-3">$10.000,00</p>
-                            </div>
-                        </div>
-                    </div>
+
+
+            <!-- APLICATION BAR -->
+            <div class="row mt-5 text-right text-white aplication-bar bg-2 align-items-center">
+                <div class="col">
+                    <span class="tittle-10 mr-5">{{cantSelectedCreditOptions}} seleccionados</span>
+                    <summary class="tittle-6 d-inline-block text-uppercase mr-4"><a class="mr-5" (click)="onSubmitContactForm()">aplicar</a>></summary>
                 </div>
             </div>
-            <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
-                <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
-                <h2 class="tittle-2 mt-4">$1.100</h2>
-                <p class="tittle-11 mt-2 mb-3 mb-lg-5 text-uppercase">mensual</p>
-                <p><a class="tittle-10 color-0" href="#">Más información</a></p>
-            </div>
-        </div>
+            <!-- END - APLICATION BAR -->
 
-        <!-- APLICATION BAR -->
-        <div class="row mt-5 text-right text-white aplication-bar bg-2 align-items-center">
-            <div class="col">
-                <span class="tittle-10 mr-5">1 seleccionado</span>
-                <summary class="tittle-6 d-inline-block text-uppercase mr-4"><a class="mr-5">aplicar</a>></summary>
-            </div>
-        </div>
+        </section>
 
-    </section>
+    </form>
+    <!-- RESULTS SECTION TEST -->
+
+
+
+
+
+
 
     <!-- RANKING SECTION -->
 
