@@ -13,6 +13,12 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppAuthModule } from './services/interceptors/app-auth.module';
 
+import { LoginComponent } from './view/login/login.component';
+
+import { TabsModule } from 'ngx-bootstrap';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { ModalModule } from 'ngx-bootstrap';
+
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -26,6 +32,9 @@ const APP_CONTAINERS = [
     ReactiveFormsModule,
     HttpClientModule,
     AlertModule.forRoot(),
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    ModalModule.forRoot(),
     AppAuthModule,
   ],
   declarations: [
@@ -34,6 +43,10 @@ const APP_CONTAINERS = [
     P404Component,
     P500Component,
     AlertComponent,
+    LoginComponent
+  ],
+  entryComponents: [
+    LoginComponent
   ],
   providers: [{
     provide: LocationStrategy,

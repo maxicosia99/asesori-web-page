@@ -1,79 +1,422 @@
-/*------------------------------------*\
-    IMPORTS
-\*------------------------------------*/
+/*------------------------------------*\ IMPORTS \*------------------------------------*/
 
 @import "./assets/css/font.scss";
+
 /* --- STYLES FOR OWL-CAROUSEL*/
+
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
-/*------------------------------------*\
-    END - IMPORTS
-\*------------------------------------*/
+/*------------------------------------*\ END - IMPORTS \*------------------------------------*/
 
 
+/*------------------------------------*\ RESET \*------------------------------------*/
 
-/*------------------------------------*\
-    RESET
-\*------------------------------------*/
-
-*{
-    box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    vertical-align: baseline;
-    background: transparent;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: transparent;
 }
-  
+
 body {
-    line-height: 1;
+	line-height: 1;
 }
 
-ol, ul {
-    list-style: none;
+ol,
+ul {
+	list-style: none;
 }
 
-blockquote, q {
-    quotes: none;
+blockquote,
+q {
+	quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
 }
 
-:focus {
-    outline: 0;
+ :focus {
+	outline: 0;
 }
 
 ins {
-    text-decoration: none;
+	text-decoration: none;
 }
+
 del {
-    text-decoration: line-through;
+	text-decoration: line-through;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-/*------------------------------------*\
-    END - RESET
-\*------------------------------------*/
+
+/*------------------------------------*\ END - RESET \*------------------------------------*/
 
 body {
-    font-family: 'Poppins-ExtraLight';      //letra por defecto para la página
-    font-stretch: normal;                   //permite hacer el texto más angosto (condensado) o más ancho (expandido).
-    font-style: normal;                     //especifica el estilo de fuente para un texto.
-    letter-spacing: normal;                 //aumenta o disminuye el espacio entre caracteres en un texto.
-    font-weight: normal;                    //establece cómo se deben mostrar los caracteres gruesos o delgados en el texto.
-    line-height: normal;                    //especifica la altura de una línea.
-    //background-color: #fafafa;
+	font-family: 'Poppins-ExtraLight';
+	//letra por defecto para la página font-stretch: normal;
+	//permite hacer el texto más angosto (condensado) o más ancho (expandido). font-style: normal;
+	//especifica el estilo de fuente para un texto. letter-spacing: normal;
+	//aumenta o disminuye el espacio entre caracteres en un texto. font-weight: normal;
+	//establece cómo se deben mostrar los caracteres gruesos o delgados en el texto. line-height: normal;
+	//especifica la altura de una línea. //background-color: #fafafa;
 }
+
+
+/* TITTLES */
+
+.tittle-0,
+.tittle-1,
+.tittle-3,
+.tittle-5,
+.tittle-7,
+.tittle-8,
+.tittle-10,
+.tittle-11,
+.tittle-3-spacing {
+	font-family: 'Poppins-Medium';
+}
+
+.tittle-2,
+.tittle-4,
+.tittle-6,
+.tittle-9 {
+	font-family: 'Poppins-SemiBold';
+}
+
+.tittle-0 {
+	font-size: 45px;
+}
+
+.tittle-1 {
+	font-size: 40px;
+}
+
+.tittle-2 {
+	font-size: 36px;
+}
+
+.tittle-3 {
+	font-size: 30px;
+	line-height: 0.4;
+}
+
+.tittle-4 {
+	font-size: 30px;
+}
+
+.tittle-5 {
+	font-size: 21px;
+	line-height: 0.57;
+}
+
+.tittle-6 {
+	font-size: 20px;
+	letter-spacing: 0.9px;
+}
+
+.tittle-7 {
+	font-size: 18px;
+}
+
+.tittle-8 {
+	line-height: 1.5;
+	font-size: 16px;
+}
+
+.tittle-3-spacing {
+	letter-spacing: 1.33px;
+	font-size: 16px;
+}
+
+.tittle-9 {
+	font-size: 16px;
+}
+
+.tittle-10 {
+	font-size: 14px;
+	letter-spacing: 1.17px;
+}
+
+.tittle-11 {
+	font-size: 10px;
+	letter-spacing: 2px;
+}
+
+.tittle-12 {
+	font-size: 10px;
+}
+
+
+/* TEXTS */
+
+.text-light-14 {
+	font-size: 14px;
+}
+
+.text-light-16 {
+	font-size: 16px;
+}
+
+.text-14 {
+	font-size: 14px;
+}
+
+.text-light-14,
+.text-light-16 {
+	line-height: 1.5;
+	color: #8c8b8d;
+}
+
+
+/* BACKGROUNDS */
+
+.bg-0 {
+	background-color: #ffffff;
+}
+
+.bg-1 {
+	background-color: #f4f4f4;
+}
+
+.bg-2 {
+	background-color: #0078A9;
+}
+
+.bg-3 {
+	background-color: #333337;
+}
+
+
+/* CORPORATIVE COLORS */
+
+.color-0 {
+	color: #ffffff;
+}
+
+.color-1 {
+	color: #0079ab;
+}
+
+.color-2 {
+	color: #1f4a77;
+}
+
+.color-3 {
+	color: #737373;
+}
+
+
+/* OTHER ELEMENTS*/
+
+.container {
+	padding: 30px 0px;
+	margin: auto;
+	overflow: hidden;
+}
+
+
+/* Label Inside of Input filed */
+
+.form-control {
+	padding: 10px 10px 0 40px;
+}
+
+input {
+	width: 100%;
+	height: 60px;
+	border: #c9c9c9 solid 1px;
+	border-radius: 9px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	padding: 10px 10px 0 40px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	position: relative;
+	font-family: 'Poppins-Regular';
+	font-size: 14px;
+	line-height: 1.33;
+	letter-spacing: 2px;
+}
+
+input:focus~.floating-label input:not(:focus):valid~.floating-label {
+	top: 5px;
+	font-size: 10px;
+	line-height: 1.33;
+	letter-spacing: 2px;
+	opacity: 1;
+}
+
+input:focus~.floating-label,
+input:valid~.floating-label {
+	top: 5px;
+	opacity: 1;
+	font-size: 10px;
+	line-height: 1.33;
+	letter-spacing: 2px;
+}
+
+input:focus~.floating-label,
+input:not(:focus):valid~.floating-label {
+	left: 40px
+}
+
+input:focus~.input-icon {
+	color: #383838
+}
+
+.floating-label {
+	position: absolute;
+	pointer-events: none;
+	left: 40px;
+	top: 23px;
+	transition: .2s ease all;
+	color: #777;
+	font-size: 12px;
+	line-height: 1.33;
+	letter-spacing: 2px;
+}
+
+.input-icon {
+	position: absolute;
+	top: 23px;
+	left: 15px;
+	color: #727272
+}
+
+.button {
+	height: 48px;
+	border-radius: 8px;
+	background-color: #0079a8;
+	color: #ffffff;
+	font-size: 14px;
+	font-family: 'Poppins-Regular';
+	text-align: center;
+}
+
+.button:hover {
+	background-color: #092AB5;
+}
+
+
+/* FOOTER */
+
+.fab {
+	padding: 10px 12px;
+	font-size: 30px;
+	width: 50px;
+	text-decoration: none;
+	border-radius: 50%;
+}
+
+.fab:hover {
+	opacity: 0.7;
+}
+
+.fa-facebook-f {
+	background: #3B5998;
+}
+
+.fa-twitter {
+	background: #55ACEE;
+}
+
+.fa-instagram {
+	background: #E1306C;
+}
+
+
+/* MEDIA QUERIES */
+
+
+/*Extra small devices (portrait phones, less than 576px)*/
+
+@media only screen and (max-width: 575.98px) {}
+
+
+/* Small devices (landscape phones, less than 768px)*/
+
+@media only screen and (max-width: 767.98px) {}
+
+@media screen and (max-width: 991.98px) {}
+
+
+/* Large devices (desktops, less than 1200px)*/
+
+@media screen and (max-width: 1199.98px) {}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserAuth } from '../../models/userAuth';
+import { UserRegister } from 'src/app/models/user-register';
 
 /*
 * Variable para adicionar información a las peticiones
@@ -48,8 +49,13 @@ export class HttpClientService {
   }
 
   public login(user: UserAuth): Observable<any> {
-      let url = this.getEndUrl('/api/v1/auth/signIn');
-      return this.doPostRequest(url, user);
+    let url = this.getEndUrl('/api/auth/signinClient');
+    return this.doPostRequest(url, user);
+  }
+
+  public register(userRegister: UserRegister): Observable<any> {
+    let url = this.getEndUrl('/api/auth/signupClient');
+    return this.doPostRequest(url, userRegister);
   }
 
   public getDataUserlogin(): Observable<any> {

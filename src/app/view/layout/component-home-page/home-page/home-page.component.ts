@@ -7,6 +7,9 @@ import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { validarCedula } from 'src/app/services/client/validar-cedula';
 import { Creditos } from 'src/app/models/creditos';
+import { LoginComponent } from 'src/app/view/login/login.component';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { Subscription } from 'rxjs';
 
 interface SimpleSliderModel {
   value: number;
@@ -21,9 +24,10 @@ interface SimpleSliderModel {
 export class HomePageComponent implements OnInit {
 
   constructor(
+    private authService: AuthenticationService,
     private modalService: BsModalService,
     private httpService: HttpClientService,
-    private formbuilder: FormBuilder, ) { }
+    private formbuilder: FormBuilder ) { }
 
   amountRequest: SimpleSliderModel = {
     value: 0,
@@ -102,9 +106,23 @@ export class HomePageComponent implements OnInit {
   message: string;
   modalRef: BsModalRef;
 
-  openModal(template: TemplateRef<any>) {
+  openModal_termsConditions(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.modalRef.setClass('modal-dialog-centered');
+    this.modalRef.content.closeBtnName = 'Close';
+  }
+  
+  openModal() {
+    // const initialState = {
+    //   information : {
+    //     username: 'bryan',
+    //     password: 'bryan123'
+    //   },
+    // };
+    //this.modalRef = this.modalService.show(LoginComponent, { initialState });
+    this.modalRef = this.modalService.show(LoginComponent);
+    this.modalRef.setClass('modal-dialog-centered');
+    this.modalRef.content.closeBtnName = 'Close';
   }
 
   confirm(): void {
@@ -340,7 +358,41 @@ export class HomePageComponent implements OnInit {
     console.log(creditos);
   }
 
-  recalculate(element: HTMLElement){
+  moveSection(element: HTMLElement) {
     element.scrollIntoView({ behavior: 'smooth' });
   }
+
+
+
+
+
+
+  /* ON LOGGED OUT */
+
+  private subscription: Subscription;
+  private intervalSub: Subscription;
+  public user: any;
+
+  onLoggedout() {
+    this.authService.logOut();
+    this.closeSubscriptions();
+    console.log('Ha finalizado sesión!')
+  }
+
+  closeSubscriptions() {
+    if(this.subscription)
+      this.subscription.unsubscribe();
+    if(this.intervalSub)
+      this.intervalSub.unsubscribe();
+  }
+
+  loginVerified(): Boolean {
+    let accessToken = localStorage.getItem('currentUser');
+    if (accessToken) {
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      return true;
+    }
+    return false;
+  }
+
 }

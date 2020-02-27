@@ -377,7 +377,7 @@
 
             <div class="row px-4 px-md-0">
                 <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text"
-                    (click)="recalculate(calculator)">
+                    (click)="moveSection(calculator)">
                     <span><i class="fas fa-redo-alt"></i></span><span class="text-uppercase ml-3">volver a
                         calcular</span>
                 </div>
@@ -859,97 +859,9 @@
         <div class="row mx-4 mx-md-0">
             <div class="col-12">
 
-                <button type="button" class="btn btn-primary" (click)="openModal(termsConditions)">MODAL ACEPTACION
+                <button type="button" class="btn btn-primary" (click)="openModal_termsConditions(termsConditions)">MODAL ACEPTACION
                     TERMINOS</button>
 
-                <ng-template #modalLoginRegister>
-                    <div class="modal-header">
-                        <h4 class="modal-title tittle-6">Bienvenido a ASESORI</h4>
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-
-                    </div>
-                    <!-- <div class="modal-body mx-4 text-justify text-light-14"> -->
-                    <div class="modal-body mx-4 text-justify">
-                        <tabset type="pills" [justified]="true">
-                            <tab>
-
-                                <ng-template tabHeading>
-                                    <span class="tittle-10">Login</span>
-                                </ng-template>
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="position-relative mt-4">
-                                            <input type="text" required>
-                                            <span class="floating-label text-uppercase">Username o Email*</span>
-                                            <i class="fas fa-user-alt input-icon"></i>
-                                        </div>
-                                        <div class="position-relative mt-4">
-                                            <input type="password" required>
-                                            <span class="floating-label text-uppercase">Password*</span>
-                                            <i class="fas fa-unlock-alt input-icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-4 justify-content-center">
-                                    <div class="col-12">
-                                        <button type="button" class="btn button btn-block">INGRESAR</button>
-                                    </div>
-                                </div>
-                            </tab>
-
-                            <tab>
-                                <ng-template tabHeading>
-                                    <span class="tittle-10">Registrate</span>
-                                </ng-template>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="position-relative mt-4">
-                                            <input type="text" required>
-                                            <span class="floating-label text-uppercase">Username*</span>
-                                            <i class="fas fa-user-alt input-icon"></i>
-                                        </div>
-                                        <div class="position-relative mt-4">
-                                            <input type="text" required>
-                                            <span class="floating-label text-uppercase">Email*</span>
-                                            <i class="fa fa-envelope-o input-icon"></i>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <div class="position-relative mt-4">
-                                                    <input type="password" required>
-                                                    <span class="floating-label text-uppercase">Password*</span>
-                                                    <i class="fas fa-unlock-alt input-icon"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <div class="position-relative mt-4">
-                                                    <input type="password" required>
-                                                    <span class="floating-label text-uppercase">Repetir Password*</span>
-                                                    <i class="fas fa-unlock-alt input-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                    </div>
-                                </div>
-
-                                <div class="row mt-4 justify-content-center">
-                                    <div class="col-12">
-                                        <button type="button" class="btn button btn-block">REGISTRARME</button>
-                                    </div>
-                                </div>
-                            </tab>
-                        </tabset>
-                    </div>
-                </ng-template>
-
-                <button type="button" class="btn btn-primary" (click)="openModal(modalLoginRegister)">MODAL LOGIN -
-                    REGISTER</button>
                 <ng-template #termsConditions>
                     <div class="modal-header">
                         <h4 class="modal-title tittle-6">Aceptación de términos</h4>
@@ -976,8 +888,6 @@
                     </div>
                 </ng-template>
             </div>
-
-
 
             <!-- FORM EXAMPLE -->
             <div class="col-12">
@@ -1055,12 +965,21 @@
     </div>
     <hr>
     <ul class="text-center py-2">
-        <li class="list-inline-item">
+        <li *ngIf="!loginVerified();" class="list-inline-item">
             <h5 class="mb-1 tittle-10">Registrate ahora!</h5>
         </li>
-        <li class="list-inline-item">
-            <a href="#!" class="btn btn-rounded text-white bg-2">Sign up!</a>
+        <li *ngIf="!loginVerified(); else elseBlock" class="list-inline-item">
+            <a (click)="openModal()" class="btn btn-rounded text-white bg-2">Sign up!</a>
         </li>
+
+        <ng-template #elseBlock>
+            <li class="list-inline-item">
+                <a class="tittle-10"><i class="fas fa-user-alt input-icon"></i>Hola {{user.username}}</a>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="onLoggedout()"class="btn btn-rounded text-white bg-2">Salir</a>
+            </li>
+        </ng-template>
     </ul>
     <hr>
 
