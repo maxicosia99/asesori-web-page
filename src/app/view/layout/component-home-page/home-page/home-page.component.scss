@@ -351,50 +351,7 @@ input:focus~.input-icon {
   color:#727272
 }
 
-/* FOOTER */
-
-.fab {
-  padding: 10px 12px;
-  font-size: 30px;
-  width: 50px;
-  text-decoration: none;
-  border-radius: 50%;
-}
-
-.fab:hover {
-  opacity: 0.7;
-}
-
-.fa-facebook-f {
-  background: #3B5998;
-}
-
-.fa-twitter {
-  background: #55ACEE;
-}
-
-.fa-instagram {
-  background: #E1306C;
-}
-
-/* MEDIA QUERIES */
-
-// Extra small devices (portrait phones, less than 576px)
-@media only screen and (max-width: 575.98px) {}
-
-// Small devices (landscape phones, less than 768px)
-@media only screen and (max-width: 767.98px) {
-  .bg-img{
-    height:300px;
-  }
-}
-
-@media screen and (max-width: 991.98px) {}
-
-// Large devices (desktops, less than 1200px)
-@media screen and (max-width: 1199.98px) {}
-
-
+/* ESTYLE TO SELECT OPTION */
 .kudos-wrap input[type="checkbox"] {
   display: none;
 }
@@ -441,10 +398,6 @@ input:focus~.input-icon {
   display: none;
 }
 
-.kudos-wrap :checked + label:before {
-  transform: scale(1);
-}
-
 .kudos-wrap label {
   transition-duration: 0.1s;
   transform-origin: 50% 50%;
@@ -453,3 +406,46 @@ input:focus~.input-icon {
 .kudos-wrap :checked + label {
   border-color: #0079ab;
 }
+
+/* FOOTER */
+
+.fab {
+  padding: 10px 12px;
+  font-size: 30px;
+  width: 50px;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.fab:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook-f {
+  background: #3B5998;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+}
+
+.fa-instagram {
+  background: #E1306C;
+}
+
+/* MEDIA QUERIES */
+
+// Extra small devices (portrait phones, less than 576px)
+@media only screen and (max-width: 575.98px) {}
+
+// Small devices (landscape phones, less than 768px)
+@media only screen and (max-width: 767.98px) {
+  .bg-img{
+    height:300px;
+  }
+}
+
+@media screen and (max-width: 991.98px) {}
+
+// Large devices (desktops, less than 1200px)
+@media screen and (max-width: 1199.98px) {}

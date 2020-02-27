@@ -46,7 +46,8 @@
 
     <section class="container pt-0">
         <div class="row">
-            <div class="col-12 col-md-6 px-4">
+
+            <div class="col-12 col-md-6 px-5 px-lg-4">
                 <div class="text-center text-lg-left">
                     <img src="/assets/img/asesori-logo-negative.png" width="95px" height="95px" class="my-4" alt="">
                 </div>
@@ -147,35 +148,35 @@
                 </div>
                 <div class="px-3">
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">1</button>
                         </div>
-                        <div class="col-11 col-lg-10">
+                        <div class="col-10 col-lg-10">
                             <p class="text-14">Selecciona el crédito al que deseas aplicar.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">2</button>
                         </div>
-                        <div class="col-11  col-lg-10">
+                        <div class="col-10  col-lg-10">
                             <p class="text-14">Selecciona el crédito al que deseas
                                 aplicar.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">3</button>
                         </div>
-                        <div class="col-11  col-lg-10">
+                        <div class="col-10  col-lg-10">
                             <p class="text-14">Ingresa tus datos para obtener beneficios.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">4</button>
                         </div>
-                        <div class="col-11 col-lg-10">
+                        <div class="col-10 col-lg-10">
                             <p class="text-14">Asesori te muestra las mejores opciones de crédito, tanto por tiempo como
                                 por su
                                 tasa de interés.</p>
@@ -234,35 +235,35 @@
                 </div>
                 <div class="px-3">
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">1</button>
                         </div>
-                        <div class="col-11 col-lg-10">
+                        <div class="col-10 col-lg-10">
                             <p class="text-14">Selecciona el crédito al que deseas aplicar.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">2</button>
                         </div>
-                        <div class="col-11  col-lg-10">
+                        <div class="col-10  col-lg-10">
                             <p class="text-14">Selecciona el crédito al que deseas
                                 aplicar.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">3</button>
                         </div>
-                        <div class="col-11  col-lg-10">
+                        <div class="col-10  col-lg-10">
                             <p class="text-14">Ingresa tus datos para obtener beneficios.</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-1 col-lg-2">
+                        <div class="col-1 mr-1 mr-lg-0 col-lg-2">
                             <button type="button" class="btn btn-circle">4</button>
                         </div>
-                        <div class="col-11 col-lg-10">
+                        <div class="col-10 col-lg-10">
                             <p class="text-14">Asesori te muestra las mejores opciones de crédito, tanto por tiempo como
                                 por su
                                 tasa de interés.</p>
@@ -369,16 +370,14 @@
     </section>
 
 
-
-
-
     <!-- RESULTS SECTION TEST -->
     <form #target [formGroup]="contactform">
 
         <section class="container" *ngIf="creditOptions">
 
-            <div class="row">
-                <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text" (click)="recalculate(calculator)">
+            <div class="row px-4 px-md-0">
+                <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text"
+                    (click)="recalculate(calculator)">
                     <span><i class="fas fa-redo-alt"></i></span><span class="text-uppercase ml-3">volver a
                         calcular</span>
                 </div>
@@ -388,17 +387,14 @@
                 </div>
             </div>
 
-
-
-
             <!-- can_access_credit OPTIONS -->
-            <div class="row mt-4" *ngIf="can_access_credit?.length > 0">
+            <div class="row mt-4 px-4 px-md-0" *ngIf="can_access_credit?.length > 0">
                 <div class="col-12">
                     <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE PUEDES OBTENER TU CRÉDITO</h2>
                 </div>
             </div>
 
-            <div class="result-container mt-4 kudos-wrap" formArrayName="can_access_credit_userSelected"
+            <div class="px-4 px-md-0 result-container mt-4 kudos-wrap" formArrayName="can_access_credit_userSelected"
                 *ngFor="let credit of can_access_credit_userSelected.controls; let i=index">
                 <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i"
                     id="{{can_access_credit[i].id}}">
@@ -422,14 +418,19 @@
                                 <div class="col-lg-9">
                                     <div class="row text-center justify-content-center">
                                         <div class="col-6 col-md-4">
-                                            <p class="text-uppercase tittle-10">Monto a solicitar</p>
-                                            <p class="tittle-3">
+                                            <p class="text-uppercase tittle-10 d-none d-md-block">Monto a solicitar</p>
+                                            <p class="text-uppercase tittle-10 d-block d-md-none ">Monto</p>
+                                            <p class="tittle-3 d-none d-md-block">
+                                                ${{can_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                            <p class="tittle-5 d-block d-md-none">
                                                 ${{can_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
                                             <p class="text-uppercase tittle-11">Dólares americanos</p>
                                         </div>
                                         <div class="col-6 col-md-4">
                                             <p class="text-uppercase tittle-10">Entrada</p>
-                                            <p class="tittle-3">
+                                            <p class="tittle-3 d-none d-md-block">
+                                                ${{can_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}</p>
+                                            <p class="tittle-5 d-block d-md-none">
                                                 ${{can_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}</p>
                                             <p class="text-uppercase tittle-11">valor opcional</p>
                                         </div>
@@ -480,14 +481,14 @@
 
 
             <!-- cannot_access_credit OPTIONS -->
-            <div class="row mt-4" *ngIf="cannot_access_credit?.length > 0">
+            <div class="row mt-4 px-4 px-md-0" *ngIf="cannot_access_credit?.length > 0">
                 <div class="col-12">
                     <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE NO TIENES LOS NECESARIO PARA OBTENER TU CRÉDITO
                     </h2>
                 </div>
             </div>
 
-            <div class="result-container mt-4 kudos-wrap" formArrayName="cannot_access_credit_userSelected"
+            <div class="px-4 px-md-0 result-container mt-4 kudos-wrap" formArrayName="cannot_access_credit_userSelected"
                 *ngFor="let credit of cannot_access_credit_userSelected.controls; let i=index">
                 <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i"
                     id="{{cannot_access_credit[i].id}}">
@@ -512,14 +513,21 @@
                                 <div class="col-lg-9">
                                     <div class="row text-center justify-content-center">
                                         <div class="col-6 col-md-4">
-                                            <p class="text-uppercase tittle-10">Monto a solicitar</p>
-                                            <p class="tittle-3">
+
+                                            <p class="text-uppercase tittle-10 d-none d-md-block">Monto a solicitar</p>
+                                            <p class="text-uppercase tittle-10 d-block d-md-none ">Monto</p>
+                                            <p class="tittle-3 d-none d-md-block">
+                                                ${{cannot_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                            <p class="tittle-5 d-block d-md-none">
                                                 ${{cannot_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
                                             <p class="text-uppercase tittle-11">Dólares americanos</p>
                                         </div>
                                         <div class="col-6 col-md-4">
                                             <p class="text-uppercase tittle-10">Entrada</p>
-                                            <p class="tittle-3">
+                                            <p class="tittle-3 d-none d-md-block">
+                                                ${{cannot_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}
+                                            </p>
+                                            <p class="tittle-5 d-block d-md-none">
                                                 ${{cannot_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}
                                             </p>
                                             <p class="text-uppercase tittle-11">valor opcional</p>
@@ -571,13 +579,14 @@
 
 
             <!-- credit_unavailable OPTIONS -->
-            <div class="row mt-4" *ngIf="credit_unavailable?.length > 0">
+            <div class="row mt-4 px-4 px-md-0" *ngIf="credit_unavailable?.length > 0">
                 <div class="col-12">
                     <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE NO PUEDES OBTENER TU CRÉDITO</h2>
                 </div>
             </div>
 
-            <div class="result-container mt-4 kudos-wrap" *ngFor="let credit of credit_unavailable; let i=index">
+            <div class="px-4 px-md-0 result-container mt-4 kudos-wrap"
+                *ngFor="let credit of credit_unavailable; let i=index">
                 <div class="row m-0 p-0">
                     <div class="col-12">
                         <div class="row align-items-center mt-4">
@@ -596,15 +605,16 @@
                 </div>
             </div>
             <!-- END - credit_unavailable OPTIONS -->
-           
+
 
 
 
             <!-- APLICATION BAR -->
-            <div class="row mt-5 text-right text-white aplication-bar bg-2 align-items-center">
+            <div class="row mt-5 text-md-right text-center text-white aplication-bar bg-2 align-items-center">
                 <div class="col">
                     <span class="tittle-10 mr-5">{{cantSelectedCreditOptions}} seleccionados</span>
-                    <summary class="tittle-6 d-inline-block text-uppercase mr-4"><a class="mr-5" (click)="onSubmitContactForm()">aplicar</a>></summary>
+                    <summary class="tittle-6 d-inline-block text-uppercase mr-2 mr-md-4 ml-md-0"><a class="mr-1 mr-md-5"
+                            (click)="onSubmitContactForm()">aplicar</a>></summary>
                 </div>
             </div>
             <!-- END - APLICATION BAR -->
@@ -612,11 +622,6 @@
         </section>
 
     </form>
-    <!-- RESULTS SECTION TEST -->
-
-
-
-
 
 
 
@@ -627,7 +632,7 @@
         <div class="row align-items-start">
 
             <!-- RANKING TEXT -->
-            <div class="col-12 col-lg-3 my-2 my-lg-0">
+            <div class="col-12 col-lg-3 my-2 my-lg-0 px-5 text-center text px-md-3">
                 <h2 class="tittle-4">Ranking Asesori</h2>
                 <p class="text-light-16 mt-5">Te enseñamos una calificación de Asesori hacia las instituciones
                     financieras en base a su tasa de interés, Cantidad de trámites y tiempo en aprobación de tu
@@ -750,8 +755,8 @@
 
     <section class="container">
 
-        <div class="row justify-content-center text-center">
-            <div class="col-8">
+        <div class="row justify-content-center mx-4 mx-md-0 text-center">
+            <div class="col-12 col-md-8">
                 <p class="tittle-7 color-2 text-uppercase">Los servicios</p>
                 <p class="tittle-0 text-uppercase">podemos ayudarte</p>
                 <p class="text-light-16">El crédito puede ser complicado. Pero no tiene que ser así. ASESORI pone a tu
@@ -759,7 +764,7 @@
             </div>
         </div>
 
-        <div class="row mt-4 text-center">
+        <div class="row mt-4 text-center mx-4 mx-md-0">
             <div class="col-md-4 d-flex align-items-stretch my-2 my-lg-0">
                 <div class="card text-center card-service">
                     <img class="card-img-top" src="/assets/img/services/deudas-credit370x245.jpg" alt="Card image cap">
@@ -798,7 +803,7 @@
             </div>
         </div>
 
-        <div class="row mt-4 justify-content-center">
+        <div class="row mt-4 mx-4 mx-md-0 justify-content-center">
             <div class="col-md-4">
                 <button type="button" class="btn button btn-block">VER TODOS</button>
             </div>
@@ -851,25 +856,119 @@
 
     <section class="container">
 
-        <div class="row">
+        <div class="row mx-4 mx-md-0">
             <div class="col-12">
-                <button type="button" class="btn btn-primary" (click)="openModal(template)">MODAL ACEPTACION
+
+                <button type="button" class="btn btn-primary" (click)="openModal(termsConditions)">MODAL ACEPTACION
                     TERMINOS</button>
 
-                <ng-template #template>
+                <ng-template #modalLoginRegister>
+                    <div class="modal-header">
+                        <h4 class="modal-title tittle-6">Bienvenido a ASESORI</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <!-- <div class="modal-body mx-4 text-justify text-light-14"> -->
+                    <div class="modal-body mx-4 text-justify">
+                        <tabset type="pills" [justified]="true">
+                            <tab>
+
+                                <ng-template tabHeading>
+                                    <span class="tittle-10">Login</span>
+                                </ng-template>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="position-relative mt-4">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">Username o Email*</span>
+                                            <i class="fas fa-user-alt input-icon"></i>
+                                        </div>
+                                        <div class="position-relative mt-4">
+                                            <input type="password" required>
+                                            <span class="floating-label text-uppercase">Password*</span>
+                                            <i class="fas fa-unlock-alt input-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4 justify-content-center">
+                                    <div class="col-12">
+                                        <button type="button" class="btn button btn-block">INGRESAR</button>
+                                    </div>
+                                </div>
+                            </tab>
+
+                            <tab>
+                                <ng-template tabHeading>
+                                    <span class="tittle-10">Registrate</span>
+                                </ng-template>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="position-relative mt-4">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">Username*</span>
+                                            <i class="fas fa-user-alt input-icon"></i>
+                                        </div>
+                                        <div class="position-relative mt-4">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">Email*</span>
+                                            <i class="fa fa-envelope-o input-icon"></i>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="position-relative mt-4">
+                                                    <input type="password" required>
+                                                    <span class="floating-label text-uppercase">Password*</span>
+                                                    <i class="fas fa-unlock-alt input-icon"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="position-relative mt-4">
+                                                    <input type="password" required>
+                                                    <span class="floating-label text-uppercase">Repetir Password*</span>
+                                                    <i class="fas fa-unlock-alt input-icon"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4 justify-content-center">
+                                    <div class="col-12">
+                                        <button type="button" class="btn button btn-block">REGISTRARME</button>
+                                    </div>
+                                </div>
+                            </tab>
+                        </tabset>
+                    </div>
+                </ng-template>
+
+                <button type="button" class="btn btn-primary" (click)="openModal(modalLoginRegister)">MODAL LOGIN -
+                    REGISTER</button>
+                <ng-template #termsConditions>
                     <div class="modal-header">
                         <h4 class="modal-title tittle-6">Aceptación de términos</h4>
                         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                             <span aria-hidden="true">&times;</span>
                         </button>
+
                     </div>
-                    <div class="modal-body mx-4 text-justify text-light-14">
-                        Estimado usuario, al aceptar los términos, trataremos sus datos única y exclusivamente para: (i)
-                        la potencial obtención de créditos, así como comunicación relacionada con la misma; y (ii) ser
-                        transferidos a Crédito Real, S.A.B. de C.V., SOFOM, E.R., para la consulta, a través de
-                        Sociedades de Información Crediticia sobre sus antecedentes crediticios; cumplimiento de sus
-                        obligaciones derivadas de cualquier relación jurídica con Entidades Financieras; calificaciones
-                        de crédito o riesgos; y, el comportamiento de su historial crediticio. Asimismo, usted dispone
+                    <div class="modal-body mx-4 text-justify">
+                        <p class="text-light-14">Estimado usuario, al aceptar los términos, trataremos sus datos única y
+                            exclusivamente para: (i)
+                            la potencial obtención de créditos, así como comunicación relacionada con la misma; y (ii)
+                            ser
+                            transferidos a Crédito Real, S.A.B. de C.V., SOFOM, E.R., para la consulta, a través de
+                            Sociedades de Información Crediticia sobre sus antecedentes crediticios; cumplimiento de sus
+                            obligaciones derivadas de cualquier relación jurídica con Entidades Financieras;
+                            calificaciones
+                            de crédito o riesgos; y, el comportamiento de su historial crediticio. Asimismo, usted
+                            dispone</p>
                     </div>
                     <div class="modal-footer text-center">
                         <button type="button" class="btn btn-primary" (click)="confirm()">SI</button>
@@ -880,9 +979,8 @@
 
 
 
-
+            <!-- FORM EXAMPLE -->
             <div class="col-12">
-
                 <div class="position-relative mt-4">
                     <input type="text" required>
                     <span class="floating-label text-uppercase">nombre de empresa*</span>
@@ -909,10 +1007,11 @@
 
 </main>
 
+
 <!-- FOOTER -->
 <footer class="pt-4">
     <div class="container py-0 text-center text-md-left">
-        <div class="row">
+        <div class="row mx-4 mx-md-0">
             <div class="col-md-4 mx-auto">
                 <img class="img-fluid" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
                 <p class="text-light-16 text-justify">Asesori te facilita las mejores opciones para que puedas acceder

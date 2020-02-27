@@ -1,8 +1,8 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Options } from 'ng5-slider';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef, TabsetComponent } from 'ngx-bootstrap';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { validarCedula } from 'src/app/services/client/validar-cedula';
@@ -78,12 +78,12 @@ export class HomePageComponent implements OnInit {
     loop: true,
     freeDrag: true,
     mouseDrag: true,
-    touchDrag: false,
+    touchDrag: true,
     pullDrag: false,
     dots: true,
     responsive: {
       0: {
-        items: 1
+        items: 2
       },
       400: {
         items: 4
@@ -104,6 +104,7 @@ export class HomePageComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+    this.modalRef.setClass('modal-dialog-centered');
   }
 
   confirm(): void {

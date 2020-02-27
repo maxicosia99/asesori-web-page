@@ -8,6 +8,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap';
+import { TabsModule } from 'ngx-bootstrap';
 
 import localeFr from '@angular/common/locales/fr';
 
@@ -29,7 +30,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     RatingModule.forRoot(),
     Ng5SliderModule,
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TabsModule.forRoot()
   ],
   exports: [
     
