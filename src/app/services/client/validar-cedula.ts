@@ -1,6 +1,6 @@
 import { AbstractControl } from '@angular/forms';
 
-export function validarCedula(control: AbstractControl) {
+export function validateCedula(control: AbstractControl) {
 
     let cedula: string = control.value;
     

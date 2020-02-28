@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserAuth } from './../../models/userAuth';
 import { Subscription } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap';
+import { faEye, faEyeSlash, faUnlock, faUserAlt, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { ShowHideService } from "ngx-show-hide-password";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,8 +21,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
     private authService: AuthenticationService,
-    public  bsModalRef: BsModalRef
-  ) { }
+    public  bsModalRef: BsModalRef,
+    private service: ShowHideService
+  ) {
+    this.service
+      .getObservable("password1")
+      .subscribe(show => {
+        this.isHidden = !show;
+      });
+  }
 
 
   @Input() information: any;
@@ -89,5 +98,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.subscription)
       this.subscription.unsubscribe();
   }
+
+  faEye = faEye;
+  faEyeSlash = faEyeSlash;
+  faUnlock = faUnlock;
+  faUserAlt = faUserAlt;
+  faEnvelope = faEnvelope;
+  
+  isHidden = true;
 
 }

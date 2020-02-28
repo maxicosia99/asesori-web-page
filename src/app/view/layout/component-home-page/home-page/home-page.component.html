@@ -106,7 +106,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 my-3 my-lg-0">
-                    <h3 class="tittle-8 mb-2"><i class="fas fa-stopwatch"></i> Reduce el tiempo</h3>
+                    <h3 class="tittle-8 mb-2"><fa-icon [icon]="faStopwatch"></fa-icon> Reduce el tiempo</h3>
                     <p class="text-light-14">Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una
                         tasa
                         menor
@@ -115,7 +115,7 @@
                     </p>
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
-                    <h4 class="tittle-8 mb-2"><i class="fas fa-money-bill-alt"></i> Ahorra dinero</h4>
+                    <h4 class="tittle-8 mb-2"><fa-icon [icon]="faMoneyBillAlt"></fa-icon> Ahorra dinero</h4>
                     <p class="text-light-14">Comparamos el costo de un crédito, sus plazos y requisitos adicionales. Por
                         lo
                         que
@@ -123,7 +123,7 @@
                     </p>
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
-                    <h4 class="tittle-8 mb-2"><i class="fas fa-clipboard"></i> Transparencia</h4>
+                    <h4 class="tittle-8 mb-2"><fa-icon [icon]="faClipboard"></fa-icon> Transparencia</h4>
                     <p class="text-light-14">Actuamos de forma independiente al no ser una entidad financiera,
                         ofreciéndote
                         información gratuita.
@@ -202,7 +202,7 @@
                         <div class="position-relative">
                             <input type="text" required>
                             <span class="floating-label text-uppercase">correo electronico*</span>
-                            <i class="fa fa-user-o input-icon"></i>
+                            <fa-icon class="input-icon" [icon]="faEnvelope"></fa-icon>
                         </div>
                     </div>
 
@@ -378,7 +378,7 @@
             <div class="row px-4 px-md-0">
                 <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text"
                     (click)="moveSection(calculator)">
-                    <span><i class="fas fa-redo-alt"></i></span><span class="text-uppercase ml-3">volver a
+                    <span><fa-icon [icon]="faRedoAlt"></fa-icon></span><span class="text-uppercase ml-3">volver a
                         calcular</span>
                 </div>
                 <div class="col-12 col-lg-12 text-left mt-4">
@@ -624,7 +624,6 @@
     </form>
 
 
-
     <!-- RANKING SECTION -->
 
     <section class="container">
@@ -825,7 +824,7 @@
             <div class="row text-center">
                 <div class="col-md-4">
                     <div class="p-5">
-                        <i class="fas fa-clipboard icon"></i>
+                        <fa-icon class="icon" [icon]="faClipboard"></fa-icon>
                     </div>
                     <h4 class="tittle-7 mb-3">Múltiples opciones de créditos</h4>
                     <p class="text-light-14">Tu solicitud será revisada por las insituciones Financieras, y
@@ -833,7 +832,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="p-5">
-                        <i class="fas fa-money-bill-alt icon"></i>
+                        <fa-icon class="icon" [icon]="faMoneyBillAlt"></fa-icon>
                     </div>
                     <h4 class="tittle-7 mb-3">Transparencia con tus créditos</h4>
                     <p class="text-light-14">Asesori es transparente, no te cobramos por nuestro servicio,
@@ -841,7 +840,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="p-5">
-                        <i class="fas fa-clipboard icon"></i>
+                        <fa-icon class="icon" [icon]="faClipboard"></fa-icon>
                     </div>
                     <h4 class="tittle-7 mb-3">Rapidez de respuesta</h4>
                     <p class="text-light-14">Cuando dejes tu solicitud en línea, aproximadamente tendrás un tiempo
@@ -894,22 +893,22 @@
                 <div class="position-relative mt-4">
                     <input type="text" required>
                     <span class="floating-label text-uppercase">nombre de empresa*</span>
-                    <i class="fa fa-user-o input-icon"></i>
+                    <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
                 </div>
                 <div class="position-relative mt-4">
                     <input type="text" required>
                     <span class="floating-label text-uppercase">nombres*</span>
-                    <i class="fa fa-user-o input-icon"></i>
+                    <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
                 </div>
                 <div class="position-relative mt-4">
                     <input type="text" required>
                     <span class="floating-label text-uppercase">apellidos*</span>
-                    <i class="fa fa-envelope-o input-icon"></i>
+                    <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
                 </div>
                 <div class="position-relative mt-4">
                     <input type="text" required />
                     <span class="floating-label text-uppercase">cedula de identidad*</span>
-                    <i class="fa fa-globe input-icon"></i>
+                    <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
                 </div>
             </div>
         </div>
@@ -949,15 +948,15 @@
                 <ul>
                     <li>
                         <p>
-                            <i class="fas fa-home mr-3"></i> Avenida 24 de Enero y Francisco Cevallos.</p>
+                            <fa-icon class="mr-3" [icon]="faHome"></fa-icon> Avenida 24 de Enero y Francisco Cevallos.</p>
                     </li>
                     <li>
                         <p>
-                            <i class="fas fa-envelope mr-3"></i> info@example.com</p>
+                            <fa-icon class="mr-3" [icon]="faEnvelope"></fa-icon> info@example.com</p>
                     </li>
                     <li>
                         <p>
-                            <i class="fas fa-phone mr-3"></i> +593-991538711</p>
+                            <fa-icon class="mr-3" [icon]="faPhone"></fa-icon> +593-991538711</p>
                     </li>
                 </ul>
             </div>
@@ -974,7 +973,7 @@
 
         <ng-template #elseBlock>
             <li class="list-inline-item">
-                <a class="tittle-10"><i class="fas fa-user-alt input-icon"></i>Hola {{user.username}}</a>
+                <a class="tittle-10">Hola {{user.username}}</a>
             </li>
             <li class="list-inline-item">
                 <a (click)="onLoggedout()"class="btn btn-rounded text-white bg-2">Salir</a>
@@ -986,13 +985,16 @@
     <!-- Social buttons -->
     <ul class="text-center my-4 text-white">
         <li class="list-inline-item">
-            <a class="fab fa-facebook-f"></a>
+            <fa-icon class="fab facebook" [icon]="faFacebook"></fa-icon>
         </li>
         <li class="list-inline-item">
-            <a class="fab fa-twitter"></a>
+            <fa-icon class="fab twitter" [icon]="faTwitter"></fa-icon>
         </li>
         <li class="list-inline-item">
-            <a class="fab fa-instagram"></a>
+            <fa-icon class="fab instagram" [icon]="faInstagram"></fa-icon>
+        </li>
+        <li class="list-inline-item">
+            <fa-icon class="fab whatsapp" [icon]="faWhatsapp"></fa-icon>
         </li>
     </ul>
     <!-- Social buttons -->

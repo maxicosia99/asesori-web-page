@@ -1,35 +1,67 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Options } from 'ng5-slider';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Options } from 'ng5-slider';                                                 //options user slider
+import { OwlOptions } from 'ngx-owl-carousel-o';                                      //options carousel images
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
+import { HttpClientService } from 'src/app/services/client/http-client.service';      //call client api
+import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';     //forms
+import { validateCedula } from 'src/app/services/client/validar-cedula';              //service to validate cedula
+import { Creditos } from 'src/app/models/creditos';                                   //part of model to credit request  
+import { LoginComponent } from 'src/app/view/login/login.component';                  //call login
+import { AuthenticationService } from 'src/app/services/auth/authentication.service'; //authentication service
+import { Subscription } from 'rxjs';                                                  //suscription to login
 
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { BsModalService, BsModalRef, TabsetComponent } from 'ngx-bootstrap';
-import { HttpClientService } from 'src/app/services/client/http-client.service';
-import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { validarCedula } from 'src/app/services/client/validar-cedula';
-import { Creditos } from 'src/app/models/creditos';
-import { LoginComponent } from 'src/app/view/login/login.component';
-import { AuthenticationService } from 'src/app/services/auth/authentication.service';
-import { Subscription } from 'rxjs';
+/* icons in this page */
+import { 
+  faStopwatch, faMoneyBillAlt, faClipboard, faUserAlt, faEnvelope, faRedoAlt,faHome,
+  faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebook, faTwitter, faWhatsapp, faInstagram
+} from '@fortawesome/free-brands-svg-icons';
+/* End - icons in this page */
 
-interface SimpleSliderModel {
+
+// slider model
+interface SliderModel {
   value: number;
   options: Options;
 }
+
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
+
 export class HomePageComponent implements OnInit {
 
   constructor(
-    private authService: AuthenticationService,
-    private modalService: BsModalService,
-    private httpService: HttpClientService,
-    private formbuilder: FormBuilder ) { }
+    private authService: AuthenticationService,   //authentication service
+    private modalService: BsModalService,         //modal service
+    private httpService: HttpClientService,       //client api service
+    private formbuilder: FormBuilder              //form service
+  ) { }
 
-  amountRequest: SimpleSliderModel = {
+
+  /* ICONS */
+  faStopwatch = faStopwatch;
+  faMoneyBillAlt = faMoneyBillAlt;
+  faClipboard = faClipboard;
+  faUserAlt = faUserAlt;
+  faEnvelope = faEnvelope;
+  faRedoAlt = faRedoAlt;
+  faHome = faHome;
+  faPhone = faPhone;
+  faFacebook = faFacebook;
+  faTwitter = faTwitter;
+  faInstagram = faInstagram;
+  faWhatsapp = faWhatsapp;
+  /* END - ICONS */
+
+
+
+  /* Slider for entry amount and time */
+  amountRequest: SliderModel = {
     value: 0,
     options: {
       floor: 0,
@@ -42,7 +74,7 @@ export class HomePageComponent implements OnInit {
     }
   };
 
-  entryAmount: SimpleSliderModel = {
+  entryAmount: SliderModel = {
     value: 0,
     options: {
       floor: 0,
@@ -55,7 +87,7 @@ export class HomePageComponent implements OnInit {
     }
   };
 
-  term: SimpleSliderModel = {
+  term: SliderModel = {
     value: 0,
     options: {
       floor: 0,
@@ -67,17 +99,26 @@ export class HomePageComponent implements OnInit {
       }
     }
   };
+  /* End - Slider for entry amount and time*/
 
+
+  /* Rating */
   max: number = 4;
   rate: number = 4;
   isReadonly: boolean = true;
+  /* End - Rating */
 
+
+  /* Navbar options */
   navbarOpen = false;
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
+  /* End - Navbar options */
 
+
+  /* Carousel options */
   customOptions: OwlOptions = {
     loop: true,
     freeDrag: true,
@@ -101,8 +142,7 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  /* MODAL */
-
+  /* Modal methods */
   message: string;
   modalRef: BsModalRef;
 
@@ -134,9 +174,14 @@ export class HomePageComponent implements OnInit {
     this.message = 'Declined!';
     this.modalRef.hide();
   }
+  /* End - Modal methods */
 
+  
+  
   /**------------------------------------------------------------------------------------------------------------------------------------ */
 
+  
+  
   /* Location variables */
   public region_name: string;
   public country_name: string;
@@ -198,16 +243,6 @@ export class HomePageComponent implements OnInit {
     /*  End - Search by location. */
   }
 
-  /* Validate credit calculation form */
-  estimateformSubmitted: boolean;
-  isFieldValidEstimateform(field: string) {
-    return (
-      this.estimateform.get(field).errors && this.estimateform.get(field).touched ||
-      this.estimateform.get(field).untouched &&
-      this.estimateformSubmitted && this.estimateform.get(field).errors
-    );
-  }
-
   /* Variables to store the results of credits selected by the user */
   get can_access_credit_userSelected(): FormArray {
     return this.contactform.get('can_access_credit_userSelected') as FormArray;
@@ -217,6 +252,7 @@ export class HomePageComponent implements OnInit {
     return this.contactform.get('cannot_access_credit_userSelected') as FormArray;
   }
   /* End - Variables to store the results of credits selected by the user */
+
 
 
   /* Add checkbox of credit options */
@@ -235,6 +271,9 @@ export class HomePageComponent implements OnInit {
   }
   /* End - Add checkbox of credit options */
 
+
+
+  /* Methods to count the selected options */
   public cantSelectedCreditOptions: number = 0;
   can_access_credit_userSelectedLenght(): number {
     return this.contactform.value.can_access_credit_userSelected
@@ -251,8 +290,18 @@ export class HomePageComponent implements OnInit {
   cantSelectedUser() {
     this.cantSelectedCreditOptions = this.can_access_credit_userSelectedLenght() + this.cannot_access_credit_userSelectedLenght();
   }
+  /* End - methods to count the selected options */
 
 
+  /* move between sections of the page */
+  moveSection(element: HTMLElement) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+  /* End - move between sections of the page */
+
+
+
+  /* Forms Submitted */
   onSubmitEstimateForm(element: HTMLElement) {
 
     // let amountRequest: number = this.amountRequest.value;
@@ -284,8 +333,6 @@ export class HomePageComponent implements OnInit {
       this.httpService.getAllCreditOptions(this.region_name, this.entityType, this.id_credit, amountRequest, monthlyincome, term, entryAmount).subscribe(res => {
         if (res.status == 200) {
 
-          //console.log(res.data);
-
           if (this.can_access_credit) {
             this.can_access_credit_userSelected.clear()
           }
@@ -300,8 +347,6 @@ export class HomePageComponent implements OnInit {
           this.credit_unavailable = res.data.credit_unavailable;
           this.addCheckboxesCan_access_credit();
           this.addCheckboxesCannot_access_credit();
-
-          /** ANTES DE AGREGAR EL HTML */
 
           element.scrollIntoView({ behavior: 'smooth' });
 
@@ -357,10 +402,7 @@ export class HomePageComponent implements OnInit {
 
     console.log(creditos);
   }
-
-  moveSection(element: HTMLElement) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
+  /* End - Forms Submitted */
 
 
 
@@ -395,4 +437,7 @@ export class HomePageComponent implements OnInit {
     return false;
   }
 
+  /* END - ON LOGGED OUT */
+
 }
+
