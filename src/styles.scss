@@ -14,7 +14,7 @@
 /*------------------------------------*\ RESET \*------------------------------------*/
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html,
@@ -78,64 +78,64 @@ thead,
 tr,
 th,
 td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	vertical-align: baseline;
-	background: transparent;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
 }
 
 body {
-	line-height: 1;
+    line-height: 1;
 }
 
 ol,
 ul {
-	list-style: none;
+    list-style: none;
 }
 
 blockquote,
 q {
-	quotes: none;
+    quotes: none;
 }
 
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: '';
-	content: none;
+    content: '';
+    content: none;
 }
 
  :focus {
-	outline: 0;
+    outline: 0;
 }
 
 ins {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 del {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 
 /*------------------------------------*\ END - RESET \*------------------------------------*/
 
 body {
-	font-family: 'Poppins-ExtraLight';
-	//letra por defecto para la página font-stretch: normal;
-	//permite hacer el texto más angosto (condensado) o más ancho (expandido). font-style: normal;
-	//especifica el estilo de fuente para un texto. letter-spacing: normal;
-	//aumenta o disminuye el espacio entre caracteres en un texto. font-weight: normal;
-	//establece cómo se deben mostrar los caracteres gruesos o delgados en el texto. line-height: normal;
-	//especifica la altura de una línea. //background-color: #fafafa;
+    font-family: 'Poppins-ExtraLight';
+    //letra por defecto para la página font-stretch: normal;
+    //permite hacer el texto más angosto (condensado) o más ancho (expandido). font-style: normal;
+    //especifica el estilo de fuente para un texto. letter-spacing: normal;
+    //aumenta o disminuye el espacio entre caracteres en un texto. font-weight: normal;
+    //establece cómo se deben mostrar los caracteres gruesos o delgados en el texto. line-height: normal;
+    //especifica la altura de una línea. //background-color: #fafafa;
 }
 
 
@@ -150,148 +150,149 @@ body {
 .tittle-10,
 .tittle-11,
 .tittle-3-spacing {
-	font-family: 'Poppins-Medium';
+    font-family: 'Poppins-Medium';
 }
 
 .tittle-2,
 .tittle-4,
 .tittle-6,
 .tittle-9 {
-	font-family: 'Poppins-SemiBold';
+    font-family: 'Poppins-SemiBold';
 }
 
 .tittle-0 {
-	font-size: 45px;
+    font-size: 45px;
 }
 
 .tittle-1 {
-	font-size: 40px;
+    font-size: 40px;
 }
 
 .tittle-2 {
-	font-size: 36px;
+    font-size: 36px;
 }
 
 .tittle-3 {
-	font-size: 30px;
-	line-height: 0.4;
+    font-size: 30px;
+    line-height: 0.4;
 }
 
 .tittle-4 {
-	font-size: 30px;
+    font-size: 30px;
 }
 
 .tittle-5 {
-	font-size: 21px;
-	line-height: 0.57;
+    font-size: 21px;
+    line-height: 0.57;
 }
 
 .tittle-6 {
-	font-size: 20px;
-	letter-spacing: 0.9px;
+    font-size: 20px;
+    letter-spacing: 0.9px;
 }
 
 .tittle-7 {
-	font-size: 18px;
+    font-size: 18px;
 }
 
 .tittle-8 {
-	line-height: 1.5;
-	font-size: 16px;
+    line-height: 1.5;
+    font-size: 16px;
 }
 
 .tittle-3-spacing {
-	letter-spacing: 1.33px;
-	font-size: 16px;
+    letter-spacing: 1.33px;
+    font-size: 16px;
 }
 
 .tittle-9 {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .tittle-10 {
-	font-size: 14px;
-	letter-spacing: 1.17px;
+    font-size: 14px;
+    letter-spacing: 1.17px;
 }
 
 .tittle-11 {
-	font-size: 10px;
-	letter-spacing: 2px;
+    font-size: 10px;
+    letter-spacing: 2px;
 }
 
 .tittle-12 {
-	font-size: 10px;
+    font-size: 10px;
 }
 
 
 /* TEXTS */
 
 .text-light-14 {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .text-light-16 {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .text-14 {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .text-light-14,
 .text-light-16 {
-	line-height: 1.5;
-	color: #8c8b8d;
+    line-height: 1.5;
+    color: #8c8b8d;
 }
 
 
 /* BACKGROUNDS */
 
 .bg-0 {
-	background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 .bg-1 {
-	background-color: #f4f4f4;
+    background-color: #f4f4f4;
 }
 
 .bg-2 {
-	background-color: #0078A9;
+    background-color: #0078A9;
 }
 
 .bg-3 {
-	background-color: #333337;
+    background-color: #333337;
 }
 
 .bg-4 {
-	background-color: #f6f6f6;
+    background-color: #f6f6f6;
 }
+
 
 /* CORPORATIVE COLORS */
 
 .color-0 {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .color-1 {
-	color: #0079ab;
+    color: #0079ab;
 }
 
 .color-2 {
-	color: #1f4a77;
+    color: #1f4a77;
 }
 
 .color-3 {
-	color: #737373;
+    color: #737373;
 }
 
 
 /* OTHER ELEMENTS*/
 
 .container {
-	padding: 30px 0px;
-	margin: auto;
-	overflow: hidden;
+    padding: 30px 0px;
+    margin: auto;
+    overflow: hidden;
 }
 
 
@@ -300,7 +301,6 @@ body {
 // .form-control {
 // 	padding: 10px 10px 0 40px;
 // }
-
 // input {
 // 	width: 100%;
 // 	height: 60px;
@@ -318,7 +318,6 @@ body {
 // 	line-height: 1.33;
 // 	letter-spacing: 2px;
 // }
-
 // input:focus~.floating-label input:not(:focus):valid~.floating-label {
 // 	top: 5px;
 // 	font-size: 10px;
@@ -326,7 +325,6 @@ body {
 // 	letter-spacing: 2px;
 // 	opacity: 1;
 // }
-
 // input:focus~.floating-label,
 // input:valid~.floating-label {
 // 	top: 5px;
@@ -335,16 +333,13 @@ body {
 // 	line-height: 1.33;
 // 	letter-spacing: 2px;
 // }
-
 // input:focus~.floating-label,
 // input:not(:focus):valid~.floating-label {
 // 	left: 40px
 // }
-
 // input:focus~.input-icon {
 // 	color: #383838
 // }
-
 // .floating-label {
 // 	position: absolute;
 // 	pointer-events: none;
@@ -356,7 +351,6 @@ body {
 // 	line-height: 1.33;
 // 	letter-spacing: 2px;
 // }
-
 // .input-icon {
 // 	position: absolute;
 // 	top: 23px;
@@ -366,112 +360,115 @@ body {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------- */
 
+
 /* Label Inside of Input filed without icon */
 
 .form-control {
-	padding: 10px 10px 0 20px;
+    padding: 10px 10px 0 20px;
 }
 
 input[type=text],
 input[type=number],
 input[type=email],
+input[type=date],
 input[type=password] {
-	width: 100%;
-	height: 60px;
-	border: #c9c9c9 solid 1px;
-	border-radius: 9px;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	padding: 10px 10px 0 20px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	position: relative;
-	font-family: 'Poppins-Regular';
-	font-size: 14px;
-	line-height: 1.33;
-	letter-spacing: 2px;
+    width: 100%;
+    height: 60px;
+    border: #c9c9c9 solid 1px;
+    border-radius: 9px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 10px 10px 0 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    font-family: 'Poppins-Regular';
+    font-size: 14px;
+    line-height: 1.33;
+    letter-spacing: 2px;
 }
 
 input:focus~.floating-label input:not(:focus):valid~.floating-label {
-	top: 5px;
-	font-size: 10px;
-	line-height: 1.33;
-	letter-spacing: 2px;
-	opacity: 1;
+    top: 5px;
+    font-size: 10px;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    opacity: 1;
 }
 
 input:focus~.floating-label,
 input:valid~.floating-label {
-	top: 5px;
-	opacity: 1;
-	font-size: 10px;
-	line-height: 1.33;
-	letter-spacing: 2px;
+    top: 5px;
+    opacity: 1;
+    font-size: 10px;
+    line-height: 1.33;
+    letter-spacing: 2px;
 }
 
 input:focus~.floating-label,
 input:not(:focus):valid~.floating-label {
-	left: 20px
+    left: 20px
 }
 
 .floating-label {
-	position: absolute;
-	pointer-events: none;
-	left: 20px;
-	top: 23px;
-	transition: .2s ease all;
-	color: #777;
-	font-size: 12px;
-	line-height: 1.33;
-	letter-spacing: 2px;
+    position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 23px;
+    transition: .2s ease all;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: 2px;
 }
+
 
 /* ------------------------------------------------------------------------------------------------------------------------------------- */
 
 .button {
-	height: 48px;
-	border-radius: 8px;
-	background-color: #0079a8;
-	color: #ffffff;
-	font-size: 14px;
-	font-family: 'Poppins-Regular';
-	text-align: center;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #0079a8;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Poppins-Regular';
+    text-align: center;
 }
 
 .button:hover {
-	background-color: #092AB5;
+    background-color: #092AB5;
 }
 
 
 /* FOOTER */
 
 .fab {
-	padding: 9px 15px;
-	font-size: 30px;
-	width: 50px;
-	text-decoration: none;
-	border-radius: 50%;
+    padding: 9px 15px;
+    font-size: 30px;
+    width: 50px;
+    text-decoration: none;
+    border-radius: 50%;
 }
 
 .fab:hover {
-	opacity: 0.7;
+    opacity: 0.7;
 }
 
 .facebook {
-	background: #3B5998;
+    background: #3B5998;
 }
 
 .twitter {
-	background: #55ACEE;
+    background: #55ACEE;
 }
 
 .instagram {
-	background: #E1306C;
+    background: #E1306C;
 }
 
 .whatsapp {
-	background: #25D366;
+    background: #25D366;
 }
 
 
