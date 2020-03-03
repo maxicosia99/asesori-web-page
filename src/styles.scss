@@ -7,6 +7,7 @@
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import '../node_modules/angular-archwizard/archwizard.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 /*------------------------------------*\ END - IMPORTS \*------------------------------------*/
 
@@ -362,6 +363,32 @@ body {
 
 
 /* Label Inside of Input filed without icon */
+
+.ng-select .ng-select-container {
+    padding: 29px 10px;
+    border-radius: 8px;
+    font-family: 'Poppins-Regular';
+    font-size: 14px;
+}
+
+.ng-select .ng-select-container .ng-placeholder {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Poppins-Light';
+}
+
+.ng-select .ng-value {
+    line-height: 1.33;
+    letter-spacing: 2px;
+}
+
+.ng-select .ng-input {
+    margin-top: -15px;
+    margin-left: -10px;
+}
 
 .form-control {
     padding: 10px 10px 0 20px;

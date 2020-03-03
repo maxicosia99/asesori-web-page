@@ -70,6 +70,8 @@ export class HttpClientService {
   }
   /*  End - Search by location. */
 
+  
+  
   /* Get all credit options  */
   getAllCreditOptions(region_name: string, entityType: number, id_credit: number, loan_amount: number, montly_income: number, credit_term: number, initial_amount: number): Observable<any> {
     let url;
@@ -87,5 +89,19 @@ export class HttpClientService {
     return this.doGetRequest(url);
   }
   /* End - Get all credit options  */
+
+  
+  
+  /* Get provinces - cities */
+  getProvinces(idCountry: number): Observable<any> {
+    let url = this.getEndUrl(`/api/provincias/get?idCountry=${idCountry}`);
+    return this.doGetRequest(url);
+  }
+
+  getCities(idProvince: number): Observable<any> {
+    let url = this.getEndUrl(`/api/ciudades/get?idProvince=${idProvince}`);
+    return this.doGetRequest(url);
+  }
+  /* End - Get provinces - cities  */
 
 }

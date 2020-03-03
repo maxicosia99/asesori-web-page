@@ -486,5 +486,33 @@ export class HomePageComponent implements OnInit {
 
   /* END - ON LOGGED OUT */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public maritalStatus: any = [
+    { id: 1, status: 'CASADO' },
+    { id: 2, status: 'SOLTERO' },
+    { id: 3, status: 'DIVORCIADO' },
+    { id: 4, status: 'VIUDO' },
+    { id: 4, status: 'UNION LIBRE' },
+  ];
+
 }
 

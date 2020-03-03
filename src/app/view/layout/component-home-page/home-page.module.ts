@@ -12,6 +12,7 @@ import localeFr from '@angular/common/locales/fr';                      // Modul
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';   // Icons module
 import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carousel module
 import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
+import { NgSelectModule } from '@ng-select/ng-select';                  // select
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ArchwizardModule } from 'angular-archwizard';                  // Wizar
     Ng5SliderModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
-    ArchwizardModule
+    ArchwizardModule,
+    NgSelectModule
   ],
   exports: [
     
