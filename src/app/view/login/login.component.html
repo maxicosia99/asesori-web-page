@@ -1,6 +1,6 @@
 <div class="modal-header">
-  <h4 class="modal-title tittle-6">Bienvenido a ASESORI</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <h4 class="modal-title tittle-6">Bienvenido a ASESORI</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 
@@ -8,121 +8,102 @@
 <!-- <div class="modal-body mx-4 text-justify text-light-14"> -->
 <div class="modal-body mx-4 text-justify">
 
-  <tabset type="pills" [justified]="true">
-    <tab>
+    <tabset type="pills" [justified]="true">
+        <tab>
 
-      <ng-template tabHeading>
-        <span class="tittle-10">Login</span>
-      </ng-template>
+            <ng-template tabHeading>
+                <span class="tittle-10">Login</span>
+            </ng-template>
 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-        <div class="row">
-          <div class="col-12">
-            <div class="position-relative mt-4">
-              <input type="text" formControlName="usernameOrEmail" class="form-control" required
-                [ngClass]="{ 'is-invalid': form.usernameOrEmail.touched && form.usernameOrEmail.errors }">
-              <span class="floating-label text-uppercase">Username o Email*</span>
-              <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
-              <div *ngIf="form.usernameOrEmail.touched && form.usernameOrEmail.errors" class="invalid-feedback">
-                <div *ngIf="form.usernameOrEmail.errors.required">Porfavor ingrese su usuario o correo!</div>
-              </div>
-            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="position-relative mt-4">
+                            <input type="text" formControlName="usernameOrEmail" class="form-control" required [ngClass]="{ 'is-invalid': form.usernameOrEmail.touched && form.usernameOrEmail.errors }">
+                            <span class="floating-label text-uppercase">Username o Email*</span>
+                            <div *ngIf="form.usernameOrEmail.touched && form.usernameOrEmail.errors" class="invalid-feedback">
+                                <div *ngIf="form.usernameOrEmail.errors.required">Porfavor ingrese su usuario o correo!</div>
+                            </div>
+                        </div>
 
-            <div class="row mt-4">
-              
-              <div class="col-12">
-                <div class="position-relative">
-                  <input id="password" type="password" formControlName="password" class="form-control" required
-                    [ngClass]="{ 'is-invalid': form.password.touched && form.password.errors }" showHideInput>
-                  <span class="floating-label text-uppercase">Password*</span>
-                  <fa-icon class="input-icon" [icon]="faUnlock"></fa-icon>
+                        <div class="row mt-4">
 
-                  <div *ngIf="form.password.touched && form.password.errors" class="invalid-feedback">
-                    <div *ngIf="form.password.errors.required">Porfavor ingrese su contraseña!</div>
-                  </div>
-                </div>
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <input id="password" type="password" formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': form.password.touched && form.password.errors }" showHideInput>
+                                    <span class="floating-label text-uppercase">Password*</span>
 
-                <button class="btn btn-primary" type="button" showHideTrigger="password" style="height: 60px;">
+                                    <div *ngIf="form.password.touched && form.password.errors" class="invalid-feedback">
+                                        <div *ngIf="form.password.errors.required">Porfavor ingrese su contraseña!</div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary" type="button" showHideTrigger="password" style="height: 60px;">
                   <fa-icon class="text-white" [fixedWidth]="true" size="sm" [icon]="(isHidden ? faEyeSlash : faEye)"
                     [showHideStatus]="{id: 'password'}"></fa-icon>
                 </button>
 
-              </div>
+                            </div>
 
+                        </div>
+
+                    </div>
+                </div>
+
+                <div *ngFor="let alert of alerts">
+                    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">
+                        {{ alert.msg }}</alert>
+                </div>
+
+                <div class="row mt-4 justify-content-center">
+                    <div class="col-12">
+                        <button type="submit" [disabled]="loginForm.invalid" class="btn button btn-block">INGRESAR</button>
+                    </div>
+                </div>
+            </form>
+
+        </tab>
+
+        <tab>
+            <ng-template tabHeading>
+                <span class="tittle-10">Registrate</span>
+            </ng-template>
+            <div class="row">
+                <div class="col-12">
+                    <div class="position-relative mt-4">
+                        <input type="text" required>
+                        <span class="floating-label text-uppercase">Username*</span>
+                    </div>
+                    <div class="position-relative mt-4">
+                        <input type="text" required>
+                        <span class="floating-label text-uppercase">Email*</span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="position-relative mt-4">
+                                <input type="password" required>
+                                <span class="floating-label text-uppercase">Password*</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="position-relative mt-4">
+                                <input type="password" required>
+                                <span class="floating-label text-uppercase">Repetir Password*</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
 
-            <div class="input-group input-group-sm">
-              <input id="test2" class="form-control" type="text" showHideInput required>
-              <span class="floating-label text-uppercase">Password*</span>
-              <i class="fas fa-unlock-alt input-icon"></i>
-              <div class="input-group-append ngx-show-hide-password">
-                <button class="btn btn-primary" type="button" showHideTrigger="test2">
-                  <i class="fas" [showHideStatus]="{show: 'fa-eye', hide: 'fa-eye-slash', id: 'test2'}"></i>
-                </button>
-              </div>
+            <div class="row mt-4 justify-content-center">
+                <div class="col-12">
+                    <button type="button" class="btn button btn-block">REGISTRARME</button>
+                </div>
             </div>
-
-          </div>
-        </div>
-
-        <div *ngFor="let alert of alerts">
-          <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">
-            {{ alert.msg }}</alert>
-        </div>
-
-        <div class="row mt-4 justify-content-center">
-          <div class="col-12">
-            <button type="submit" [disabled]="loginForm.invalid" class="btn button btn-block">INGRESAR</button>
-          </div>
-        </div>
-      </form>
-
-    </tab>
-
-    <tab>
-      <ng-template tabHeading>
-        <span class="tittle-10">Registrate</span>
-      </ng-template>
-      <div class="row">
-        <div class="col-12">
-          <div class="position-relative mt-4">
-            <input type="text" required>
-            <span class="floating-label text-uppercase">Username*</span>
-            <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
-          </div>
-          <div class="position-relative mt-4">
-            <input type="text" required>
-            <span class="floating-label text-uppercase">Email*</span>
-            <fa-icon class="input-icon" [icon]="faEnvelope"></fa-icon>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <div class="position-relative mt-4">
-                <input type="password" required>
-                <span class="floating-label text-uppercase">Password*</span>
-                <fa-icon class="input-icon" [icon]="faUnlock"></fa-icon>
-              </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <div class="position-relative mt-4">
-                <input type="password" required>
-                <span class="floating-label text-uppercase">Repetir Password*</span>
-                <fa-icon class="input-icon" [icon]="faUnlock"></fa-icon>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-      <div class="row mt-4 justify-content-center">
-        <div class="col-12">
-          <button type="button" class="btn button btn-block">REGISTRARME</button>
-        </div>
-      </div>
-    </tab>
-  </tabset>
+        </tab>
+    </tabset>
 </div>

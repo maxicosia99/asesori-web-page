@@ -6,6 +6,7 @@
 
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import '../node_modules/angular-archwizard/archwizard.css';
 
 /*------------------------------------*\ END - IMPORTS \*------------------------------------*/
 
@@ -262,6 +263,9 @@ body {
 	background-color: #333337;
 }
 
+.bg-4 {
+	background-color: #f6f6f6;
+}
 
 /* CORPORATIVE COLORS */
 
@@ -291,13 +295,87 @@ body {
 }
 
 
-/* Label Inside of Input filed */
+/* Label Inside of Input filed with icon*/
+
+// .form-control {
+// 	padding: 10px 10px 0 40px;
+// }
+
+// input {
+// 	width: 100%;
+// 	height: 60px;
+// 	border: #c9c9c9 solid 1px;
+// 	border-radius: 9px;
+// 	box-sizing: border-box;
+// 	-webkit-box-sizing: border-box;
+// 	-moz-box-sizing: border-box;
+// 	padding: 10px 10px 0 40px;
+// 	-webkit-appearance: none;
+// 	-moz-appearance: none;
+// 	position: relative;
+// 	font-family: 'Poppins-Regular';
+// 	font-size: 14px;
+// 	line-height: 1.33;
+// 	letter-spacing: 2px;
+// }
+
+// input:focus~.floating-label input:not(:focus):valid~.floating-label {
+// 	top: 5px;
+// 	font-size: 10px;
+// 	line-height: 1.33;
+// 	letter-spacing: 2px;
+// 	opacity: 1;
+// }
+
+// input:focus~.floating-label,
+// input:valid~.floating-label {
+// 	top: 5px;
+// 	opacity: 1;
+// 	font-size: 10px;
+// 	line-height: 1.33;
+// 	letter-spacing: 2px;
+// }
+
+// input:focus~.floating-label,
+// input:not(:focus):valid~.floating-label {
+// 	left: 40px
+// }
+
+// input:focus~.input-icon {
+// 	color: #383838
+// }
+
+// .floating-label {
+// 	position: absolute;
+// 	pointer-events: none;
+// 	left: 40px;
+// 	top: 23px;
+// 	transition: .2s ease all;
+// 	color: #777;
+// 	font-size: 12px;
+// 	line-height: 1.33;
+// 	letter-spacing: 2px;
+// }
+
+// .input-icon {
+// 	position: absolute;
+// 	top: 23px;
+// 	left: 15px;
+// 	color: #727272
+// }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Label Inside of Input filed without icon */
 
 .form-control {
-	padding: 10px 10px 0 40px;
+	padding: 10px 10px 0 20px;
 }
 
-input {
+input[type=text],
+input[type=number],
+input[type=email],
+input[type=password] {
 	width: 100%;
 	height: 60px;
 	border: #c9c9c9 solid 1px;
@@ -305,7 +383,7 @@ input {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	padding: 10px 10px 0 40px;
+	padding: 10px 10px 0 20px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	position: relative;
@@ -334,17 +412,13 @@ input:valid~.floating-label {
 
 input:focus~.floating-label,
 input:not(:focus):valid~.floating-label {
-	left: 40px
-}
-
-input:focus~.input-icon {
-	color: #383838
+	left: 20px
 }
 
 .floating-label {
 	position: absolute;
 	pointer-events: none;
-	left: 40px;
+	left: 20px;
 	top: 23px;
 	transition: .2s ease all;
 	color: #777;
@@ -353,12 +427,7 @@ input:focus~.input-icon {
 	letter-spacing: 2px;
 }
 
-.input-icon {
-	position: absolute;
-	top: 23px;
-	left: 15px;
-	color: #727272
-}
+/* ------------------------------------------------------------------------------------------------------------------------------------- */
 
 .button {
 	height: 48px;

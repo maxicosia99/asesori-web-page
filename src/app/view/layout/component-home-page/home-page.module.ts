@@ -11,6 +11,7 @@ import { ModalModule } from 'ngx-bootstrap';                            // Ngx-B
 import localeFr from '@angular/common/locales/fr';                      // Module for currency type (dollars)
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';   // Icons module
 import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carousel module
+import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carou
     Ng5SliderModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    ArchwizardModule
   ],
   exports: [
     

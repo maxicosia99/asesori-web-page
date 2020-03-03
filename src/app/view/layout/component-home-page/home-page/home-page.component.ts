@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';                                            
 /* icons in this page */
 import { 
   faStopwatch, faMoneyBillAlt, faClipboard, faUserAlt, faEnvelope, faRedoAlt,faHome,
-  faPhone } from "@fortawesome/free-solid-svg-icons";
+  faPhone, faBuilding, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook, faTwitter, faWhatsapp, faInstagram
 } from '@fortawesome/free-brands-svg-icons';
@@ -56,6 +56,8 @@ export class HomePageComponent implements OnInit {
   faTwitter = faTwitter;
   faInstagram = faInstagram;
   faWhatsapp = faWhatsapp;
+  faBuilding = faBuilding;
+  faUserTie = faUserTie;
   /* END - ICONS */
 
 
@@ -297,6 +299,10 @@ export class HomePageComponent implements OnInit {
   moveSection(element: HTMLElement) {
     element.scrollIntoView({ behavior: 'smooth' });
   }
+
+  scrollToTop(el: HTMLElement) {
+    el.scrollIntoView();
+  }
   /* End - move between sections of the page */
 
 
@@ -405,6 +411,47 @@ export class HomePageComponent implements OnInit {
   /* End - Forms Submitted */
 
 
+  section1: boolean = true;
+  section2: boolean = false;
+  section3: boolean = false;
+
+  /* Archwizard Form */
+  finishIdentification(){
+    console.log('Finalizó identificación');
+    this.section1 = false;
+    this.section2 = true;
+    this.section3 = false;
+  }
+
+  finishFinancialSituation(){
+    console.log('Finalizó situacion economica');
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = true;
+  }
+
+  section2_1(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = true;
+    this.section2 = false;
+    this.section3 = false;
+  }
+
+  section3_2(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = true;
+    this.section3 = false;
+  }
+
+  section1_3(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = true;
+  }
+
+  /* Archwizard Form */
 
 
 
