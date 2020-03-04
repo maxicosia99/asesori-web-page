@@ -358,88 +358,91 @@
     </section>
 
 
-    <form #target [formGroup]="contactform">
+    <section #target class="container">
 
-        <section class="container">
+        <div class="row">
+            <div class="d-none d-lg-block col-3">
+                <div class="row">
+                    <div class="col bg-4 text-center">
+                        <img class="img-fluid" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
 
-            <div class="row">
-                <div class="d-none d-lg-block col-3">
-                    <div class="row">
-                        <div class="col bg-4 text-center">
-                            <img class="img-fluid" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
-
-                            <ul class="timeline text-left text-uppercase tittle-11 color-1">
-                                <li>
-                                    <summary (click)="section2_1(target)">Identificación</summary>
-                                    <p class="mt-4">datos personales</p>
-                                    <p>domicilio actual</p>
-                                    <p>contacto</p>
-                                </li>
-                                <li>
-                                    <summary (click)="section3_2(target)">Información económica</summary>
-                                    <p class="mt-4">situación laboral</p>
-                                    <p>situación financiera</p>
-                                </li>
-                                <li>
-                                    <summary (click)="section1_3(target)">Mi crédito</summary>
-                                    <p class="mt-4">solicitud</p>
-                                </li>
-                                <li>
-                                    <summary href="#">Solicitud lista</summary>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row mt-3 mx-1">
-                        <div class="col-12">
-                            <p class="tittle-10">Tienes la seguridad y confianza</p>
-                            <p class="text-light-14">Para nosotros es primordial brindarte toda la seguridad posible y confianza que necesitas durante todo el proceso. Estamos avalados por</p>
-                            <owl-carousel-o [options]="customOptions">
-                                <ng-template carouselSlide>
-                                    <div class="bg-0 mx-1 rounded">
-                                        <img src="/assets/img/financial-entities/banco-austro-188x100.png">
-                                    </div>
-                                </ng-template>
-                                <ng-template carouselSlide>
-                                    <div class="bg-0 mx-1 rounded">
-                                        <img src="/assets/img/financial-entities/banco-biess-188x100.png">
-                                    </div>
-                                </ng-template>
-                                <ng-template carouselSlide>
-                                    <div class="bg-0 mx-1 rounded">
-                                        <img src="/assets/img/financial-entities/banco-bolivariano-188x100.png">
-                                    </div>
-                                </ng-template>
-                                <ng-template carouselSlide>
-                                    <div class="bg-0 mx-1 rounded">
-                                        <img src="/assets/img/financial-entities/banco-dinnersClub-188x100.png">
-                                    </div>
-                                </ng-template>
-                                <ng-template carouselSlide>
-                                    <div class="bg-0 mx-1 rounded">
-                                        <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png">
-                                    </div>
-                                </ng-template>
-                            </owl-carousel-o>
-                        </div>
+                        <ul class="timeline text-left text-uppercase tittle-11 color-1">
+                            <li>
+                                <summary>Identificación</summary>
+                                <p class="mt-4">datos personales</p>
+                                <p>domicilio actual</p>
+                                <p>contacto</p>
+                            </li>
+                            <li>
+                                <summary>Información económica</summary>
+                                <p class="mt-4">situación laboral</p>
+                                <p>situación financiera</p>
+                            </li>
+                            <li>
+                                <summary>Mi crédito</summary>
+                                <p class="mt-4">solicitud</p>
+                            </li>
+                            <li>
+                                <summary href="#">Solicitud lista</summary>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-12 col-lg-9">
-                    <div class="row mx-2 mx-md-0 justify-content-center py-5">
+                <div class="row mt-3 mx-1">
+                    <div class="col-12">
+                        <p class="tittle-10">Tienes la seguridad y confianza</p>
+                        <p class="text-light-14">Para nosotros es primordial brindarte toda la seguridad posible y confianza que necesitas durante todo el proceso. Estamos avalados por</p>
+                        <owl-carousel-o [options]="customOptions">
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-austro-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-biess-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-bolivariano-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-dinnersClub-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png">
+                                </div>
+                            </ng-template>
+                        </owl-carousel-o>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-9">
+                <div class="row mx-2 mx-md-0 justify-content-center py-5">
 
-                        <div class="col-12 col-lg-8" *ngIf="section1">
+                    <div class="col-12 col-lg-8" *ngIf="section1">
 
-                            <h2 class="tittle-1 mb-2">Identificación</h2>
-                            <p class="text-light-14">Con Asesori puedes acceder a créditos en varios Bancos, Mutualistas o Cooperativas de forma más fácil y segura, por lo que necesitamos identicarte. </p>
+                        <h2 class="tittle-1 mb-2">Identificación</h2>
+                        <p class="text-light-14">Con Asesori puedes acceder a créditos en varios Bancos, Mutualistas o Cooperativas de forma más fácil y segura, por lo que necesitamos identicarte. </p>
 
-                            <aw-wizard>
-                                <aw-wizard-step stepTitle="Datos personales">
+                        <aw-wizard>
+                            <aw-wizard-step stepTitle="Datos personales">
+
+                                <form [formGroup]="personalDataForm">
 
                                     <div class="row my-4">
                                         <div class="col-12 col-md-6 my-md-0 my-4">
                                             <div class="position-relative">
-                                                <input type="text" required>
+                                                <input type="text" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
                                                 <span class="floating-label text-uppercase">numero de identidad*</span>
+                                                <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
+                                                    <span>Ingrese su cédula!</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -450,16 +453,22 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" required>
+                                                <input type="text" formControlName="names" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('names')}">
                                                 <span class="floating-label text-uppercase">nombres*</span>
+                                                <div *ngIf="isFieldValidPersonalData('names')" class="invalid-feedback">
+                                                    <span>Ingrese sus nombres!</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" required>
+                                                <input type="text" formControlName="last_names" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('last_names')}">
                                                 <span class="floating-label text-uppercase">apellidos*</span>
+                                                <div *ngIf="isFieldValidPersonalData('last_names')" class="invalid-feedback">
+                                                    <span>Ingrese sus apellidos!</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -473,11 +482,17 @@
                                     </div>
                                     <div class="row my-4 justify-content-center">
                                         <div class="col-12 col-md-4">
-                                            <button type="button" class="btn button btn-block" awNextStep (finalize)="scrollToTop(target)">CONTINUAR</button>
+                                            <button type="submit" [disabled]="!personalDataForm.valid" class="btn button btn-block" awNextStep (click)="onSubmitPersonalDataForm()" (finalize)="scrollToTop(target)">CONTINUAR</button>
                                         </div>
                                     </div>
-                                </aw-wizard-step>
-                                <aw-wizard-step stepTitle="Domicilio actual">
+
+                                </form>
+
+                            </aw-wizard-step>
+                            <aw-wizard-step stepTitle="Domicilio actual">
+
+                                <form [formGroup]="addressForm">
+
                                     <div class="row my-4">
                                         <div class="col">
                                             <div class="form-check">
@@ -495,15 +510,21 @@
                                             </ng-select>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <ng-select class="custom" [items]="maritalStatus" placeholder="ciudad*" [searchable]="true" bindLabel="status" [clearable]="false">
+                                            <ng-select class="custom" [items]="maritalStatus" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="status" [clearable]="false">
                                             </ng-select>
+                                            <div *ngIf="isFieldValidaddressForm('city')" class="invalid-feedback">
+                                                <span>Seleccione una ciudad!</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" required>
+                                                <input type="text" formControlName="address" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
                                                 <span class="floating-label text-uppercase">direccion*</span>
+                                                <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
+                                                    <span>Ingrese su dirección!</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -531,20 +552,26 @@
                                             <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
                                         </div>
                                         <div class="col-4 d-none d-sm-block">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>CONTINUAR</button>
+                                            <button type="submit" [disabled]="!addressForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep (click)="onSubmitaddressForm()">CONTINUAR</button>
                                         </div>
                                         <div class="col-4 d-block d-sm-none">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>&gt;</button>
+                                            <button type="submit" [disabled]="!addressForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep (click)="onSubmitaddressForm()">&gt;</button>
                                         </div>
                                     </div>
-                                </aw-wizard-step>
-                                <aw-wizard-step stepTitle="Contacto">
+                                </form>
+                            </aw-wizard-step>
+                            <aw-wizard-step stepTitle="Contacto">
+
+                                <form [formGroup]="contactForm">
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" required>
+                                                <input type="text" formControlName="phone" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}">
                                                 <span class="floating-label text-uppercase">telefono para
                                                     contacto*</span>
+                                                <div *ngIf="isFieldValidContactForm('phone')" class="invalid-feedback">
+                                                    <span>Ingrese teléfono!</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -560,8 +587,11 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" required>
+                                                <input type="text" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}">
                                                 <span class="floating-label text-uppercase">correo electromico*</span>
+                                                <div *ngIf="isFieldValidContactForm('email')" class="invalid-feedback">
+                                                    <span>Ingrese correo electrónico!</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -573,203 +603,280 @@
                                             <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
                                         </div>
                                         <div class="col-4 d-none d-sm-block">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="finishIdentification()">CONTINUAR</button>
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">CONTINUAR</button>
                                         </div>
                                         <div class="col-4 d-block d-sm-none">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="finishIdentification()">&gt;</button>
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">&gt;</button>
                                         </div>
                                     </div>
-                                </aw-wizard-step>
-                            </aw-wizard>
-                        </div>
+                                </form>
+                            </aw-wizard-step>
+                        </aw-wizard>
+                    </div>
 
-                        <div class="col-12 col-lg-8" *ngIf="section2">
+                    <div class="col-12 col-lg-8" *ngIf="section2">
 
-                            <h2 class="tittle-1 mb-2">Información económica </h2>
-                            <p class="text-light-14">Con Asesori puedes acceder a créditos de forma más fácil y segura, por lo que necesitamos identicarte.</p>
+                        <h2 class="tittle-1 mb-2">Información económica </h2>
+                        <p class="text-light-14">Con Asesori puedes acceder a créditos de forma más fácil y segura, por lo que necesitamos identicarte.</p>
 
-                            <aw-wizard>
-                                <aw-wizard-step stepTitle="Situación laboral">
-                                    <p>todo para mixto</p>
-                                    <div class="row my-4 justify-content-between">
-                                        <p>solo esta parte para en independencia</p>
-                                        <div class="col-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                                <label class="form-check-label text-light-14" for="exampleRadios1">
-                                                    <fa-icon class="icon" [icon]="faBuilding"></fa-icon>
-                                                    En independencia
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                                <label class="form-check-label text-light-14" for="exampleRadios2">
-                                                    <fa-icon class="icon" [icon]="faUserAlt"></fa-icon>
-                                                    Independiente
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-                                                <label class="form-check-label text-light-14" for="exampleRadios3">
-                                                    <fa-icon class="icon" [icon]="faUserTie"></fa-icon>
-                                                    Mixta
-                                                </label>
-                                            </div>
+                        <aw-wizard>
+                            <aw-wizard-step stepTitle="Situación laboral">
+                                <p>todo para mixto</p>
+                                <div class="row my-4 justify-content-between">
+                                    <p>solo esta parte para en independencia</p>
+                                    <div class="col-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                            <label class="form-check-label text-light-14" for="exampleRadios1">
+                                                <fa-icon class="icon" [icon]="faBuilding"></fa-icon>
+                                                En independencia
+                                            </label>
                                         </div>
                                     </div>
-
-                                    <div class="row my-0 my-md-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">nombre de la empresa*</span>
-                                            </div>
+                                    <div class="col-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                            <label class="form-check-label text-light-14" for="exampleRadios2">
+                                                <fa-icon class="icon" [icon]="faUserAlt"></fa-icon>
+                                                Independiente
+                                            </label>
                                         </div>
                                     </div>
+                                    <div class="col-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                                            <label class="form-check-label text-light-14" for="exampleRadios3">
+                                                <fa-icon class="icon" [icon]="faUserTie"></fa-icon>
+                                                Mixta
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row my-0 my-md-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">nombre de la empresa*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-0 my-md-4">
+                                    <div class="col-12 col-md-6 my-md-0 my-4">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">cargo en la empresa*</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="position-relative">
+                                            <input type="date">
+                                            <span class="floating-label text-uppercase">fecha de ingreso*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4 mb-0 my-md-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">sueldo mensual*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-0 my-md-4">
+                                    <div class="col-12 col-md-6 my-md-0 my-4">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">otro valor mensual*</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">detalle del valor*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-0 my-md-4">
+                                    <div class="col-12 col-md-6 my-md-0 my-4">
+                                        <ng-select class="custom" [items]="maritalStatus" placeholder="provincia*" [searchable]="true" bindLabel="status" [clearable]="false">
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <ng-select class="custom" [items]="maritalStatus" placeholder="ciudad*" [searchable]="true" bindLabel="status" [clearable]="false">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">dirección*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">teléfono de contacto*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>solo esta parte para independiente</p>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">Ruc*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">sector*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">promedio mensual
+                                                ventas*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4 justify-content-between">
+                                    <div class="col-4 d-none d-sm-block">
+                                        <button type="button" class="btn button btn-block" (click)="section2_1(target)">REGRESAR</button>
+                                    </div>
+                                    <div class="col-4 d-block d-sm-none">
+                                        <button type="button" class="btn button btn-block" (click)="section2_1(target)">&lt;</button>
+                                    </div>
+                                    <div class="col-4 d-none d-sm-block">
+                                        <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>CONTINUAR</button>
+                                    </div>
+                                    <div class="col-4 d-block d-sm-none">
+                                        <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>&gt;</button>
+                                    </div>
+                                </div>
+                            </aw-wizard-step>
+                            <aw-wizard-step stepTitle="Situación Financiera">
+                                <div class="row mt-4 mb-0 my-md-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">sueldo mensual*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-0 my-md-4">
+                                    <div class="col-12 col-md-6 my-md-0 my-4">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">otro valor mensual*</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">detalle del valor*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">gastos al mes*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="text" required>
+                                            <span class="floating-label text-uppercase">mi capacidad de pago mensual
+                                                es**</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4 justify-content-between">
+                                    <div class="col-4 d-none d-sm-block">
+                                        <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>REGRESAR</button>
+                                    </div>
+                                    <div class="col-4 d-block d-sm-none">
+                                        <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
+                                    </div>
+                                    <div class="col-4 d-none d-sm-block">
+                                        <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>CONTINUAR</button>
+                                    </div>
+                                    <div class="col-4 d-block d-sm-none">
+                                        <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>&gt;</button>
+                                    </div>
+                                </div>
+                            </aw-wizard-step>
+                            <aw-wizard-step stepTitle="Datos económicos">
+
+                                <form [formGroup]="economicForm">
+
                                     <div class="row my-0 my-md-4">
                                         <div class="col-12 col-md-6 my-md-0 my-4">
                                             <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">cargo en la empresa*</span>
+                                                <input type="text" formControlName="card_payment">
+                                                <span class="floating-label text-uppercase">pago de tarjetas*</span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="position-relative">
-                                                <input type="date">
-                                                <span class="floating-label text-uppercase">fecha de ingreso*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-4 mb-0 my-md-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">sueldo mensual*</span>
+                                                <input type="text" formControlName="mortgage_payment">
+                                                <span class="floating-label text-uppercase">pago de hipotecas*</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row my-0 my-md-4">
                                         <div class="col-12 col-md-6 my-md-0 my-4">
                                             <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">otro valor mensual*</span>
+                                                <input type="text" formControlName="loans_payment">
+                                                <span class="floating-label text-uppercase">pago por préstamos*</span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">detalle del valor*</span>
+                                                <input type="text" formControlName="total_properties" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('total_properties')}">
+                                                <span class="floating-label text-uppercase">total de bienes*</span>
+                                                <div *ngIf="isFieldValidEconomicForm('total_properties')" class="invalid-feedback">
+                                                    <span>Ingrese total de bienes!</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row my-0 my-md-4">
                                         <div class="col-12 col-md-6 my-md-0 my-4">
-                                            <ng-select class="custom" [items]="maritalStatus" placeholder="provincia*" [searchable]="true" bindLabel="status" [clearable]="false">
+                                            <ng-select class="custom" formControlName="typeHousing" [items]="typeHousing" placeholder="tipo de vivienda*" [searchable]="false" bindLabel="type" [clearable]="false">
                                             </ng-select>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <ng-select class="custom" [items]="maritalStatus" placeholder="ciudad*" [searchable]="true" bindLabel="status" [clearable]="false">
-                                            </ng-select>
-                                        </div>
-                                    </div>
-                                    <div class="row my-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">dirección*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">teléfono de contacto*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p>solo esta parte para independiente</p>
-                                    <div class="row my-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">Ruc*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">sector*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">promedio mensual
-                                                    ventas*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my-4 justify-content-between">
-                                        <div class="col-4 d-none d-sm-block">
-                                            <button type="button" class="btn button btn-block" (click)="section2_1(target)">REGRESAR</button>
-                                        </div>
-                                        <div class="col-4 d-block d-sm-none">
-                                            <button type="button" class="btn button btn-block" (click)="section2_1(target)">&lt;</button>
-                                        </div>
-                                        <div class="col-4 d-none d-sm-block">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>CONTINUAR</button>
-                                        </div>
-                                        <div class="col-4 d-block d-sm-none">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep>&gt;</button>
-                                        </div>
-                                    </div>
-                                </aw-wizard-step>
-                                <aw-wizard-step stepTitle="Situación Financiera">
-                                    <div class="row mt-4 mb-0 my-md-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">sueldo mensual*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my-0 my-md-4">
-                                        <div class="col-12 col-md-6 my-md-0 my-4">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">otro valor mensual*</span>
+                                            <div *ngIf="isFieldValidEconomicForm('typeHousing')" class="invalid-feedback">
+                                                <span>Seleccione una tipo de propiedad!</span>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">detalle del valor*</span>
+                                                <input type="number" formControlName="rent_payment">
+                                                <span class="floating-label text-uppercase">pago por arriendo*</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">gastos al mes*</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row my-4">
-                                        <div class="col-12">
-                                            <div class="position-relative">
-                                                <input type="text" required>
-                                                <span class="floating-label text-uppercase">mi capacidad de pago mensual
-                                                    es**</span>
+                                                <input type="text" formControlName="services_payment" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('services_payment')}">
+                                                <span class="floating-label text-uppercase">pago de servicios*</span>
+                                                <div *ngIf="isFieldValidEconomicForm('services_payment')" class="invalid-feedback">
+                                                    <span>Ingrese total de servicios!</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -781,24 +888,26 @@
                                             <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
                                         </div>
                                         <div class="col-4 d-none d-sm-block">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="finishFinancialSituation()">CONTINUAR</button>
+                                            <button type="button" [disabled]="!economicForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmiteconomicForm()">CONTINUAR</button>
                                         </div>
                                         <div class="col-4 d-block d-sm-none">
-                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="finishFinancialSituation()">&gt;</button>
+                                            <button type="button" [disabled]="!economicForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmiteconomicForm()">&gt;</button>
                                         </div>
                                     </div>
-                                </aw-wizard-step>
-                            </aw-wizard>
-                        </div>
+                                </form>
+                            </aw-wizard-step>
+                        </aw-wizard>
+                    </div>
 
-                        <div class="col-12" *ngIf="!creditOptions && section3">
-                            <h2 class="tittle-1 mb-2">Aún no se han calculado opciones de crédito! </h2>
-                        </div>
+                    <div class="col-12" *ngIf="!creditOptions && section3">
+                        <h2 class="tittle-1 mb-2">Aún no se han calculado opciones de crédito! </h2>
+                    </div>
 
+                    <div class="col-12" *ngIf="creditOptions && section3">
 
-                        <div class="col-12" *ngIf="creditOptions && section3">
+                        <h2 class="tittle-1 mb-2">Mi crédito</h2>
 
-                            <h2 class="tittle-1 mb-2">Mi crédito </h2>
+                        <form [formGroup]="creditform">
 
                             <!-- RESULTS SECTION TEST -->
 
@@ -839,8 +948,8 @@
                                                         </div>
                                                         <div class="row text-center justify-content-center">
                                                             <div class="col-6 col-lg-12">
-                                                                <img class="img-fluid"
-                                                                    [src]="can_access_credit[i].url_photo" alt="Image">
+                                                                <img class="img-fluid" [src]="can_access_credit[i].url_photo"
+                                                                    alt="Image">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -944,8 +1053,7 @@
                                                         </div>
                                                         <div class="row text-center justify-content-center">
                                                             <div class="col-6 col-lg-12">
-                                                                <img class="img-fluid"
-                                                                    [src]="cannot_access_credit[i].url_photo"
+                                                                <img class="img-fluid" [src]="cannot_access_credit[i].url_photo"
                                                                     alt="Image">
                                                             </div>
                                                         </div>
@@ -953,7 +1061,7 @@
                                                     <div class="col-lg-9">
                                                         <div class="row text-center justify-content-center">
                                                             <div class="col-6 col-md-4">
-
+        
                                                                 <p class="text-uppercase tittle-10 d-none d-md-block">
                                                                     Monto a solicitar</p>
                                                                 <p class="text-uppercase tittle-10 d-block d-md-none ">
@@ -1046,22 +1154,25 @@
 
 
                                 <div class="col-3 d-none d-md-block tittle-6 text-uppercase text-right">
-                                    <summary class="pr-3" (click)="onSubmitContactForm()">aplicar &gt;</summary>
+                                    <summary class="pr-3" (click)="onSubmitCreditform()">aplicar &gt;</summary>
                                 </div>
 
                                 <div class="col-3 d-block d-md-none tittle-6 text-right">
-                                    <summary class="pr-3" (click)="onSubmitContactForm()">&gt;</summary>
+                                    <summary class="pr-3" (click)="onSubmitCreditform()">&gt;</summary>
                                 </div>
 
                             </div>
                             <!-- END - APLICATION BAR -->
-                        </div>
+
+                        </form>
+
                     </div>
                 </div>
             </div>
+        </div>
 
-        </section>
-    </form>
+    </section>
+
 
 
     <!-- RANKING SECTION -->

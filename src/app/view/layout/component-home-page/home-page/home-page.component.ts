@@ -17,6 +17,7 @@ import {
 import {
   faFacebook, faTwitter, faWhatsapp, faInstagram
 } from '@fortawesome/free-brands-svg-icons';
+import { CreditInformation } from 'src/app/models/credit-information';
 /* End - icons in this page */
 
 
@@ -200,6 +201,20 @@ export class HomePageComponent implements OnInit {
   public cannot_access_credit: any;
   public credit_unavailable: any;
 
+  /* variables for the selection of marital status */
+  public maritalStatus: any = [
+    { id: 1, status: 'CASADO' },
+    { id: 2, status: 'SOLTERO' },
+    { id: 3, status: 'DIVORCIADO' },
+    { id: 4, status: 'VIUDO' },
+    { id: 4, status: 'UNION LIBRE' },
+  ];
+  /* variables for the selection of type housing */
+  public typeHousing = [
+    {id: 1, type: "Propia"},
+    {id: 2, type: "Arrendada"}
+  ]
+
 
   /* Credit calculation form */
   estimateform = this.formbuilder.group({
@@ -209,25 +224,134 @@ export class HomePageComponent implements OnInit {
     term: ['', [Validators.required, Validators.minLength(1)]]
   });
 
-  /* Data submission form */
-  contactform = this.formbuilder.group({
+  /* ----------------------------------- Constact Form ------------------------------- */
+  
+  personalDataForm = this.formbuilder.group({
+    names: ['', Validators.required],
+    last_names: ['', Validators.required],
+    dni: ['', [Validators.required, validateCedula]],
+  });
+
+  personalDataFormSubmitted: boolean;
+  isFieldValidPersonalData(field: string) {
+    return (
+      this.personalDataForm.get(field).errors && this.personalDataForm.get(field).touched ||
+      this.personalDataForm.get(field).untouched &&
+      this.personalDataFormSubmitted && this.personalDataForm.get(field).errors
+    );
+  }
+
+  onSubmitPersonalDataForm() {
+    this.personalDataFormSubmitted = true;
+    // if (this.personalDataForm.valid) {}
+  }
+
+  /* -------------------------------------------------------------------------------------------- */
+
+  addressForm = this.formbuilder.group({
+    address: ['', Validators.required],
+    city: ['', Validators.required],
+  });
+
+  addressFormSubmitted: boolean;
+  isFieldValidaddressForm(field: string) {
+    return (
+      this.addressForm.get(field).errors && this.addressForm.get(field).touched ||
+      this.addressForm.get(field).untouched &&
+      this.addressFormSubmitted && this.addressForm.get(field).errors
+    );
+  }
+
+  onSubmitaddressForm () {
+    this.addressFormSubmitted = true;
+    // if (this.personalDataForm.valid) {}
+  }
+
+  /* -------------------------------------------------------------------------------------------- */
+
+  contactForm = this.formbuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['', Validators.required],
+  });
+
+  contactFormSubmitted: boolean;
+  isFieldValidContactForm(field: string) {
+    return (
+      this.contactForm.get(field).errors && this.contactForm.get(field).touched ||
+      this.contactForm.get(field).untouched &&
+      this.contactFormSubmitted && this.contactForm.get(field).errors
+    );
+  }
+
+  onSubmitContactForm() {
+    this.contactFormSubmitted = true;
+    if (this.contactForm.valid) {
+      console.log('Finalizó identificación');
+      this.section1 = false;
+      this.section2 = true;
+      this.section3 = false;
+    }
+  }
+
+  /* -------------------------------------------------------------------------------------------- */
+
+  economicForm = this.formbuilder.group({
+    card_payment: [''],
+    loans_payment: [''],
+    mortgage_payment: [''],
+    rent_payment: [''],
+    services_payment: ['', [Validators.required]],
+    total_properties: ['', [Validators.required]],
+    typeHousing: ['', [Validators.required]]
+  });
+
+  economicFormSubmitted: boolean;
+  isFieldValidEconomicForm(field: string) {
+    return (
+      this.economicForm.get(field).errors && this.economicForm.get(field).touched ||
+      this.economicForm.get(field).untouched &&
+      this.economicFormSubmitted && this.economicForm.get(field).errors
+    );
+  }
+
+  onSubmiteconomicForm() {
+    this.economicFormSubmitted = true;
+    if (this.economicForm.valid) {
+      console.log('Finalizó situacion economica');
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = true;
+    }
+  }
+
+  /* ------------------------------------------------------------------------------------------ */
+
+  creditform = this.formbuilder.group({
     can_access_credit_userSelected: new FormArray([]),
     cannot_access_credit_userSelected: new FormArray([]),
-    // names: ['', Validators.required],
-    // last_names: ['', Validators.required],
-    // email: ['', [Validators.required, Validators.email]],
-    // phone: ['', Validators.required],
-    // address: ['', Validators.required],
-    // city: ['', Validators.required],
-    // cedula: ['', [Validators.required, validarCedula]],
-    // card_payment: [''],
-    // rent_payment: ['', [Validators.minLength(1)]],
-    // loans_payment: [''],
-    // services_payment: ['', [Validators.required, Validators.minLength(1)]],
-    // typeHousing: ['', [Validators.required, validatePropertyType]],
-    // mortgage_payment: [''],
-    // total_properties: ['', [Validators.required, Validators.minLength(1)]],
   });
+
+  onSubmitCreditform() {
+    if (this.cantSelectedCreditOptions > 0) {
+      console.log(`formulario de creditos correcto`);
+    }else{
+      console.log(`seleccione al menos una`);
+    }
+  }
+
+  /* ----------------------------------- End  - Constact Form --------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+  
 
   ngOnInit() {
 
@@ -247,11 +371,11 @@ export class HomePageComponent implements OnInit {
 
   /* Variables to store the results of credits selected by the user */
   get can_access_credit_userSelected(): FormArray {
-    return this.contactform.get('can_access_credit_userSelected') as FormArray;
+    return this.creditform.get('can_access_credit_userSelected') as FormArray;
   }
 
   get cannot_access_credit_userSelected(): FormArray {
-    return this.contactform.get('cannot_access_credit_userSelected') as FormArray;
+    return this.creditform.get('cannot_access_credit_userSelected') as FormArray;
   }
   /* End - Variables to store the results of credits selected by the user */
 
@@ -261,14 +385,14 @@ export class HomePageComponent implements OnInit {
   private addCheckboxesCan_access_credit() {
     this.can_access_credit.forEach((o, i) => {
       const control = new FormControl(false);
-      (this.contactform.controls.can_access_credit_userSelected as FormArray).push(control);
+      (this.creditform.controls.can_access_credit_userSelected as FormArray).push(control);
     });
   }
 
   private addCheckboxesCannot_access_credit() {
     this.cannot_access_credit.forEach((o, i) => {
       const control = new FormControl(false);
-      (this.contactform.controls.cannot_access_credit_userSelected as FormArray).push(control);
+      (this.creditform.controls.cannot_access_credit_userSelected as FormArray).push(control);
     });
   }
   /* End - Add checkbox of credit options */
@@ -278,13 +402,13 @@ export class HomePageComponent implements OnInit {
   /* Methods to count the selected options */
   public cantSelectedCreditOptions: number = 0;
   can_access_credit_userSelectedLenght(): number {
-    return this.contactform.value.can_access_credit_userSelected
+    return this.creditform.value.can_access_credit_userSelected
       .map((v, i) => v ? this.can_access_credit[i].id : null)
       .filter(v => v !== null).length;
   }
 
   cannot_access_credit_userSelectedLenght(): number {
-    return this.contactform.value.cannot_access_credit_userSelected
+    return this.creditform.value.cannot_access_credit_userSelected
       .map((v, i) => v ? this.cannot_access_credit[i].id : null)
       .filter(v => v !== null).length;
   }
@@ -379,12 +503,43 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  onSubmitContactForm() {
-    const selectedCreditsIds1 = this.contactform.value.can_access_credit_userSelected
+  onSubmitContactForm_general() {
+    
+    let creditInformation: CreditInformation = {} as CreditInformation;
+
+    //creditInformation.user_id = this.user_id;
+    creditInformation.name = this.creditform.value.names;
+    creditInformation.last_name = this.creditform.value.last_names;
+    creditInformation.email = this.creditform.value.email;
+    creditInformation.phone = this.creditform.value.phone;
+    creditInformation.address = this.creditform.value.address;
+    creditInformation.cedula = this.creditform.value.cedula;
+    creditInformation.amount_required = this.estimateform.value.propertyamount;
+    creditInformation.monthly_income = this.estimateform.value.monthlyincome;
+    creditInformation.initial_amount = this.estimateform.value.entryAmount;
+    //creditInformation.term = this.term.value;
+    creditInformation.term = 144;
+    //creditInformation.id_credit = +(this._route.snapshot.paramMap.get('id'));
+    creditInformation.id_credit = this.id_credit;
+    // creditInformation.city = this.contactform.value.city;
+    // creditInformation.region_name = this.region_name;
+    creditInformation.city = `Cuenca`;
+    creditInformation.region_name = this.region_name;
+    creditInformation.country_name = this.country_name;
+    creditInformation.destination = `La casa de tus sueños`;
+    creditInformation.payments_cards = this.creditform.value.card_payment;
+    creditInformation.rental = this.creditform.value.rent_payment;
+    creditInformation.payment_loans = this.creditform.value.loans_payment;
+    creditInformation.payment_services = this.creditform.value.services_payment;
+    creditInformation.housing_type = this.creditform.value.typeHousing.type;
+    creditInformation.mortgage_payment = this.creditform.value.mortgage_payment;
+    creditInformation.total_possessions = this.creditform.value.total_properties;
+    
+    const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
       .map((v, i) => v ? this.can_access_credit[i].id : null)
       .filter(v => v !== null);
 
-    const selectedCreditsIds2 = this.contactform.value.cannot_access_credit_userSelected
+    const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
       .map((v, i) => v ? this.cannot_access_credit[i].id : null)
       .filter(v => v !== null);
 
@@ -406,7 +561,13 @@ export class HomePageComponent implements OnInit {
       creditos.push(credito);
     }
 
-    console.log(creditos);
+    creditInformation.creditos = creditos;
+
+    if (this.creditform.valid && this.cantSelectedCreditOptions > 0) {
+      console.log(creditInformation);
+    }else{
+      console.log(`formulario incorrecto`);
+    }
   }
   /* End - Forms Submitted */
 
@@ -416,19 +577,6 @@ export class HomePageComponent implements OnInit {
   section3: boolean = false;
 
   /* Archwizard Form */
-  finishIdentification(){
-    console.log('Finalizó identificación');
-    this.section1 = false;
-    this.section2 = true;
-    this.section3 = false;
-  }
-
-  finishFinancialSituation(){
-    console.log('Finalizó situacion economica');
-    this.section1 = false;
-    this.section2 = false;
-    this.section3 = true;
-  }
 
   section2_1(el: HTMLElement) {
     el.scrollIntoView();
@@ -485,34 +633,6 @@ export class HomePageComponent implements OnInit {
   }
 
   /* END - ON LOGGED OUT */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  public maritalStatus: any = [
-    { id: 1, status: 'CASADO' },
-    { id: 2, status: 'SOLTERO' },
-    { id: 3, status: 'DIVORCIADO' },
-    { id: 4, status: 'VIUDO' },
-    { id: 4, status: 'UNION LIBRE' },
-  ];
 
 }
 
