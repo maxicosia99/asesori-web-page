@@ -4,7 +4,6 @@ import { AuthenticationService } from './../../services/auth/authentication.serv
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Subscription, Observable, interval } from 'rxjs';
-//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,19 +23,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy{
   constructor(
     private authService: AuthenticationService, 
     private httpService: HttpClientService, 
-    private router: Router, 
-    //private toastr: ToastrService,
-    @Inject(DOCUMENT) _document?: any
-  ) {
-    this.changes = new MutationObserver((mutations) => {
-      this.sidebarMinimized = _document.body.classList.contains('sidebar-minimized');
-    });
-    this.element = _document.body;
-    this.changes.observe(<Element>this.element, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     

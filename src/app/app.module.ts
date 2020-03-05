@@ -16,8 +16,6 @@ import { LoginComponent } from './view/login/login.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -26,7 +24,6 @@ const APP_CONTAINERS = [
 @NgModule({
   imports: [
     BrowserModule,
-    FontAwesomeModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
@@ -37,7 +34,6 @@ const APP_CONTAINERS = [
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
     AppAuthModule,
-    ShowHidePasswordModule
   ],
   declarations: [
     AppComponent,

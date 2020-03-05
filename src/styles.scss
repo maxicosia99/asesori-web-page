@@ -489,7 +489,7 @@ input:not(:focus):valid~.floating-label {
 /* FOOTER */
 
 .fab {
-    padding: 9px 15px;
+    padding: 10px 10px;
     font-size: 30px;
     width: 50px;
     text-decoration: none;
@@ -535,3 +535,7 @@ input:not(:focus):valid~.floating-label {
 /* Large devices (desktops, less than 1200px)*/
 
 @media screen and (max-width: 1199.98px) {}
+
+// .navbar-light {
+//     background-color: rgba($color: #2E2E2E, $alpha: 0.5);
+// }

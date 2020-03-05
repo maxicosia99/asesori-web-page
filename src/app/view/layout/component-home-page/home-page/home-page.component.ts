@@ -9,15 +9,6 @@ import { Creditos } from 'src/app/models/creditos';                             
 import { LoginComponent } from 'src/app/view/login/login.component';                  //call login
 import { AuthenticationService } from 'src/app/services/auth/authentication.service'; //authentication service
 import { Subscription } from 'rxjs';                                                  //suscription to login
-
-/* icons in this page */
-import {
-  faStopwatch, faMoneyBillAlt, faClipboard, faUserAlt, faEnvelope, faRedoAlt, faHome,
-  faPhone, faBuilding, faUserTie
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faFacebook, faTwitter, faWhatsapp, faInstagram
-} from '@fortawesome/free-brands-svg-icons';
 import { CreditInformation } from 'src/app/models/credit-information';
 /* End - icons in this page */
 
@@ -50,25 +41,6 @@ export class HomePageComponent implements OnInit {
     private httpService: HttpClientService,       //client api service
     private formbuilder: FormBuilder              //form service
   ) { }
-
-
-  /* ICONS */
-  faStopwatch = faStopwatch;
-  faMoneyBillAlt = faMoneyBillAlt;
-  faClipboard = faClipboard;
-  faUserAlt = faUserAlt;
-  faEnvelope = faEnvelope;
-  faRedoAlt = faRedoAlt;
-  faHome = faHome;
-  faPhone = faPhone;
-  faFacebook = faFacebook;
-  faTwitter = faTwitter;
-  faInstagram = faInstagram;
-  faWhatsapp = faWhatsapp;
-  faBuilding = faBuilding;
-  faUserTie = faUserTie;
-  /* END - ICONS */
-
 
 
   /* Slider for entry amount and time */
@@ -275,8 +247,7 @@ export class HomePageComponent implements OnInit {
   addressForm = this.formbuilder.group({
     province: ['', [validateSelect]],
     address: ['', Validators.required],
-    //city: ['', [Validators.required, validateSelect]],
-    city: ['', [validateSelect]]
+    city: ['', [Validators.required, validateSelect]]
   });
 
   addressFormSubmitted: boolean;
@@ -403,14 +374,14 @@ export class HomePageComponent implements OnInit {
 
     this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
     /*  Get all provinces. */
-    // this.httpService.getProvinces().subscribe(res => {
-    //   this.provinces = res.data;
-    //   this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
-    //   this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
-    // }, error => {
-    //   console.log('error');
-    //   console.log(error);
-    // });
+    this.httpService.getProvinces().subscribe(res => {
+      this.provinces = res.data;
+      this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
+      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
     /*  End - Get all provinces */
 
 

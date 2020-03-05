@@ -1,32 +1,27 @@
-<!-- <header>
+<header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand tittle-9" href="#">ASESORI</a>
 
-        <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="container py-0">
 
-        <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link tittle-10" href="#">INICIO</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tittle-10" href="#">COMPAÑÍA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tittle-10" href="#">NUESTRO TRABAJO</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link tittle-10" href="#">CONTACTANOS</a>
-                </li>
-                <li class="nav-item btn-group" dropdown [insideClick]="true">
-                    <a id="button-basic" dropdownToggle type="button"
-                        class="btn dropdown-toggle nav-link tittle-10 " aria-controls="dropdown-animated">
+            <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link tittle-10 mt-1" href="#">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tittle-10 mt-1" href="#">Testimonios</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-secondary">Iniciar sesión</button>
+                    </li>
+                    <!-- <li class="nav-item btn-group" dropdown [insideClick]="true">
+                    <a id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle nav-link tittle-10 " aria-controls="dropdown-animated">
                         INGRESAR <span class="caret"></span>
                     </a>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
-                        aria-labelledby="button-basic"> 
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
                         <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
                         <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
                         <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
@@ -34,17 +29,18 @@
                         <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
                         </li>
                     </ul>
-                </li>
-            </ul>
+                </li> -->
+                </ul>
+            </div>
         </div>
     </nav>
-</header> -->
+</header>
 
 <main>
 
     <!-- INITIAL SECTION -->
 
-    <section class="container pt-0">
+    <section class="container pt-5">
         <div class="row">
 
             <div class="col-12 col-md-6 px-5 px-lg-4">
@@ -106,21 +102,21 @@
             <div class="row">
                 <div class="col-md-4 my-3 my-lg-0">
                     <h3 class="tittle-8 mb-2">
-                        <fa-icon [icon]="faStopwatch"></fa-icon> Reduce el tiempo
+                        <i class="fas fa-stopwatch"></i> Reduce el tiempo
                     </h3>
                     <p class="text-light-14">Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una tasa menor de interés
                     </p>
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
                     <h4 class="tittle-8 mb-2">
-                        <fa-icon [icon]="faMoneyBillAlt"></fa-icon> Ahorra dinero
+                        <i class="far fa-money-bill-alt"></i> Ahorra dinero
                     </h4>
                     <p class="text-light-14">Comparamos el costo de un crédito, sus plazos y requisitos adicionales. Por lo que podrás elegir el préstamo.
                     </p>
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
                     <h4 class="tittle-8 mb-2">
-                        <fa-icon [icon]="faClipboard"></fa-icon> Transparencia
+                        <i class="fas fa-paste"></i> Transparencia
                     </h4>
                     <p class="text-light-14">Actuamos de forma independiente al no ser una entidad financiera, ofreciéndote información gratuita.
                     </p>
@@ -648,7 +644,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                             <label class="form-check-label text-light-14" for="exampleRadios1">
-                                                <fa-icon class="icon" [icon]="faBuilding"></fa-icon>
+                                                <i class="fas fa-building"></i>
                                                 En independencia
                                             </label>
                                         </div>
@@ -657,7 +653,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
                                             <label class="form-check-label text-light-14" for="exampleRadios2">
-                                                <fa-icon class="icon" [icon]="faUserAlt"></fa-icon>
+                                                <i class="fas fa-user-alt"></i>
                                                 Independiente
                                             </label>
                                         </div>
@@ -666,7 +662,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
                                             <label class="form-check-label text-light-14" for="exampleRadios3">
-                                                <fa-icon class="icon" [icon]="faUserTie"></fa-icon>
+                                                <i class="fas fa-user-tie"></i>
                                                 Mixta
                                             </label>
                                         </div>
@@ -944,7 +940,7 @@
                             <div class="row px-4 px-md-0">
                                 <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text" (click)="moveSection(calculator)">
                                     <span>
-                                        <fa-icon [icon]="faRedoAlt"></fa-icon>
+                                        <i class="fas fa-redo-alt"></i>
                                     </span><span class="text-uppercase ml-3">volver a
                                         calcular</span>
                                 </div>
@@ -978,8 +974,8 @@
                                                         </div>
                                                         <div class="row text-center justify-content-center">
                                                             <div class="col-6 col-lg-12">
-                                                                <img class="img-fluid" [src]="can_access_credit[i].url_photo"
-                                                                    alt="Image">
+                                                                <img class="img-fluid"
+                                                                    [src]="can_access_credit[i].url_photo" alt="Image">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1018,13 +1014,15 @@
                                                         <hr>
                                                         <div class="row text-center">
                                                             <div class="col-6 col-md-3">
-                                                                <p class="text-uppercase tittle-11">tasa anual de interés</p>
+                                                                <p class="text-uppercase tittle-11">tasa anual de
+                                                                    interés</p>
                                                                 <p class="tittle-7 color-3">
                                                                     {{can_access_credit[i].loan_rate | number : '1.2-2' }}%
                                                                 </p>
                                                             </div>
                                                             <div class="col-6 col-md-3">
-                                                                <p class="text-uppercase tittle-11">financiamiento del</p>
+                                                                <p class="text-uppercase tittle-11">financiamiento del
+                                                                </p>
                                                                 <p class="tittle-7 color-3">
                                                                     {{can_access_credit[i].financing | number }}%
                                                                 </p>
@@ -1083,7 +1081,8 @@
                                                         </div>
                                                         <div class="row text-center justify-content-center">
                                                             <div class="col-6 col-lg-12">
-                                                                <img class="img-fluid" [src]="cannot_access_credit[i].url_photo"
+                                                                <img class="img-fluid"
+                                                                    [src]="cannot_access_credit[i].url_photo"
                                                                     alt="Image">
                                                             </div>
                                                         </div>
@@ -1091,8 +1090,9 @@
                                                     <div class="col-lg-9">
                                                         <div class="row text-center justify-content-center">
                                                             <div class="col-6 col-md-4">
-        
-                                                                <p class="text-uppercase tittle-10 d-none d-md-block"> Monto</p>
+
+                                                                <p class="text-uppercase tittle-10 d-none d-md-block">
+                                                                    Monto</p>
                                                                 <p class="text-uppercase tittle-10 d-block d-md-none ">
                                                                     Monto</p>
                                                                 <p class="tittle-5 d-none d-md-block">
@@ -1123,13 +1123,15 @@
                                                         <hr>
                                                         <div class="row text-center">
                                                             <div class="col-6 col-md-3">
-                                                                <p class="text-uppercase tittle-11">tasa anual de interés</p>
+                                                                <p class="text-uppercase tittle-11">tasa anual de
+                                                                    interés</p>
                                                                 <p class="tittle-7 color-3">
                                                                     {{cannot_access_credit[i].loan_rate | number : '1.2-2' }}%
                                                                 </p>
                                                             </div>
                                                             <div class="col-6 col-md-3">
-                                                                <p class="text-uppercase tittle-11">financiamiento del</p>
+                                                                <p class="text-uppercase tittle-11">financiamiento del
+                                                                </p>
                                                                 <p class="tittle-7 color-3">
                                                                     {{cannot_access_credit[i].financing | number }}%
                                                                 </p>
@@ -1266,7 +1268,8 @@
                     <div class="col-12 col-lg-8 align-self-center" *ngIf="section5">
 
                         <h2 class="tittle-1 mb-5 text-center color-1">¡Solicitud lista!</h2>
-                        <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.</p>
+                        <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
+                        </p>
 
                         <p class="mt-5 mb-3 tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud</p>
 
@@ -1502,21 +1505,21 @@
             <div class="row text-center">
                 <div class="col-md-4">
                     <div class="p-5">
-                        <fa-icon class="icon" [icon]="faClipboard"></fa-icon>
+                        <i class="fas icon fa-paste"></i>
                     </div>
                     <h4 class="tittle-7 mb-3">Múltiples opciones de créditos</h4>
                     <p class="text-light-14">Tu solicitud será revisada por las insituciones Financieras, y Asesori te mostrará cual es la mejor para ti</p>
                 </div>
                 <div class="col-md-4">
                     <div class="p-5">
-                        <fa-icon class="icon" [icon]="faMoneyBillAlt"></fa-icon>
+                        <i class="far icon fa-money-bill-alt"></i>
                     </div>
                     <h4 class="tittle-7 mb-3">Transparencia con tus créditos</h4>
                     <p class="text-light-14">Asesori es transparente, no te cobramos por nuestro servicio, nosotros queremos que siempre obtengas la mejor tasa de interés</p>
                 </div>
                 <div class="col-md-4">
                     <div class="p-5">
-                        <fa-icon class="icon" [icon]="faClipboard"></fa-icon>
+                        <i class="fas icon fa-paste"></i>
                     </div>
                     <h4 class="tittle-7 mb-3">Rapidez de respuesta</h4>
                     <p class="text-light-14">Cuando dejes tu solicitud en línea, aproximadamente tendrás un tiempo de respuesta de unas 48horas, luego nosotros te enviaremos un email con las diferentes opciones de insituciones financieras a las que ya puedes aplicar</p>
@@ -1556,21 +1559,6 @@
                     </div>
                 </ng-template>
             </div>
-
-            <!-- FORM EXAMPLE -->
-            <!-- <div class="col-12">
-
-                <div class="position-relative mt-4">
-                    <input type="text" required>
-                    <span class="floating-label text-uppercase">apellidos*</span>
-                    <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
-                </div>
-                <div class="position-relative mt-4">
-                    <input type="text" required />
-                    <span class="floating-label text-uppercase">cedula de identidad*</span>
-                    <fa-icon class="input-icon" [icon]="faUserAlt"></fa-icon>
-                </div>
-            </div> -->
         </div>
     </section>
 
@@ -1607,17 +1595,17 @@
                 <ul>
                     <li>
                         <p>
-                            <fa-icon class="mr-3" [icon]="faHome"></fa-icon> Avenida 24 de Enero y Francisco Cevallos.
+                            <i class="fas fa-home"></i> Avenida 24 de Enero y Francisco Cevallos.
                         </p>
                     </li>
                     <li>
                         <p>
-                            <fa-icon class="mr-3" [icon]="faEnvelope"></fa-icon> info@example.com
+                            <i class="fas fa-envelope"></i> info@example.com
                         </p>
                     </li>
                     <li>
                         <p>
-                            <fa-icon class="mr-3" [icon]="faPhone"></fa-icon> +593-991538711
+                            <i class="fas fa-phone"></i> +593-991538711
                         </p>
                     </li>
                 </ul>
@@ -1647,16 +1635,16 @@
     <!-- Social buttons -->
     <ul class="text-center my-4 text-white">
         <li class="list-inline-item">
-            <fa-icon class="fab facebook" [icon]="faFacebook"></fa-icon>
+            <i class="fab facebook fa-facebook"></i>
         </li>
         <li class="list-inline-item">
-            <fa-icon class="fab twitter" [icon]="faTwitter"></fa-icon>
+            <i class="fab twitter fa-twitter"></i>
         </li>
         <li class="list-inline-item">
-            <fa-icon class="fab instagram" [icon]="faInstagram"></fa-icon>
+            <i class="fab instagram fa-instagram"></i>
         </li>
         <li class="list-inline-item">
-            <fa-icon class="fab whatsapp" [icon]="faWhatsapp"></fa-icon>
+            <i class="fab whatsapp fa-whatsapp"></i>
         </li>
     </ul>
     <!-- Social buttons -->

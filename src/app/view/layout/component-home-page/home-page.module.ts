@@ -9,11 +9,11 @@ import { RatingModule } from 'ngx-bootstrap/rating';                    // Ngx-B
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';              // Ngx-Bootstrap dropdown module
 import { ModalModule } from 'ngx-bootstrap';                            // Ngx-Bootstrap Modal module
 import localeFr from '@angular/common/locales/fr';                      // Module for currency type (dollars)
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';   // Icons module
 import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carousel module
 import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
 import { NgSelectModule } from '@ng-select/ng-select';                  // select
 import { NgxCurrencyModule } from "ngx-currency";                       // currency input $
+
 
 export const customCurrencyMaskConfig = {
   align: "left",
@@ -36,7 +36,6 @@ export const customCurrencyMaskConfig = {
     FormsModule,
     ReactiveFormsModule,
     HomePageRoutingModule,
-    FontAwesomeModule,
     CarouselModule,
     ButtonsModule.forRoot(),
     RatingModule.forRoot(),
