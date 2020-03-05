@@ -93,13 +93,13 @@ export class HttpClientService {
   
   
   /* Get provinces - cities */
-  getProvinces(idCountry: number): Observable<any> {
-    let url = this.getEndUrl(`/api/provincias/get?idCountry=${idCountry}`);
+  getProvinces(): Observable<any> {
+    let url = this.getEndUrl(`/api/provincias/findAll`);
     return this.doGetRequest(url);
   }
 
   getCities(idProvince: number): Observable<any> {
-    let url = this.getEndUrl(`/api/ciudades/get?idProvince=${idProvince}`);
+    let url = this.getEndUrl(`/api/ciudades/${idProvince}`);
     return this.doGetRequest(url);
   }
   /* End - Get provinces - cities  */

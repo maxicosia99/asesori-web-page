@@ -3,7 +3,7 @@ import { Options } from 'ng5-slider';                                           
 import { OwlOptions } from 'ngx-owl-carousel-o';                                      //options carousel images
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
 import { HttpClientService } from 'src/app/services/client/http-client.service';      //call client api
-import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';     //forms
+import { FormBuilder, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';     //forms
 import { validateCedula } from 'src/app/services/client/validar-cedula';              //service to validate cedula
 import { Creditos } from 'src/app/models/creditos';                                   //part of model to credit request  
 import { LoginComponent } from 'src/app/view/login/login.component';                  //call login
@@ -11,9 +11,10 @@ import { AuthenticationService } from 'src/app/services/auth/authentication.serv
 import { Subscription } from 'rxjs';                                                  //suscription to login
 
 /* icons in this page */
-import { 
-  faStopwatch, faMoneyBillAlt, faClipboard, faUserAlt, faEnvelope, faRedoAlt,faHome,
-  faPhone, faBuilding, faUserTie } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStopwatch, faMoneyBillAlt, faClipboard, faUserAlt, faEnvelope, faRedoAlt, faHome,
+  faPhone, faBuilding, faUserTie
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook, faTwitter, faWhatsapp, faInstagram
 } from '@fortawesome/free-brands-svg-icons';
@@ -25,6 +26,13 @@ import { CreditInformation } from 'src/app/models/credit-information';
 interface SliderModel {
   value: number;
   options: Options;
+}
+
+export function validateSelect(control: AbstractControl) {
+  if (control.value.id === -1) {
+    return { valid: true };
+  }
+  return null;
 }
 
 
@@ -102,6 +110,19 @@ export class HomePageComponent implements OnInit {
       }
     }
   };
+
+  monthly_income: SliderModel = {
+    value: 0,
+    options: {
+      floor: 0,
+      ceil: 360,
+      enforceStep: false,
+      hideLimitLabels: true,
+      translate: (value: number): string => {
+        return '' + value;
+      }
+    }
+  };
   /* End - Slider for entry amount and time*/
 
 
@@ -154,7 +175,7 @@ export class HomePageComponent implements OnInit {
     this.modalRef.setClass('modal-dialog-centered');
     this.modalRef.content.closeBtnName = 'Close';
   }
-  
+
   openModal() {
     // const initialState = {
     //   information : {
@@ -179,12 +200,12 @@ export class HomePageComponent implements OnInit {
   }
   /* End - Modal methods */
 
-  
-  
+
+
   /**------------------------------------------------------------------------------------------------------------------------------------ */
 
-  
-  
+
+
   /* Location variables */
   public region_name: string;
   public country_name: string;
@@ -200,7 +221,6 @@ export class HomePageComponent implements OnInit {
   public can_access_credit: any;
   public cannot_access_credit: any;
   public credit_unavailable: any;
-
   /* variables for the selection of marital status */
   public maritalStatus: any = [
     { id: 1, status: 'CASADO' },
@@ -211,10 +231,14 @@ export class HomePageComponent implements OnInit {
   ];
   /* variables for the selection of type housing */
   public typeHousing = [
-    {id: 1, type: "Propia"},
-    {id: 2, type: "Arrendada"}
+    { id: 1, type: "Propia" },
+    { id: 2, type: "Arrendada" }
   ]
-
+  /* variable to store all provinces and from Ecuador */
+  public provinces: any;
+  public cities: any;
+  /* Variable to store the names of the selected financial entities. */
+  public creditos_entities: string = ``;
 
   /* Credit calculation form */
   estimateform = this.formbuilder.group({
@@ -225,7 +249,7 @@ export class HomePageComponent implements OnInit {
   });
 
   /* ----------------------------------- Constact Form ------------------------------- */
-  
+
   personalDataForm = this.formbuilder.group({
     names: ['', Validators.required],
     last_names: ['', Validators.required],
@@ -249,8 +273,10 @@ export class HomePageComponent implements OnInit {
   /* -------------------------------------------------------------------------------------------- */
 
   addressForm = this.formbuilder.group({
+    province: ['', [validateSelect]],
     address: ['', Validators.required],
-    city: ['', Validators.required],
+    //city: ['', [Validators.required, validateSelect]],
+    city: ['', [validateSelect]]
   });
 
   addressFormSubmitted: boolean;
@@ -262,7 +288,7 @@ export class HomePageComponent implements OnInit {
     );
   }
 
-  onSubmitaddressForm () {
+  onSubmitaddressForm() {
     this.addressFormSubmitted = true;
     // if (this.personalDataForm.valid) {}
   }
@@ -290,6 +316,8 @@ export class HomePageComponent implements OnInit {
       this.section1 = false;
       this.section2 = true;
       this.section3 = false;
+      this.section4 = false;
+      this.section5 = false;
     }
   }
 
@@ -302,7 +330,7 @@ export class HomePageComponent implements OnInit {
     rent_payment: [''],
     services_payment: ['', [Validators.required]],
     total_properties: ['', [Validators.required]],
-    typeHousing: ['', [Validators.required]]
+    typeHousing: ['', [Validators.required, validateSelect]]
   });
 
   economicFormSubmitted: boolean;
@@ -321,6 +349,8 @@ export class HomePageComponent implements OnInit {
       this.section1 = false;
       this.section2 = false;
       this.section3 = true;
+      this.section4 = false;
+      this.section5 = false;
     }
   }
 
@@ -331,11 +361,38 @@ export class HomePageComponent implements OnInit {
     cannot_access_credit_userSelected: new FormArray([]),
   });
 
-  onSubmitCreditform() {
+  onSubmitCreditform(el: HTMLElement) {
     if (this.cantSelectedCreditOptions > 0) {
-      console.log(`formulario de creditos correcto`);
-    }else{
-      console.log(`seleccione al menos una`);
+      
+      this.creditos_entities = ``;
+
+      el.scrollIntoView();
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = false;
+      this.section4 = true;
+      this.section5 = false;
+
+      const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
+        .map((v, i) => v ? this.can_access_credit[i].id : null)
+        .filter(v => v !== null);
+
+      const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
+        .map((v, i) => v ? this.cannot_access_credit[i].id : null)
+        .filter(v => v !== null);
+
+      for (let entry of selectedCreditsIds1) {
+        let aux = this.can_access_credit.find(x => x.id == entry);
+        this.creditos_entities+=aux.name_financial_entity+', ';
+      }
+
+      for (let entry of selectedCreditsIds2) {
+        let aux = this.cannot_access_credit.find(x => x.id == entry);
+        this.creditos_entities+=aux.name_financial_entity+', ';
+      }
+
+    } else {
+      alert(`seleccione al menos una opción de crédito`);
     }
   }
 
@@ -345,15 +402,21 @@ export class HomePageComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-  
-
   ngOnInit() {
+
+    this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
+    /*  Get all provinces. */
+    this.httpService.getProvinces().subscribe(res => {
+      this.provinces = res.data;
+      this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
+      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+    /*  End - Get all provinces */
+
+
 
     /*  Start - Search by location. */
     this.httpService.getCurrentCity().subscribe(res => {
@@ -367,6 +430,19 @@ export class HomePageComponent implements OnInit {
       console.log(error);
     });
     /*  End - Search by location. */
+  }
+
+  changeProvince(event) {
+    let idProvince: number = event.id;
+    this.httpService.getCities(idProvince).subscribe(res => {
+      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD' });
+      this.cities = []
+      this.cities = res.data;
+      console.log(this.cities);
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
   }
 
   /* Variables to store the results of credits selected by the user */
@@ -503,38 +579,48 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  onSubmitContactForm_general() {
-    
+
+  onSubmitRequestSummary(el: HTMLElement) {
+
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = false;
+    this.section4 = false;
+    this.section5 = true;
+
     let creditInformation: CreditInformation = {} as CreditInformation;
 
     //creditInformation.user_id = this.user_id;
-    creditInformation.name = this.creditform.value.names;
-    creditInformation.last_name = this.creditform.value.last_names;
-    creditInformation.email = this.creditform.value.email;
-    creditInformation.phone = this.creditform.value.phone;
-    creditInformation.address = this.creditform.value.address;
-    creditInformation.cedula = this.creditform.value.cedula;
-    creditInformation.amount_required = this.estimateform.value.propertyamount;
-    creditInformation.monthly_income = this.estimateform.value.monthlyincome;
-    creditInformation.initial_amount = this.estimateform.value.entryAmount;
-    //creditInformation.term = this.term.value;
-    creditInformation.term = 144;
-    //creditInformation.id_credit = +(this._route.snapshot.paramMap.get('id'));
-    creditInformation.id_credit = this.id_credit;
-    // creditInformation.city = this.contactform.value.city;
-    // creditInformation.region_name = this.region_name;
-    creditInformation.city = `Cuenca`;
+    creditInformation.name = this.personalDataForm.value.names;
+    creditInformation.last_name = this.personalDataForm.value.last_names;
+    creditInformation.cedula = this.personalDataForm.value.dni;
+
+    /* verificar nombre de provincia y pais con select y api */
+    creditInformation.city = this.addressForm.value.city;
     creditInformation.region_name = this.region_name;
     creditInformation.country_name = this.country_name;
+    creditInformation.address = this.addressForm.value.address;
+
+    creditInformation.email = this.contactForm.value.email;
+    creditInformation.phone = this.contactForm.value.phone;
+
+    creditInformation.payments_cards = this.economicForm.value.card_payment;
+    creditInformation.rental = this.economicForm.value.rent_payment;
+    creditInformation.payment_loans = this.economicForm.value.loans_payment;
+    creditInformation.payment_services = this.economicForm.value.services_payment;
+    creditInformation.housing_type = this.economicForm.value.typeHousing.type;
+    creditInformation.mortgage_payment = this.economicForm.value.mortgage_payment;
+    creditInformation.total_possessions = this.economicForm.value.total_properties;
+
+    creditInformation.term = this.term.value;
+    creditInformation.id_credit = this.id_credit;
+
+    creditInformation.amount_required = this.amountRequest.value;
+    creditInformation.monthly_income = this.monthly_income.value;
+    creditInformation.initial_amount = this.entryAmount.value;
     creditInformation.destination = `La casa de tus sueños`;
-    creditInformation.payments_cards = this.creditform.value.card_payment;
-    creditInformation.rental = this.creditform.value.rent_payment;
-    creditInformation.payment_loans = this.creditform.value.loans_payment;
-    creditInformation.payment_services = this.creditform.value.services_payment;
-    creditInformation.housing_type = this.creditform.value.typeHousing.type;
-    creditInformation.mortgage_payment = this.creditform.value.mortgage_payment;
-    creditInformation.total_possessions = this.creditform.value.total_properties;
-    
+
     const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
       .map((v, i) => v ? this.can_access_credit[i].id : null)
       .filter(v => v !== null);
@@ -563,11 +649,7 @@ export class HomePageComponent implements OnInit {
 
     creditInformation.creditos = creditos;
 
-    if (this.creditform.valid && this.cantSelectedCreditOptions > 0) {
-      console.log(creditInformation);
-    }else{
-      console.log(`formulario incorrecto`);
-    }
+    console.log(creditInformation);
   }
   /* End - Forms Submitted */
 
@@ -575,6 +657,8 @@ export class HomePageComponent implements OnInit {
   section1: boolean = true;
   section2: boolean = false;
   section3: boolean = false;
+  section4: boolean = false;
+  section5: boolean = false;
 
   /* Archwizard Form */
 
@@ -583,6 +667,8 @@ export class HomePageComponent implements OnInit {
     this.section1 = true;
     this.section2 = false;
     this.section3 = false;
+    this.section4 = false;
+    this.section5 = false;
   }
 
   section3_2(el: HTMLElement) {
@@ -590,6 +676,8 @@ export class HomePageComponent implements OnInit {
     this.section1 = false;
     this.section2 = true;
     this.section3 = false;
+    this.section4 = false;
+    this.section5 = false;
   }
 
   section1_3(el: HTMLElement) {
@@ -597,8 +685,18 @@ export class HomePageComponent implements OnInit {
     this.section1 = false;
     this.section2 = false;
     this.section3 = true;
+    this.section4 = false;
+    this.section5 = false;
   }
 
+  section4_3(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = true;
+    this.section4 = false;
+    this.section5 = false;
+  }
   /* Archwizard Form */
 
 
@@ -617,9 +715,9 @@ export class HomePageComponent implements OnInit {
   }
 
   closeSubscriptions() {
-    if(this.subscription)
+    if (this.subscription)
       this.subscription.unsubscribe();
-    if(this.intervalSub)
+    if (this.intervalSub)
       this.intervalSub.unsubscribe();
   }
 
