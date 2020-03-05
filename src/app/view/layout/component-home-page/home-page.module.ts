@@ -13,7 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';   // Icons
 import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carousel module
 import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
 import { NgSelectModule } from '@ng-select/ng-select';                  // select
-import { NgxCurrencyModule } from "ngx-currency";                       // currency input $ 
+import { NgxCurrencyModule } from "ngx-currency";                       // currency input $
 
 export const customCurrencyMaskConfig = {
   align: "left",

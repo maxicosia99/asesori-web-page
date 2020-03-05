@@ -31,7 +31,7 @@
 
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input id="password" type="password" formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': form.password.touched && form.password.errors }" showHideInput>
+                                    <input type="password" formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': form.password.touched && form.password.errors }">
                                     <span class="floating-label text-uppercase">Password*</span>
 
                                     <div *ngIf="form.password.touched && form.password.errors" class="invalid-feedback">
@@ -39,10 +39,10 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-primary" type="button" showHideTrigger="password" style="height: 60px;">
+                                <!-- <button class="btn btn-primary" type="button" showHideTrigger="password" style="height: 60px;">
                   <fa-icon class="text-white" [fixedWidth]="true" size="sm" [icon]="(isHidden ? faEyeSlash : faEye)"
                     [showHideStatus]="{id: 'password'}"></fa-icon>
-                </button>
+                </button> -->
 
                             </div>
 

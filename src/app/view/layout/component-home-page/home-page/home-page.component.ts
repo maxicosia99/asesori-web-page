@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Options } from 'ng5-slider';                                                 //options user slider
 import { OwlOptions } from 'ngx-owl-carousel-o';                                      //options carousel images
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
-import { HttpClientService } from 'src/app/services/client/http-client.service';      //call client api
+import { HttpClientService } from '../../../../services/client/http-client.service';
 import { FormBuilder, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';     //forms
 import { validateCedula } from 'src/app/services/client/validar-cedula';              //service to validate cedula
 import { Creditos } from 'src/app/models/creditos';                                   //part of model to credit request  
@@ -399,21 +399,18 @@ export class HomePageComponent implements OnInit {
   /* ----------------------------------- End  - Constact Form --------------------------------- */
 
 
-
-
-
   ngOnInit() {
 
     this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
     /*  Get all provinces. */
-    this.httpService.getProvinces().subscribe(res => {
-      this.provinces = res.data;
-      this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
-      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // this.httpService.getProvinces().subscribe(res => {
+    //   this.provinces = res.data;
+    //   this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
+    //   this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
     /*  End - Get all provinces */
 
 
