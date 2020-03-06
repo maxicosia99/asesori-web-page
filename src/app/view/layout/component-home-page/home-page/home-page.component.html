@@ -187,129 +187,162 @@
 
         <div class="row px-4 px-md-0">
             <div class="col-12 my-4">
-                <h4 class="tittle-9 mb-4 text-uppercase"><b>Compara las mejores tasas y oportunidades de financiamiento</b>
+                <h4 class="tittle-9 mb-4 text-uppercase"><b>Compara las mejores tasas y oportunidades de
+                        financiamiento</b>
                 </h4>
                 <p class="text-light-14">ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de inversión que ofrecen los Bancos, Cooperativas o Mutualistas, utiliza nuestra calculadora a continuación y compara.</p>
             </div>
         </div>
 
-        <!-- SERVICES TAGS -->
-        <div class="row mx-3 px-md-0 justify-content-between">
+        <form [formGroup]="estimateform">
 
-            <div class="my-2 my-lg-0 btn-selection-active px-4">
-                <div class="media py-4">
-                    <div class="media">
-                        <img src="/assets/img/iconos/dinero.png" width="40px" height="40px" alt="">
+            <!-- SERVICES TAGS -->
+
+            <div class="row kudos-wrap mx-3 px-md-0 justify-content-between">
+
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="creditos" id="credito">
+                <label for="credito" class="my-2 my-lg-0 px-4 btn-selection">
+                    <div class="media py-4">
+                        <div class="media">
+                            <img src="/assets/img/iconos/dinero.png" width="40px" height="40px" alt="">
+                        </div>
+                        <div class="media-body pt-3 pl-3">
+                            <p>Crédito</p>
+                        </div>
                     </div>
-                    <div class="media-body pt-2 pl-3">
-                        <p>Crédito</p>
+                    <span class="badge selected-service-tag">✓</span>
+                </label>
+
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="seguros" id="seguros">
+                <label for="seguros" class="my-2 my-lg-0 px-4 btn-selection">
+                    <div class="media py-4">
+                        <div class="media">
+                            <img src="/assets/img/iconos/children-parents@3x.png" width="40px" height="40px" alt="">
+                        </div>
+                        <div class="media-body pt-3 pl-3">
+                            <p>Seguros</p>
+                        </div>
                     </div>
-                </div>
-                <span class="badge badge-secondary">✓</span>
+                    <span class="badge selected-service-tag">✓</span>
+                </label>
+
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="tarjetas" id="tarjetas">
+                <label for="tarjetas" class="my-2 my-lg-0 px-4 btn-selection">
+
+                    <div class="media py-4">
+                        <div class="media mt-2">
+                            <img src="/assets/img/iconos/master-card.png" width="40px" height="30px" alt="">
+                        </div>
+                        <div class="media-body pt-2 pl-3">
+                            <p>Tarjetas de crédito</p>
+                        </div>
+                    </div>
+                    <span class="badge selected-service-tag">✓</span>
+                </label>
+
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="poliza" id="poliza">
+                <label for="poliza" class="my-2 my-lg-0 px-4 btn-selection">
+                    <div class="media py-4">
+                        <div class="media">
+                            <img src="/assets/img/iconos/bar@3x.png" width="40px" height="35px" alt="">
+                        </div>
+                        <div class="media-body pt-3 pl-3">
+                            <p>Póliza de inversion</p>
+                        </div>
+                    </div>
+                    <span class="badge selected-service-tag">✓</span>
+                </label>
+
             </div>
 
-            <div class="my-2 my-lg-0 btn-selection px-4">
-                <div class="media py-4">
-                    <div class="media">
-                        <img src="/assets/img/iconos/children-parents@3x.png" width="40px" height="40px" alt="">
-                    </div>
-                    <div class="media-body pt-2 pl-3">
-                        <p>Seguros</p>
-                    </div>
-                </div>
-            </div>
+            <!-- OPTIONS SELECT -->
+            <div class="row mx-1 mx-md-0 my-4">
 
-            <div class="my-2 my-lg-0 btn-selection px-4">
-                <div class="media py-4">
-                    <div class="media">
-                        <img src="/assets/img/iconos/master-card.png" width="40px" height="30px" alt="">
-                    </div>
-                    <div class="media-body pt-2 pl-3">
-                        <p>Tarjetas de crédito</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="my-2 my-lg-0 btn-selection px-4">
-                <div class="media py-4">
-                    <div class="media">
-                        <img src="/assets/img/iconos/bar@3x.png" width="40px" height="35px" alt="">
-                    </div>
-                    <div class="media-body pt-2 pl-3">
-                        <p>Póliza de inversion</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row mx-3 mx-md-0 my-4">
-            <div class="col-12">
-
-                <ng-select [items]="cities_select" (add)="onAdd($event)" (change)="onSelectOption()" placeholder="seleccione" [searchable]="false" bindLabel="name" bindValue="id" [clearable]="false">
-
-                    <ng-template ng-label-tmp let-item="item">
-                        <i class="fas fa-check-circle color-1"></i> <span class="tittle-9 color-1 ml-2 mr-3">{{item.name}}</span><span class="text-14 color-1">({{item.description}})</span>
-                    </ng-template>
-
-                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-                        <div class="container py-0">
-                            <div class="row px-3 px-md-5 row-hover">
-                                <div class="col">
-                                    <span class="tittle-9">{{item.name}}</span>
-                                </div>
-                                <div class="col-10">
-                                    <span class="text-14">({{item.description}})</span>
+                <!-- CREDITS SELECT -->
+                <div *ngIf="active_credits_select" class="col-12">
+                    <ng-select [items]="credits_select" (change)="onSelectCreditOption($event)" placeholder="opciones de crédito" [searchable]="false" bindLabel="name" bindValue="id" [clearable]="false">
+                        <ng-template ng-label-tmp let-item="item">
+                            <i class="fas fa-check-circle color-1"></i> <span class="tittle-9 color-1 ml-2 mr-3">{{item.name}}</span><span class="text-14 color-1">({{item.description}})</span>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                            <div class="container py-0">
+                                <div class="row px-3 px-md-5 row-hover">
+                                    <div class="col">
+                                        <span class="tittle-9">{{item.name}}</span>
+                                    </div>
+                                    <div class="col-9">
+                                        <span class="text-14">({{item.description}})</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ng-template>
-                </ng-select>
-            </div>
-        </div>
+                        </ng-template>
+                    </ng-select>
+                </div>
 
-        <!-- VALUES BOX -->
-        <div class="row justify-content-between mx-3 px-md-0">
-            <div class="my-2 my-lg-0  box-values-slider">
-                <div class="custom-slider">
-                    <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
-                    <ng5-slider [(value)]="amountRequest.value" [options]="amountRequest.options"></ng5-slider>
-                    <p class="tittle-11 text-right mt-2 mb-0">Dólares americanos</p>
+                <!-- INSURANCE SELECT -->
+                <div *ngIf="active_insurance_select" class="col-12">
+                    <ng-select [items]="insurance_select" (change)="onSelectInsuranceOption($event)" placeholder="opciones de seguros" [searchable]="false" bindLabel="name" bindValue="id" [clearable]="false">
+                        <ng-template ng-label-tmp let-item="item">
+                            <i class="fas fa-check-circle color-1"></i> <span class="tittle-9 color-1 ml-2 mr-3">{{item.name}}</span><span class="text-14 color-1">({{item.description}})</span>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                            <div class="container py-0">
+                                <div class="row px-3 px-md-5 row-hover">
+                                    <div class="col">
+                                        <span class="tittle-9">{{item.name}}</span>
+                                    </div>
+                                    <div class="col-10">
+                                        <span class="text-14">({{item.description}})</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+            </div>
+
+            <!-- VALUES BOX -->
+            <div class="row justify-content-between mx-3 px-md-0">
+                <div class="my-2 my-lg-0  box-values-slider">
+                    <div class="custom-slider">
+                        <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
+                        <ng5-slider [(value)]="amountRequest.value" [options]="amountRequest.options"></ng5-slider>
+                        <p class="tittle-11 text-right mt-2 mb-0">Dólares americanos</p>
+                    </div>
+                </div>
+                <div class="my-2 my-lg-0  box-values-slider">
+                    <div class="custom-slider">
+                        <p class="header-box-values-slider mb-4 text-uppercase"><b>ingreso mensual*</b></p>
+                        <ng5-slider [(value)]="monthly_income.value" [options]="monthly_income.options"></ng5-slider>
+                        <p class="tittle-11 text-right mt-2 mb-0">Sueldo mensual</p>
+                    </div>
+                </div>
+                <div class="my-2 my-lg-0  box-values-slider">
+                    <div class="custom-slider">
+                        <p class="header-box-values-slider mb-4 text-uppercase"><b>entrada</b></p>
+                        <ng5-slider [(value)]="entryAmount.value" [options]="entryAmount.options"></ng5-slider>
+                        <p class="tittle-11 text-right mt-2 mb-0">Valor opcional</p>
+                    </div>
+                </div>
+
+                <div class="my-2 my-lg-0 box-values-slider">
+                    <div class="custom-slider">
+                        <p class="header-box-values-slider mb-4 text-uppercase"><b>tiempo plazo*</b></p>
+                        <ng5-slider [(value)]="term.value" [options]="term.options"></ng5-slider>
+                        <p class="tittle-11 text-right mt-2 mb-0">Meses</p>
+                    </div>
                 </div>
             </div>
-            <div class="my-2 my-lg-0  box-values-slider">
-                <div class="custom-slider">
-                    <p class="header-box-values-slider mb-4 text-uppercase"><b>ingreso mensual*</b></p>
-                    <ng5-slider [(value)]="entryAmount.value" [options]="entryAmount.options"></ng5-slider>
-                    <p class="tittle-11 text-right mt-2 mb-0">Sueldo mensual</p>
+
+            <!-- CALCULATE BUTTON -->
+            <div class="row mt-5 justify-content-center mx-3 px-md-0">
+                <div class="col-md-6 col-lg-3">
+                    <button type="submit" class="btn button btn-block" [disabled]="!activateButton" (click)="onSubmitEstimateForm(target)">CALCULAR</button>
+                    <!-- <button type="button" class="btn button btn-block" (click)="cambiar()">cambiar</button> -->
                 </div>
             </div>
-            <div class="my-2 my-lg-0  box-values-slider">
-                <div class="custom-slider">
-                    <p class="header-box-values-slider mb-4 text-uppercase"><b>entrada</b></p>
-                    <ng5-slider [(value)]="entryAmount.value" [options]="entryAmount.options"></ng5-slider>
-                    <p class="tittle-11 text-right mt-2 mb-0">Valor opcional</p>
-                </div>
-            </div>
-
-            <div class="my-2 my-lg-0 box-values-slider">
-                <div class="custom-slider">
-                    <p class="header-box-values-slider mb-4 text-uppercase"><b>tiempo plazo*</b></p>
-                    <ng5-slider [(value)]="term.value" [options]="term.options"></ng5-slider>
-                    <p class="tittle-11 text-right mt-2 mb-0">Meses</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- CALCULATE BUTTON -->
-        <div class="row mt-5 justify-content-center mx-3 px-md-0">
-            <div class="col-md-6 col-lg-3">
-                <button type="submit" class="btn button btn-block" [disabled]="!activateButton" (click)="onSubmitEstimateForm(target)">CALCULAR</button>
-                <!-- <button type="button" class="btn button btn-block" (click)="cambiar()">cambiar</button> -->
-            </div>
-        </div>
-
-
+        </form>
 
     </section>
 

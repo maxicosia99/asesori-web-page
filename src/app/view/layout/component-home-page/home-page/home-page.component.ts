@@ -57,23 +57,6 @@ export class HomePageComponent implements OnInit {
       }
     }
   };
-  
-  cities_select = [
-    { id: 1, name: 'Viaje', description: 'Para el viaje de tu sueños'},
-    { id: 2, name: 'Inmobiliario', description: 'Para tu casa'},
-    { id: 3, name: 'Vehicular', description: 'Para el auto nuevo que quieres'},
-    { id: 4, name: 'Deudas', description: 'Para consolidar las deudas'}, 
-  ];
-
-  public activateButton: boolean = false;
-
-  onSelectOption(){
-    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
-    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
-    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: false});
-    this.term.options = Object.assign({}, this.term.options, {disabled: false});
-    this.activateButton = true;
-  }
 
   entryAmount: SliderModel = {
     value: 0,
@@ -198,7 +181,6 @@ export class HomePageComponent implements OnInit {
   /**------------------------------------------------------------------------------------------------------------------------------------ */
 
 
-
   /* Location variables */
   public region_name: string;
   public region_code: string;
@@ -233,14 +215,90 @@ export class HomePageComponent implements OnInit {
   public cities: any;
   /* Variable to store the names of the selected financial entities. */
   public creditos_entities: string = ``;
+  /* Variable to activate the calculate button when selecting a credit. */
+  public activateButton: boolean = false;
+  /* Variable that stores the types of credits. */
+  public credits_select: any = [
+    { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños'},
+    { id: 11, name: 'Inmobiliario', description: 'Para tu casa'},
+    { id: 9, name: 'Vehicular', description: 'Para el auto nuevo que quieres'},
+    { id: 9, name: 'Deudas', description: 'Para consolidar las deudas'}, 
+    { id: 9, name: 'Arreglos del hogar', description: 'Para hacer arreglos en tu casa o local comercial'}, 
+    { id: 10, name: 'Curso o postgrado', description: 'Créditos de estudio'}, 
+    { id: 9, name: 'Préstamo rápido', description: 'Cualquier necesitad'},
+    { id: 9, name: 'Urgencias', description: 'Crédito por emergencias'},
+  ];
+   /* Variable that stores the types of credits. */
+   public insurance_select: any = [
+    { id: 1, name: 'Vehicular', description: 'Seguros para tu vehículo'},
+  ];
+  /* Variables to enable or disable service tag options. */
+  public active_credits_select: boolean = false;
+  public active_insurance_select: boolean = false;
+  public active_cards_select: boolean = false;
+  public active_pilicy_select: boolean = false;
 
   /* Credit calculation form */
   estimateform = this.formbuilder.group({
-    amountRequest: ['', [Validators.required, Validators.minLength(1)]],
+    amountRequest: [''],
     entryAmount: [''],
-    monthlyincome: ['', [Validators.required, Validators.minLength(1)]],
-    term: ['', [Validators.required, Validators.minLength(1)]]
+    monthlyincome: [''],
+    term: [''],
+    credit_type_userSelected: new FormControl()
   });
+
+  /* Method to enable or disable service tag options. */
+  onSelectServiceTag($event){
+    
+    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: true});
+    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: true});
+    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: true});
+    this.term.options = Object.assign({}, this.term.options, {disabled: true});
+    this.activateButton = false;
+
+    if ($event.target.value === 'creditos') {
+      this.active_credits_select = true;
+      this.active_insurance_select = false;
+      this.active_cards_select = false;
+      this.active_pilicy_select = false;
+    }
+    if ($event.target.value === 'seguros') {
+      this.active_credits_select = false;
+      this.active_insurance_select = true;
+      this.active_cards_select = false;
+      this.active_pilicy_select = false;
+    }
+    if ($event.target.value === 'tarjetas') {
+      this.active_credits_select = false;
+      this.active_insurance_select = false;
+      this.active_cards_select = true;
+      this.active_pilicy_select = false;
+    }
+    if ($event.target.value === 'poliza') {
+      this.active_credits_select = false;
+      this.active_insurance_select = false;
+      this.active_cards_select = false;
+      this.active_pilicy_select = true;
+    }
+  }
+
+  onSelectCreditOption($event){
+    this.id_credit = $event.id;
+    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
+    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
+    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: false});
+    this.term.options = Object.assign({}, this.term.options, {disabled: false});
+    this.activateButton = true;
+  }
+
+  onSelectInsuranceOption($event){
+    console.log($event.id);
+    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
+    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
+    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: false});
+    this.term.options = Object.assign({}, this.term.options, {disabled: false});
+    this.activateButton = true;
+  }
 
   /* ----------------------------------- Constact Form ------------------------------- */
 
@@ -394,6 +452,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
+    //this.addCheckboxesCredit_type();
+
     this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
@@ -513,6 +573,7 @@ export class HomePageComponent implements OnInit {
     // let monthlyincome: number = 0;
     // let entryAmount: number = this.entryAmount.value;
     // let term: number = this.term.value;
+    console.log(this.estimateform.get('credit_type_userSelected').value);
 
     let amountRequest: number = 50000;
     let monthlyincome: number = 250;

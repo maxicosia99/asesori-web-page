@@ -25,28 +25,12 @@
     background-color: #0078A9;
 }
 
-.btn-selection-active {
-    position: relative;
-    display: inline-block;
-    border: 2px solid #0078A9;
-    width: 23%;
-    border-radius: 8px;
-}
-
-.btn-selection-active .badge {
-    position: absolute;
-    border-radius: 15px;
-    top: -5px;
-    right: -3px;
-    background-color: #0078A9;
-}
-
 .btn-selection {
     position: relative;
     display: inline-block;
-    border: 2px solid #e6e6ed;
     width: 23%;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .box-values-slider {
@@ -136,17 +120,33 @@
 
 /* ESTYLE TO SELECT OPTION */
 
-.kudos-wrap input[type="checkbox"] {
+.kudos-wrap input[type="checkbox"],
+.kudos-wrap input[type="radio"] {
     display: none;
 }
 
 .kudos-wrap label {
-    border: 2px solid #fff;
+    //border: 2px solid #fff;
+    border: 2px solid #e6e6ed;
 }
 
 .kudos-wrap label:before {
     transition-duration: 0.4s;
     transform: scale(0);
+}
+
+.badge {
+    position: absolute;
+    border-radius: 50px;
+    top: -5px;
+    right: -3px;
+    background-color: #0078A9;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.selected-service-tag {
+    display: none
 }
 
 .selected {
@@ -175,6 +175,10 @@
 }
 
 .kudos-wrap :checked+label .selected {
+    display: inline-block;
+}
+
+.kudos-wrap :checked+label .selected-service-tag {
     display: inline-block;
 }
 
