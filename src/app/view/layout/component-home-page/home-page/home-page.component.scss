@@ -13,20 +13,13 @@
     border-radius: 8px;
 }
 
-.sidebar-steps {
-    background-color: #0078A9;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .btn-circle {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     padding: 6px 0;
-    font-size: 12px;
-    border-radius: 15px;
+    font-size: 14px;
+    border-radius: 50%;
     border-color: white;
     color: white;
     background-color: #0078A9;
@@ -36,6 +29,8 @@
     position: relative;
     display: inline-block;
     border: 2px solid #0078A9;
+    width: 23%;
+    border-radius: 8px;
 }
 
 .btn-selection-active .badge {
@@ -50,12 +45,15 @@
     position: relative;
     display: inline-block;
     border: 2px solid #e6e6ed;
+    width: 23%;
+    border-radius: 8px;
 }
 
 .box-values-slider {
     border-radius: 9px;
     background-color: #f3f3f3;
     padding: 15px 20px;
+    width: 23%;
 }
 
 ::ng-deep {
@@ -127,7 +125,7 @@
 }
 
 .icon {
-    font-size: 35px;
+    font-size: 25px;
     color: #0A9BC9;
 }
 
@@ -251,4 +249,26 @@ ul.timeline>li:before {
     width: 40px;
     height: 40px;
     margin: -15px 0;
+}
+
+.row-hover:hover {
+    color: #0079ab;
+}
+
+
+/* MEDIA QUERIES */
+
+
+/* Small devices (landscape phones, less than 768px)*/
+
+@media only screen and (max-width: 767.98px) {
+    .box-values-slider {
+        width: 100%;
+    }
+    .btn-selection-active {
+        width: 100%;
+    }
+    .btn-selection {
+        width: 100%;
+    }
 }

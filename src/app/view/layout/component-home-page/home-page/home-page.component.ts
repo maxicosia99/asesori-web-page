@@ -48,6 +48,7 @@ export class HomePageComponent implements OnInit {
     value: 0,
     options: {
       floor: 0,
+      disabled: true,
       ceil: 99999,
       enforceStep: false,
       hideLimitLabels: true,
@@ -56,12 +57,30 @@ export class HomePageComponent implements OnInit {
       }
     }
   };
+  
+  cities_select = [
+    { id: 1, name: 'Viaje', description: 'Para el viaje de tu sueños'},
+    { id: 2, name: 'Inmobiliario', description: 'Para tu casa'},
+    { id: 3, name: 'Vehicular', description: 'Para el auto nuevo que quieres'},
+    { id: 4, name: 'Deudas', description: 'Para consolidar las deudas'}, 
+  ];
+
+  public activateButton: boolean = false;
+
+  onSelectOption(){
+    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
+    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
+    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: false});
+    this.term.options = Object.assign({}, this.term.options, {disabled: false});
+    this.activateButton = true;
+  }
 
   entryAmount: SliderModel = {
     value: 0,
     options: {
       floor: 0,
       ceil: 99999,
+      disabled: true,
       enforceStep: false,
       hideLimitLabels: true,
       translate: (value: number): string => {
@@ -75,6 +94,7 @@ export class HomePageComponent implements OnInit {
     options: {
       floor: 0,
       ceil: 360,
+      disabled: true,
       enforceStep: false,
       hideLimitLabels: true,
       translate: (value: number): string => {
@@ -87,7 +107,8 @@ export class HomePageComponent implements OnInit {
     value: 0,
     options: {
       floor: 0,
-      ceil: 360,
+      ceil: 99999,
+      disabled: true,
       enforceStep: false,
       hideLimitLabels: true,
       translate: (value: number): string => {
@@ -180,6 +201,7 @@ export class HomePageComponent implements OnInit {
 
   /* Location variables */
   public region_name: string;
+  public region_code: string;
   public country_name: string;
   /* Validation variables */
   public correctly: boolean = false;
@@ -392,6 +414,15 @@ export class HomePageComponent implements OnInit {
       let aux = res.region.split(" ");
       aux.splice(0, 2);
       this.region_name = aux.join(" ").toLowerCase();
+      //console.log(res);
+
+      this.httpService.verifyLocationExistence(res.region_code).subscribe(resp => {
+        this.region_code = res.region_code;
+      }, error => {
+        console.log('error');
+        console.log(error);
+      });
+
       //this.contactform.controls['city'].setValue(res.city.toUpperCase() + ', ' + this.region_name.toUpperCase());
     }, error => {
       console.log('error');
@@ -504,7 +535,7 @@ export class HomePageComponent implements OnInit {
 
     if (this.correctly) {
       this.correctly2 = true;
-      this.httpService.getAllCreditOptions(this.region_name, this.entityType, this.id_credit, amountRequest, monthlyincome, term, entryAmount).subscribe(res => {
+      this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyincome, term, entryAmount).subscribe(res => {
         if (res.status == 200) {
 
           if (this.can_access_credit) {
@@ -525,7 +556,7 @@ export class HomePageComponent implements OnInit {
           element.scrollIntoView({ behavior: 'smooth' });
 
         } else {
-          console.log('Ah ocurrido un error!' + res.status);
+          console.log('Ah ocurrido un error!' + res.message);
         }
       }, error => {
         console.log('error');
@@ -699,6 +730,13 @@ export class HomePageComponent implements OnInit {
   }
 
   /* END - ON LOGGED OUT */
-
 }
+
+
+
+
+
+
+
+
 

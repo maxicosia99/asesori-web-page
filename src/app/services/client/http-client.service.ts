@@ -68,12 +68,17 @@ export class HttpClientService {
     let url = `https://ipapi.co/json/`;
     return this.doGetRequest(url);
   }
+
+  verifyLocationExistence(region_code: string): Observable<any> {
+    let url = this.getEndUrl(`/api/provincias/verificarExistenciaProvincia?region_code=${region_code}`);
+    return this.doGetRequest(url);
+  }
   /*  End - Search by location. */
 
   
   
   /* Get all credit options  */
-  getAllCreditOptions(region_name: string, entityType: number, id_credit: number, loan_amount: number, montly_income: number, credit_term: number, initial_amount: number): Observable<any> {
+  getAllCreditOptions(region_code: string, entityType: number, id_credit: number, loan_amount: number, montly_income: number, credit_term: number, initial_amount: number): Observable<any> {
     let url;
 
     if (entityType === undefined) {
@@ -81,9 +86,9 @@ export class HttpClientService {
     }
 
     if (initial_amount === null || initial_amount === 0) {
-      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&type=${entityType}&region_name=${region_name}`);
+      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&search_type=${entityType}&region_code=${region_code}`);
     } else {
-      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&initial_amount=${initial_amount}&type=${entityType}&region_name=${region_name}`);
+      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&initial_amount=${initial_amount}&search_type=${entityType}&region_code=${region_code}`);
     }
 
     return this.doGetRequest(url);
