@@ -1,0 +1,44 @@
+/* navbar */
+
+.navbar-light {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+
+/* Title */
+
+.navbar-light .navbar-brand {
+    color: #777;
+}
+
+.navbar-light .navbar-brand:hover,
+.navbar-light .navbar-brand:focus {
+    color: #777;
+}
+
+
+/* Link */
+
+.navbar-light .navbar-nav>li>a {
+    color: #0079ab;
+}
+
+.navbar-light .navbar-nav>li>a:hover,
+.navbar-light .navbar-nav>li>a:focus {
+    text-decoration: underline;
+}
+
+.navbar-light .navbar-nav>.active>a,
+.navbar-light .navbar-nav>.active>a:hover,
+.navbar-light .navbar-nav>.active>a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+
+.navbar-light .navbar-nav>.open>a,
+.navbar-light .navbar-nav>.open>a:hover,
+.navbar-light .navbar-nav>.open>a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}

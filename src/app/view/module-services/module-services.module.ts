@@ -5,6 +5,7 @@ import { ModuleServicesRoutingModule } from './module-services-routing.module';
 import { ServicesComponent } from './services/services.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';                  // Ngx-Bootstrap button module
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';     // Forms
+import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carousel module
 
 @NgModule({
   declarations: [ServicesComponent],
@@ -13,7 +14,8 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';     // Forms
     ModuleServicesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ButtonsModule
+    ButtonsModule,
+    CarouselModule,
   ]
 })
 export class ModuleServicesModule { }

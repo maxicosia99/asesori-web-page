@@ -131,12 +131,14 @@ table {
 
 body {
     font-family: 'Poppins-ExtraLight';
-    //letra por defecto para la página font-stretch: normal;
-    //permite hacer el texto más angosto (condensado) o más ancho (expandido). font-style: normal;
-    //especifica el estilo de fuente para un texto. letter-spacing: normal;
-    //aumenta o disminuye el espacio entre caracteres en un texto. font-weight: normal;
-    //establece cómo se deben mostrar los caracteres gruesos o delgados en el texto. line-height: normal;
-    //especifica la altura de una línea. //background-color: #fafafa;
+}
+
+.main-top-90 {
+    margin-top: 90px;
+}
+
+.main-top-50 {
+    margin-top: 50px;
 }
 
 
@@ -150,7 +152,8 @@ body {
 .tittle-8,
 .tittle-10,
 .tittle-11,
-.tittle-3-spacing {
+.tittle-3-spacing,
+.text-14-medium {
     font-family: 'Poppins-Medium';
 }
 
@@ -234,6 +237,11 @@ body {
     font-size: 12px;
 }
 
+.tittle-15 {
+    font-size: 12px;
+    font-family: 'Poppins-Light';
+}
+
 
 /* TEXTS */
 
@@ -247,6 +255,15 @@ body {
 
 .text-14 {
     font-size: 14px;
+}
+
+.text-14-medium {
+    font-size: 14px;
+}
+
+.text-14-regular {
+    font-size: 14px;
+    font-family: 'Poppins-Regular';
 }
 
 .text-light-14,
@@ -304,7 +321,8 @@ body {
 
 /* OTHER ELEMENTS*/
 
-.container {
+.container,
+.container-fluid {
     padding: 30px 0px;
     margin: auto;
     overflow: hidden;

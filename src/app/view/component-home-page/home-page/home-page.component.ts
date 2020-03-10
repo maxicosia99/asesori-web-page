@@ -5,9 +5,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';                     
 import { FormBuilder, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';     //forms
 import { validateCedula } from 'src/app/services/client/validar-cedula';              //service to validate cedula
 import { Creditos } from 'src/app/models/creditos';                                   //part of model to credit request  
-import { LoginComponent } from 'src/app/view/login/login.component';                  //call login
-import { AuthenticationService } from 'src/app/services/auth/authentication.service'; //authentication service
-import { Subscription } from 'rxjs';                                                  //suscription to login
 import { CreditInformation } from 'src/app/models/credit-information';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 /* End - icons in this page */
@@ -36,7 +33,6 @@ export function validateSelect(control: AbstractControl) {
 export class HomePageComponent implements OnInit {
 
   constructor(
-    private authService: AuthenticationService,   //authentication service
     private modalService: BsModalService,         //modal service
     private httpService: HttpClientService,       //client api service
     private formbuilder: FormBuilder              //form service
@@ -109,15 +105,6 @@ export class HomePageComponent implements OnInit {
   /* End - Rating */
 
 
-  /* Navbar options */
-  navbarOpen = false;
-
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
-  }
-  /* End - Navbar options */
-
-
   /* Carousel options */
   customOptions: OwlOptions = {
     loop: true,
@@ -148,19 +135,6 @@ export class HomePageComponent implements OnInit {
 
   openModal_termsConditions(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-    this.modalRef.setClass('modal-dialog-centered');
-    this.modalRef.content.closeBtnName = 'Close';
-  }
-
-  openModal() {
-    // const initialState = {
-    //   information : {
-    //     username: 'bryan',
-    //     password: 'bryan123'
-    //   },
-    // };
-    //this.modalRef = this.modalService.show(LoginComponent, { initialState });
-    this.modalRef = this.modalService.show(LoginComponent);
     this.modalRef.setClass('modal-dialog-centered');
     this.modalRef.content.closeBtnName = 'Close';
   }
@@ -773,35 +747,7 @@ export class HomePageComponent implements OnInit {
 
 
 
-  /* ON LOGGED OUT */
-
-  private subscription: Subscription;
-  private intervalSub: Subscription;
-  public user: any;
-
-  onLoggedout() {
-    this.authService.logOut();
-    this.closeSubscriptions();
-    console.log('Ha finalizado sesión!')
-  }
-
-  closeSubscriptions() {
-    if (this.subscription)
-      this.subscription.unsubscribe();
-    if (this.intervalSub)
-      this.intervalSub.unsubscribe();
-  }
-
-  loginVerified(): Boolean {
-    let accessToken = localStorage.getItem('currentUser');
-    if (accessToken) {
-      this.user = JSON.parse(localStorage.getItem('currentUser'));
-      return true;
-    }
-    return false;
-  }
-
-  /* END - ON LOGGED OUT */
+  
 
 
 

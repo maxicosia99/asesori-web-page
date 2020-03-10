@@ -14,6 +14,8 @@ import { LoginComponent } from './view/login/login.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap';
+import { HeaderComponent } from './view/header/header.component';
+import { FooterComponent } from './view/footer/footer.component';
 
 @NgModule({
   imports: [
@@ -34,7 +36,9 @@ import { ModalModule } from 'ngx-bootstrap';
     P404Component,
     P500Component,
     AlertComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   entryComponents: [
     LoginComponent

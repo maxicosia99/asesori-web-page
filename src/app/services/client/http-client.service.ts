@@ -95,6 +95,14 @@ export class HttpClientService {
   }
   /* End - Get all credit options  */
 
+
+  /* Get credit informaction by id  */
+  getInformationCreditByid(idCredit: number): Observable<any> {
+    let url = this.getEndUrl(`/api/creditos/condiciones?idcredito=${idCredit}`);
+    return this.doGetRequest(url);
+  }
+  /* End - Get credit informaction by id  */
+
   
   
   /* Get provinces - cities */

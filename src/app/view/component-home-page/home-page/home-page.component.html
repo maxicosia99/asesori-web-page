@@ -1,46 +1,8 @@
-<header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="container py-0">
-
-            <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link tittle-10 mt-1" routerLink="/services">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tittle-10 mt-1" routerLink="/homepage">Testimonios</a>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-outline-secondary">Iniciar sesión</button>
-                    </li>
-                    <!-- <li class="nav-item btn-group" dropdown [insideClick]="true">
-                    <a id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle nav-link tittle-10 " aria-controls="dropdown-animated">
-                        INGRESAR <span class="caret"></span>
-                    </a>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
-                        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-                        <li class="divider dropdown-divider"></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-                        </li>
-                    </ul>
-                </li> -->
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<main>
+<main class="main-top-50">
 
     <!-- INITIAL SECTION -->
 
-    <section class="container pt-5">
+    <section class="container">
         <div class="row">
 
             <div class="col-12 col-md-6 px-5 px-lg-4">
@@ -171,7 +133,7 @@
 
         </div>
 
-        <!-- CALCULATE BUTTON -->
+        <!-- SEND BUTTON -->
         <div class="row px-4 px-md-0 mt-4 justify-content-end">
             <div class="col-md-4">
                 <button type="button" class="btn button btn-block">CONTINUAR</button>
@@ -1633,97 +1595,3 @@
     </section> -->
 
 </main>
-
-
-<!-- FOOTER -->
-<footer class="pt-4">
-    <div class="container py-0 text-center text-md-left">
-        <div class="row mx-4 mx-md-0">
-            <div class="col-md-4 mx-auto">
-                <img class="img-fluid" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
-                <p class="text-light-16 text-justify">Asesori te facilita las mejores opciones para que puedas acceder rápido y seguro al crédito que necesites.</p>
-            </div>
-            <div class="col-md-3 col-lg-2 mx-auto my-md-4 my-0 mt-4">
-                <h5 class="text-uppercase mb-4 tittle-7">ACERCA DE</h5>
-                <ul>
-                    <li>
-                        <p>
-                            <summary routerLink="/homepage" class="tittle-10 color-1">INICIO</summary>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            <summary routerLink="/services" class="tittle-10 color-1">SERVICIOS</summary>
-                        </p>
-                    </li>
-                    <li>
-                        <p><a href="#!" class="tittle-10">TESTIMONIOS</a></p>
-                    </li>
-                    <!-- <li>
-                        <p><a href="#!" class="tittle-10">CONTACTANOS</a></p>
-                    </li> -->
-                </ul>
-            </div>
-            <div class="col-md-5 col-lg-5 mx-auto my-md-4 my-0 mt-4">
-                <h5 class="text-uppercase mb-4 tittle-7">Información</h5>
-                <ul>
-                    <li>
-                        <p>
-                            <i class="fas fa-home"></i> Avenida 24 de Enero y Francisco Cevallos.
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            <i class="fas fa-envelope"></i> info@example.com
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            <i class="fas fa-phone"></i> +593-991538711
-                        </p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <ul class="text-center py-2">
-        <li *ngIf="!loginVerified();" class="list-inline-item">
-            <h5 class="mb-1 tittle-10">Registrate ahora!</h5>
-        </li>
-        <li *ngIf="!loginVerified(); else elseBlock" class="list-inline-item">
-            <a (click)="openModal()" class="btn btn-rounded text-white bg-2">Sign up!</a>
-        </li>
-
-        <ng-template #elseBlock>
-            <li class="list-inline-item">
-                <a class="tittle-10">Hola {{user.username}}</a>
-            </li>
-            <li class="list-inline-item">
-                <a (click)="onLoggedout()" class="btn btn-rounded text-white bg-2">Salir</a>
-            </li>
-        </ng-template>
-    </ul>
-    <hr>
-
-    <!-- Social buttons -->
-    <ul class="text-center my-4 text-white">
-        <li class="list-inline-item">
-            <i class="fab facebook fa-facebook"></i>
-        </li>
-        <li class="list-inline-item">
-            <i class="fab twitter fa-twitter"></i>
-        </li>
-        <li class="list-inline-item">
-            <i class="fab instagram fa-instagram"></i>
-        </li>
-        <li class="list-inline-item">
-            <i class="fab whatsapp fa-whatsapp"></i>
-        </li>
-    </ul>
-    <!-- Social buttons -->
-
-    <!-- Copyright -->
-    <div class="text-white bg-3 text-center py-3 tittle-10">© 2020 Copyright ASESORI</div>
-    <!-- Copyright -->
-</footer>

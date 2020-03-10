@@ -1,12 +1,132 @@
-<main class="bg-1">
-    <form [formGroup]="myForm">
-        <section class="container">
+<main class="bg-1 main-top-90">
+
+    <section class="container">
+        <form [formGroup]="myForm">
             <div class="row justify-content-center">
-                <div class="col-6 text-center">
+                <div class="col-10 col-md-6 text-center">
                     <div class="form-group">
-                        <div class="btn-group btn-group-lg rounded" btnRadioGroup formControlName="radio">
-                            <label btnRadio="0" (click)="todos()" class="btn btn-primary tittle-7 bg-0 color-4 border-bg-1" tabindex="0" role="button">CRÉDITOS</label>
-                            <label btnRadio="1" (click)="bancos()" class="btn btn-primary tittle-7 bg-0 color-4 border-bg-1" tabindex="0" role="button">SEGUROS</label>
+                        <div class="btn-group btn-group-sm rounded" btnRadioGroup formControlName="radio">
+                            <label btnRadio="0" (click)="creditos()" class="btn btn-primary tittle-7 bg-0 color-4 border-bg-1" tabindex="0" role="button">CRÉDITOS</label>
+                            <label btnRadio="1" (click)="seguros()" class="btn btn-primary tittle-7 bg-0 color-4 border-bg-1" tabindex="0" role="button">SEGUROS</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <form [formGroup]="creditform">
+        <section class="container-fluid pt-1">
+            <div class="row justify-content-center">
+
+                <div class="col-12 px-5 px-md-3 px-lg-5 col-md-3 kudos-wrap">
+
+                    <input type="radio" value="estudios_10" id="estudios" formControlName="credit_type_userSelected" (change)="onSelectCreditType($event)">
+                    <label for="estudios" class="options mt-0 mb-2">
+                    <div class="media mb-1">
+                        <div class="media-body">
+                            <p class="text-14-medium mt-1">Estudios</p>
+                        </div>
+                        <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
+                    </div>
+                    <p class="text-14-regular mb-1">Para mi carrera</p>
+                    <p class="tittle-15 mb-1">(De consumo)</p>
+                </label>
+
+                    <input type="radio" value="viaje_9" id="viaje" formControlName="credit_type_userSelected" (change)="onSelectCreditType($event)">
+                    <label for="viaje" class="options my-2">
+                    <div class="media mb-1">
+                        <div class="media-body">
+                            <p class="text-14-medium mt-1">Viaje</p>
+                        </div>
+                        <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
+                    </div>
+                    <p class="text-14-regular mb-1">Para mis sueños</p>
+                    <p class="tittle-15 mb-1">(De consumo)</p>
+                </label>
+
+                    <input type="radio" value="emergencia_9" id="emergencia" formControlName="credit_type_userSelected" (change)="onSelectCreditType($event)">
+                    <label for="emergencia" class="options my-2">
+                    <div class="media mb-1">
+                        <div class="media-body">
+                            <p class="text-14-medium mt-1">Emergencia</p>
+                        </div>
+                        <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
+                    </div>
+                    <p class="text-14-regular mb-1">Para mi consumo</p>
+                    <p class="tittle-15 mb-1">(De consumo)</p>
+                </label>
+
+                </div>
+
+                <div class="col-12 px-5 col-md-8 bg-0 mt-5 mt-md-0 p-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="tittle-9">{{credit_name}}</p>
+                            <!-- <p class="tittle-5">Para mi carrera</p> -->
+                            <p class="text-light-14">Obtén el crédito que necesitas en donde tu eligas de manera más rápida y ágil, asegurando confianza y confiabilidad. El crédito para tus estudios te está esperando. </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img *ngIf="url_photo" [src]="url_photo" class="img-fluid" alt="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="text-light-14 mt-3 mb-5">Obtén el crédito que necesitas en donde tu eligas de manera más rápida y ágil, asegurando confianza y confiabilidad.</p>
+                            <p class="tittle-8">Otorgado a: </p>
+
+                            <div *ngFor="let beneficiaries of beneficiaries">
+                                <p class="text-light-14">{{beneficiaries}}</p>
+                            </div>
+
+                            <p class="tittle-8">Destinado a: </p>
+
+                            <div *ngFor="let destination of destination">
+                                <p class="text-light-14">{{destination}}</p>
+                            </div>
+
+                            <p class="text-light-14">Compra de bienes, servicios o gastos no relacionados con una actividad productiva.
+                            </p>
+                            <p class="tittle-8">Términos: </p>
+
+                            <div *ngFor="let terms of terms">
+                                <p class="text-light-14">{{terms}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEND BUTTON -->
+                    <div class="row mt-3 mb-5">
+                        <div class="col-12 col-sm-5 col-lg-3">
+                            <button type="button" class="btn button btn-block">INICIA UNA SOLICITUD</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="tittle-9">¿Tienes dudas? Ingresa tu email y nos contactamos contigo</p>
+                            <p class="text-light-14">Antes de conocer las mejores opciones de crédito es importante que ingreses tu email.</p>
+                        </div>
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="text" required>
+                                <span class="floating-label text-uppercase">correo electronico*</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEND BUTTON -->
+                    <div class="row mt-4 justify-content-end">
+                        <div class="col-12 col-sm-5 col-lg-3">
+                            <button type="button" class="btn button btn-block">ENVIAR</button>
                         </div>
                     </div>
                 </div>
@@ -14,36 +134,54 @@
         </section>
     </form>
 
-    <section class="container pt-1">
-        <div class="row">
-            <div class="col-2">
-                <div class="options">
-                    <p class="">Estudios</p>
-                    <p class="">Para mi carrera</p>
-                    <p class="">(De consumo)</p>
-                </div>
-                <div class="options my-4">
-                    <p class="">Estudios</p>
-                    <p class="">Para mi carrera</p>
-                    <p class="">(De consumo)</p>
+    <section class="container-fluid pb-0 bg-0">
+        <div class="container pb-0 px-4">
+            <div class="row">
+                <div class="col-12">
+                    <p class="tittle-9">Tienes la seguridad y confianza</p>
+                    <p class="text-light-14">Para nosotros es primordial brindarte toda la seguridad posible y confianza que necesitas durante todo el proceso. Estamos avalados por: </p>
                 </div>
             </div>
-            <div class="col-10 bg-0">
-                <p class="tittle-9">Estudios</p>
-                <p class="tittle-5">Para mi carrera</p>
-                <p class="text-light-14">Obtén el crédito que necesitas en donde tu eligas de manera más rápida y ágil, asegurando confianza y confiabilidad. El crédito para tus estudios te está esperando. </p>
-                <img src="assets/img/credit-images/credito-educacion.jpg" alt="">
-                <p class="text-light-14">Obtén el crédito que necesitas en donde tu eligas de manera más rápida y ágil, asegurando confianza y confiabilidad.</p>
-                <p class="tittle-8">Otorgado a: </p>
-                <p class="text-light-14">Personas naturales.</p>
-                <p class="tittle-8">Destinado a: </p>
-                <p class="text-light-14">Compra de bienes, servicios o gastos no relacionados con una actividad productiva.</p>
-                <p class="tittle-8">Términos</p>
-                <p class="text-light-14">INCLUYE: créditos prendarios de joyas y consumos en establecimientos médicos cuyo saldo adeudado sea superior a USD 5.000.00. INCLUYE: anticios de efectivo y consumos con tarjetas de crédito (coporativas y de personas naturales) cuyo saldo
-                    adeudado sea inferior a USD 5.000.00. EXCEPCIONES: créditos efectuados en establecimientos educativos.</p>
-
-                <button class="btn button text-uppercase">inicia una solicitud</button>
-
+            <div class="row my-4">
+                <div class="col-12">
+                    <owl-carousel-o [options]="customOptions">
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-austro-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-biess-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-bolivariano-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-dinnersClub-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-produbanco-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/cooperativa-jep-188x100.png">
+                            </div>
+                        </ng-template>
+                    </owl-carousel-o>
+                </div>
             </div>
         </div>
     </section>
