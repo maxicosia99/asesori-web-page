@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { DefaultLayoutComponent } from './view/layout/default-layout.component';
 import { P404Component } from './view/not-found/404.component';
 import { P500Component } from './view/server-error/500.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
@@ -16,10 +14,6 @@ import { LoginComponent } from './view/login/login.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap';
-
-const APP_CONTAINERS = [
-  DefaultLayoutComponent
-];
 
 @NgModule({
   imports: [
@@ -37,7 +31,6 @@ const APP_CONTAINERS = [
   ],
   declarations: [
     AppComponent,
-    ...APP_CONTAINERS,
     P404Component,
     P500Component,
     AlertComponent,
@@ -46,10 +39,7 @@ const APP_CONTAINERS = [
   entryComponents: [
     LoginComponent
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

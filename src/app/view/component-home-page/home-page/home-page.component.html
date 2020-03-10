@@ -9,10 +9,10 @@
             <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link tittle-10 mt-1" href="#">Servicios</a>
+                        <a class="nav-link tittle-10 mt-1" routerLink="/services">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tittle-10 mt-1" href="#">Testimonios</a>
+                        <a class="nav-link tittle-10 mt-1" routerLink="/homepage">Testimonios</a>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="btn btn-outline-secondary">Iniciar sesión</button>
@@ -103,46 +103,45 @@
         <div class="container">
 
             <div class="row justify-content-around align-items-center">
-                <div class="col-2">
+                <div class="col-12 col-lg-2">
                     <p class="tittle-3-spacing text-uppercase">¿Como trabaja Asesori?</p>
                 </div>
-                <div class="col-2 px-0">
-
-                    <div class="row">
-                        <div class="col-3 pl-1">
+                <div class="col-12 col-md-2 px-md-0">
+                    <div class="row justify-content-lg-start justify-content-center">
+                        <div class="col-2 col-sm-4 col-lg-3 pl-1">
                             <button type="button" class="btn btn-circle">1</button>
                         </div>
-                        <div class="col-9 pl-1 pr-0 mt-2">
+                        <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
                             <p class="text-14">Selecciona el crédito al que deseas aplicar.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-2 px-0">
-                    <div class="row">
-                        <div class="col-3 pl-1">
+                <div class="col-12 col-md-2 px-md-0 my-2 my-md-0">
+                    <div class="row justify-content-lg-start justify-content-center">
+                        <div class="col-2 col-sm-4 col-lg-3 pl-1">
                             <button type="button" class="btn btn-circle">2</button>
                         </div>
-                        <div class="col-9 pl-1 pr-0 mt-2">
+                        <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
                             <p class="text-14">Ingresa el monto, entrada y plazo.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-2 px-0">
-                    <div class="row">
-                        <div class="col-3 pl-1">
+                <div class="col-12 col-md-2 px-md-0 my-2 my-md-0">
+                    <div class="row justify-content-lg-start justify-content-center">
+                        <div class="col-2 col-sm-4 col-lg-3 pl-1">
                             <button type="button" class="btn btn-circle">3</button>
                         </div>
-                        <div class="col-9 pl-1 pr-0 mt-2">
+                        <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
                             <p class="text-14">Ingresa tus datos para una solicitud.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-2 px-0">
-                    <div class="row">
-                        <div class="col-3 pl-1">
+                <div class="col-12 col-md-2 px-md-0">
+                    <div class="row justify-content-lg-start justify-content-center">
+                        <div class="col-2 col-sm-4 col-lg-3 pl-1">
                             <button type="button" class="btn btn-circle">4</button>
                         </div>
-                        <div class="col-9 pl-1 pr-0 mt-2">
+                        <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
                             <p class="text-14">Presentar las mejores opciones de crédito.</p>
                         </div>
                     </div>
@@ -303,7 +302,7 @@
             </div>
 
             <!-- VALUES BOX -->
-            <div class="row justify-content-between mx-3 px-md-0">
+            <div *ngIf="valuesCreditSection" class="row justify-content-between mx-3 px-md-0">
                 <div class="my-2 my-lg-0  box-values-slider">
                     <div class="custom-slider">
                         <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
@@ -314,7 +313,7 @@
                 <div class="my-2 my-lg-0  box-values-slider">
                     <div class="custom-slider">
                         <p class="header-box-values-slider mb-4 text-uppercase"><b>ingreso mensual*</b></p>
-                        <ng5-slider [(value)]="monthly_income.value" [options]="monthly_income.options"></ng5-slider>
+                        <ng5-slider [(value)]="monthlyIncome.value" [options]="monthlyIncome.options"></ng5-slider>
                         <p class="tittle-11 text-right mt-2 mb-0">Sueldo mensual</p>
                     </div>
                 </div>
@@ -338,7 +337,7 @@
             <!-- CALCULATE BUTTON -->
             <div class="row mt-5 justify-content-center mx-3 px-md-0">
                 <div class="col-md-6 col-lg-3">
-                    <button type="submit" class="btn button btn-block" [disabled]="!activateButton" (click)="onSubmitEstimateForm(target)">CALCULAR</button>
+                    <button type="submit" class="btn button btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0" (click)="onSubmitEstimateForm(target)">CALCULAR</button>
                     <!-- <button type="button" class="btn button btn-block" (click)="cambiar()">cambiar</button> -->
                 </div>
             </div>
@@ -346,6 +345,8 @@
 
     </section>
 
+
+    <!-- RESULTS SECTION -->
 
     <section #target class="container">
 
@@ -931,28 +932,44 @@
                             <!-- RESULTS SECTION TEST -->
 
                             <div class="row px-4 px-md-0">
-                                <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text" (click)="moveSection(calculator)">
+                                <div class="col-12 text-right tittle-9 color-1 recalculate-text" (click)="moveSection(calculator)">
                                     <span>
                                         <i class="fas fa-redo-alt"></i>
                                     </span><span class="text-uppercase ml-3">volver a
                                         calcular</span>
                                 </div>
-                                <div class="col-12 col-lg-12 text-left mt-4">
+                                <div class="col-12 text-left mt-4">
                                     <p class="text-light-14">Puedes aplicar a todas las opciones o a las que tú seleciones
                                     </p>
                                 </div>
                             </div>
 
+                            <form [formGroup]="myForm" class="">
+
+                                <div class="row mt-4 justify-content-center">
+                                    <div class="col-10 col-md-6">
+                                        <div class="form-group">
+                                            <div class="btn-group btn-group-sm rounded" btnRadioGroup formControlName="radio">
+                                                <label btnRadio="0" (click)="todos()" class="btn btn-primary tittle-7 bg-1 color-4 border-bg-1" tabindex="0" role="button">TODOS</label>
+                                                <label btnRadio="1" (click)="bancos()" class="btn btn-primary tittle-7 bg-1 color-4 border-bg-1" tabindex="0" role="button">BANCOS</label>
+                                                <label btnRadio="2" (click)="cooperativas()" class="btn btn-primary tittle-7 bg-1 color-4 border-bg-1" tabindex="0" role="button">COOPERATIVAS</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
                             <div id="global">
 
                                 <!-- can_access_credit OPTIONS -->
-                                <div class="row mt-4 px-4 px-md-0" *ngIf="can_access_credit?.length > 0">
+                                <div class="row mt-3 px-0" *ngIf="can_access_credit?.length > 0">
                                     <div class="col-12">
                                         <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE PUEDES OBTENER TU CRÉDITO</h2>
                                     </div>
                                 </div>
 
-                                <div class="px-4 px-md-0 result-container mt-4 kudos-wrap" formArrayName="can_access_credit_userSelected" *ngFor="let credit of can_access_credit_userSelected.controls; let i=index">
+                                <div class="px-0 result-container mt-4 kudos-wrap" formArrayName="can_access_credit_userSelected" *ngFor="let credit of can_access_credit_userSelected.controls; let i=index">
                                     <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i" id="{{can_access_credit[i].id}}">
                                     <label for="{{can_access_credit[i].id}}">
                                         <div class="row m-0 p-0">
@@ -1000,7 +1017,7 @@
                                                             </div>
                                                             <div class="col-6 col-md-4 d-none d-md-block">
                                                                 <p class="text-uppercase tittle-10">tiempo plazo</p>
-                                                                <p class="tittle-5">12</p>
+                                                                <p class="tittle-5">{{term.value}}</p>
                                                                 <p class="text-uppercase tittle-11">meses</p>
                                                             </div>
                                                         </div>
@@ -1052,14 +1069,14 @@
 
 
                                 <!-- cannot_access_credit OPTIONS -->
-                                <div class="row mt-4 px-4 px-md-0" *ngIf="cannot_access_credit?.length > 0">
+                                <div class="row mt-4 px-0" *ngIf="cannot_access_credit?.length > 0">
                                     <div class="col-12">
                                         <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE NO TIENES LOS NECESARIO PARA OBTENER TU CRÉDITO
                                         </h2>
                                     </div>
                                 </div>
 
-                                <div class="px-4 px-md-0 result-container mt-4 kudos-wrap" formArrayName="cannot_access_credit_userSelected" *ngFor="let credit of cannot_access_credit_userSelected.controls; let i=index">
+                                <div class="px-0 result-container mt-4 kudos-wrap" formArrayName="cannot_access_credit_userSelected" *ngFor="let credit of cannot_access_credit_userSelected.controls; let i=index">
                                     <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i" id="{{cannot_access_credit[i].id}}">
                                     <label for="{{cannot_access_credit[i].id}}">
                                         <div class="row m-0 p-0">
@@ -1109,7 +1126,7 @@
                                                             </div>
                                                             <div class="col-6 col-md-4 d-none d-md-block">
                                                                 <p class="text-uppercase tittle-10">tiempo plazo</p>
-                                                                <p class="tittle-5">12</p>
+                                                                <p class="tittle-5">{{term.value}}</p>
                                                                 <p class="text-uppercase tittle-11">meses</p>
                                                             </div>
                                                         </div>
@@ -1495,12 +1512,12 @@
 
         <div class="container">
             <div class="row py-5 text-center justify-content-center">
-                <div class="col-9 col-md-6">
+                <div class="col-10 col-md-6">
                     <h1 class="tittle-2">Qué beneficios obtengo?</h1>
                 </div>
             </div>
 
-            <div class="row pt-5">
+            <div class="row px-4 pt-5">
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
                         <div class="col-2">
@@ -1539,7 +1556,7 @@
                 </div>
             </div>
 
-            <div class="row pt-0 pt-md-5">
+            <div class="row px-4 pt-0 pt-md-5">
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
                         <div class="col-2">
@@ -1630,17 +1647,21 @@
                 <h5 class="text-uppercase mb-4 tittle-7">ACERCA DE</h5>
                 <ul>
                     <li>
-                        <p><a href="#!" class="tittle-10">INICIO</a></p>
+                        <p>
+                            <summary routerLink="/homepage" class="tittle-10 color-1">INICIO</summary>
+                        </p>
                     </li>
                     <li>
-                        <p><a href="#!" class="tittle-10">COMPAÑÍA</a></p>
+                        <p>
+                            <summary routerLink="/services" class="tittle-10 color-1">SERVICIOS</summary>
+                        </p>
                     </li>
                     <li>
-                        <p><a href="#!" class="tittle-10">NUESTRO TRABAJO</a></p>
+                        <p><a href="#!" class="tittle-10">TESTIMONIOS</a></p>
                     </li>
-                    <li>
+                    <!-- <li>
                         <p><a href="#!" class="tittle-10">CONTACTANOS</a></p>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="col-md-5 col-lg-5 mx-auto my-md-4 my-0 mt-4">

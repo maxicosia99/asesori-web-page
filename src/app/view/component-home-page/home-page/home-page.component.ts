@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Options } from 'ng5-slider';                                                 //options user slider
 import { OwlOptions } from 'ngx-owl-carousel-o';                                      //options carousel images
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
-import { HttpClientService } from '../../../../services/client/http-client.service';
 import { FormBuilder, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';     //forms
 import { validateCedula } from 'src/app/services/client/validar-cedula';              //service to validate cedula
 import { Creditos } from 'src/app/models/creditos';                                   //part of model to credit request  
@@ -10,6 +9,7 @@ import { LoginComponent } from 'src/app/view/login/login.component';            
 import { AuthenticationService } from 'src/app/services/auth/authentication.service'; //authentication service
 import { Subscription } from 'rxjs';                                                  //suscription to login
 import { CreditInformation } from 'src/app/models/credit-information';
+import { HttpClientService } from 'src/app/services/client/http-client.service';
 /* End - icons in this page */
 
 
@@ -86,11 +86,11 @@ export class HomePageComponent implements OnInit {
     }
   };
 
-  monthly_income: SliderModel = {
+  monthlyIncome: SliderModel = {
     value: 0,
     options: {
       floor: 0,
-      ceil: 99999,
+      ceil: 4999,
       disabled: true,
       enforceStep: false,
       hideLimitLabels: true,
@@ -215,8 +215,6 @@ export class HomePageComponent implements OnInit {
   public cities: any;
   /* Variable to store the names of the selected financial entities. */
   public creditos_entities: string = ``;
-  /* Variable to activate the calculate button when selecting a credit. */
-  public activateButton: boolean = false;
   /* Variable that stores the types of credits. */
   public credits_select: any = [
     { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños'},
@@ -247,57 +245,80 @@ export class HomePageComponent implements OnInit {
     credit_type_userSelected: new FormControl()
   });
 
+  public valuesCreditSection: boolean = false;
+
   /* Method to enable or disable service tag options. */
   onSelectServiceTag($event){
     
     this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: true});
     this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: true});
-    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: true});
+    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, {disabled: true});
     this.term.options = Object.assign({}, this.term.options, {disabled: true});
-    this.activateButton = false;
 
     if ($event.target.value === 'creditos') {
+      /* Para activar los selects*/
       this.active_credits_select = true;
       this.active_insurance_select = false;
       this.active_cards_select = false;
       this.active_pilicy_select = false;
+      /* Para activar seccion de valores de entrada*/
+      this.valuesCreditSection = true;
     }
     if ($event.target.value === 'seguros') {
+      /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = true;
       this.active_cards_select = false;
       this.active_pilicy_select = false;
+      /* Para activar seccion de valores de entrada*/
+      this.valuesCreditSection = false;
     }
     if ($event.target.value === 'tarjetas') {
+      /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = false;
       this.active_cards_select = true;
       this.active_pilicy_select = false;
+      /* Para activar seccion de valores de entrada*/
+      this.valuesCreditSection = false;
     }
     if ($event.target.value === 'poliza') {
+      /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = false;
       this.active_cards_select = false;
       this.active_pilicy_select = true;
+      /* Para activar seccion de valores de entrada*/
+      this.valuesCreditSection = false;
     }
   }
 
   onSelectCreditOption($event){
     this.id_credit = $event.id;
+    
     this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
     this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
-    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: false});
+    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, {disabled: false});
     this.term.options = Object.assign({}, this.term.options, {disabled: false});
-    this.activateButton = true;
+
+    this.amountRequest.value = 0;
+    this.entryAmount.value = 0;
+    this.monthlyIncome.value = 0;
+    this.term.value = 0;
   }
 
   onSelectInsuranceOption($event){
     console.log($event.id);
+
     this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
     this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
-    this.monthly_income.options = Object.assign({}, this.monthly_income.options, {disabled: false});
+    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, {disabled: false});
     this.term.options = Object.assign({}, this.term.options, {disabled: false});
-    this.activateButton = true;
+
+    this.amountRequest.value = 0;
+    this.entryAmount.value = 0;
+    this.monthlyIncome.value = 0;
+    this.term.value = 0;
   }
 
   /* ----------------------------------- Constact Form ------------------------------- */
@@ -569,16 +590,12 @@ export class HomePageComponent implements OnInit {
   /* Forms Submitted */
   onSubmitEstimateForm(element: HTMLElement) {
 
-    // let amountRequest: number = this.amountRequest.value;
-    // let monthlyincome: number = 0;
-    // let entryAmount: number = this.entryAmount.value;
-    // let term: number = this.term.value;
     console.log(this.estimateform.get('credit_type_userSelected').value);
 
-    let amountRequest: number = 50000;
-    let monthlyincome: number = 250;
-    let entryAmount: number = 1000;
-    let term: number = 144;
+    let amountRequest: number = this.amountRequest.value;
+    let monthlyIncome: number = this.monthlyIncome.value;
+    let entryAmount: number = this.entryAmount.value;
+    let term: number = this.term.value;
 
     if (entryAmount !== null || entryAmount !== 0) {
       if (entryAmount < (amountRequest * 0.9)) {
@@ -588,15 +605,9 @@ export class HomePageComponent implements OnInit {
       }
     }
 
-    // console.log(amountRequest);
-    // console.log(monthlyincome);
-    // console.log(entryAmount);
-    // console.log(term);
-    // console.log(this.correctly);
-
     if (this.correctly) {
       this.correctly2 = true;
-      this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyincome, term, entryAmount).subscribe(res => {
+      this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyIncome, term, entryAmount).subscribe(res => {
         if (res.status == 200) {
 
           if (this.can_access_credit) {
@@ -677,7 +688,7 @@ export class HomePageComponent implements OnInit {
     creditInformation.id_credit = this.id_credit;
 
     creditInformation.amount_required = this.amountRequest.value;
-    creditInformation.monthly_income = this.monthly_income.value;
+    creditInformation.monthly_income = this.monthlyIncome.value;
     creditInformation.initial_amount = this.entryAmount.value;
     creditInformation.destination = `La casa de tus sueños`;
 
@@ -791,6 +802,28 @@ export class HomePageComponent implements OnInit {
   }
 
   /* END - ON LOGGED OUT */
+
+
+
+
+
+
+
+  myForm = this.formbuilder.group({
+    radio: '0'
+  });
+
+  todos(){
+    console.log(`todos`);
+  }
+
+  bancos(){
+    console.log(`bancos`);
+  }
+
+  cooperativas(){
+    console.log(`cooperativas`);
+  }
 }
 
 

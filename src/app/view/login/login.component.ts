@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   @Input() information: any;
 
+  public sectionLogin: boolean = true;
+  public sectionRegister: boolean = false;
+
 
   /*########### Form ###########*/
   loginForm = this.formBuilder.group({
@@ -90,6 +93,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
   }
   
-  isHidden = true;
+  
+  changeSectionRegister(){
+    this.sectionLogin = false;
+    this.sectionRegister = true;
+  }
+
+  changeSectionLogin(){
+    this.sectionLogin = true;
+    this.sectionRegister = false;
+  }
 
 }
