@@ -7,6 +7,8 @@ import { validateCedula } from 'src/app/services/client/validar-cedula';        
 import { Creditos } from 'src/app/models/creditos';                                   //part of model to credit request  
 import { CreditInformation } from 'src/app/models/credit-information';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
+import { CarInsuranceRequest } from '../../../models/car-insurance-request';
+import { element } from 'protractor';
 /* End - icons in this page */
 
 
@@ -156,16 +158,16 @@ export class HomePageComponent implements OnInit {
 
 
   /* Location variables */
-  public region_name: string;
   public region_code: string;
-  public country_name: string;
   /* Validation variables */
   public correctly: boolean = false;
   public correctly2: boolean = true;
   /* Variable for the type of entity: bank, cooperative or both. */
   public entityType: number = 0;
   /* Variable for the type of credit */
-  public id_credit: number = 11; // test - inmobiliario
+  public id_credit: number = 0;
+  /* Variable for the type of insurance */
+  public id_insurance;
   /* Variables to store credit results */
   public creditOptions: any;
   public can_access_credit: any;
@@ -191,24 +193,30 @@ export class HomePageComponent implements OnInit {
   public creditos_entities: string = ``;
   /* Variable that stores the types of credits. */
   public credits_select: any = [
-    { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños'},
-    { id: 11, name: 'Inmobiliario', description: 'Para tu casa'},
-    { id: 9, name: 'Vehicular', description: 'Para el auto nuevo que quieres'},
-    { id: 9, name: 'Deudas', description: 'Para consolidar las deudas'}, 
-    { id: 9, name: 'Arreglos del hogar', description: 'Para hacer arreglos en tu casa o local comercial'}, 
-    { id: 10, name: 'Curso o postgrado', description: 'Créditos de estudio'}, 
-    { id: 9, name: 'Préstamo rápido', description: 'Cualquier necesitad'},
-    { id: 9, name: 'Urgencias', description: 'Crédito por emergencias'},
+    { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños' },
+    { id: 11, name: 'Inmobiliario', description: 'Para tu casa' },
+    { id: 9, name: 'Vehicular', description: 'Para el auto nuevo que quieres' },
+    { id: 9, name: 'Deudas', description: 'Para consolidar las deudas' },
+    { id: 9, name: 'Arreglos del hogar', description: 'Para hacer arreglos en tu casa o local comercial' },
+    { id: 10, name: 'Curso o postgrado', description: 'Créditos de estudio' },
+    { id: 9, name: 'Préstamo rápido', description: 'Cualquier necesitad' },
+    { id: 9, name: 'Urgencias', description: 'Crédito por emergencias' },
   ];
-   /* Variable that stores the types of credits. */
-   public insurance_select: any = [
-    { id: 1, name: 'Vehicular', description: 'Seguros para tu vehículo'},
+  /* Variable that stores the types of credits. */
+  public insurance_select: any = [
+    { id: 1, name: 'Vehicular', description: 'Seguros para tu vehículo' },
   ];
   /* Variables to enable or disable service tag options. */
   public active_credits_select: boolean = false;
   public active_insurance_select: boolean = false;
   public active_cards_select: boolean = false;
   public active_pilicy_select: boolean = false;
+  /* Variables to activate credit or insurance values and select */
+  public creditSection: boolean = false;
+  public insuranceSection: boolean = false;
+  /* Variables to activate credit or insurance forms */
+  public creditSectionForm: boolean = false;
+  public insuranceSectionForm: boolean = false;
 
   /* Credit calculation form */
   estimateform = this.formbuilder.group({
@@ -219,15 +227,13 @@ export class HomePageComponent implements OnInit {
     credit_type_userSelected: new FormControl()
   });
 
-  public valuesCreditSection: boolean = false;
-
   /* Method to enable or disable service tag options. */
-  onSelectServiceTag($event){
-    
-    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: true});
-    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: true});
-    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, {disabled: true});
-    this.term.options = Object.assign({}, this.term.options, {disabled: true});
+  onSelectServiceTag($event) {
+
+    this.amountRequest.options = Object.assign({}, this.amountRequest.options, { disabled: true });
+    this.entryAmount.options = Object.assign({}, this.entryAmount.options, { disabled: true });
+    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, { disabled: true });
+    this.term.options = Object.assign({}, this.term.options, { disabled: true });
 
     if ($event.target.value === 'creditos') {
       /* Para activar los selects*/
@@ -236,7 +242,12 @@ export class HomePageComponent implements OnInit {
       this.active_cards_select = false;
       this.active_pilicy_select = false;
       /* Para activar seccion de valores de entrada*/
-      this.valuesCreditSection = true;
+      this.creditSection = true;
+      this.insuranceSection = false;
+      /* Para activar o desactivar secciones de formularios */
+      this.insuranceSectionForm = false;
+      this.creditSectionForm = false;
+
     }
     if ($event.target.value === 'seguros') {
       /* Para activar los selects*/
@@ -245,7 +256,11 @@ export class HomePageComponent implements OnInit {
       this.active_cards_select = false;
       this.active_pilicy_select = false;
       /* Para activar seccion de valores de entrada*/
-      this.valuesCreditSection = false;
+      this.creditSection = false;
+      this.insuranceSection = true;
+      /* Para activar o desactivar secciones de formularios */
+      this.insuranceSectionForm = false;
+      this.creditSectionForm = false;
     }
     if ($event.target.value === 'tarjetas') {
       /* Para activar los selects*/
@@ -254,7 +269,11 @@ export class HomePageComponent implements OnInit {
       this.active_cards_select = true;
       this.active_pilicy_select = false;
       /* Para activar seccion de valores de entrada*/
-      this.valuesCreditSection = false;
+      this.creditSection = false;
+      this.insuranceSection = false;
+      /* Para activar o desactivar secciones de formularios */
+      this.insuranceSectionForm = false;
+      this.creditSectionForm = false;
     }
     if ($event.target.value === 'poliza') {
       /* Para activar los selects*/
@@ -263,17 +282,21 @@ export class HomePageComponent implements OnInit {
       this.active_cards_select = false;
       this.active_pilicy_select = true;
       /* Para activar seccion de valores de entrada*/
-      this.valuesCreditSection = false;
+      this.creditSection = false;
+      this.insuranceSection = false;
+      /* Para activar o desactivar secciones de formularios */
+      this.insuranceSectionForm = false;
+      this.creditSectionForm = false;
     }
   }
 
-  onSelectCreditOption($event){
+  onSelectCreditOption($event) {
     this.id_credit = $event.id;
-    
-    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
-    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
-    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, {disabled: false});
-    this.term.options = Object.assign({}, this.term.options, {disabled: false});
+
+    this.amountRequest.options = Object.assign({}, this.amountRequest.options, { disabled: false });
+    this.entryAmount.options = Object.assign({}, this.entryAmount.options, { disabled: false });
+    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, { disabled: false });
+    this.term.options = Object.assign({}, this.term.options, { disabled: false });
 
     this.amountRequest.value = 0;
     this.entryAmount.value = 0;
@@ -281,18 +304,21 @@ export class HomePageComponent implements OnInit {
     this.term.value = 0;
   }
 
-  onSelectInsuranceOption($event){
+  onSelectInsuranceOption($event) {
     console.log($event.id);
+    this.id_insurance = $event.id;
 
-    this.amountRequest.options = Object.assign({}, this.amountRequest.options, {disabled: false});
-    this.entryAmount.options = Object.assign({}, this.entryAmount.options, {disabled: false});
-    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, {disabled: false});
-    this.term.options = Object.assign({}, this.term.options, {disabled: false});
+    this.amountRequest.options = Object.assign({}, this.amountRequest.options, { disabled: false });
+    this.entryAmount.options = Object.assign({}, this.entryAmount.options, { disabled: false });
+    this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, { disabled: false });
+    this.term.options = Object.assign({}, this.term.options, { disabled: false });
 
     this.amountRequest.value = 0;
     this.entryAmount.value = 0;
     this.monthlyIncome.value = 0;
     this.term.value = 0;
+
+
   }
 
   /* ----------------------------------- Constact Form ------------------------------- */
@@ -301,6 +327,7 @@ export class HomePageComponent implements OnInit {
     names: ['', Validators.required],
     last_names: ['', Validators.required],
     dni: ['', [Validators.required, validateCedula]],
+    maritalStatus: ['']
   });
 
   personalDataFormSubmitted: boolean;
@@ -410,7 +437,7 @@ export class HomePageComponent implements OnInit {
 
   onSubmitCreditform(el: HTMLElement) {
     if (this.cantSelectedCreditOptions > 0) {
-      
+
       this.creditos_entities = ``;
 
       el.scrollIntoView();
@@ -430,12 +457,12 @@ export class HomePageComponent implements OnInit {
 
       for (let entry of selectedCreditsIds1) {
         let aux = this.can_access_credit.find(x => x.id == entry);
-        this.creditos_entities+=aux.name_financial_entity+', ';
+        this.creditos_entities += aux.name_financial_entity + ', ';
       }
 
       for (let entry of selectedCreditsIds2) {
         let aux = this.cannot_access_credit.find(x => x.id == entry);
-        this.creditos_entities+=aux.name_financial_entity+', ';
+        this.creditos_entities += aux.name_financial_entity + ', ';
       }
 
     } else {
@@ -448,8 +475,10 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
-    //this.addCheckboxesCredit_type();
+    this.personalDataForm.controls['maritalStatus'].setValue({ id: -1, status: 'ESTADO CIVIL' });
 
+
+    /* TODO DE CREDITOS */
     this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
@@ -463,15 +492,24 @@ export class HomePageComponent implements OnInit {
     /*  End - Get all provinces */
 
 
+    /* TODO DE SEGUROS */
+    this.insuranceform.controls['vehicleBrand'].setValue({ id: -1, brand_name: 'MARCA*' });
+    this.insuranceform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+    this.insuranceform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
+    this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+    this.insuranceform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
+    /*  Get all car brands. */
+    this.httpService.getAllCarBrands().subscribe(res => {
+      this.vehicleBrand = res.data;
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+    /*  End - all car brands. */
+
 
     /*  Start - Search by location. */
     this.httpService.getCurrentCity().subscribe(res => {
-      this.country_name = res.country_name;
-      let aux = res.region.split(" ");
-      aux.splice(0, 2);
-      this.region_name = aux.join(" ").toLowerCase();
-      //console.log(res);
-
       this.httpService.verifyLocationExistence(res.region_code).subscribe(resp => {
         this.region_code = res.region_code;
       }, error => {
@@ -493,7 +531,6 @@ export class HomePageComponent implements OnInit {
       this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
       this.cities = []
       this.cities = res.data;
-      console.log(this.cities);
     }, error => {
       console.log('error');
       console.log(error);
@@ -565,63 +602,166 @@ export class HomePageComponent implements OnInit {
   /* Forms Submitted */
   onSubmitEstimateForm(element: HTMLElement) {
 
-    console.log(this.estimateform.get('credit_type_userSelected').value);
+    if (this.estimateform.get('credit_type_userSelected').value === 'creditos') {
 
-    let amountRequest: number = this.amountRequest.value;
-    let monthlyIncome: number = this.monthlyIncome.value;
-    let entryAmount: number = this.entryAmount.value;
-    let term: number = this.term.value;
+      this.creditSectionForm = true;
+      this.insuranceSectionForm = false;
 
-    if (entryAmount !== null || entryAmount !== 0) {
-      if (entryAmount < (amountRequest * 0.9)) {
-        this.correctly = true;
+      let amountRequest: number = this.amountRequest.value;
+      let monthlyIncome: number = this.monthlyIncome.value;
+      let entryAmount: number = this.entryAmount.value;
+      let term: number = this.term.value;
+
+      if (entryAmount !== null || entryAmount !== 0) {
+        if (entryAmount < (amountRequest * 0.9)) {
+          this.correctly = true;
+        } else {
+          this.correctly = false;
+        }
+      }
+
+      /*Cambio temporal por cambio de provincia*/
+      this.region_code = 'A';
+
+      if (this.correctly) {
+        this.correctly2 = true;
+        this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyIncome, term, entryAmount).subscribe(res => {
+          if (res.status == 200) {
+
+            if (this.can_access_credit) {
+              this.can_access_credit_userSelected.clear()
+            }
+
+            if (this.cannot_access_credit) {
+              this.cannot_access_credit_userSelected.clear()
+            }
+
+            this.creditOptions = res.data;
+            this.can_access_credit = res.data.can_access_credit;
+            this.cannot_access_credit = res.data.cannot_access_credit;
+            this.credit_unavailable = res.data.credit_unavailable;
+            this.addCheckboxesCan_access_credit();
+            this.addCheckboxesCannot_access_credit();
+
+            element.scrollIntoView({ behavior: 'smooth' });
+
+          } else {
+            console.log('Ah ocurrido un error!' + res.message);
+          }
+        }, error => {
+          console.log('error');
+          console.log(error);
+        });
       } else {
-        this.correctly = false;
+        this.correctly2 = false;
+        if (this.can_access_credit) {
+          this.can_access_credit_userSelected.clear();
+          this.can_access_credit = 0;
+        }
+        if (this.cannot_access_credit) {
+          this.cannot_access_credit_userSelected.clear()
+          this.cannot_access_credit = 0;
+        }
+        if (this.credit_unavailable) {
+          this.credit_unavailable.length = 0;
+        }
       }
     }
 
-    if (this.correctly) {
-      this.correctly2 = true;
-      this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyIncome, term, entryAmount).subscribe(res => {
+    if (this.estimateform.get('credit_type_userSelected').value === 'seguros') {
+
+      this.creditSectionForm = false;
+      this.insuranceSectionForm = true;
+
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  onSubmitInsuranceForm(element: HTMLElement) {
+    
+    this.insuranceoptions = [];
+    this.cont_insurances = 0;
+    this.cant_insurances = 0;
+
+    this.insuranceformSubmitted = true;
+    if (this.insuranceform.valid) {
+
+      console.log('Finalizó información vehicular');
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = true;
+      this.section4 = false;
+      this.section5 = false;
+
+      let request: CarInsuranceRequest = {} as CarInsuranceRequest;
+      request.insured_dni = this.personalDataForm.value.dni;
+      request.insured_age = 22;
+      request.insured_name = this.personalDataForm.value.names;
+      request.insured_lastname = this.personalDataForm.value.last_names;
+
+      request.insured_gender = 'HOMBRE';
+      request.insured_marital_status = this.personalDataForm.value.maritalStatus.status;
+
+      request.region = 'AZUAY';
+      request.city = 'CUENCA';
+
+      request.car_year = this.insuranceform.value.vehicleModel.year;
+      request.car_brand = this.insuranceform.value.vehicleBrand.brand_name;
+      request.car_model = this.insuranceform.value.vehicleModel.model_name;
+      request.car_description = this.insuranceform.value.vehicleDescription.description;
+      request.carprice_id = this.insuranceform.value.vehicleDescription.price_id;
+      request.car_color = this.insuranceform.value.vehicleColor.color_name;
+      request.car_license_plate = this.insuranceform.value.vehiclePlate;
+
+      if (this.subsc1) {
+        this.subsc1.unsubscribe();
+      }
+
+      if (this.subsc2 && this.subsc2.length) {
+        for (let entry of this.subsc2)
+          entry.unsubscribe();
+      }
+
+      this.subsc1 = this.httpService.getAllInsuranceCompanies().subscribe(res => {
+
         if (res.status == 200) {
+          let insurances = res.data;
+          //console.log(insurances);
+          this.cant_insurances = insurances.length;
 
-          if (this.can_access_credit) {
-            this.can_access_credit_userSelected.clear()
+          for (let entry of insurances) {
+            request.insurancecompany_id = entry.id;
+            
+            this.subsc2.push(
+              this.httpService.getInsuranceInformation(request).subscribe(resp => {
+                this.cont_insurances = this.cont_insurances + 1;
+                //console.log(resp);
+                if (res.status == 200) {
+                  if (resp.data && resp.data.aseguradoras.length > 0) {
+                    console.log(resp.data.aseguradoras[0]);
+                    //this.insuranceoptions.push(resp.data.aseguradoras[0]);
+                  }
+                } else {
+                  console.log(res);
+                  console.log('Ah ocurrido un error!' + res.status);
+                }
+              }, error => {
+                console.log('error');
+                console.log(error);
+              })
+            );
           }
 
-          if (this.cannot_access_credit) {
-            this.cannot_access_credit_userSelected.clear()
-          }
-
-          this.creditOptions = res.data;
-          this.can_access_credit = res.data.can_access_credit;
-          this.cannot_access_credit = res.data.cannot_access_credit;
-          this.credit_unavailable = res.data.credit_unavailable;
-          this.addCheckboxesCan_access_credit();
-          this.addCheckboxesCannot_access_credit();
-
-          element.scrollIntoView({ behavior: 'smooth' });
+          console.log(this.insuranceoptions);
 
         } else {
-          console.log('Ah ocurrido un error!' + res.message);
+          console.log(res);
+          console.log('Ah ocurrido un error!' + res.status);
         }
       }, error => {
         console.log('error');
         console.log(error);
       });
-    } else {
-      this.correctly2 = false;
-      if (this.can_access_credit) {
-        this.can_access_credit_userSelected.clear();
-        this.can_access_credit = 0;
-      }
-      if (this.cannot_access_credit) {
-        this.cannot_access_credit_userSelected.clear()
-        this.cannot_access_credit = 0;
-      }
-      if (this.credit_unavailable) {
-        this.credit_unavailable.length = 0;
-      }
     }
   }
 
@@ -644,8 +784,8 @@ export class HomePageComponent implements OnInit {
 
     /* verificar nombre de provincia y pais con select y api */
     creditInformation.city = this.addressForm.value.city;
-    creditInformation.region_name = this.region_name;
-    creditInformation.country_name = this.country_name;
+    creditInformation.region_name = 'AZUAY';
+    creditInformation.country_name = 'ECUADOR';
     creditInformation.address = this.addressForm.value.address;
 
     creditInformation.email = this.contactForm.value.email;
@@ -748,7 +888,6 @@ export class HomePageComponent implements OnInit {
 
 
 
-  
 
 
 
@@ -758,16 +897,147 @@ export class HomePageComponent implements OnInit {
 
 
 
-  todos(){
+
+  todos() {
     console.log(`todos`);
   }
 
-  bancos(){
+  bancos() {
     console.log(`bancos`);
   }
 
-  cooperativas(){
+  cooperativas() {
     console.log(`cooperativas`);
+  }
+
+
+
+
+
+
+
+  /* Todo relacionado a seguro de vehículos */
+
+  public typeVehicle: any;
+  public vehicleBrand: any;
+  public vehicleModel: any;
+  public vehicleYear: any;
+  public vehicleDescription: any;
+
+  public vehicleColors: any = [
+    { id: 1, color_name: 'AMARILLO' },
+    { id: 2, color_name: 'AZUL' },
+    { id: 3, color_name: 'BEIGE' },
+    { id: 4, color_name: 'BLANCO' },
+    { id: 5, color_name: 'BRONCE' },
+    { id: 6, color_name: 'CAFE' },
+    { id: 7, color_name: 'CELESTE' },
+    { id: 8, color_name: 'COBRE' },
+    { id: 9, color_name: 'CREMA' },
+    { id: 10, color_name: 'DORADO' },
+    { id: 11, color_name: 'FUCSIA' },
+    { id: 12, color_name: 'GRIS' },
+    { id: 13, color_name: 'ABANO' },
+    { id: 14, color_name: 'LILA' },
+    { id: 15, color_name: 'MARFIL' },
+    { id: 16, color_name: 'MORADO' },
+    { id: 17, color_name: 'MOSTAZA' },
+    { id: 18, color_name: 'NARANJA' },
+    { id: 18, color_name: 'NEGRO' },
+    { id: 19, color_name: 'OTROS' },
+    { id: 20, color_name: 'PERLA' },
+    { id: 21, color_name: 'PLATA' },
+    { id: 22, color_name: 'PLATEADO' },
+    { id: 23, color_name: 'PLOMO' },
+    { id: 24, color_name: 'ROJO' },
+    { id: 25, color_name: 'ROSADO' },
+    { id: 26, color_name: 'TOMATE' },
+    { id: 27, color_name: 'TURQUEZA' },
+    { id: 28, color_name: 'VERDE' },
+    { id: 29, color_name: 'VINO' },
+  ]
+
+  public insuranceoptions: any = [];
+  public cant_insurances: number = 0;
+  public cont_insurances: number = 0;
+  public subsc1: any;
+  public subsc2: any = [];
+
+  /* Formulario seguro-vehicular*/
+  insuranceform = this.formbuilder.group({
+    vehicleBrand: ['', [Validators.required, validateSelect]],
+    vehicleModel: ['', [Validators.required, validateSelect]],
+    vehicleYear: ['', [Validators.required, validateSelect]],
+    vehicleDescription: ['', [Validators.required, validateSelect]],
+    vehicleColor: ['', [Validators.required, validateSelect]],
+    vehiclePlate: [''],
+
+    // maritalStatus: ['', [Validators.required, validateSelect]],
+    // gender: ['', [Validators.required, validateSelect]],
+    // regionName: ['', [Validators.required]],
+    // cityName: ['', [Validators.required]],
+    // dni: ['', [Validators.required, validateCedula]],
+    // name: ['', [Validators.required]],
+    // lastName: ['', [Validators.required]],
+    // age: ['', [Validators.required]]
+  });
+
+  /* Validar insuranceform */
+  insuranceformSubmitted: boolean;
+  isFieldValidInsuranceform(field: string) {
+    return (
+      this.insuranceform.get(field).errors && this.insuranceform.get(field).touched ||
+      this.insuranceform.get(field).untouched &&
+      this.insuranceformSubmitted && this.insuranceform.get(field).errors
+    );
+  }
+
+  changeCarBrand(event) {
+    let id_brand: number = event.id;
+    this.httpService.getYearByBrand(id_brand).subscribe(res => {
+      this.insuranceform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+      this.insuranceform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
+      this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleModel = [];
+      this.vehicleYear = [];
+      this.vehicleDescription = [];
+      this.vehicleYear = res.data;
+      //console.log(this.vehicleYear);
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+  }
+
+  changeCarYear(event) {
+    let year: number = event.year;
+    let id_model: number = event.brand_id;
+    this.httpService.getModelByYear(id_model, year).subscribe(res => {
+      this.insuranceform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+      this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleModel = [];
+      this.vehicleDescription = [];
+      this.vehicleModel = res.data;
+      //console.log(this.vehicleYear);
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+  }
+
+  changeCarModel(event) {
+    let id_model: number = event.model_id;
+    let year: number = event.year;
+    let id_brand: number = event.brand_id;
+    this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
+      this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleDescription = [];
+      this.vehicleDescription = res.data;
+      //console.log(this.vehicleYear);
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
   }
 }
 

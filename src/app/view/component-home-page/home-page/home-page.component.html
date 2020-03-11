@@ -142,7 +142,7 @@
     </section>
 
 
-    <!-- CALCULATOR & STEPS SECTION -->
+    <!-- CALCULATOR -->
 
     <section #calculator class="container">
 
@@ -264,7 +264,7 @@
             </div>
 
             <!-- VALUES BOX -->
-            <div *ngIf="valuesCreditSection" class="row justify-content-between mx-3 px-md-0">
+            <div *ngIf="creditSection" class="row justify-content-between mx-3 px-md-0">
                 <div class="my-2 my-lg-0  box-values-slider">
                     <div class="custom-slider">
                         <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
@@ -297,20 +297,27 @@
             </div>
 
             <!-- CALCULATE BUTTON -->
-            <div class="row mt-5 justify-content-center mx-3 px-md-0">
+            <div *ngIf="creditSection" class="row mt-5 justify-content-center mx-3 px-md-0">
                 <div class="col-md-6 col-lg-3">
                     <button type="submit" class="btn button btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0" (click)="onSubmitEstimateForm(target)">CALCULAR</button>
-                    <!-- <button type="button" class="btn button btn-block" (click)="cambiar()">cambiar</button> -->
                 </div>
             </div>
+
+            <!-- CONTINUE BUTTON -->
+            <div *ngIf="insuranceSection" class="row mt-5 justify-content-center mx-3 px-md-0">
+                <div class="col-md-6 col-lg-3">
+                    <button type="submit" class="btn button btn-block" [disabled]="!id_insurance" (click)="onSubmitEstimateForm(target)">CONTINUAR</button>
+                </div>
+            </div>
+
         </form>
 
     </section>
 
 
-    <!-- RESULTS SECTION -->
-
-    <section #target class="container">
+    <!-- CREDIT RESULTS SECTION -->
+    <section #target></section>
+    <section *ngIf="creditSectionForm" class="container">
 
         <div class="row">
             <div class="d-none d-lg-block col-3">
@@ -402,7 +409,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <ng-select class="custom" [items]="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
+                                            <ng-select class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
                                             </ng-select>
                                         </div>
                                     </div>
@@ -1282,6 +1289,479 @@
 
     </section>
 
+    <!-- CREDIT RESULTS SECTION -->
+
+    <section *ngIf="insuranceSectionForm" #target class="container">
+
+        <div class="row">
+            <div class="d-none d-lg-block col-3">
+                <div class="row">
+                    <div class="col bg-4 text-center">
+                        <img class="img-fluid" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
+
+                        <ul class="timeline text-left text-uppercase tittle-11 color-1">
+                            <li>
+                                <summary (click)="section2_1(target)">Identificación</summary>
+                                <p class="mt-4">datos personales</p>
+                                <p>domicilio actual</p>
+                                <p>contacto</p>
+                            </li>
+                            <li>
+                                <summary (click)="section3_2(target)">Información vehicular</summary>
+                                <p class="mt-4">el vehiculo</p>
+                            </li>
+                            <li>
+                                <summary (click)="section1_3(target)">Mi seguro</summary>
+                                <p class="mt-4">solicitud</p>
+                            </li>
+                            <li>
+                                <summary href="#">Solicitud lista</summary>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row mt-3 mx-1">
+                    <div class="col-12">
+                        <p class="tittle-10">Tienes la seguridad y confianza</p>
+                        <p class="text-light-14">Para nosotros es primordial brindarte toda la seguridad posible y confianza que necesitas durante todo el proceso. Estamos avalados por</p>
+                        <owl-carousel-o [options]="customOptions">
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-austro-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-biess-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-bolivariano-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-dinnersClub-188x100.png">
+                                </div>
+                            </ng-template>
+                            <ng-template carouselSlide>
+                                <div class="bg-0 mx-1 rounded">
+                                    <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png">
+                                </div>
+                            </ng-template>
+                        </owl-carousel-o>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-9">
+                <div class="row mx-2 mx-md-0 justify-content-center py-5">
+
+                    <div class="col-12 col-lg-8" *ngIf="section1">
+
+                        <h2 class="tittle-1 mb-2">Identificación</h2>
+                        <p class="text-light-14">Con Asesori puedes acceder a créditos en varios Bancos, Mutualistas o Cooperativas de forma más fácil y segura, por lo que necesitamos identicarte. </p>
+
+                        <aw-wizard>
+                            <aw-wizard-step>
+
+                                <ng-template awWizardStepTitle>
+                                    <span class="tittle-13 color-1">Datos personales</span>
+                                </ng-template>
+
+                                <form [formGroup]="personalDataForm">
+
+                                    <div class="row my-4">
+                                        <div class="col-12 col-md-6 my-md-0 my-4">
+                                            <div class="position-relative">
+                                                <input type="text" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
+                                                <span class="floating-label text-uppercase">numero de identidad*</span>
+                                                <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
+                                                    <span>Ingrese su cédula!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <ng-select class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="text" formControlName="names" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('names')}">
+                                                <span class="floating-label text-uppercase">nombres*</span>
+                                                <div *ngIf="isFieldValidPersonalData('names')" class="invalid-feedback">
+                                                    <span>Ingrese sus nombres!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="text" formControlName="last_names" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('last_names')}">
+                                                <span class="floating-label text-uppercase">apellidos*</span>
+                                                <div *ngIf="isFieldValidPersonalData('last_names')" class="invalid-feedback">
+                                                    <span>Ingrese sus apellidos!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="date">
+                                                <span class="floating-label text-uppercase">fecha de nacimiento</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4 justify-content-center">
+                                        <div class="col-12 col-md-4">
+                                            <button type="submit" [disabled]="!personalDataForm.valid" class="btn button btn-block" awNextStep (click)="onSubmitPersonalDataForm()" (finalize)="scrollToTop(target)">CONTINUAR</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </aw-wizard-step>
+                            <aw-wizard-step>
+
+                                <ng-template awWizardStepTitle>
+                                    <span class="tittle-13 color-1">Domicilio actual</span>
+                                </ng-template>
+
+                                <form [formGroup]="addressForm">
+
+                                    <div class="row my-0 my-md-4">
+                                        <div class="col-12 col-md-6 my-md-0 my-4">
+                                            <ng-select class="custom" [items]="provinces" placeholder="provincia*" formControlName="province" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="isFieldValidaddressForm('province')" class="invalid-feedback">
+                                                <span>Seleccione una provincia!</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <ng-select class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="isFieldValidaddressForm('city')" class="invalid-feedback">
+                                                <span>Seleccione una ciudad!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="text" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                                <span class="floating-label text-uppercase">direccion*</span>
+                                                <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
+                                                    <span>Ingrese su dirección!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control text-uppercase" required>
+                                                <span class="floating-label text-uppercase">referencia</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control text-uppercase" required>
+                                                <span class="floating-label text-uppercase">sector</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4 justify-content-between">
+                                        <div class="col-4 d-none d-sm-block">
+                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>REGRESAR</button>
+                                        </div>
+                                        <div class="col-4 d-block d-sm-none">
+                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
+                                        </div>
+                                        <div class="col-4 d-none d-sm-block">
+                                            <button type="submit" [disabled]="!addressForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep (click)="onSubmitaddressForm()">CONTINUAR</button>
+                                        </div>
+                                        <div class="col-4 d-block d-sm-none">
+                                            <button type="submit" [disabled]="!addressForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" awNextStep (click)="onSubmitaddressForm()">&gt;</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </aw-wizard-step>
+                            <aw-wizard-step>
+
+                                <ng-template awWizardStepTitle>
+                                    <span class="tittle-13 color-1">Contacto</span>
+                                </ng-template>
+
+                                <form [formGroup]="contactForm">
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="tel" formControlName="phone" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}">
+                                                <span class="floating-label text-uppercase">telefono para
+                                                    contacto*</span>
+                                                <div *ngIf="isFieldValidContactForm('phone')" class="invalid-feedback">
+                                                    <span>Ingrese teléfono!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="tel" class="form-control text-uppercase" required>
+                                                <span class="floating-label text-uppercase">telefono opcional de
+                                                    contacto</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col-12">
+                                            <div class="position-relative">
+                                                <input type="email" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}">
+                                                <span class="floating-label text-uppercase">correo electromico*</span>
+                                                <div *ngIf="isFieldValidContactForm('email')" class="invalid-feedback">
+                                                    <span>Ingrese correo electrónico!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4 justify-content-between">
+                                        <div class="col-4 d-none d-sm-block">
+                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>REGRESAR</button>
+                                        </div>
+                                        <div class="col-4 d-block d-sm-none">
+                                            <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
+                                        </div>
+                                        <div class="col-4 d-none d-sm-block">
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">CONTINUAR</button>
+                                        </div>
+                                        <div class="col-4 d-block d-sm-none">
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">&gt;</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </aw-wizard-step>
+                        </aw-wizard>
+                    </div>
+
+                    <div class="col-12 col-lg-8" *ngIf="section2">
+
+                        <h2 class="tittle-1 mb-2">Información vehicular </h2>
+                        <p class="text-light-14">La información de tu vehículo es valiosa para obtener la información que necesitas sobre tu seguro.</p>
+
+                        <form [formGroup]="insuranceform">
+
+                            <div class="row my-0 my-md-4">
+                                <div class="col-12 col-md-6 my-md-0 my-4">
+                                    <ng-select class="custom" [items]="vehicleBrand" formControlName="vehicleBrand" (change)="changeCarBrand($event)" [searchable]="true" bindLabel="brand_name" [clearable]="false">
+                                    </ng-select>
+                                    <div *ngIf="isFieldValidInsuranceform('vehicleBrand')" class="invalid-feedback">
+                                        <span>Seleccione una marca!</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <ng-select class="custom" [items]="vehicleYear" formControlName="vehicleYear" [searchable]="true" bindLabel="year" (change)="changeCarYear($event)" [clearable]="false">
+                                    </ng-select>
+                                    <div *ngIf="isFieldValidInsuranceform('vehicleYear')" class="invalid-feedback">
+                                        <span>Seleccione un año!</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-4">
+                                <div class="col-12">
+                                    <ng-select class="custom" [items]="vehicleModel" formControlName="vehicleModel" [searchable]="true" bindLabel="model_name" (change)="changeCarModel($event)" [clearable]="false">
+                                    </ng-select>
+                                    <div *ngIf="isFieldValidInsuranceform('vehicleModel')" class="invalid-feedback">
+                                        <span>Seleccione un modelo!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 mb-0 my-md-4">
+                                <div class="col-12">
+                                    <ng-select class="custom" [items]="vehicleDescription" formControlName="vehicleDescription" [searchable]="true" bindLabel="description" [clearable]="false">
+                                    </ng-select>
+                                    <div *ngIf="isFieldValidInsuranceform('vehicleDescription')" class="invalid-feedback">
+                                        <span>Seleccione la descripción!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4 mb-0 my-md-4">
+                                <div class="col-12">
+                                    <ng-select class="custom" [items]="vehicleColors" formControlName="vehicleColor" [searchable]="true" bindLabel="color_name" [clearable]="false">
+                                    </ng-select>
+                                    <div *ngIf="isFieldValidInsuranceform('vehicleColor')" class="invalid-feedback">
+                                        <span>Seleccione un color!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row my-0 my-md-4">
+                                <div class="col-12">
+                                    <div class="position-relative">
+                                        <input type="text" class="form-control text-uppercase" formControlName="vehiclePlate">
+                                        <span class="floating-label text-uppercase">placa</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row mt-4 mb-0 my-md-4">
+                                <div class="col-12">
+                                    <div class="position-relative">
+                                        <input type="tel" currencyMask class="form-control" required>
+                                        <span class="floating-label text-uppercase">detalles del vehiculo</span>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="row my-4 justify-content-center">
+                                <div class="col-12 col-md-4">
+                                    <button type="submit" [disabled]="!insuranceform.valid" (click)="onSubmitInsuranceForm(target)" class="btn button btn-block">CONTINUAR</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-12 col-lg-8" *ngIf="section3">
+
+                        <div *ngIf="results && results.length">
+
+                            <div *ngIf="cant_insurances!=cont_insurances">
+                                Todavía se están cargando resultados
+                            </div>
+
+                            <div *ngIf="cant_insurances==cont_insurances">
+                                Consultas terminadas
+                            </div>
+
+                            <li *ngFor="let entry of results" class="list-group-item">
+
+                                <h2>Aseguradora: {{entry.nombre_corto}}</h2>
+                                <p><strong>Producto: {{entry.name}}</strong></p>
+
+                                <h4>Beneficios</h4>
+                                <p><b>{{entry.beneficiosadicionales1}}</b></p>
+
+                            </li>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-8" *ngIf="section4">
+
+                        <h2 class="tittle-1 mb-2">Mi crédito </h2>
+                        <p class="text-light-14">Ya terminamos! completa esta información para asegurar tu solicitud de crédito y acceder más fácil y seguro.</p>
+
+                        <div class="row mt-5 mb-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <p class="floating-label-static text-uppercase">estas buscando</p>
+                                    <p class="tittle-10">Crédito para mi casa</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <p class="floating-label-static text-uppercase">instituciones seleccionadas*</p>
+                                    <p class="tittle-10">{{creditos_entities}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <p class="floating-label-static text-uppercase">monto a solicitar*</p>
+                                    <p class="tittle-10">$ {{amountRequest.value | number : '1.2-2':'fr' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <p class="floating-label-static text-uppercase">entrada (valor opcional)*</p>
+                                    <p class="tittle-10">$ {{entryAmount.value | number : '1.2-2':'fr' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <p class="floating-label-static text-uppercase">plazo (meses)*</p>
+                                    <p class="tittle-10">{{term.value}} meses</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-5 justify-content-between">
+                            <div class="col-4 d-none d-sm-block">
+                                <button type="button" class="btn button btn-block" (click)="section4_3(target)">REGRESAR</button>
+                            </div>
+                            <div class="col-4 d-block d-sm-none">
+                                <button type="button" class="btn button btn-block" (click)="section4_3(target)">&lt;</button>
+                            </div>
+                            <div class="col-4 d-none d-sm-block">
+                                <button type="submit" class="btn button btn-block" (click)="onSubmitRequestSummary(target)">FINALIZAR</button>
+                            </div>
+                            <div class="col-4 d-block d-sm-none">
+                                <button type="submit" class="btn button btn-block" (click)="onSubmitRequestSummary(target)">✓</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-8 align-self-center" *ngIf="section5">
+
+                        <h2 class="tittle-1 mb-5 text-center color-1">¡Solicitud lista!</h2>
+                        <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
+                        </p>
+
+                        <p class="mt-5 mb-3 tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud</p>
+
+                        <div class="row mt-5 mb-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" required>
+                                    <span class="floating-label text-uppercase">Username*</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <input type="email" class="form-control" required>
+                                    <span class="floating-label text-uppercase">Email*</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <input type="password" class="form-control" required>
+                                    <span class="floating-label text-uppercase">Password*</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-5 justify-content-center">
+                            <div class="col-12 col-md-4">
+                                <button type="submit" class="btn button btn-block">CREAR CUENTA</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
 
 
     <!-- RANKING SECTION -->

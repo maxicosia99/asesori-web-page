@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserAuth } from '../../models/userAuth';
 import { UserRegister } from 'src/app/models/user-register';
+import { CarInsuranceRequest } from 'src/app/models/car-insurance-request';
 
 /*
 * Variable para adicionar información a las peticiones
@@ -116,5 +117,43 @@ export class HttpClientService {
     return this.doGetRequest(url);
   }
   /* End - Get provinces - cities  */
+
+
+  /* ---------------------------------  SEGUROS DE VEHICULOS ------------------------------ */
+
+  getAllCarBrands(): Observable<any> {
+    let url = this.getEndUrl(`/api/autos/marcas?categoria=1`);
+    return this.doGetRequest(url);
+  }
+
+  getYearByBrand(id_brand: number): Observable<any> {
+    let url = this.getEndUrl(`/api/autos/anos?marca=${id_brand}`);
+    return this.doGetRequest(url);
+  }
+
+  getModelByYear(id_model: number, year: number): Observable<any> {
+    let url = this.getEndUrl(`/api/autos/modelos?marca=${id_model}&ano=${year}`);
+    return this.doGetRequest(url);
+  }
+
+  getDescriptionByModel(id_model: number, id_brand: number, year: number, ): Observable<any> {
+    let url = this.getEndUrl(`/api/autos/descripciones?marca=${id_brand}&ano=${year}&modelo=${id_model}`);
+    return this.doGetRequest(url);
+  }
+
+  getAllInsuranceOptions(id_car: number): Observable<any> {
+    let url = this.getEndUrl(`/api/seguros/buscarcuota?auto=${id_car}`);
+    return this.doGetRequest(url);
+  }
+
+  getAllInsuranceCompanies(): Observable<any> {
+    let url = this.getEndUrl(`/api/seguros/aseguradoras`);
+    return this.doGetRequest(url);
+  }
+
+  getInsuranceInformation(body: CarInsuranceRequest): Observable<any> {
+    let url = this.getEndUrl(`/api/seguros/calcular-cuota`);
+    return this.doPostRequest(url, body);
+  }
 
 }
