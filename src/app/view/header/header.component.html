@@ -1,51 +1,57 @@
 <header>
-    <nav class="navbar fixed-top navbar-expand-md navbar-light">
+    <nav class="navbar fixed-top navbar-expand-md navbar-light ">
         <div class="container py-0">
 
             <a class="navbar-brand" routerLink="/homepage">
                 <img src="/assets/img/asesori-logo-negative.png" width="60px" height="60px" alt="">
             </a>
 
-            <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+            <button class="navbar-toggler" type="button" (click)="toggleNavbar()" aria-controls="collapseBasic">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+
+            <div class="collapse navbar-collapse" id="collapseBasic" [collapse]="!navbarOpen" [isAnimated]="false">
                 <ul class="navbar-nav ml-auto">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/homepage" routerLinkActive="active-link">Inicio</a>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link tittle-10 mt-1" routerLink="/homepage" routerLinkActive="active-link">Inicio</a>
+                        <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/services" routerLinkActive="active-link">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tittle-10 mt-1" routerLink="/services" routerLinkActive="active-link">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link tittle-10 mt-1" routerLink="/homepage" routerLinkActive="active-link">Testimonios</a>
+                        <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/homepage" routerLinkActive="active-link">Testimonios</a>
                     </li>
                     <li *ngIf="!loginVerified(); else elseBlock" class="nav-item">
                         <a (click)="openModal()" class="nav-link tittle-10 mt-1">Iniciar sesión</a>
                     </li>
+
+                    <!-- <li class="nav-item" dropdown placement="left">
+                        <a href id="basic-link" dropdownToggle (click)="false" class="nav-link tittle-10 mt-1" aria-controls="basic-link-dropdown">User <span class="caret"></span></a>
+                        <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="basic-link">
+                            <li class="nav-item">
+                                <a (click)="onLoggedout()" class="nav-link tittle-10 mt-1">Salir</a>
+                            </li>
+                        </ul>
+                    </li> -->
+
+                    <!-- <li class="nav-item" role="menuitem" dropdown placement="right">
+                        <a dropdownToggle class="dropdown-item dropdown-toggle nav-link tittle-10 mt-1" (click)="false">User<span class="caret"></span></a>
+                        <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li role="menuitem"><a class="dropdown-item nav-link tittle-10 mt-1">Salir</a></li>
+                        </ul>
+                    </li> -->
+
                     <ng-template #elseBlock>
                         <li class="nav-item">
-                            <a class="nav-link tittle-10 mt-1 text-white">{{user.username}}</a>
+                            <a class="nav-link tittle-10 mt-1"><i class="fas fa-user-circle"></i> {{user.username}}</a>
                         </li>
                         <li class="nav-item">
                             <a (click)="onLoggedout()" class="nav-link tittle-10 mt-1">Salir</a>
                         </li>
                     </ng-template>
-                    <!-- <li class="nav-item btn-group" dropdown [insideClick]="true">
-                    <a id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle nav-link tittle-10 " aria-controls="dropdown-animated">
-                        INGRESAR <span class="caret"></span>
-                    </a>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
-                        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-                        <li class="divider dropdown-divider"></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-                        </li>
-                    </ul>
-                </li> -->
                 </ul>
             </div>
+
         </div>
     </nav>
 </header>

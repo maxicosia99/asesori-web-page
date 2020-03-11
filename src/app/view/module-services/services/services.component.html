@@ -3,12 +3,10 @@
     <section class="container">
         <form [formGroup]="myForm">
             <div class="row justify-content-center">
-                <div class="col-10 col-md-6 text-center">
-                    <div class="form-group">
-                        <div class="btn-group btn-group-sm rounded" btnRadioGroup formControlName="radio">
-                            <label btnRadio="0" (click)="creditos()" class="btn btn-primary tittle-7 bg-0 color-4 border-bg-1" tabindex="0" role="button">CRÉDITOS</label>
-                            <label btnRadio="1" (click)="seguros()" class="btn btn-primary tittle-7 bg-0 color-4 border-bg-1" tabindex="0" role="button">SEGUROS</label>
-                        </div>
+                <div class="col-10 px-4 col-md-4 text-center">
+                    <div class="btn-group special btn-group-sm" btnRadioGroup formControlName="radio">
+                        <label btnRadio="0" (click)="creditos()" class="btn tittle-7 bg-0" tabindex="0" role="button">CRÉDITOS</label>
+                        <label btnRadio="1" (click)="seguros()" class="btn tittle-7 bg-0" tabindex="0" role="button">SEGUROS</label>
                     </div>
                 </div>
             </div>
@@ -89,8 +87,6 @@
                                 <p class="text-light-14">{{destination}}</p>
                             </div>
 
-                            <p class="text-light-14">Compra de bienes, servicios o gastos no relacionados con una actividad productiva.
-                            </p>
                             <p class="tittle-8">Términos: </p>
 
                             <div *ngFor="let terms of terms">

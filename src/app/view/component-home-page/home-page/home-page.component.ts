@@ -405,6 +405,7 @@ export class HomePageComponent implements OnInit {
   creditform = this.formbuilder.group({
     can_access_credit_userSelected: new FormArray([]),
     cannot_access_credit_userSelected: new FormArray([]),
+    radio: '0'
   });
 
   onSubmitCreditform(el: HTMLElement) {
@@ -489,7 +490,7 @@ export class HomePageComponent implements OnInit {
   changeProvince(event) {
     let idProvince: number = event.id;
     this.httpService.getCities(idProvince).subscribe(res => {
-      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD' });
+      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
       this.cities = []
       this.cities = res.data;
       console.log(this.cities);
@@ -755,9 +756,7 @@ export class HomePageComponent implements OnInit {
 
 
 
-  myForm = this.formbuilder.group({
-    radio: '0'
-  });
+
 
   todos(){
     console.log(`todos`);

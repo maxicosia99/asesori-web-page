@@ -35,3 +35,29 @@
     background-color: #0079ab;
     color: #fff;
 }
+
+label:active,
+label:focus,
+[role="button"][aria-pressed="true"] {
+    background-color: #0079a8;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 13px;
+}
+
+label:active,
+label:focus,
+[role="button"][aria-pressed="false"] {
+    background-color: #ffffff;
+    color: #3d3d3d;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.btn-group.special {
+    display: flex;
+}
+
+.special .btn {
+    flex: 1
+}

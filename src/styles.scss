@@ -329,72 +329,7 @@ body {
 }
 
 
-/* Label Inside of Input filed with icon*/
-
-// .form-control {
-// 	padding: 10px 10px 0 40px;
-// }
-// input {
-// 	width: 100%;
-// 	height: 60px;
-// 	border: #c9c9c9 solid 1px;
-// 	border-radius: 9px;
-// 	box-sizing: border-box;
-// 	-webkit-box-sizing: border-box;
-// 	-moz-box-sizing: border-box;
-// 	padding: 10px 10px 0 40px;
-// 	-webkit-appearance: none;
-// 	-moz-appearance: none;
-// 	position: relative;
-// 	font-family: 'Poppins-Regular';
-// 	font-size: 14px;
-// 	line-height: 1.33;
-// 	letter-spacing: 2px;
-// }
-// input:focus~.floating-label input:not(:focus):valid~.floating-label {
-// 	top: 5px;
-// 	font-size: 10px;
-// 	line-height: 1.33;
-// 	letter-spacing: 2px;
-// 	opacity: 1;
-// }
-// input:focus~.floating-label,
-// input:valid~.floating-label {
-// 	top: 5px;
-// 	opacity: 1;
-// 	font-size: 10px;
-// 	line-height: 1.33;
-// 	letter-spacing: 2px;
-// }
-// input:focus~.floating-label,
-// input:not(:focus):valid~.floating-label {
-// 	left: 40px
-// }
-// input:focus~.input-icon {
-// 	color: #383838
-// }
-// .floating-label {
-// 	position: absolute;
-// 	pointer-events: none;
-// 	left: 40px;
-// 	top: 23px;
-// 	transition: .2s ease all;
-// 	color: #777;
-// 	font-size: 12px;
-// 	line-height: 1.33;
-// 	letter-spacing: 2px;
-// }
-// .input-icon {
-// 	position: absolute;
-// 	top: 23px;
-// 	left: 15px;
-// 	color: #727272
-// }
-
-/* ------------------------------------------------------------------------------------------------------------------------------------- */
-
-
-/* Label Inside of Input filed without icon */
+/* Label Inside of Input filed */
 
 .ng-select .ng-select-container {
     padding: 29px 10px;
@@ -498,7 +433,7 @@ input:not(:focus):valid~.floating-label {
 /* ------------------------------------------------------------------------------------------------------------------------------------- */
 
 .button {
-    height: 48px;
+    padding: 15px;
     border-radius: 8px;
     background-color: #0079a8;
     color: #ffffff;
@@ -508,42 +443,9 @@ input:not(:focus):valid~.floating-label {
 }
 
 .button:hover {
-    background-color: #092AB5;
-}
-
-.border-bg-1 {
-    border-color: #f4f4f4;
-}
-
-
-/* FOOTER */
-
-.fab {
-    padding: 10px 10px;
-    font-size: 30px;
-    width: 50px;
-    text-decoration: none;
-    border-radius: 50%;
-}
-
-.fab:hover {
-    opacity: 0.7;
-}
-
-.facebook {
-    background: #3B5998;
-}
-
-.twitter {
-    background: #55ACEE;
-}
-
-.instagram {
-    background: #E1306C;
-}
-
-.whatsapp {
-    background: #25D366;
+    background-color: #fff;
+    color: #0079a8;
+    border: 2px solid #0079a8;
 }
 
 

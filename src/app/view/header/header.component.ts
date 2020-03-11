@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
         this.modalRef = this.modalService.show(LoginComponent);
         this.modalRef.setClass('modal-dialog-centered');
         this.modalRef.content.closeBtnName = 'Close';
+        this.navbarOpen = !this.navbarOpen;
       }
 
     /* ON LOGGED OUT */
@@ -53,6 +54,7 @@ export class HeaderComponent implements OnInit {
     public user: any;
 
     onLoggedout() {
+        this.navbarOpen = !this.navbarOpen;
         this.authService.logOut();
         this.closeSubscriptions();
         console.log('Ha finalizado sesión!')
@@ -75,5 +77,4 @@ export class HeaderComponent implements OnInit {
     }
 
     /* END - ON LOGGED OUT */
-
 }

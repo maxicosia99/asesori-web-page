@@ -16,6 +16,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap';
 import { HeaderComponent } from './view/header/header.component';
 import { FooterComponent } from './view/footer/footer.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { FooterComponent } from './view/footer/footer.component';
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot(),
     AppAuthModule,
   ],
   declarations: [

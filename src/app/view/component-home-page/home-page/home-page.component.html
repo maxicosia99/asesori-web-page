@@ -62,7 +62,7 @@
 
     <section class="container-fluid bg-1">
 
-        <div class="container">
+        <div class="container px-3">
 
             <div class="row justify-content-around align-items-center">
                 <div class="col-12 col-lg-2">
@@ -228,10 +228,10 @@
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div class="container py-0">
                                 <div class="row px-3 px-md-5 row-hover">
-                                    <div class="col">
+                                    <div class="col-12 col-lg-2">
                                         <span class="tittle-9">{{item.name}}</span>
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-12 col-lg-10">
                                         <span class="text-14">({{item.description}})</span>
                                     </div>
                                 </div>
@@ -249,10 +249,10 @@
                         <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                             <div class="container py-0">
                                 <div class="row px-3 px-md-5 row-hover">
-                                    <div class="col">
+                                    <div class="col-12 col-lg-2">
                                         <span class="tittle-9">{{item.name}}</span>
                                     </div>
-                                    <div class="col-10">
+                                    <div class="col-12 col-lg-10">
                                         <span class="text-14">({{item.description}})</span>
                                     </div>
                                 </div>
@@ -893,7 +893,7 @@
 
                             <!-- RESULTS SECTION TEST -->
 
-                            <div class="row px-4 px-md-0">
+                            <div class="row px-3 px-md-0">
                                 <div class="col-12 text-right tittle-9 color-1 recalculate-text" (click)="moveSection(calculator)">
                                     <span>
                                         <i class="fas fa-redo-alt"></i>
@@ -906,21 +906,15 @@
                                 </div>
                             </div>
 
-                            <form [formGroup]="myForm" class="">
-
-                                <div class="row mt-4 justify-content-center">
-                                    <div class="col-10 col-md-6">
-                                        <div class="form-group">
-                                            <div class="btn-group btn-group-sm rounded" btnRadioGroup formControlName="radio">
-                                                <label btnRadio="0" (click)="todos()" class="btn btn-primary tittle-7 bg-1 color-4 border-bg-1" tabindex="0" role="button">TODOS</label>
-                                                <label btnRadio="1" (click)="bancos()" class="btn btn-primary tittle-7 bg-1 color-4 border-bg-1" tabindex="0" role="button">BANCOS</label>
-                                                <label btnRadio="2" (click)="cooperativas()" class="btn btn-primary tittle-7 bg-1 color-4 border-bg-1" tabindex="0" role="button">COOPERATIVAS</label>
-                                            </div>
-                                        </div>
+                            <div class="row my-4 justify-content-center">
+                                <div class="col-10 col-md-6">
+                                    <div class="btn-group special btn-group-sm rounded" btnRadioGroup formControlName="radio">
+                                        <label btnRadio="0" (click)="todos()" class="btn tittle-7 bg-1" tabindex="0" role="button">TODOS</label>
+                                        <label btnRadio="1" (click)="bancos()" class="btn tittle-7 bg-1" tabindex="0" role="button">BANCOS</label>
+                                        <label btnRadio="2" (click)="cooperativas()" class="btn tittle-7 bg-1" tabindex="0" role="button">COOPERATIVAS</label>
                                     </div>
                                 </div>
-
-                            </form>
+                            </div>
 
                             <div id="global">
 
