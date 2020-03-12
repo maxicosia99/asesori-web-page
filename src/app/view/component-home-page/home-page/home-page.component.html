@@ -1289,7 +1289,7 @@
 
     </section>
 
-    <!-- CREDIT RESULTS SECTION -->
+    <!-- INSURANCE RESULTS SECTION -->
 
     <section *ngIf="insuranceSectionForm" #target class="container">
 
@@ -1555,20 +1555,20 @@
                         <h2 class="tittle-1 mb-2">Información vehicular </h2>
                         <p class="text-light-14">La información de tu vehículo es valiosa para obtener la información que necesitas sobre tu seguro.</p>
 
-                        <form [formGroup]="insuranceform">
+                        <form [formGroup]="vehicleform">
 
                             <div class="row my-0 my-md-4">
                                 <div class="col-12 col-md-6 my-md-0 my-4">
                                     <ng-select class="custom" [items]="vehicleBrand" formControlName="vehicleBrand" (change)="changeCarBrand($event)" [searchable]="true" bindLabel="brand_name" [clearable]="false">
                                     </ng-select>
-                                    <div *ngIf="isFieldValidInsuranceform('vehicleBrand')" class="invalid-feedback">
+                                    <div *ngIf="isFieldValidVehicleform('vehicleBrand')" class="invalid-feedback">
                                         <span>Seleccione una marca!</span>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <ng-select class="custom" [items]="vehicleYear" formControlName="vehicleYear" [searchable]="true" bindLabel="year" (change)="changeCarYear($event)" [clearable]="false">
                                     </ng-select>
-                                    <div *ngIf="isFieldValidInsuranceform('vehicleYear')" class="invalid-feedback">
+                                    <div *ngIf="isFieldValidVehicleform('vehicleYear')" class="invalid-feedback">
                                         <span>Seleccione un año!</span>
                                     </div>
                                 </div>
@@ -1577,7 +1577,7 @@
                                 <div class="col-12">
                                     <ng-select class="custom" [items]="vehicleModel" formControlName="vehicleModel" [searchable]="true" bindLabel="model_name" (change)="changeCarModel($event)" [clearable]="false">
                                     </ng-select>
-                                    <div *ngIf="isFieldValidInsuranceform('vehicleModel')" class="invalid-feedback">
+                                    <div *ngIf="isFieldValidVehicleform('vehicleModel')" class="invalid-feedback">
                                         <span>Seleccione un modelo!</span>
                                     </div>
                                 </div>
@@ -1587,7 +1587,7 @@
                                 <div class="col-12">
                                     <ng-select class="custom" [items]="vehicleDescription" formControlName="vehicleDescription" [searchable]="true" bindLabel="description" [clearable]="false">
                                     </ng-select>
-                                    <div *ngIf="isFieldValidInsuranceform('vehicleDescription')" class="invalid-feedback">
+                                    <div *ngIf="isFieldValidVehicleform('vehicleDescription')" class="invalid-feedback">
                                         <span>Seleccione la descripción!</span>
                                     </div>
                                 </div>
@@ -1597,7 +1597,7 @@
                                 <div class="col-12">
                                     <ng-select class="custom" [items]="vehicleColors" formControlName="vehicleColor" [searchable]="true" bindLabel="color_name" [clearable]="false">
                                     </ng-select>
-                                    <div *ngIf="isFieldValidInsuranceform('vehicleColor')" class="invalid-feedback">
+                                    <div *ngIf="isFieldValidVehicleform('vehicleColor')" class="invalid-feedback">
                                         <span>Seleccione un color!</span>
                                     </div>
                                 </div>
@@ -1613,69 +1613,202 @@
                             </div>
 
                             <!-- <div class="row mt-4 mb-0 my-md-4">
-                                <div class="col-12">
-                                    <div class="position-relative">
-                                        <input type="tel" currencyMask class="form-control" required>
-                                        <span class="floating-label text-uppercase">detalles del vehiculo</span>
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <input type="tel" currencyMask class="form-control" required>
+                                            <span class="floating-label text-uppercase">detalles del vehiculo</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> -->
+                                </div> -->
 
                             <div class="row my-4 justify-content-center">
                                 <div class="col-12 col-md-4">
-                                    <button type="submit" [disabled]="!insuranceform.valid" (click)="onSubmitInsuranceForm(target)" class="btn button btn-block">CONTINUAR</button>
+                                    <button type="submit" [disabled]="!vehicleform.valid" (click)="onSubmitVehicleform(target)" class="btn button btn-block">CONTINUAR</button>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <div class="col-12 col-lg-8" *ngIf="section3">
+                    <div class="col-12" *ngIf="section3">
 
-                        <div *ngIf="results && results.length">
+                        <h2 class="tittle-1 mb-2">Mi seguro</h2>
+
+                        <form [formGroup]="insuranceform">
 
                             <div *ngIf="cant_insurances!=cont_insurances">
-                                Todavía se están cargando resultados
+                                <p class="my-4">Todavía se están cargando resultados</p>
                             </div>
 
                             <div *ngIf="cant_insurances==cont_insurances">
-                                Consultas terminadas
+                                <p class="my-4">Consultas terminadas</p>
                             </div>
 
-                            <li *ngFor="let entry of results" class="list-group-item">
+                            <div id="global">
 
-                                <h2>Aseguradora: {{entry.nombre_corto}}</h2>
-                                <p><strong>Producto: {{entry.name}}</strong></p>
+                                <!-- can_access_vehicleInsurance OPTIONS -->
+                                <div class="row mt-3 px-0" *ngIf="can_access_vehicleInsurance?.length > 0">
+                                    <div class="col-12">
+                                        <h2 class="tittle-8">ENTIDADES DONDE PUEDES OBTENER TU SEGURO</h2>
+                                    </div>
+                                </div>
 
-                                <h4>Beneficios</h4>
-                                <p><b>{{entry.beneficiosadicionales1}}</b></p>
+                                <div class="px-0 result-container mt-4 kudos-wrap" formArrayName="can_access_vehicleInsurance_userSelected" *ngFor="let insurance of can_access_vehicleInsurance_userSelected.controls; let i=index">
+                                    <input type="checkbox" (change)="cantInsuranceSelectedUser()" [formControlName]="i" id="{{can_access_vehicleInsurance[i].idaseguradora}}">
+                                    <label for="{{can_access_vehicleInsurance[i].idaseguradora}}">
+                                        <div class="row m-0 p-0">
+                                            <div class="col-12 col-lg-10">
+                                                <div class="row align-items-center mt-4">
+                                                    <div class="col-lg-3">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <p class="selected">✓ Seleccionado</p>
+                                                                <p class="no-selected">Seleccionar</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row text-center justify-content-center">
+                                                            <div class="col-6 col-lg-12">
+                                                                <img class="img-fluid"
+                                                                    [src]="can_access_vehicleInsurance[i].url_photo" alt="Image">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <div class="row text-center justify-content-center">
+                                                            <div class="col-12 col-md-4">
+                                                                <p class="text-uppercase tittle-10 d-none d-md-block">
+                                                                    Precio referencial</p>
+                                                                <p class="text-uppercase tittle-10 d-block d-md-none ">
+                                                                    Precio referencial</p>
+                                                                <p class="tittle-5 d-none d-md-block">
+                                                                    ${{can_access_vehicleInsurance[i].referencial_price | number:'1.2-2':'fr'}}
+                                                                </p>
+                                                                <p class="tittle-5 d-block d-md-none">
+                                                                    ${{can_access_vehicleInsurance[i].referencial_price | number:'1.2-2':'fr'}}
+                                                                </p>
+                                                                <p class="text-uppercase tittle-11">Dólares
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-12 col-md-8 text-left">
+                                                                <p class="text-uppercase tittle-10">Aseguradora</p>
+                                                                <p class="tittle-11 d-none d-md-block">{{can_access_vehicleInsurance[i].nombre_corto}}</p>
+                                                                <p class="text-uppercase tittle-10">Producto</p>
+                                                                <p class="tittle-11 d-none d-md-block">{{can_access_vehicleInsurance[i].name}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row text-center">
+                                                            <div class="col-6 col-md-3">
 
-                            </li>
+                                                                <p class="text-uppercase tittle-11">tasa anual de
+                                                                    interés</p>
+                                                                <p class="tittle-7 color-3">
+                                                                    {{can_access_vehicleInsurance[i].detail}}%
+                                                                </p>
+                                                            </div>
 
-                        </div>
+                                                            <div class="col-6 col-md-3">
+                                                                <p class="text-uppercase tittle-11">valor prima neta
+                                                                </p>
+                                                                <p class="tittle-7 color-3">
+                                                                    ${{can_access_vehicleInsurance[i].net_premium | number:'1.2-2':'fr' }}
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="col-6 col-md-3">
+                                                                <p class="text-uppercase tittle-11">SUP. BANCOS. {{can_access_vehicleInsurance[i].supbancos_percentage}}%</p>
+                                                                <p class="tittle-7 color-3">
+                                                                    ${{can_access_vehicleInsurance[i].supbancos | number:'1.2-2':'fr' }}
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="col-6 col-md-3">
+                                                                <p class="text-uppercase tittle-11">impuesto S.S.C. 0.50%</p>
+                                                                <p class="tittle-7 color-3">
+                                                                    ${{can_access_vehicleInsurance[i].ssc | number:'1.2-2':'fr' }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
+                                                <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
+                                                <h2 class="tittle-5 mt-4">
+                                                    ${{(can_access_vehicleInsurance[i].total_premium)/12 | number : '1.2-2':'fr' }}
+                                                </h2>
+                                                <p class="tittle-11 mt-3 mb-3 mb-lg-5 text-uppercase">mensual</p>
+                                                <p><a class="tittle-11 color-0" href="#">Más información</a></p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <!-- END - can_access_vehicleInsurance OPTIONS -->
+
+                            </div>
+
+                            <!-- APLICATION BAR -->
+                            <div class="row mt-2 text-white aplication-bar bg-2 align-items-center justify-content-between">
+
+                                <div class="col-3 d-none d-md-block tittle-6 text-uppercase text-letf">
+                                    <summary class="pl-3" (click)="section3_2(target)">&lt; regresar</summary>
+                                </div>
+
+                                <div class="col-3 d-block d-md-none tittle-6 text-letf">
+                                    <summary class="pl-3" (click)="section3_2(target)">&lt;</summary>
+                                </div>
+
+
+                                <div *ngIf="cantInsurnaceUserSelected > 0" class="col-3 text-center">
+                                    <span class="tittle-10">{{cantInsurnaceUserSelected}} seleccionados</span>
+                                </div>
+
+                                <div *ngIf="cantInsurnaceUserSelected == 0" class="col-3 text-center d-none d-md-block">
+                                    <span class="tittle-10">Seleccione al menos una opción</span>
+                                </div>
+
+                                <div *ngIf="cantInsurnaceUserSelected == 0" class="col-3 text-center d-block d-md-none">
+                                    <span class="tittle-12">Seleccione al menos uno</span>
+                                </div>
+
+
+                                <div class="col-3 d-none d-md-block tittle-6 text-uppercase text-right">
+                                    <summary class="pr-3" (click)="onSubmitInsuranceform(target)">aplicar &gt;</summary>
+                                </div>
+
+                                <div class="col-3 d-block d-md-none tittle-6 text-right">
+                                    <summary class="pr-3" (click)="onSubmitInsuranceform(target)">&gt;</summary>
+                                </div>
+
+                            </div>
+                            <!-- END - APLICATION BAR -->
+
+                        </form>
+
                     </div>
 
                     <div class="col-12 col-lg-8" *ngIf="section4">
 
-                        <h2 class="tittle-1 mb-2">Mi crédito </h2>
-                        <p class="text-light-14">Ya terminamos! completa esta información para asegurar tu solicitud de crédito y acceder más fácil y seguro.</p>
+                        <h2 class="tittle-1 mb-2">Mi seguro </h2>
+                        <p class="text-light-14">Ya terminamos! completa esta información para asegurar tu solicitud de seguro y acceder más fácil y seguro.</p>
 
-                        <div class="row mt-5 mb-4">
+                        <!-- <div class="row mt-5 mb-4">
                             <div class="col-12">
                                 <div class="position-relative">
                                     <p class="floating-label-static text-uppercase">estas buscando</p>
                                     <p class="tittle-10">Crédito para mi casa</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <p class="floating-label-static text-uppercase">instituciones seleccionadas*</p>
-                                    <p class="tittle-10">{{creditos_entities}}</p>
+                                    <p class="floating-label-static text-uppercase">entidades aseguradoras seleccionadas*</p>
+                                    <p class="tittle-10">{{insurance_entities}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row my-4">
+                        <!-- <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
                                     <p class="floating-label-static text-uppercase">monto a solicitar*</p>
@@ -1698,7 +1831,7 @@
                                     <p class="tittle-10">{{term.value}} meses</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row my-5 justify-content-between">
                             <div class="col-4 d-none d-sm-block">
@@ -1708,10 +1841,11 @@
                                 <button type="button" class="btn button btn-block" (click)="section4_3(target)">&lt;</button>
                             </div>
                             <div class="col-4 d-none d-sm-block">
-                                <button type="submit" class="btn button btn-block" (click)="onSubmitRequestSummary(target)">FINALIZAR</button>
+                                <button type="submit" class="btn button btn-block">FINALIZAR</button>
                             </div>
                             <div class="col-4 d-block d-sm-none">
-                                <button type="submit" class="btn button btn-block" (click)="onSubmitRequestSummary(target)">✓</button>
+                                <button type="submit" class="btn button btn-block">✓</button>
+                                <!-- <button type="submit" class="btn button btn-block" (click)="onSubmitRequestSummary(target)">✓</button> -->
                             </div>
                         </div>
                     </div>

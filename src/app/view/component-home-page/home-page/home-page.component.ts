@@ -191,6 +191,8 @@ export class HomePageComponent implements OnInit {
   public cities: any;
   /* Variable to store the names of the selected financial entities. */
   public creditos_entities: string = ``;
+  /* Variable to store the names of the selected insurance entities. */
+  public insurance_entities: string = ``;
   /* Variable that stores the types of credits. */
   public credits_select: any = [
     { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños' },
@@ -493,11 +495,11 @@ export class HomePageComponent implements OnInit {
 
 
     /* TODO DE SEGUROS */
-    this.insuranceform.controls['vehicleBrand'].setValue({ id: -1, brand_name: 'MARCA*' });
-    this.insuranceform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-    this.insuranceform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
-    this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
-    this.insuranceform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
+    this.vehicleform.controls['vehicleBrand'].setValue({ id: -1, brand_name: 'MARCA*' });
+    this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+    this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
+    this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+    this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
     /*  Get all car brands. */
     this.httpService.getAllCarBrands().subscribe(res => {
       this.vehicleBrand = res.data;
@@ -677,14 +679,14 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  onSubmitInsuranceForm(element: HTMLElement) {
+  onSubmitVehicleform(element: HTMLElement) {
     
-    this.insuranceoptions = [];
+    this.can_access_vehicleInsurance = [];
     this.cont_insurances = 0;
     this.cant_insurances = 0;
 
-    this.insuranceformSubmitted = true;
-    if (this.insuranceform.valid) {
+    this.vehicleformSubmitted = true;
+    if (this.vehicleform.valid) {
 
       console.log('Finalizó información vehicular');
       this.section1 = false;
@@ -705,13 +707,13 @@ export class HomePageComponent implements OnInit {
       request.region = 'AZUAY';
       request.city = 'CUENCA';
 
-      request.car_year = this.insuranceform.value.vehicleModel.year;
-      request.car_brand = this.insuranceform.value.vehicleBrand.brand_name;
-      request.car_model = this.insuranceform.value.vehicleModel.model_name;
-      request.car_description = this.insuranceform.value.vehicleDescription.description;
-      request.carprice_id = this.insuranceform.value.vehicleDescription.price_id;
-      request.car_color = this.insuranceform.value.vehicleColor.color_name;
-      request.car_license_plate = this.insuranceform.value.vehiclePlate;
+      request.car_year = this.vehicleform.value.vehicleModel.year;
+      request.car_brand = this.vehicleform.value.vehicleBrand.brand_name;
+      request.car_model = this.vehicleform.value.vehicleModel.model_name;
+      request.car_description = this.vehicleform.value.vehicleDescription.description;
+      request.carprice_id = this.vehicleform.value.vehicleDescription.price_id;
+      request.car_color = this.vehicleform.value.vehicleColor.color_name;
+      request.car_license_plate = this.vehicleform.value.vehiclePlate;
 
       if (this.subsc1) {
         this.subsc1.unsubscribe();
@@ -725,6 +727,7 @@ export class HomePageComponent implements OnInit {
       this.subsc1 = this.httpService.getAllInsuranceCompanies().subscribe(res => {
 
         if (res.status == 200) {
+
           let insurances = res.data;
           //console.log(insurances);
           this.cant_insurances = insurances.length;
@@ -737,9 +740,23 @@ export class HomePageComponent implements OnInit {
                 this.cont_insurances = this.cont_insurances + 1;
                 //console.log(resp);
                 if (res.status == 200) {
+
+                  element.scrollIntoView({ behavior: 'smooth' });
+
                   if (resp.data && resp.data.aseguradoras.length > 0) {
+                    
+                    if (this.can_access_vehicleInsurance) {
+                      this.can_access_vehicleInsurance_userSelected.clear()
+                    }
+                    
                     console.log(resp.data.aseguradoras[0]);
-                    //this.insuranceoptions.push(resp.data.aseguradoras[0]);
+                    this.can_access_vehicleInsurance.push(resp.data.aseguradoras[0]);
+
+                    this.can_access_vehicleInsurance.forEach((o, i) => {
+                      const control = new FormControl(false);
+                      (this.insuranceform.controls.can_access_vehicleInsurance_userSelected as FormArray).push(control);
+                    });
+
                   }
                 } else {
                   console.log(res);
@@ -751,8 +768,6 @@ export class HomePageComponent implements OnInit {
               })
             );
           }
-
-          console.log(this.insuranceoptions);
 
         } else {
           console.log(res);
@@ -957,14 +972,16 @@ export class HomePageComponent implements OnInit {
     { id: 29, color_name: 'VINO' },
   ]
 
-  public insuranceoptions: any = [];
+  public can_access_vehicleInsurance: any;
   public cant_insurances: number = 0;
   public cont_insurances: number = 0;
   public subsc1: any;
   public subsc2: any = [];
 
+  public cantInsurnaceUserSelected: number = 0;
+
   /* Formulario seguro-vehicular*/
-  insuranceform = this.formbuilder.group({
+  vehicleform = this.formbuilder.group({
     vehicleBrand: ['', [Validators.required, validateSelect]],
     vehicleModel: ['', [Validators.required, validateSelect]],
     vehicleYear: ['', [Validators.required, validateSelect]],
@@ -982,22 +999,22 @@ export class HomePageComponent implements OnInit {
     // age: ['', [Validators.required]]
   });
 
-  /* Validar insuranceform */
-  insuranceformSubmitted: boolean;
-  isFieldValidInsuranceform(field: string) {
+  /* Validar vehicleform */
+  vehicleformSubmitted: boolean;
+  isFieldValidVehicleform(field: string) {
     return (
-      this.insuranceform.get(field).errors && this.insuranceform.get(field).touched ||
-      this.insuranceform.get(field).untouched &&
-      this.insuranceformSubmitted && this.insuranceform.get(field).errors
+      this.vehicleform.get(field).errors && this.vehicleform.get(field).touched ||
+      this.vehicleform.get(field).untouched &&
+      this.vehicleformSubmitted && this.vehicleform.get(field).errors
     );
   }
 
   changeCarBrand(event) {
     let id_brand: number = event.id;
     this.httpService.getYearByBrand(id_brand).subscribe(res => {
-      this.insuranceform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-      this.insuranceform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
-      this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+      this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
+      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
       this.vehicleModel = [];
       this.vehicleYear = [];
       this.vehicleDescription = [];
@@ -1013,8 +1030,8 @@ export class HomePageComponent implements OnInit {
     let year: number = event.year;
     let id_model: number = event.brand_id;
     this.httpService.getModelByYear(id_model, year).subscribe(res => {
-      this.insuranceform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-      this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
       this.vehicleModel = [];
       this.vehicleDescription = [];
       this.vehicleModel = res.data;
@@ -1030,7 +1047,7 @@ export class HomePageComponent implements OnInit {
     let year: number = event.year;
     let id_brand: number = event.brand_id;
     this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
-      this.insuranceform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
       this.vehicleDescription = [];
       this.vehicleDescription = res.data;
       //console.log(this.vehicleYear);
@@ -1039,6 +1056,49 @@ export class HomePageComponent implements OnInit {
       console.log(error);
     });
   }
+
+  insuranceform = this.formbuilder.group({
+    can_access_vehicleInsurance_userSelected: new FormArray([]),
+  });
+
+  get can_access_vehicleInsurance_userSelected(): FormArray {
+    return this.insuranceform.get('can_access_vehicleInsurance_userSelected') as FormArray;
+  }
+
+  public cantInsuranceSelectedUser() {
+    this.cantInsurnaceUserSelected = this.insuranceform.value.can_access_vehicleInsurance_userSelected
+      .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
+      .filter(v => v !== null).length;
+  }
+
+  onSubmitInsuranceform(el: HTMLElement) {
+    
+    if (this.cantInsurnaceUserSelected > 0) {
+
+      this.insurance_entities = ``;
+
+      el.scrollIntoView();
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = false;
+      this.section4 = true;
+      this.section5 = false;
+
+      const selectedInsurancesIds = this.insuranceform.value.can_access_vehicleInsurance_userSelected
+        .map((v, i) => v ? this.can_access_vehicleInsurance[i].idaseguradora : null)
+        .filter(v => v !== null);
+
+
+      for (let entry of selectedInsurancesIds) {
+        let aux = this.can_access_vehicleInsurance.find(x => x.idaseguradora == entry);
+        this.insurance_entities += aux.name+ ' - '+aux.nombre_corto+', ';
+      }
+
+    } else {
+      alert(`seleccione al menos una opción de crédito`);
+    }
+  }
+
 }
 
 
