@@ -65,7 +65,7 @@ export class HttpClientService {
   }
 
   /*  Start - Search by location. */
-  getCurrentCity(): Observable<any> {
+  getCurrentLocation(): Observable<any> {
     let url = `https://ipapi.co/json/`;
     return this.doGetRequest(url);
   }

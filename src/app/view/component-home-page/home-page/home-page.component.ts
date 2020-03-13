@@ -500,6 +500,7 @@ export class HomePageComponent implements OnInit {
 
     /* TODO DE CREDITOS */
     this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
+    
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
       this.provinces = res.data;
@@ -518,6 +519,7 @@ export class HomePageComponent implements OnInit {
     this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
     this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
     this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
+    
     /*  Get all car brands. */
     this.httpService.getAllCarBrands().subscribe(res => {
       this.vehicleBrand = res.data;
@@ -529,10 +531,29 @@ export class HomePageComponent implements OnInit {
 
 
     /*  Start - Search by location. */
-    this.httpService.getCurrentCity().subscribe(res => {
+    this.httpService.getCurrentLocation().subscribe(res => {
       this.httpService.verifyProvinceExistence(res.region_code).subscribe(resp => {
-        console.log(resp.data);
-        this.region_code = res.region_code;
+        //console.log(resp);
+
+        /* In case the location is detected */
+        if (resp.status === 200) {
+          this.region_code = res.region_code;
+          this.addressForm.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
+          /* the cities of the detected province are loaded */
+          this.httpService.getCities(resp.data.id).subscribe(res => {
+            this.cities = []
+            this.cities = res.data;
+          }, error => {
+            console.log('error');
+            console.log(error);
+          });
+        }
+
+        /* In case the location is not detected */
+        if (resp.status === 500) {
+          console.log(resp.message); // enviar como un mensaje de error
+        }
+
       }, error => {
         console.log('error');
         console.log(error);
@@ -789,11 +810,11 @@ export class HomePageComponent implements OnInit {
   /* End - Forms Submitted */
 
 
-  section1: boolean = true;
-  section2: boolean = false;
-  section3: boolean = false;
-  section4: boolean = false;
-  section5: boolean = false;
+  section1: boolean = true;   //seccion de formularios de identificación: datos personales, domicilio, contacto
+  section2: boolean = false;  //sección para formularios: información de vehículo - información financiera
+  section3: boolean = false;  //sección de resultados de créditos y seguros
+  section4: boolean = false;  //sección de resumen de creditos y seguros
+  section5: boolean = false;  //sección final de solicitud
 
   /* Archwizard Form */
 
@@ -1025,7 +1046,7 @@ export class HomePageComponent implements OnInit {
       }
 
     } else {
-      alert(`seleccione al menos una opción de crédito`);
+      alert(`seleccione al menos una opción de seguro`);
     }
   }
 
@@ -1152,7 +1173,6 @@ export class HomePageComponent implements OnInit {
   public hasAddress: Boolean = false;
   public hasNames: Boolean = false;
   public hasLastNames: Boolean = false;
-
 
   loginVerified(): Boolean {
     let accessToken = localStorage.getItem('currentUser');
