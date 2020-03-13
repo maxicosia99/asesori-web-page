@@ -60,7 +60,7 @@ export class HttpClientService {
   }
 
   public getDataUserlogin(): Observable<any> {
-    let url = this.getEndUrl('/api/v1/user/me');
+    let url = this.getEndUrl('/api/user/me');
     return this.doGetRequest(url);
   }
 
@@ -72,6 +72,11 @@ export class HttpClientService {
 
   verifyLocationExistence(region_code: string): Observable<any> {
     let url = this.getEndUrl(`/api/provincias/verificarExistenciaProvincia?region_code=${region_code}`);
+    return this.doGetRequest(url);
+  }
+
+  verifyProvinceExistence(region_code: string): Observable<any> {
+    let url = this.getEndUrl(`/api/provincias/buscar?region_code=${region_code}`);
     return this.doGetRequest(url);
   }
   /*  End - Search by location. */

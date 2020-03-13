@@ -3,6 +3,7 @@ import { AuthenticationService } from 'src/app/services/auth/authentication.serv
 import { Subscription } from 'rxjs';                                                  //suscription to login
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
 import { LoginComponent } from 'src/app/view/login/login.component';                  //call login
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -13,6 +14,7 @@ import { LoginComponent } from 'src/app/view/login/login.component';            
 export class HeaderComponent implements OnInit {
 
     constructor(
+        private router: Router,
         private modalService: BsModalService,         //modal service
         private authService: AuthenticationService,   //authentication service
     ) { }
@@ -33,19 +35,21 @@ export class HeaderComponent implements OnInit {
     message: string;
     modalRef: BsModalRef;
 
-    openModal() {
-        // const initialState = {
-        //   information : {
-        //     username: 'bryan',
-        //     password: 'bryan123'
-        //   },
-        // };
-        //this.modalRef = this.modalService.show(LoginComponent, { initialState });
-        this.modalRef = this.modalService.show(LoginComponent);
+    openModal(redirect: string, isloginVerified: boolean) {
+
+        if (!isloginVerified) {
+            redirect = this.router.url;
+        }
+
+        const initialState = {
+            redirect: redirect
+        };
+        
+        this.modalRef = this.modalService.show(LoginComponent, { initialState });
         this.modalRef.setClass('modal-dialog-centered');
         this.modalRef.content.closeBtnName = 'Close';
         this.navbarOpen = !this.navbarOpen;
-      }
+    }
 
     /* ON LOGGED OUT */
 
@@ -53,11 +57,22 @@ export class HeaderComponent implements OnInit {
     private intervalSub: Subscription;
     public user: any;
 
-    onLoggedout() {
+    onLoggedout(redirect: string) {
+
+        // if (this.router.url === '/stepper') {
+        //     redirect = '/';
+        // } else {
+        //     redirect = this.router.url;
+        // }
+
+        redirect = this.router.url;
+
         this.navbarOpen = !this.navbarOpen;
         this.authService.logOut();
         this.closeSubscriptions();
-        console.log('Ha finalizado sesión!')
+        console.log('Ha finalizado sesión!');
+        this.authService.functionClearUserData();
+        this.router.navigate([redirect]);
     }
 
     closeSubscriptions() {
@@ -74,6 +89,14 @@ export class HeaderComponent implements OnInit {
             return true;
         }
         return false;
+    }
+
+    loginValidated(redirect: string) {
+        if (!this.loginVerified()) {
+            this.openModal(redirect, true);
+        } else {
+            this.router.navigate([redirect]);
+        }
     }
 
     /* END - ON LOGGED OUT */

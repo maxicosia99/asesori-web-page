@@ -5,8 +5,10 @@ export interface CarInsuranceRequest {
 	insured_lastname : string,
 	insured_gender : string,
 	insured_marital_status : string,
-	region : string,
+	
 	city : string,
+	region_code: string;
+	
 	car_year : number,
 	car_brand : string,
 	car_model : string,

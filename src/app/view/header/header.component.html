@@ -22,7 +22,7 @@
                         <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/homepage" routerLinkActive="active-link">Testimonios</a>
                     </li>
                     <li *ngIf="!loginVerified(); else elseBlock" class="nav-item">
-                        <a (click)="openModal()" class="nav-link tittle-10 mt-1">Iniciar sesión</a>
+                        <a (click)="openModal('',false)" class="nav-link tittle-10 mt-1">Iniciar sesión</a>
                     </li>
 
                     <!-- <li class="nav-item" dropdown placement="left">
@@ -46,7 +46,7 @@
                             <a class="nav-link tittle-10 mt-1"><i class="fas fa-user-circle"></i> {{user.username}}</a>
                         </li>
                         <li class="nav-item">
-                            <a (click)="onLoggedout()" class="nav-link tittle-10 mt-1">Salir</a>
+                            <a (click)="onLoggedout('')" class="nav-link tittle-10 mt-1">Salir</a>
                         </li>
                     </ng-template>
                 </ul>

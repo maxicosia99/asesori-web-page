@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserAuth } from './../../models/userAuth';
 import { Subscription } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,11 +20,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
     private authService: AuthenticationService,
-    public  bsModalRef: BsModalRef
-  ) {}
+    public bsModalRef: BsModalRef,
+    public router: Router,
+  ) { }
 
 
-  @Input() information: any;
+  @Input() redirect: any;
 
   public sectionLogin: boolean = true;
   public sectionRegister: boolean = false;
@@ -51,13 +53,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   //Alert Component
   alerts: any[] = [{}];
- 
+
   add(msg: string): void {
     this.alerts.push({
       type: 'danger', msg, timeout: 5000
     });
   }
- 
+
   onClosed(dismissedAlert: AlertComponent): void {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
@@ -75,7 +77,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     this.subscription = this.httpService.login(user).subscribe((response) => {
-      if (response.status == 200){
+      if (response.status == 200) {
+
+
+        this.authService.setSession(response.data);
+        this.router.navigate([this.redirect]);
+        /* ------------------------------ */
+        this.httpService.getDataUserlogin().subscribe(() => {
+          this.authService.functionGetUserData();
+        }, (error) => {
+          console.log(error);
+        });
+        /* ------------------------------ */
+
         this.bsModalRef.hide();
         this.loginForm.reset();
         this.authService.setSession(response.data);
@@ -84,7 +98,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }, (error) => {
       console.log(error);
       this.authService.redirectInternalServerError();
-      this.add('Servidor no disponible '+error);  
+      this.add('Servidor no disponible ' + error);
     });
   }
 
@@ -92,14 +106,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.subscription)
       this.subscription.unsubscribe();
   }
-  
-  
-  changeSectionRegister(){
+
+
+  changeSectionRegister() {
     this.sectionLogin = false;
     this.sectionRegister = true;
   }
 
-  changeSectionLogin(){
+  changeSectionLogin() {
     this.sectionLogin = true;
     this.sectionRegister = false;
   }

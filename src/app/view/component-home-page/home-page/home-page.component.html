@@ -142,7 +142,7 @@
     </section>
 
 
-    <!-- CALCULATOR -->
+    <!-- CALCULATOR & SERVICES OPTIONS -->
 
     <section #calculator class="container">
 
@@ -296,27 +296,20 @@
                 </div>
             </div>
 
-            <!-- CALCULATE BUTTON -->
+            <!-- CALCULATE CREDIT BUTTON -->
             <div *ngIf="creditSection" class="row mt-5 justify-content-center mx-3 px-md-0">
                 <div class="col-md-6 col-lg-3">
                     <button type="submit" class="btn button btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0" (click)="onSubmitEstimateForm(target)">CALCULAR</button>
                 </div>
             </div>
 
-            <!-- CONTINUE BUTTON -->
-            <div *ngIf="insuranceSection" class="row mt-5 justify-content-center mx-3 px-md-0">
-                <div class="col-md-6 col-lg-3">
-                    <button type="submit" class="btn button btn-block" [disabled]="!id_insurance" (click)="onSubmitEstimateForm(target)">CONTINUAR</button>
-                </div>
-            </div>
-
         </form>
-
     </section>
 
 
-    <!-- CREDIT RESULTS SECTION -->
     <section #target></section>
+
+    <!-- CREDIT RESULTS SECTION -->
     <section *ngIf="creditSectionForm" class="container">
 
         <div class="row">
@@ -401,7 +394,7 @@
                                     <div class="row my-4">
                                         <div class="col-12 col-md-6 my-md-0 my-4">
                                             <div class="position-relative">
-                                                <input type="text" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
+                                                <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
                                                 <span class="floating-label text-uppercase">numero de identidad*</span>
                                                 <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
                                                     <span>Ingrese su cédula!</span>
@@ -435,6 +428,23 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row my-0 my-md-4">
+                                        <div class="col-12 col-md-6 my-md-0 my-4">
+                                            <ng-select class="custom" [items]="gender" formControlName="gender" placeholder="genero" [searchable]="false" bindLabel="gender" [clearable]="false">
+                                            </ng-select>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="position-relative">
+                                                <input type="number" class="form-control" formControlName="age" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('age')}">
+                                                <span class="floating-label text-uppercase">edad*</span>
+                                                <div *ngIf="isFieldValidPersonalData('age')" class="invalid-feedback">
+                                                    <span>Ingrese su edad!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
@@ -490,7 +500,7 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                                <input type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
                                                 <span class="floating-label text-uppercase">direccion*</span>
                                                 <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                                     <span>Ingrese su dirección!</span>
@@ -540,7 +550,7 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="tel" formControlName="phone" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}">
+                                                <input type="tel" [attr.disabled]="hasPhone1 ? '' : null" formControlName="phone" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}">
                                                 <span class="floating-label text-uppercase">telefono para
                                                     contacto*</span>
                                                 <div *ngIf="isFieldValidContactForm('phone')" class="invalid-feedback">
@@ -561,7 +571,7 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="email" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}">
+                                                <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}">
                                                 <span class="floating-label text-uppercase">correo electromico*</span>
                                                 <div *ngIf="isFieldValidContactForm('email')" class="invalid-feedback">
                                                     <span>Ingrese correo electrónico!</span>
@@ -1374,7 +1384,7 @@
                                     <div class="row my-4">
                                         <div class="col-12 col-md-6 my-md-0 my-4">
                                             <div class="position-relative">
-                                                <input type="text" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
+                                                <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
                                                 <span class="floating-label text-uppercase">numero de identidad*</span>
                                                 <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
                                                     <span>Ingrese su cédula!</span>
@@ -1408,6 +1418,23 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row my-0 my-md-4">
+                                        <div class="col-12 col-md-6 my-md-0 my-4">
+                                            <ng-select class="custom" [items]="gender" formControlName="gender" placeholder="genero" [searchable]="false" bindLabel="gender" [clearable]="false">
+                                            </ng-select>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="position-relative">
+                                                <input type="number" class="form-control" formControlName="age" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('age')}">
+                                                <span class="floating-label text-uppercase">edad*</span>
+                                                <div *ngIf="isFieldValidPersonalData('age')" class="invalid-feedback">
+                                                    <span>Ingrese su edad!</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
@@ -1452,7 +1479,7 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="text" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                                <input type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
                                                 <span class="floating-label text-uppercase">direccion*</span>
                                                 <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                                     <span>Ingrese su dirección!</span>
@@ -1502,7 +1529,7 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="tel" formControlName="phone" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}">
+                                                <input type="tel" [attr.disabled]="hasPhone1 ? '' : null" formControlName="phone" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}">
                                                 <span class="floating-label text-uppercase">telefono para
                                                     contacto*</span>
                                                 <div *ngIf="isFieldValidContactForm('phone')" class="invalid-feedback">
@@ -1523,7 +1550,7 @@
                                     <div class="row my-4">
                                         <div class="col-12">
                                             <div class="position-relative">
-                                                <input type="email" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}">
+                                                <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}">
                                                 <span class="floating-label text-uppercase">correo electromico*</span>
                                                 <div *ngIf="isFieldValidContactForm('email')" class="invalid-feedback">
                                                     <span>Ingrese correo electrónico!</span>
@@ -1636,11 +1663,11 @@
                         <form [formGroup]="insuranceform">
 
                             <div *ngIf="cant_insurances!=cont_insurances">
-                                <p class="my-4">Todavía se están cargando resultados</p>
+                                <p class="my-4"><i class="fas fa-spinner color-1"></i> Todavía se están cargando resultados</p>
                             </div>
 
                             <div *ngIf="cant_insurances==cont_insurances">
-                                <p class="my-4">Consultas terminadas</p>
+                                <p class="my-4"><i class="fas fa-check-circle color-1"></i> Consultas terminadas</p>
                             </div>
 
                             <div id="global">
@@ -1688,11 +1715,11 @@
                                                                 <p class="text-uppercase tittle-11">Dólares
                                                                 </p>
                                                             </div>
-                                                            <div class="col-12 col-md-8 text-left">
+                                                            <div class="col-12 col-md-8 text-md-left">
                                                                 <p class="text-uppercase tittle-10">Aseguradora</p>
-                                                                <p class="tittle-11 d-none d-md-block">{{can_access_vehicleInsurance[i].nombre_corto}}</p>
+                                                                <p class="tittle-11">{{can_access_vehicleInsurance[i].nombre_corto}}</p>
                                                                 <p class="text-uppercase tittle-10">Producto</p>
-                                                                <p class="tittle-11 d-none d-md-block">{{can_access_vehicleInsurance[i].name}}</p>
+                                                                <p class="tittle-11">{{can_access_vehicleInsurance[i].name}}</p>
                                                             </div>
                                                         </div>
                                                         <hr>
@@ -1750,7 +1777,11 @@
                             <div class="row mt-2 text-white aplication-bar bg-2 align-items-center justify-content-between">
 
                                 <div class="col-3 d-none d-md-block tittle-6 text-uppercase text-letf">
-                                    <summary class="pl-3" (click)="section3_2(target)">&lt; regresar</summary>
+
+                                    <div *ngIf="cant_insurances==cont_insurances">
+                                        <summary class="pl-3" (click)="section3_2(target)">&lt; recalcular</summary>
+                                    </div>
+
                                 </div>
 
                                 <div class="col-3 d-block d-md-none tittle-6 text-letf">
@@ -1791,14 +1822,14 @@
                         <h2 class="tittle-1 mb-2">Mi seguro </h2>
                         <p class="text-light-14">Ya terminamos! completa esta información para asegurar tu solicitud de seguro y acceder más fácil y seguro.</p>
 
-                        <!-- <div class="row mt-5 mb-4">
+                        <div class="row mt-5 mb-4">
                             <div class="col-12">
                                 <div class="position-relative">
                                     <p class="floating-label-static text-uppercase">estas buscando</p>
-                                    <p class="tittle-10">Crédito para mi casa</p>
+                                    <p class="tittle-10">Seguro vehícular</p>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="row my-4">
                             <div class="col-12">

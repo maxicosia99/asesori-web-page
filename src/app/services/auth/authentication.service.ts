@@ -1,6 +1,6 @@
 //import { AlertService } from './../alerts/alert.service';
 import { HttpClientService } from './../client/http-client.service';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, EventEmitter } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { UserInfo } from './../../models/user-info';
 import { Router } from '@angular/router';
@@ -23,10 +23,6 @@ export class AuthenticationService implements OnDestroy {
   // logOut() {
   //   localStorage.removeItem('username')
   // }
-
-  getCitas() {
-    
-  }
 
   // login(username: string, password: string) {
   //   let user: UserAuth = {usernameOrEmail: username, password: password}
@@ -62,8 +58,16 @@ export class AuthenticationService implements OnDestroy {
 
   public setSession(authResult) {
     localStorage.setItem('accessToken', authResult.accessToken);
-    localStorage.setItem('currentUser', JSON.stringify(authResult));
-    this.router.navigate(['/']);
+
+    this.subscription = this.httpService.getDataUserlogin().subscribe((response: UserInfo) => {
+      localStorage.setItem('currentUser', JSON.stringify(response));
+    }, (error) => {
+      this.logOut();
+      console.log(error);
+    });
+
+    //localStorage.setItem('currentUser', JSON.stringify(authResult));
+    //this.router.navigate(['/']);
 
     //console.log("resultado----:");
     //console.log();
@@ -120,5 +124,20 @@ export class AuthenticationService implements OnDestroy {
   // getCurrentUser(): UserInfo {
   //   return JSON.parse(localStorage.getItem('currentUser')) as UserInfo;
   // }
+
+  /* ------------------------------ */
+  getUserData = new EventEmitter();
+  clearUserData = new EventEmitter();
+  subsVar: Subscription;
+  subsClearVar: Subscription;
+
+  functionGetUserData() {    
+    this.getUserData.emit();    
+  }
+
+  functionClearUserData() {    
+    this.clearUserData.emit();    
+  }
+  /* ------------------------------ */
 
 }

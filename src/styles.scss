@@ -388,7 +388,7 @@ input[type=password] {
     letter-spacing: 2px;
 }
 
-input:focus~.floating-label input:not(:focus):valid~.floating-label {
+input:focus~.floating-label input:not(:focus):valid:disabled~.floating-label {
     top: 5px;
     font-size: 10px;
     line-height: 1.33;
@@ -397,7 +397,8 @@ input:focus~.floating-label input:not(:focus):valid~.floating-label {
 }
 
 input:focus~.floating-label,
-input:valid~.floating-label {
+input:valid~.floating-label,
+input:disabled~.floating-label {
     top: 5px;
     opacity: 1;
     font-size: 10px;
