@@ -11,6 +11,8 @@ import { CarInsuranceRequest } from '../../../models/car-insurance-request';
 import { element } from 'protractor';
 import { UserInfo } from '../../../models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { InsuranceInformation } from 'src/app/models/insurance-information';
+import { Insurance } from '../../../models/insurance';
 /* End - icons in this page */
 
 
@@ -500,7 +502,7 @@ export class HomePageComponent implements OnInit {
 
     /* TODO DE CREDITOS */
     this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
-    
+
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
       this.provinces = res.data;
@@ -519,7 +521,7 @@ export class HomePageComponent implements OnInit {
     this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
     this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
     this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
-    
+
     /*  Get all car brands. */
     this.httpService.getAllCarBrands().subscribe(res => {
       this.vehicleBrand = res.data;
@@ -736,7 +738,7 @@ export class HomePageComponent implements OnInit {
   }
 
 
-  onSubmitRequestSummary(el: HTMLElement) {
+  onSubmitRequestSummaryCredit(el: HTMLElement) {
 
     el.scrollIntoView();
     this.section1 = false;
@@ -747,12 +749,11 @@ export class HomePageComponent implements OnInit {
 
     let creditInformation: CreditInformation = {} as CreditInformation;
 
-    //creditInformation.user_id = this.user_id;
+    creditInformation.user_id = this.user_id;
     creditInformation.name = this.personalDataForm.value.names;
     creditInformation.last_name = this.personalDataForm.value.last_names;
     creditInformation.cedula = this.personalDataForm.value.dni;
 
-    /* verificar nombre de provincia y pais con select y api */
     creditInformation.city = this.addressForm.value.city;
     creditInformation.region_name = 'AZUAY';
     creditInformation.country_name = 'ECUADOR';
@@ -807,6 +808,50 @@ export class HomePageComponent implements OnInit {
 
     console.log(creditInformation);
   }
+
+  onSubmitRequestSummaryInsurance(el: HTMLElement) {
+
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = false;
+    this.section4 = false;
+    this.section5 = true;
+
+    let insuranceInformation: InsuranceInformation = {} as InsuranceInformation;
+
+    insuranceInformation.user_id = this.user_id;
+    insuranceInformation.name = this.personalDataForm.value.names;
+    insuranceInformation.last_name = this.personalDataForm.value.last_names;
+    insuranceInformation.cedula = this.personalDataForm.value.dni;
+
+    insuranceInformation.city = this.addressForm.value.city.id;
+    insuranceInformation.address = this.addressForm.value.address;
+
+    insuranceInformation.email = this.contactForm.value.email;
+    insuranceInformation.phone = this.contactForm.value.phone;
+
+    insuranceInformation.carprice_id = this.vehicleform.value.vehicleDescription.price_id;
+
+    const selectedVehicleInsurance = this.insuranceform.value.can_access_vehicleInsurance_userSelected
+      .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
+      .filter(v => v !== null);
+
+    let options: Insurance[] = [];
+
+    for (let entry of selectedVehicleInsurance) {
+      let aux = this.can_access_vehicleInsurance.find(x => x.id == entry);
+      let insurance: Insurance = {} as Insurance;
+      insurance.id_insurancecompany = aux.id_insurance_entity;
+      insurance.anual_fee = aux.total_premium;
+      options.push(insurance);
+    }
+
+    insuranceInformation.options = options;
+
+    console.log(insuranceInformation);
+  }
+
   /* End - Forms Submitted */
 
 

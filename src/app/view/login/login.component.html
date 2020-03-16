@@ -56,41 +56,85 @@
         </div>
     </form>
 
-    <div class="row" *ngIf="sectionRegister">
-        <div class="col-12">
-            <p class="tittle-8 text-uppercase">Registrarse</p>
-            <p class="text-light-14">Ingresa la información registrada en tu formulario de solicitud.</p>
-            <div class="position-relative mt-4">
-                <input type="text" class="form-control" required>
-                <span class="floating-label text-uppercase">Username*</span>
-            </div>
-            <div class="position-relative mt-4">
-                <input type="text" class="form-control" required>
-                <span class="floating-label text-uppercase">Email*</span>
-            </div>
-            <div class="position-relative mt-4">
-                <input type="password" class="form-control" required>
-                <span class="floating-label text-uppercase">Contraseña*</span>
-            </div>
-
-            <div *ngFor="let alert of alerts">
-                <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">
-                    {{ alert.msg }}</alert>
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-6">
-                    <button type="submit" class="btn button btn-block">REGISTRARSE</button>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+        <div class="row" *ngIf="sectionRegister">
+            <div class="col-12">
+                <p class="tittle-8 text-uppercase">Registrarse</p>
+                <p class="text-light-14">Ingresa la información registrada en tu formulario de solicitud.</p>
+                <div class="position-relative mt-4">
+                    <input type="text" formControlName="username" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.username.touched && formRegister.username.errors }">
+                    <span class="floating-label text-uppercase">Username*</span>
+                    <div *ngIf="formRegister.username.touched && formRegister.username.errors" class="invalid-feedback">
+                        <div *ngIf="formRegister.username.errors.required">Porfavor ingrese su usuario!
+                        </div>
+                        <div *ngIf="formRegister.username.errors.minlength">Al menos 3 caracteres!
+                        </div>
+                        <div *ngIf="formRegister.username.errors.maxlength">Máximo 15 caracteres!
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row justify-content-center py-4">
-                <div class="col-8 text-center tittle-14">
-                    <span>Ya tienes cuenta,</span>
-                    <summary (click)="changeSectionLogin()" class="color-1 d-inline"> Inicia sesión aquí</summary>
+                <div class="position-relative mt-4">
+                    <input type="text" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.email.touched && formRegister.email.errors }">
+                    <span class="floating-label text-uppercase">Email*</span>
+                    <div *ngIf="formRegister.email.touched && formRegister.email.errors" class="invalid-feedback">
+                        <div *ngIf="formRegister.email.errors.required">Porfavor ingrese su email!
+                        </div>
+                        <div *ngIf="formRegister.email.errors.maxlength">Máximo 40 caracteres!
+                        </div>
+                    </div>
                 </div>
-            </div>
 
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="position-relative">
+                            <input type="password" formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
+                            <span class="floating-label text-uppercase">Password*</span>
+                            <div *ngIf="formRegister.password.touched && formRegister.password.errors" class="invalid-feedback">
+                                <div *ngIf="formRegister.password.errors.required">Porfavor ingrese su contraseña!
+                                </div>
+                                <div *ngIf="formRegister.password.errors.minlength">Al menos 6 caracteres!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mt-4 mt-md-0">
+                        <div class="position-relative">
+                            <input type="password" formControlName="confirmPassword" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.confirmPassword.touched && formRegister.confirmPassword.errors }">
+                            <span class="floating-label text-uppercase">Repetir password*</span>
+                            <div *ngIf="formRegister.confirmPassword.touched && formRegister.confirmPassword.errors" class="invalid-feedback">
+                                <div *ngIf="formRegister.confirmPassword.errors.required">Confirme la contraseña!
+                                </div>
+
+                                <!-- Problema al mostrar mensaje de error -->
+                                <div *ngIf="formRegister.confirmPassword.errors.MustMatch">No coinciden!
+                                </div>
+
+                                <div *ngIf="formRegister.confirmPassword.errors.minlength">Al menos 6 caracteres!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngFor="let alert of alerts">
+                    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">
+                        {{ alert.msg }}</alert>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <button type="submit" [disabled]="registerForm.invalid" class="btn button btn-block">REGISTRARSE</button>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center py-4">
+                    <div class="col-8 text-center tittle-14">
+                        <span>Ya tienes cuenta,</span>
+                        <summary (click)="changeSectionLogin()" class="color-1 d-inline"> Inicia sesión aquí</summary>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
+    </form>
 </div>

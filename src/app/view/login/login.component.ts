@@ -7,6 +7,24 @@ import { UserAuth } from './../../models/userAuth';
 import { Subscription } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
+import { UserRegister } from 'src/app/models/user-register';
+
+export function MustMatch(controlName: string, matchingControlName: string) {
+  return (formGroup: FormGroup) => {
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
+    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+      // return if another validator has already found an error on the matchingControl
+      return;
+    }
+    // set error on matchingControl if validation fails
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
+  }
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -38,14 +56,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   })
 
   /*########### Form ###########*/
-  // registerForm = this.formBuilder.group({
-  //   username: ['', [Validators.required, Validators.maxLength(15)]],
-  //   email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
-  //   password: ['', [Validators.required, Validators.minLength(6)]],
-  //   confirmPassword: ['', [Validators.required]]
-  // }, {
-  //   validator: MustMatch('password', 'confirmPassword')
-  // });
+  registerForm = this.formBuilder.group({
+    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', [Validators.required]]
+  }, {
+    validator: MustMatch('password', 'confirmPassword')
+  });
 
   ngOnInit() {
 
@@ -69,6 +87,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.loginForm.controls;
   }
 
+  get formRegister() {
+    return this.registerForm.controls;
+  }
+
   // funcion que llama el submit del login
   onSubmit() {
     let user: UserAuth = {
@@ -78,8 +100,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.subscription = this.httpService.login(user).subscribe((response) => {
       if (response.status == 200) {
-
-
         this.authService.setSession(response.data);
         this.router.navigate([this.redirect]);
         /* ------------------------------ */
@@ -99,6 +119,59 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log(error);
       this.authService.redirectInternalServerError();
       this.add('Servidor no disponible ' + error);
+    });
+  }
+
+  // funcion que llama el submit del register
+  onSubmitRegister() {
+    
+    let userRegister: UserRegister = {
+      username: this.formRegister.username.value,
+      email: this.formRegister.email.value,
+      password: this.formRegister.password.value
+    }
+
+    this.subscription = this.httpService.register(userRegister).subscribe((response) => {
+      if (response.status == 200) {
+
+        let user: UserAuth = {} as UserAuth;
+        user.usernameOrEmail = userRegister.email;
+        user.password = userRegister.password;
+
+        this.subscription = this.httpService.login(user).subscribe((response) => {
+
+          //console.log(response);
+
+          if (response.status == 200) {
+            this.authService.setSession(response.data);
+            this.router.navigate([this.redirect]);
+            /* ------------------------------ */
+            this.httpService.getDataUserlogin().subscribe(() => {
+              this.authService.functionGetUserData();
+            }, (error) => {
+              console.log(error);
+            });
+            /* ------------------------------ */
+
+            this.bsModalRef.hide();
+            this.loginForm.reset();
+            this.authService.setSession(response.data);
+          } else
+            this.add(response.error);
+
+        }, (error) => {
+          console.log(error);
+          this.authService.redirectInternalServerError();
+          this.add('Servidor no disponible ' + error);
+        });
+
+      } else {
+        this.add(response.error);
+      }
+    }, (error) => {
+      console.log(error);
+      this.authService.redirectInternalServerError();
+      this.add('Servidor no disponible' + error);
     });
   }
 
