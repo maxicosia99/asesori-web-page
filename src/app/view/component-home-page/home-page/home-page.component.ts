@@ -8,20 +8,23 @@ import { Creditos } from 'src/app/models/creditos';                             
 import { CreditInformation } from 'src/app/models/credit-information';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { CarInsuranceRequest } from '../../../models/car-insurance-request';
-import { element } from 'protractor';
 import { UserInfo } from '../../../models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { InsuranceInformation } from 'src/app/models/insurance-information';
 import { Insurance } from '../../../models/insurance';
-/* End - icons in this page */
 
 
-// slider model
+/** Interface representing a slider model */
 interface SliderModel {
   value: number;
   options: Options;
 }
 
+/**
+ * Validate the selection of a select
+ * @param {AbstractControl} control - Object to validate with id
+ * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
+ */
 export function validateSelect(control: AbstractControl) {
   if (control.value.id === -1) {
     return { valid: true };
@@ -29,91 +32,49 @@ export function validateSelect(control: AbstractControl) {
   return null;
 }
 
-
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
 
+/** Class representing Home Component. */
 export class HomePageComponent implements OnInit {
 
+  /**
+    * Represents the component of the homepage module
+    * @constructor
+    * @param {BsModalService} modalService - Modal administration service
+    * @param {HttpClientService} httpService - Service for connection to the server
+    * @param {FormBuilder} formbuilder - Service for the use of forms
+    * @param {AuthenticationService} authenticationService - Authentication service for user data
+  */
   constructor(
-    private modalService: BsModalService,                 //modal service
-    private httpService: HttpClientService,               //client api service
-    private formbuilder: FormBuilder,                     //form service
-    private authenticationService: AuthenticationService  //authentication service
+    private modalService: BsModalService,
+    private httpService: HttpClientService,
+    private formbuilder: FormBuilder,
+    private authenticationService: AuthenticationService
   ) { }
 
+  /**---------------------------------------------VARIABLES FOR CREDITS AND INSURANCE--------------------------------------------------- */
 
-  /* Slider for entry amount and time */
-  amountRequest: SliderModel = {
-    value: 0,
-    options: {
-      floor: 0,
-      disabled: true,
-      ceil: 99999,
-      enforceStep: false,
-      hideLimitLabels: true,
-      translate: (value: number): string => {
-        return '$' + value;
-      }
-    }
-  };
+  /**
+   * Rating max
+   * @type {number}
+  */
+  public max: number = 4;
 
-  entryAmount: SliderModel = {
-    value: 0,
-    options: {
-      floor: 0,
-      ceil: 99999,
-      disabled: true,
-      enforceStep: false,
-      hideLimitLabels: true,
-      translate: (value: number): string => {
-        return '$' + value;
-      }
-    }
-  };
+  /**
+   * Rating rate
+   * @type {number}
+  */
+  public rate: number = 4;
 
-  term: SliderModel = {
-    value: 0,
-    options: {
-      floor: 0,
-      ceil: 360,
-      disabled: true,
-      enforceStep: false,
-      hideLimitLabels: true,
-      translate: (value: number): string => {
-        return '' + value;
-      }
-    }
-  };
-
-  monthlyIncome: SliderModel = {
-    value: 0,
-    options: {
-      floor: 0,
-      ceil: 4999,
-      disabled: true,
-      enforceStep: false,
-      hideLimitLabels: true,
-      translate: (value: number): string => {
-        return '' + value;
-      }
-    }
-  };
-  /* End - Slider for entry amount and time*/
-
-
-  /* Rating */
-  max: number = 4;
-  rate: number = 4;
-  isReadonly: boolean = true;
-  /* End - Rating */
-
-
-  /* Carousel options */
-  customOptions: OwlOptions = {
+  /**
+   * Carousel options
+   * @type {OwlOptions}
+  */
+  public customOptions: OwlOptions = {
     loop: true,
     freeDrag: true,
     mouseDrag: true,
@@ -136,49 +97,22 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  /* Modal methods */
-  message: string;
-  modalRef: BsModalRef;
+  /**
+   * Modal methods
+   * @type {BsModalRef}
+  */
+  public modalRef: BsModalRef;
 
-  openModal_termsConditions(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-    this.modalRef.setClass('modal-dialog-centered');
-    this.modalRef.content.closeBtnName = 'Close';
-  }
-
-  confirm(): void {
-    this.message = 'Confirmed!';
-    this.modalRef.hide();
-  }
-
-  decline(): void {
-    this.message = 'Declined!';
-    this.modalRef.hide();
-  }
-  /* End - Modal methods */
-
-
-
-  /**------------------------------------------------------------------------------------------------------------------------------------ */
-
-
-  /* Location variables */
+  /**
+   * Location variables
+   * @type {string}
+  */
   public region_code: string;
-  /* Validation variables */
-  public correctly: boolean = false;
-  public correctly2: boolean = true;
-  /* Variable for the type of entity: bank, cooperative or both. */
-  public entityType: number = 0;
-  /* Variable for the type of credit */
-  public id_credit: number = 0;
-  /* Variable for the type of insurance */
-  public id_insurance;
-  /* Variables to store credit results */
-  public creditOptions: any;
-  public can_access_credit: any;
-  public cannot_access_credit: any;
-  public credit_unavailable: any;
-  /* variables for the selection of marital status */
+
+  /**
+   * Variable for the selection of marital status
+   * @type {any[]}
+  */
   public maritalStatus: any = [
     { id: 1, status: 'CASADO' },
     { id: 2, status: 'SOLTERO' },
@@ -186,24 +120,173 @@ export class HomePageComponent implements OnInit {
     { id: 4, status: 'VIUDO' },
     { id: 4, status: 'UNION LIBRE' },
   ];
-  /* variables for the selection of gender */
+
+  /**
+   * Variables for the selection of gender
+   * @type {any[]}
+  */
   public gender: any = [
     { id: 1, gender: 'HOMBRE' },
     { id: 2, gender: 'MUJER' }
   ]
-  /* variables for the selection of type housing */
+
+  /**
+   * Variables for the selection of type housing
+   * @type {any[]}
+  */
   public typeHousing = [
     { id: 1, type: "Propia" },
     { id: 2, type: "Arrendada" }
   ]
-  /* variable to store all provinces and from Ecuador */
+
+  /**
+   * Variable to store all provinces from Ecuador
+   * @type {any}
+  */
   public provinces: any;
+
+  /**
+   * Variable to store all cities from a province
+   * @type {any}
+  */
   public cities: any;
-  /* Variable to store the names of the selected financial entities. */
-  public creditos_entities: string = ``;
-  /* Variable to store the names of the selected insurance entities. */
-  public insurance_entities: string = ``;
-  /* Variable that stores the types of credits. */
+
+  /**
+   * Variables to enable or disable service tag options
+   * @type {boolean}
+  */
+  public active_credits_select: boolean = false;
+  public active_insurance_select: boolean = false;
+
+  /**
+   * Variables to activate credit or insurance values and select
+   * @type {boolean}
+  */
+  public creditSection: boolean = false;
+  public insuranceSection: boolean = false;
+
+  /**
+   * Variables to activate credit or insurance forms
+   * @type {boolean}
+  */
+  public creditSectionForm: boolean = false;
+  public insuranceSectionForm: boolean = false;
+
+  /**
+   * Variables to enable sections of forms
+   * @type {boolean}
+  */
+  section1: boolean = true;   //Identification forms section: personal data, address, contact
+  section2: boolean = false;  //Section for forms: vehicle information - financial information
+  section3: boolean = false;  //Credit and insurance results section
+  section4: boolean = false;  //Summary section
+  section5: boolean = false;  //Final application section
+
+  /**---------------------------------------------------VARIABLES FOR CREDITS----------------------------------------------------------- */
+
+  /**
+   * Slider for amount request value to credit
+   * @type {SliderModel}
+  */
+  amountRequest: SliderModel = {
+    value: 0,
+    options: {
+      floor: 0,
+      disabled: true,
+      ceil: 99999,
+      enforceStep: false,
+      hideLimitLabels: true,
+      translate: (value: number): string => {
+        return '$' + value;
+      }
+    }
+  };
+
+  /**
+   * Slider for entry amount value to credit
+   * @type {SliderModel}
+  */
+  entryAmount: SliderModel = {
+    value: 0,
+    options: {
+      floor: 0,
+      ceil: 99999,
+      disabled: true,
+      enforceStep: false,
+      hideLimitLabels: true,
+      translate: (value: number): string => {
+        return '$' + value;
+      }
+    }
+  };
+
+  /**
+   * Slider for term value to credit
+   * @type {SliderModel}
+  */
+  term: SliderModel = {
+    value: 0,
+    options: {
+      floor: 0,
+      ceil: 360,
+      disabled: true,
+      enforceStep: false,
+      hideLimitLabels: true,
+      translate: (value: number): string => {
+        return '' + value;
+      }
+    }
+  };
+
+  /**
+   * Slider for monthly income value to credit
+   * @type {SliderModel}
+  */
+  monthlyIncome: SliderModel = {
+    value: 0,
+    options: {
+      floor: 0,
+      ceil: 4999,
+      disabled: true,
+      enforceStep: false,
+      hideLimitLabels: true,
+      translate: (value: number): string => {
+        return '' + value;
+      }
+    }
+  };
+
+  /**
+   * Variable for the type of entity: bank, cooperative or both
+   * @type {number}
+  */
+  public entityType: number = 0;
+
+  /**
+   * Variable for the type of credit
+   * @type {number}
+  */
+  public id_credit: number = 0;
+
+  /**
+   * Variables to store credit results
+   * @type {any}
+  */
+  public creditOptions: any;        //all credit options
+  public can_access_credit: any;    //financial institutions where you can get credit
+  public cannot_access_credit: any; //financial institutions where you cannot obtain credit
+  public credit_unavailable: any;   //financial institutions where credit is not available
+
+  /**
+   * Variable to store the names of the selected financial entities
+   * @type {string}
+  */
+  public credits_entities: string = ``;
+
+  /**
+   * Variable that stores the types of credits
+   * @type {any[]}
+  */
   public credits_select: any = [
     { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños' },
     { id: 11, name: 'Inmobiliario', description: 'Para tu casa' },
@@ -214,38 +297,189 @@ export class HomePageComponent implements OnInit {
     { id: 9, name: 'Préstamo rápido', description: 'Cualquier necesitad' },
     { id: 9, name: 'Urgencias', description: 'Crédito por emergencias' },
   ];
-  /* Variable that stores the types of credits. */
+
+  /**
+   * Variable to store the amount of results chosen by the user
+   * @type {number}
+  */
+  public cantSelectedCreditOptions: number = 0;
+
+  /**----------------------------------------------------INSURANCE VARIABLES------------------------------------------------------------ */
+
+  /**
+   * Variable for the type of insurance
+   * @type {number}
+  */
+  public id_insurance;
+
+  /**
+   * Variable to store the names of the selected insurance entities
+   * @type {string}
+  */
+  public insurance_entities: string = ``;
+
+  /**
+   * Variable that stores the types of insurance
+   * @type {any[]}
+  */
   public insurance_select: any = [
     { id: 1, name: 'Vehicular', description: 'Seguros para tu vehículo' },
   ];
-  /* Variables to enable or disable service tag options. */
-  public active_credits_select: boolean = false;
-  public active_insurance_select: boolean = false;
-  public active_cards_select: boolean = false;
-  public active_pilicy_select: boolean = false;
-  /* Variables to activate credit or insurance values and select */
-  public creditSection: boolean = false;
-  public insuranceSection: boolean = false;
-  /* Variables to activate credit or insurance forms */
-  public creditSectionForm: boolean = false;
-  public insuranceSectionForm: boolean = false;
 
-  /* Credit calculation form */
-  estimateform = this.formbuilder.group({
-    amountRequest: [''],
-    entryAmount: [''],
-    monthlyincome: [''],
-    term: [''],
-    credit_type_userSelected: new FormControl()
-  });
+  /**
+   * Variable that stores the vehicle information
+   * @type {any}
+  */
+  public typeVehicle: any;
+  public vehicleBrand: any;
+  public vehicleModel: any;
+  public vehicleYear: any;
+  public vehicleDescription: any;
 
-  /* Method to enable or disable service tag options. */
+  /**
+   * Variable that stores the vehicle color
+   * @type {any[]}
+  */
+  public vehicleColors: any = [
+    { id: 1, color_name: 'AMARILLO' },
+    { id: 2, color_name: 'AZUL' },
+    { id: 3, color_name: 'BEIGE' },
+    { id: 4, color_name: 'BLANCO' },
+    { id: 5, color_name: 'BRONCE' },
+    { id: 6, color_name: 'CAFE' },
+    { id: 7, color_name: 'CELESTE' },
+    { id: 8, color_name: 'COBRE' },
+    { id: 9, color_name: 'CREMA' },
+    { id: 10, color_name: 'DORADO' },
+    { id: 11, color_name: 'FUCSIA' },
+    { id: 12, color_name: 'GRIS' },
+    { id: 13, color_name: 'ABANO' },
+    { id: 14, color_name: 'LILA' },
+    { id: 15, color_name: 'MARFIL' },
+    { id: 16, color_name: 'MORADO' },
+    { id: 17, color_name: 'MOSTAZA' },
+    { id: 18, color_name: 'NARANJA' },
+    { id: 18, color_name: 'NEGRO' },
+    { id: 19, color_name: 'OTROS' },
+    { id: 20, color_name: 'PERLA' },
+    { id: 21, color_name: 'PLATA' },
+    { id: 22, color_name: 'PLATEADO' },
+    { id: 23, color_name: 'PLOMO' },
+    { id: 24, color_name: 'ROJO' },
+    { id: 25, color_name: 'ROSADO' },
+    { id: 26, color_name: 'TOMATE' },
+    { id: 27, color_name: 'TURQUEZA' },
+    { id: 28, color_name: 'VERDE' },
+    { id: 29, color_name: 'VINO' },
+  ]
+
+  /**
+   * Variable to store insurance results
+   * @type {any}
+  */
+  public can_access_vehicleInsurance: any;
+
+  /**
+   * Variables necessary to store the results
+   * @type {number}
+  */
+  public cant_insurances: number = 0;
+  public cont_insurances: number = 0;
+
+  /**
+   * Subscriptions necessary to store the results
+   * @type {any}
+  */
+  public subsc1: any;
+  public subsc2: any = [];
+
+  /**
+   * Variable to store the amount of results chosen by the user
+   * @type {number}
+  */
+  public cantInsurnaceUserSelected: number = 0;
+
+  /**------------------------------------------------------LOGIN VARIABLES-------------------------------------------------------------- */
+
+  /**
+   * Variable to check user login
+   * @type {any}
+  */
+  public user: any;
+
+  /**
+   * Variable to store the user id
+   * @type {number}
+  */
+  public user_id: number;
+
+  /**
+   * Variables to retrieve user information
+   * @type {boolean}
+  */
+  public hasCedula: boolean = false;
+  public hasEmail: boolean = false;
+  public hasPhone1: boolean = false;
+  public hasAddress: boolean = false;
+  public hasNames: boolean = false;
+  public hasLastNames: boolean = false;
+
+
+
+
+
+
+
+
+
+  /**----------------------------------------METHODS AND FUNCTIONS FOR CREDITS AND INSURANCE-------------------------------------------- */
+
+  /**
+   * Allows to open and close the modal terms and conditions
+   * @param {TemplateRef<any>} template - Identifier of the modal HTML tag
+  */
+  openModal_termsConditions(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+    this.modalRef.setClass('modal-dialog-centered');
+    this.modalRef.content.closeBtnName = 'Close';
+  }
+
+  /**
+   * Shows modal confirmation message
+   * @return {void} Nothing
+  */
+  confirm(): void {
+    console.log(`Confirmed`);
+    this.modalRef.hide();
+  }
+
+  /**
+   * Shows modal denial message
+   * @return {void} Nothing
+  */
+  decline(): void {
+    console.log(`Declined`);
+    this.modalRef.hide();
+  }
+
+  /**
+   * Method to enable or disable service tag options
+   * @param {Event} event - Identifier of the value service tag
+   * @return {void} Nothing
+  */
   onSelectServiceTag($event) {
 
+    /* Bloquear la seccion de ingresar valores */
     this.amountRequest.options = Object.assign({}, this.amountRequest.options, { disabled: true });
     this.entryAmount.options = Object.assign({}, this.entryAmount.options, { disabled: true });
     this.monthlyIncome.options = Object.assign({}, this.monthlyIncome.options, { disabled: true });
     this.term.options = Object.assign({}, this.term.options, { disabled: true });
+
+    /* Reiniciar los valores a 0 */
+    this.amountRequest.value = 0;
+    this.entryAmount.value = 0;
+    this.monthlyIncome.value = 0;
+    this.term.value = 0;
 
     /* Volver a la sección inicial del formulario */
     this.section1 = true;
@@ -258,8 +492,6 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = true;
       this.active_insurance_select = false;
-      this.active_cards_select = false;
-      this.active_pilicy_select = false;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = true;
       this.insuranceSection = false;
@@ -271,8 +503,6 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = true;
-      this.active_cards_select = false;
-      this.active_pilicy_select = false;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = false;
       this.insuranceSection = true;
@@ -284,8 +514,6 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = false;
-      this.active_cards_select = true;
-      this.active_pilicy_select = false;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = false;
       this.insuranceSection = false;
@@ -297,8 +525,6 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = false;
-      this.active_cards_select = false;
-      this.active_pilicy_select = true;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = false;
       this.insuranceSection = false;
@@ -308,7 +534,13 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  /**
+   * Method to verify if credits have been selected
+   * @param {Event} event - Identifier of credit type (id_credit)
+   * @return {void} Nothing
+  */
   onSelectCreditOption($event) {
+
     this.id_credit = $event.id;
 
     this.amountRequest.options = Object.assign({}, this.amountRequest.options, { disabled: false });
@@ -320,8 +552,14 @@ export class HomePageComponent implements OnInit {
     this.entryAmount.value = 0;
     this.monthlyIncome.value = 0;
     this.term.value = 0;
+
   }
 
+  /**
+   * Verify if insurance have been selected
+   * @param {Event} event - Identifier of credit type (id_credit)
+   * @return {void} Nothing
+  */
   onSelectInsuranceOption($event) {
 
     this.id_insurance = $event.id;
@@ -341,8 +579,16 @@ export class HomePageComponent implements OnInit {
 
   }
 
-  /* ----------------------------------- Constact Form ------------------------------- */
+  /**
+   * Service form (credit, insurance, credit cards, investment policy)
+  */
+  serviceform = this.formbuilder.group({
+    service_type_userSelected: new FormControl()
+  });
 
+  /**
+   * Define personal data form
+  */
   personalDataForm = this.formbuilder.group({
     names: ['', Validators.required],
     last_names: ['', Validators.required],
@@ -352,7 +598,17 @@ export class HomePageComponent implements OnInit {
     age: ['', [Validators.required]]
   });
 
+  /**
+   * Variable to verify if the personal data form is correct
+   * @type {boolean}
+  */
   personalDataFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
   isFieldValidPersonalData(field: string) {
     return (
       this.personalDataForm.get(field).errors && this.personalDataForm.get(field).touched ||
@@ -361,20 +617,35 @@ export class HomePageComponent implements OnInit {
     );
   }
 
+  /**
+   * Validate personal data form
+   * @return {void} Nothing
+  */
   onSubmitPersonalDataForm() {
     this.personalDataFormSubmitted = true;
-    // if (this.personalDataForm.valid) {}
+    //if (this.personalDataForm.valid) {}
   }
 
-  /* -------------------------------------------------------------------------------------------- */
-
+  /**
+   * Define address form
+  */
   addressForm = this.formbuilder.group({
-    province: ['', [validateSelect]],
+    province: ['', [Validators.required, validateSelect]],
     address: ['', Validators.required],
     city: ['', [Validators.required, validateSelect]]
   });
 
+  /**
+   * Variable to verify if the address form is correct
+   * @type {boolean}
+  */
   addressFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
   isFieldValidaddressForm(field: string) {
     return (
       this.addressForm.get(field).errors && this.addressForm.get(field).touched ||
@@ -383,19 +654,34 @@ export class HomePageComponent implements OnInit {
     );
   }
 
+  /**
+   * Validate address form
+   * @return {void} Nothing
+  */
   onSubmitaddressForm() {
     this.addressFormSubmitted = true;
-    // if (this.personalDataForm.valid) {}
+    //if (this.addressForm.valid) {}
   }
 
-  /* -------------------------------------------------------------------------------------------- */
-
+  /**
+   * Define contact form
+  */
   contactForm = this.formbuilder.group({
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
   });
 
+  /**
+   * Variable to verify if the contact form is correct
+   * @type {boolean}
+  */
   contactFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
   isFieldValidContactForm(field: string) {
     return (
       this.contactForm.get(field).errors && this.contactForm.get(field).touched ||
@@ -404,6 +690,10 @@ export class HomePageComponent implements OnInit {
     );
   }
 
+  /**
+   * Validate contact form
+   * @return {void} Nothing
+  */
   onSubmitContactForm() {
     this.contactFormSubmitted = true;
     if (this.contactForm.valid) {
@@ -416,92 +706,14 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  /* -------------------------------------------------------------------------------------------- */
-
-  economicForm = this.formbuilder.group({
-    card_payment: [''],
-    loans_payment: [''],
-    mortgage_payment: [''],
-    rent_payment: [''],
-    services_payment: ['', [Validators.required]],
-    total_properties: ['', [Validators.required]],
-    typeHousing: ['', [Validators.required, validateSelect]]
-  });
-
-  economicFormSubmitted: boolean;
-  isFieldValidEconomicForm(field: string) {
-    return (
-      this.economicForm.get(field).errors && this.economicForm.get(field).touched ||
-      this.economicForm.get(field).untouched &&
-      this.economicFormSubmitted && this.economicForm.get(field).errors
-    );
-  }
-
-  onSubmiteconomicForm() {
-    this.economicFormSubmitted = true;
-    if (this.economicForm.valid) {
-      console.log('Finalizó situacion economica');
-      this.section1 = false;
-      this.section2 = false;
-      this.section3 = true;
-      this.section4 = false;
-      this.section5 = false;
-    }
-  }
-
-  /* ------------------------------------------------------------------------------------------ */
-
-  creditform = this.formbuilder.group({
-    can_access_credit_userSelected: new FormArray([]),
-    cannot_access_credit_userSelected: new FormArray([]),
-    radio: '0'
-  });
-
-  onSubmitCreditform(el: HTMLElement) {
-    if (this.cantSelectedCreditOptions > 0) {
-
-      this.creditos_entities = ``;
-
-      el.scrollIntoView();
-      this.section1 = false;
-      this.section2 = false;
-      this.section3 = false;
-      this.section4 = true;
-      this.section5 = false;
-
-      const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
-        .map((v, i) => v ? this.can_access_credit[i].id : null)
-        .filter(v => v !== null);
-
-      const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
-        .map((v, i) => v ? this.cannot_access_credit[i].id : null)
-        .filter(v => v !== null);
-
-      for (let entry of selectedCreditsIds1) {
-        let aux = this.can_access_credit.find(x => x.id == entry);
-        this.creditos_entities += aux.name_financial_entity + ', ';
-      }
-
-      for (let entry of selectedCreditsIds2) {
-        let aux = this.cannot_access_credit.find(x => x.id == entry);
-        this.creditos_entities += aux.name_financial_entity + ', ';
-      }
-
-    } else {
-      alert(`seleccione al menos una opción de crédito`);
-    }
-  }
-
-  /* ----------------------------------- End  - Constact Form --------------------------------- */
-
-
+  /**
+   * On Init
+   * @return {void} Nothing
+  */
   ngOnInit() {
 
     this.personalDataForm.controls['maritalStatus'].setValue({ id: -1, status: 'ESTADO CIVIL' });
     this.personalDataForm.controls['gender'].setValue({ id: -1, gender: 'GÉNERO' });
-
-    /* TODO DE CREDITOS */
-    this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
 
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
@@ -512,30 +724,10 @@ export class HomePageComponent implements OnInit {
       console.log('error');
       console.log(error);
     });
-    /*  End - Get all provinces */
-
-
-    /* TODO DE SEGUROS */
-    this.vehicleform.controls['vehicleBrand'].setValue({ id: -1, brand_name: 'MARCA*' });
-    this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-    this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
-    this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
-    this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
-
-    /*  Get all car brands. */
-    this.httpService.getAllCarBrands().subscribe(res => {
-      this.vehicleBrand = res.data;
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
-    /*  End - all car brands. */
-
 
     /*  Start - Search by location. */
     this.httpService.getCurrentLocation().subscribe(res => {
       this.httpService.verifyProvinceExistence(res.region_code).subscribe(resp => {
-        //console.log(resp);
 
         /* In case the location is detected */
         if (resp.status === 200) {
@@ -560,8 +752,6 @@ export class HomePageComponent implements OnInit {
         console.log('error');
         console.log(error);
       });
-
-      //this.contactform.controls['city'].setValue(res.city.toUpperCase() + ', ' + this.region_name.toUpperCase());
     }, error => {
       console.log('error');
       console.log(error);
@@ -589,13 +779,33 @@ export class HomePageComponent implements OnInit {
       this.hasNames = false;
       this.hasLastNames = false;
     });
-    /* End - Handling of personal data when logging in */
 
+    /** TODO DE CREDITOS */
+    this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
+
+    /* TODO DE SEGUROS */
+    this.vehicleform.controls['vehicleBrand'].setValue({ id: -1, brand_name: 'MARCA*' });
+    this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+    this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
+    this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+    this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
+
+    /*  Get all car brands. */
+    this.httpService.getAllCarBrands().subscribe(res => {
+      this.vehicleBrand = res.data;
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
   }
 
+  /**
+   * Recover the cities of a province
+   * @param {Event} event.id - Province identifier
+   * @return {void} Nothing
+  */
   changeProvince(event) {
-    let idProvince: number = event.id;
-    this.httpService.getCities(idProvince).subscribe(res => {
+    this.httpService.getCities(event.id).subscribe(res => {
       this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
       this.cities = []
       this.cities = res.data;
@@ -605,19 +815,212 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  /* Variables to store the results of credits selected by the user */
+  /**
+   * Move between sections of the page
+   * @param {HTMLElement} element - HTML identifier
+   * @return {void} Nothing
+  */
+  moveSection(element: HTMLElement) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /**
+   * Move between sections of the page
+   * @param {HTMLElement} element - HTML identifier
+   * @return {void} Nothing
+  */
+  scrollToTop(element: HTMLElement) {
+    element.scrollIntoView();
+  }
+
+  /**
+   * Move between sections of forms
+   * @param {HTMLElement} el - HTML identifier
+   * @return {void} Nothing
+  */
+  section2_1(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = true;
+    this.section2 = false;
+    this.section3 = false;
+    this.section4 = false;
+    this.section5 = false;
+  }
+
+  /**
+   * Move between sections of forms
+   * @param {HTMLElement} el - HTML identifier
+   * @return {void} Nothing
+  */
+  section3_2(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = true;
+    this.section3 = false;
+    this.section4 = false;
+    this.section5 = false;
+
+    if (this.can_access_vehicleInsurance) {
+      this.can_access_vehicleInsurance_userSelected.clear()
+    }
+
+  }
+
+  /**
+   * Move between sections of forms
+   * @param {HTMLElement} el - HTML identifier
+   * @return {void} Nothing
+  */
+  section1_3(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = true;
+    this.section4 = false;
+    this.section5 = false;
+  }
+
+  /**
+   * Move between sections of forms
+   * @param {HTMLElement} el - HTML identifier
+   * @return {void} Nothing
+  */
+  section4_3(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = true;
+    this.section4 = false;
+    this.section5 = false;
+  }
+
+
+
+
+
+
+
+
+
+
+  /**-----------------------------------------------METHODS AND FUNCTIONS FOR CREDITS--------------------------------------------------- */
+
+  /**
+   * Define economic form
+  */
+  economicForm = this.formbuilder.group({
+    card_payment: [''],
+    loans_payment: [''],
+    mortgage_payment: [''],
+    rent_payment: [''],
+    services_payment: ['', [Validators.required]],
+    total_properties: ['', [Validators.required]],
+    typeHousing: ['', [Validators.required, validateSelect]]
+  });
+
+  /**
+   * Variable to verify if the economic form is correct
+   * @type {boolean}
+  */
+  economicFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
+  isFieldValidEconomicForm(field: string) {
+    return (
+      this.economicForm.get(field).errors && this.economicForm.get(field).touched ||
+      this.economicForm.get(field).untouched &&
+      this.economicFormSubmitted && this.economicForm.get(field).errors
+    );
+  }
+
+  /**
+   * Validate economic form
+   * @return {void} Nothing
+  */
+  onSubmiteconomicForm() {
+    this.economicFormSubmitted = true;
+    if (this.economicForm.valid) {
+      console.log('Finalizó situacion economica');
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = true;
+      this.section4 = false;
+      this.section5 = false;
+    }
+  }
+
+  /**
+   * Define credit form
+  */
+  creditform = this.formbuilder.group({
+    can_access_credit_userSelected: new FormArray([]),
+    cannot_access_credit_userSelected: new FormArray([]),
+    filter: '0'
+  });
+
+  /**
+   * Validate economic form and generates a summary
+   * @return {void} Nothing
+  */
+  onSubmitCreditform(el: HTMLElement) {
+    if (this.cantSelectedCreditOptions > 0) {
+
+      this.credits_entities = ``;
+
+      el.scrollIntoView();
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = false;
+      this.section4 = true;
+      this.section5 = false;
+
+      const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
+        .map((v, i) => v ? this.can_access_credit[i].id : null)
+        .filter(v => v !== null);
+
+      const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
+        .map((v, i) => v ? this.cannot_access_credit[i].id : null)
+        .filter(v => v !== null);
+
+      for (let entry of selectedCreditsIds1) {
+        let aux = this.can_access_credit.find(x => x.id == entry);
+        this.credits_entities += aux.name_financial_entity + ', ';
+      }
+
+      for (let entry of selectedCreditsIds2) {
+        let aux = this.cannot_access_credit.find(x => x.id == entry);
+        this.credits_entities += aux.name_financial_entity + ', ';
+      }
+
+    } else {
+      alert(`seleccione al menos una opción de crédito`);
+    }
+  }
+
+  /**
+   * Get variable to store the results of credits selected by the user
+   * @return {FormArray} Values where the user can obtain the credit
+  */
   get can_access_credit_userSelected(): FormArray {
     return this.creditform.get('can_access_credit_userSelected') as FormArray;
   }
 
+  /**
+   * Get variable to store the results of credits selected by the user
+   * @return {FormArray} Values where the user cannot obtain the credit
+  */
   get cannot_access_credit_userSelected(): FormArray {
     return this.creditform.get('cannot_access_credit_userSelected') as FormArray;
   }
-  /* End - Variables to store the results of credits selected by the user */
 
-
-
-  /* Add checkbox of credit options */
+  /**
+   * Add checkbox of can access credit options
+   * @return {void} Nothing
+  */
   private addCheckboxesCan_access_credit() {
     this.can_access_credit.forEach((o, i) => {
       const control = new FormControl(false);
@@ -625,54 +1028,41 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  /**
+   * Add checkbox of cannot access credit options
+   * @return {void} Nothing
+  */
   private addCheckboxesCannot_access_credit() {
     this.cannot_access_credit.forEach((o, i) => {
       const control = new FormControl(false);
       (this.creditform.controls.cannot_access_credit_userSelected as FormArray).push(control);
     });
   }
-  /* End - Add checkbox of credit options */
 
-
-
-  /* Methods to count the selected options */
-  public cantSelectedCreditOptions: number = 0;
-  can_access_credit_userSelectedLenght(): number {
-    return this.creditform.value.can_access_credit_userSelected
-      .map((v, i) => v ? this.can_access_credit[i].id : null)
-      .filter(v => v !== null).length;
-  }
-
-  cannot_access_credit_userSelectedLenght(): number {
-    return this.creditform.value.cannot_access_credit_userSelected
-      .map((v, i) => v ? this.cannot_access_credit[i].id : null)
-      .filter(v => v !== null).length;
-  }
-
+  /**
+   * Count credit selected options
+   * @return {void} Nothing
+  */
   cantSelectedUser() {
-    this.cantSelectedCreditOptions = this.can_access_credit_userSelectedLenght() + this.cannot_access_credit_userSelectedLenght();
+    this.cantSelectedCreditOptions =
+      this.creditform.value.can_access_credit_userSelected
+        .map((v, i) => v ? this.can_access_credit[i].id : null)
+        .filter(v => v !== null).length +
+      this.creditform.value.cannot_access_credit_userSelected
+        .map((v, i) => v ? this.cannot_access_credit[i].id : null)
+        .filter(v => v !== null).length;
   }
-  /* End - methods to count the selected options */
 
-
-  /* move between sections of the page */
-  moveSection(element: HTMLElement) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  scrollToTop(el: HTMLElement) {
-    el.scrollIntoView();
-  }
-  /* End - move between sections of the page */
-
-
-
-  /* Forms Submitted */
-  onSubmitEstimateForm(element: HTMLElement) {
+  /**
+   * Calculate credit options
+   * @param {HTMLElement} element - HTML identifier
+   * @return {void} Nothing
+  */
+  onSubmitServiceform(element: HTMLElement) {
 
     element.scrollIntoView({ behavior: 'smooth' });
 
-    if (this.estimateform.get('credit_type_userSelected').value === 'creditos') {
+    if (this.serviceform.get('service_type_userSelected').value === 'creditos') {
 
       this.creditSectionForm = true;
       this.insuranceSectionForm = false;
@@ -682,62 +1072,39 @@ export class HomePageComponent implements OnInit {
       let entryAmount: number = this.entryAmount.value;
       let term: number = this.term.value;
 
-      if (entryAmount !== null || entryAmount !== 0) {
-        if (entryAmount < (amountRequest * 0.9)) {
-          this.correctly = true;
-        } else {
-          this.correctly = false;
-        }
-      }
+      this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyIncome, term, entryAmount).subscribe(res => {
+        if (res.status == 200) {
 
-      /*Cambio temporal por cambio de provincia*/
-      //this.region_code = 'A';
-
-      if (this.correctly) {
-        this.correctly2 = true;
-        this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyIncome, term, entryAmount).subscribe(res => {
-          if (res.status == 200) {
-
-            if (this.can_access_credit) {
-              this.can_access_credit_userSelected.clear()
-            }
-
-            if (this.cannot_access_credit) {
-              this.cannot_access_credit_userSelected.clear()
-            }
-
-            this.creditOptions = res.data;
-            this.can_access_credit = res.data.can_access_credit;
-            this.cannot_access_credit = res.data.cannot_access_credit;
-            this.credit_unavailable = res.data.credit_unavailable;
-            this.addCheckboxesCan_access_credit();
-            this.addCheckboxesCannot_access_credit();
-
-          } else {
-            console.log('Ah ocurrido un error!' + res.message);
+          if (this.can_access_credit) {
+            this.can_access_credit_userSelected.clear()
           }
-        }, error => {
-          console.log('error');
-          console.log(error);
-        });
-      } else {
-        this.correctly2 = false;
-        if (this.can_access_credit) {
-          this.can_access_credit_userSelected.clear();
-          this.can_access_credit = 0;
+
+          if (this.cannot_access_credit) {
+            this.cannot_access_credit_userSelected.clear()
+          }
+
+          this.creditOptions = res.data;
+          this.can_access_credit = res.data.can_access_credit;
+          this.cannot_access_credit = res.data.cannot_access_credit;
+          this.credit_unavailable = res.data.credit_unavailable;
+          this.addCheckboxesCan_access_credit();
+          this.addCheckboxesCannot_access_credit();
+
+        } else {
+          console.log('Ah ocurrido un error!' + res.message);
         }
-        if (this.cannot_access_credit) {
-          this.cannot_access_credit_userSelected.clear()
-          this.cannot_access_credit = 0;
-        }
-        if (this.credit_unavailable) {
-          this.credit_unavailable.length = 0;
-        }
-      }
+      }, error => {
+        console.log('error');
+        console.log(error);
+      });
     }
   }
 
-
+  /**
+   * Retrieve all the information for the credit application
+   * @param {HTMLElement} el - HTML identifier
+   * @return {void} Nothing
+  */
   onSubmitRequestSummaryCredit(el: HTMLElement) {
 
     el.scrollIntoView();
@@ -809,6 +1176,287 @@ export class HomePageComponent implements OnInit {
     console.log(creditInformation);
   }
 
+  /**
+   * Filter credit options (all)
+   * @return {void} Nothing
+  */
+  todos() {
+    console.log(`todos`);
+  }
+
+  /**
+   * Filter credit options (bank)
+   * @return {void} Nothing
+  */
+  bancos() {
+    console.log(`bancos`);
+  }
+
+  /**
+   * Filter credit options (cooperative)
+   * @return {void} Nothing
+  */
+  cooperativas() {
+    console.log(`cooperativas`);
+  }
+
+
+
+
+
+
+
+
+
+  /**----------------------------------------------METHODS AND FUNCTIONS FOR INSURANCE-------------------------------------------------- */
+
+  /**
+   * Define vehicle form
+  */
+  vehicleform = this.formbuilder.group({
+    vehicleBrand: ['', [Validators.required, validateSelect]],
+    vehicleModel: ['', [Validators.required, validateSelect]],
+    vehicleYear: ['', [Validators.required, validateSelect]],
+    vehicleDescription: ['', [Validators.required, validateSelect]],
+    vehicleColor: ['', [Validators.required, validateSelect]],
+    vehiclePlate: [''],
+  });
+
+  /**
+   * Variable to verify if the vehicle form is correct
+   * @type {boolean}
+  */
+  vehicleformSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
+  isFieldValidVehicleform(field: string) {
+    return (
+      this.vehicleform.get(field).errors && this.vehicleform.get(field).touched ||
+      this.vehicleform.get(field).untouched &&
+      this.vehicleformSubmitted && this.vehicleform.get(field).errors
+    );
+  }
+
+  /**
+   * Change car brand
+   * @param {Event} event.id - Brand identifier
+   * @return {void} Nothing
+  */
+  changeCarBrand(event) {
+    let id_brand: number = event.id;
+    this.httpService.getYearByBrand(id_brand).subscribe(res => {
+      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+      this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
+      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleModel = [];
+      this.vehicleYear = [];
+      this.vehicleDescription = [];
+      this.vehicleYear = res.data;
+      //console.log(this.vehicleYear);
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+  }
+
+  /**
+   * Change car year
+   * @param {Event} event.id - year identifier
+   * @return {void} Nothing
+  */
+  changeCarYear(event) {
+    let year: number = event.year;
+    let id_model: number = event.brand_id;
+    this.httpService.getModelByYear(id_model, year).subscribe(res => {
+      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
+      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleModel = [];
+      this.vehicleDescription = [];
+      this.vehicleModel = res.data;
+      //console.log(this.vehicleYear);
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+  }
+
+  /**
+   * Change car model
+   * @param {Event} event.id - model identifier
+   * @return {void} Nothing
+  */
+  changeCarModel(event) {
+    let id_model: number = event.model_id;
+    let year: number = event.year;
+    let id_brand: number = event.brand_id;
+    this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
+      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleDescription = [];
+      this.vehicleDescription = res.data;
+      //console.log(this.vehicleYear);
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+  }
+
+  /**
+   * Get variable to store the results of insurance selected by the user
+   * @return {FormArray} Values where the user can obtain the insurance
+  */
+  get can_access_vehicleInsurance_userSelected(): FormArray {
+    return this.insuranceform.get('can_access_vehicleInsurance_userSelected') as FormArray;
+  }
+
+  /**
+   * Count insurance selected options
+   * @return {void} Nothing
+  */
+  public cantInsuranceSelectedUser() {
+    this.cantInsurnaceUserSelected = this.insuranceform.value.can_access_vehicleInsurance_userSelected
+      .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
+      .filter(v => v !== null).length;
+  }
+
+  /**
+   * Define insurance form
+  */
+  insuranceform = this.formbuilder.group({
+    can_access_vehicleInsurance_userSelected: new FormArray([]),
+  });
+
+  /**
+   * Validate insurance form and generates a summary
+   * @return {void} Nothing
+  */
+  onSubmitInsuranceform(el: HTMLElement) {
+
+    if (this.cantInsurnaceUserSelected > 0) {
+
+      this.insurance_entities = ``;
+
+      el.scrollIntoView();
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = false;
+      this.section4 = true;
+      this.section5 = false;
+
+      const selectedInsurancesIds = this.insuranceform.value.can_access_vehicleInsurance_userSelected
+        .map((v, i) => v ? this.can_access_vehicleInsurance[i].idaseguradora : null)
+        .filter(v => v !== null);
+
+
+      for (let entry of selectedInsurancesIds) {
+        let aux = this.can_access_vehicleInsurance.find(x => x.idaseguradora == entry);
+        this.insurance_entities += aux.name + ' - ' + aux.nombre_corto + ', ';
+      }
+
+    } else {
+      alert(`seleccione al menos una opción de seguro`);
+    }
+  }
+
+  /**
+   * Calculate vehicle insurance options
+   * @param {HTMLElement} element - HTML identifier
+   * @return {void} Nothing
+  */
+  onSubmitVehicleform(element: HTMLElement) {
+
+    this.can_access_vehicleInsurance = [];
+    this.cont_insurances = 0;
+    this.cant_insurances = 0;
+
+    this.vehicleformSubmitted = true;
+    if (this.vehicleform.valid) {
+
+      console.log('Finalizó información vehicular');
+      this.section1 = false;
+      this.section2 = false;
+      this.section3 = true;
+      this.section4 = false;
+      this.section5 = false;
+
+      let request: CarInsuranceRequest = {} as CarInsuranceRequest;
+      request.insured_dni = this.personalDataForm.value.dni;
+      request.insured_age = this.personalDataForm.value.age;
+      request.insured_name = this.personalDataForm.value.names;
+      request.insured_lastname = this.personalDataForm.value.last_names;
+      request.insured_gender = this.personalDataForm.value.gender.gender;
+      request.insured_marital_status = this.personalDataForm.value.maritalStatus.status;
+      request.region_code = this.addressForm.value.province.id;
+      request.city = this.addressForm.value.city.name;
+      request.car_year = this.vehicleform.value.vehicleModel.year;
+      request.car_brand = this.vehicleform.value.vehicleBrand.brand_name;
+      request.car_model = this.vehicleform.value.vehicleModel.model_name;
+      request.car_description = this.vehicleform.value.vehicleDescription.description;
+      request.carprice_id = this.vehicleform.value.vehicleDescription.price_id;
+      request.car_color = this.vehicleform.value.vehicleColor.color_name;
+      request.car_license_plate = this.vehicleform.value.vehiclePlate;
+
+      if (this.subsc1) {
+        this.subsc1.unsubscribe();
+      }
+      if (this.subsc2 && this.subsc2.length) {
+        for (let entry of this.subsc2)
+          entry.unsubscribe();
+      }
+      this.subsc1 = this.httpService.getAllInsuranceCompanies().subscribe(res => {
+        if (res.status == 200) {
+          let insurances = res.data;
+          //console.log(insurances);
+          this.cant_insurances = insurances.length;
+          for (let entry of insurances) {
+            request.insurancecompany_id = entry.id;
+            this.subsc2.push(
+              this.httpService.getInsuranceInformation(request).subscribe(resp => {
+                this.cont_insurances = this.cont_insurances + 1;
+                //console.log(resp);
+                if (res.status == 200) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                  if (resp.data && resp.data.aseguradoras.length > 0) {
+                    if (this.can_access_vehicleInsurance) {
+                      this.can_access_vehicleInsurance_userSelected.clear()
+                    }
+                    //console.log(resp.data.aseguradoras[0]);
+                    this.can_access_vehicleInsurance.push(resp.data.aseguradoras[0]);
+                    this.can_access_vehicleInsurance.forEach((o, i) => {
+                      const control = new FormControl(false);
+                      (this.insuranceform.controls.can_access_vehicleInsurance_userSelected as FormArray).push(control);
+                    });
+                  }
+                } else {
+                  console.log(res);
+                  console.log('Ah ocurrido un error!' + res.message);
+                }
+              }, error => {
+                console.log('error');
+                console.log(error);
+              })
+            );
+          }
+
+        } else {
+          console.log(res);
+          console.log('Ah ocurrido un error!' + res.message);
+        }
+      }, error => {
+        console.log('error');
+        console.log(error);
+      });
+    }
+  }
+
+  /**
+   * Retrieve all the information for the insurance application
+   * @param {HTMLElement} el - HTML identifier
+   * @return {void} Nothing
+  */
   onSubmitRequestSummaryInsurance(el: HTMLElement) {
 
     el.scrollIntoView();
@@ -852,374 +1500,21 @@ export class HomePageComponent implements OnInit {
     console.log(insuranceInformation);
   }
 
-  /* End - Forms Submitted */
 
 
-  section1: boolean = true;   //seccion de formularios de identificación: datos personales, domicilio, contacto
-  section2: boolean = false;  //sección para formularios: información de vehículo - información financiera
-  section3: boolean = false;  //sección de resultados de créditos y seguros
-  section4: boolean = false;  //sección de resumen de creditos y seguros
-  section5: boolean = false;  //sección final de solicitud
 
-  /* Archwizard Form */
 
-  section2_1(el: HTMLElement) {
-    el.scrollIntoView();
-    this.section1 = true;
-    this.section2 = false;
-    this.section3 = false;
-    this.section4 = false;
-    this.section5 = false;
-  }
 
-  section3_2(el: HTMLElement) {
-    el.scrollIntoView();
-    this.section1 = false;
-    this.section2 = true;
-    this.section3 = false;
-    this.section4 = false;
-    this.section5 = false;
 
-    if (this.can_access_vehicleInsurance) {
-      this.can_access_vehicleInsurance_userSelected.clear()
-    }
 
-  }
 
-  section1_3(el: HTMLElement) {
-    el.scrollIntoView();
-    this.section1 = false;
-    this.section2 = false;
-    this.section3 = true;
-    this.section4 = false;
-    this.section5 = false;
-  }
+  /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */
 
-  section4_3(el: HTMLElement) {
-    el.scrollIntoView();
-    this.section1 = false;
-    this.section2 = false;
-    this.section3 = true;
-    this.section4 = false;
-    this.section5 = false;
-  }
-  /* Archwizard Form */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  todos() {
-    console.log(`todos`);
-  }
-
-  bancos() {
-    console.log(`bancos`);
-  }
-
-  cooperativas() {
-    console.log(`cooperativas`);
-  }
-
-
-
-
-
-
-
-  /* Todo relacionado a seguro de vehículos */
-
-  public typeVehicle: any;
-  public vehicleBrand: any;
-  public vehicleModel: any;
-  public vehicleYear: any;
-  public vehicleDescription: any;
-
-  public vehicleColors: any = [
-    { id: 1, color_name: 'AMARILLO' },
-    { id: 2, color_name: 'AZUL' },
-    { id: 3, color_name: 'BEIGE' },
-    { id: 4, color_name: 'BLANCO' },
-    { id: 5, color_name: 'BRONCE' },
-    { id: 6, color_name: 'CAFE' },
-    { id: 7, color_name: 'CELESTE' },
-    { id: 8, color_name: 'COBRE' },
-    { id: 9, color_name: 'CREMA' },
-    { id: 10, color_name: 'DORADO' },
-    { id: 11, color_name: 'FUCSIA' },
-    { id: 12, color_name: 'GRIS' },
-    { id: 13, color_name: 'ABANO' },
-    { id: 14, color_name: 'LILA' },
-    { id: 15, color_name: 'MARFIL' },
-    { id: 16, color_name: 'MORADO' },
-    { id: 17, color_name: 'MOSTAZA' },
-    { id: 18, color_name: 'NARANJA' },
-    { id: 18, color_name: 'NEGRO' },
-    { id: 19, color_name: 'OTROS' },
-    { id: 20, color_name: 'PERLA' },
-    { id: 21, color_name: 'PLATA' },
-    { id: 22, color_name: 'PLATEADO' },
-    { id: 23, color_name: 'PLOMO' },
-    { id: 24, color_name: 'ROJO' },
-    { id: 25, color_name: 'ROSADO' },
-    { id: 26, color_name: 'TOMATE' },
-    { id: 27, color_name: 'TURQUEZA' },
-    { id: 28, color_name: 'VERDE' },
-    { id: 29, color_name: 'VINO' },
-  ]
-
-  public can_access_vehicleInsurance: any;
-  public cant_insurances: number = 0;
-  public cont_insurances: number = 0;
-  public subsc1: any;
-  public subsc2: any = [];
-
-  public cantInsurnaceUserSelected: number = 0;
-
-  /* Formulario seguro-vehicular*/
-  vehicleform = this.formbuilder.group({
-    vehicleBrand: ['', [Validators.required, validateSelect]],
-    vehicleModel: ['', [Validators.required, validateSelect]],
-    vehicleYear: ['', [Validators.required, validateSelect]],
-    vehicleDescription: ['', [Validators.required, validateSelect]],
-    vehicleColor: ['', [Validators.required, validateSelect]],
-    vehiclePlate: [''],
-  });
-
-  /* Validar vehicleform */
-  vehicleformSubmitted: boolean;
-  isFieldValidVehicleform(field: string) {
-    return (
-      this.vehicleform.get(field).errors && this.vehicleform.get(field).touched ||
-      this.vehicleform.get(field).untouched &&
-      this.vehicleformSubmitted && this.vehicleform.get(field).errors
-    );
-  }
-
-  changeCarBrand(event) {
-    let id_brand: number = event.id;
-    this.httpService.getYearByBrand(id_brand).subscribe(res => {
-      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-      this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
-      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
-      this.vehicleModel = [];
-      this.vehicleYear = [];
-      this.vehicleDescription = [];
-      this.vehicleYear = res.data;
-      //console.log(this.vehicleYear);
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
-  }
-
-  changeCarYear(event) {
-    let year: number = event.year;
-    let id_model: number = event.brand_id;
-    this.httpService.getModelByYear(id_model, year).subscribe(res => {
-      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
-      this.vehicleModel = [];
-      this.vehicleDescription = [];
-      this.vehicleModel = res.data;
-      //console.log(this.vehicleYear);
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
-  }
-
-  changeCarModel(event) {
-    let id_model: number = event.model_id;
-    let year: number = event.year;
-    let id_brand: number = event.brand_id;
-    this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
-      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
-      this.vehicleDescription = [];
-      this.vehicleDescription = res.data;
-      //console.log(this.vehicleYear);
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
-  }
-
-  insuranceform = this.formbuilder.group({
-    can_access_vehicleInsurance_userSelected: new FormArray([]),
-  });
-
-  get can_access_vehicleInsurance_userSelected(): FormArray {
-    return this.insuranceform.get('can_access_vehicleInsurance_userSelected') as FormArray;
-  }
-
-  public cantInsuranceSelectedUser() {
-    this.cantInsurnaceUserSelected = this.insuranceform.value.can_access_vehicleInsurance_userSelected
-      .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
-      .filter(v => v !== null).length;
-  }
-
-  onSubmitInsuranceform(el: HTMLElement) {
-
-    if (this.cantInsurnaceUserSelected > 0) {
-
-      this.insurance_entities = ``;
-
-      el.scrollIntoView();
-      this.section1 = false;
-      this.section2 = false;
-      this.section3 = false;
-      this.section4 = true;
-      this.section5 = false;
-
-      const selectedInsurancesIds = this.insuranceform.value.can_access_vehicleInsurance_userSelected
-        .map((v, i) => v ? this.can_access_vehicleInsurance[i].idaseguradora : null)
-        .filter(v => v !== null);
-
-
-      for (let entry of selectedInsurancesIds) {
-        let aux = this.can_access_vehicleInsurance.find(x => x.idaseguradora == entry);
-        this.insurance_entities += aux.name + ' - ' + aux.nombre_corto + ', ';
-      }
-
-    } else {
-      alert(`seleccione al menos una opción de seguro`);
-    }
-  }
-
-  onSubmitVehicleform(element: HTMLElement) {
-
-    this.can_access_vehicleInsurance = [];
-    this.cont_insurances = 0;
-    this.cant_insurances = 0;
-
-    this.vehicleformSubmitted = true;
-    if (this.vehicleform.valid) {
-
-      console.log('Finalizó información vehicular');
-      this.section1 = false;
-      this.section2 = false;
-      this.section3 = true;
-      this.section4 = false;
-      this.section5 = false;
-
-      let request: CarInsuranceRequest = {} as CarInsuranceRequest;
-      request.insured_dni = this.personalDataForm.value.dni;
-      request.insured_age = this.personalDataForm.value.age;
-      request.insured_name = this.personalDataForm.value.names;
-      request.insured_lastname = this.personalDataForm.value.last_names;
-      request.insured_gender = this.personalDataForm.value.gender.gender;
-      request.insured_marital_status = this.personalDataForm.value.maritalStatus.status;
-
-      request.region_code = 'A';
-      request.city = 'CUENCA';
-
-      request.car_year = this.vehicleform.value.vehicleModel.year;
-      request.car_brand = this.vehicleform.value.vehicleBrand.brand_name;
-      request.car_model = this.vehicleform.value.vehicleModel.model_name;
-      request.car_description = this.vehicleform.value.vehicleDescription.description;
-      request.carprice_id = this.vehicleform.value.vehicleDescription.price_id;
-      request.car_color = this.vehicleform.value.vehicleColor.color_name;
-      request.car_license_plate = this.vehicleform.value.vehiclePlate;
-
-      if (this.subsc1) {
-        this.subsc1.unsubscribe();
-      }
-
-      if (this.subsc2 && this.subsc2.length) {
-        for (let entry of this.subsc2)
-          entry.unsubscribe();
-      }
-
-      this.subsc1 = this.httpService.getAllInsuranceCompanies().subscribe(res => {
-
-        if (res.status == 200) {
-
-          let insurances = res.data;
-          //console.log(insurances);
-          this.cant_insurances = insurances.length;
-
-          for (let entry of insurances) {
-            request.insurancecompany_id = entry.id;
-
-            this.subsc2.push(
-              this.httpService.getInsuranceInformation(request).subscribe(resp => {
-
-                this.cont_insurances = this.cont_insurances + 1;
-                //console.log(resp);
-                if (res.status == 200) {
-
-                  element.scrollIntoView({ behavior: 'smooth' });
-
-                  if (resp.data && resp.data.aseguradoras.length > 0) {
-
-                    if (this.can_access_vehicleInsurance) {
-                      this.can_access_vehicleInsurance_userSelected.clear()
-                    }
-
-                    //console.log(resp.data.aseguradoras[0]);
-                    this.can_access_vehicleInsurance.push(resp.data.aseguradoras[0]);
-
-                    this.can_access_vehicleInsurance.forEach((o, i) => {
-                      const control = new FormControl(false);
-                      (this.insuranceform.controls.can_access_vehicleInsurance_userSelected as FormArray).push(control);
-                    });
-
-                  }
-                } else {
-                  console.log(res);
-                  console.log('Ah ocurrido un error!' + res.message);
-                }
-              }, error => {
-                console.log('error');
-                console.log(error);
-              })
-            );
-          }
-
-        } else {
-          console.log(res);
-          console.log('Ah ocurrido un error!' + res.message);
-        }
-      }, error => {
-        console.log('error');
-        console.log(error);
-      });
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-  /* Todo lo relacionado al inicio de sesión */
-
-  public user: any;
-  public user_post: any;
-  public user_id: number;
-
-  public hasCedula: Boolean = false;
-  public hasEmail: Boolean = false;
-  public hasPhone1: Boolean = false;
-  public hasAddress: Boolean = false;
-  public hasNames: Boolean = false;
-  public hasLastNames: Boolean = false;
-
-  loginVerified(): Boolean {
+  /**
+   * Check if the user is logged in
+   * @return {boolean} True if you are logged in, false if not
+  */
+  loginVerified(): boolean {
     let accessToken = localStorage.getItem('currentUser');
     if (accessToken) {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -1229,13 +1524,14 @@ export class HomePageComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Retrieves the information if the user is logged in.
+   * @return {void} Nothing
+  */
   recuperateLoginData() {
     if (this.loginVerified()) {
       this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
-
-        this.user_post = user;
-        this.user_id = this.user_post.id;
-
+        this.user_id = this.user.id;
         if (user) {
           if (user.cedula) {
             this.personalDataForm.controls['dni'].setValue(user.cedula);

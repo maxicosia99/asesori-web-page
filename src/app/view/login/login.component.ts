@@ -2,13 +2,19 @@ import { HttpClientService } from './../../services/client/http-client.service';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { AuthenticationService } from './../../services/auth/authentication.service';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserAuth } from './../../models/userAuth';
 import { Subscription } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/models/user-register';
 
+/**
+ * Validate if the password and confirmation are the same
+ * @param {string} controlName - Password
+ * @param {string} matchingControlName - COnfirm password
+ * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
+ */
 export function MustMatch(controlName: string, matchingControlName: string) {
   return (formGroup: FormGroup) => {
     const control = formGroup.controls[controlName];
@@ -30,10 +36,18 @@ export function MustMatch(controlName: string, matchingControlName: string) {
   selector: 'app-dashboard',
   templateUrl: './login.component.html'
 })
+
 export class LoginComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
-
+  /**
+    * Represents the component of the homepage module
+    * @constructor
+    * @param {BsModalService} modalService - Modal administration service
+    * @param {HttpClientService} httpService - Service for connection to the server
+    * @param {FormBuilder} formbuilder - Service for the use of forms
+    * @param {AuthenticationService} authService - Authentication service for user data
+    * @param {Router} router - Routing service
+  */
   constructor(
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
@@ -42,20 +56,47 @@ export class LoginComponent implements OnInit, OnDestroy {
     public router: Router,
   ) { }
 
-
+  /**
+   * Variable that receives the route to redirect
+   * @type {any}
+  */
   @Input() redirect: any;
-
+  
+  /**
+   * To activate the login section
+   * @type {boolean}
+  */
   public sectionLogin: boolean = true;
+  
+  /**
+   * To activate the register section
+   * @type {boolean}
+  */
   public sectionRegister: boolean = false;
+  
+  /**
+   * Variable to sign out
+   * @type {Subscription}
+  */
+  private subscription: Subscription;
 
+  /**
+   * Alert Component
+   * @type {any[]}
+  */
+  alerts: any[] = [{}];
 
-  /*########### Form ###########*/
+  /**
+   * Define login form
+  */
   loginForm = this.formBuilder.group({
     usernameOrEmail: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
   })
 
-  /*########### Form ###########*/
+  /**
+   * Define register form
+  */
   registerForm = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
@@ -65,33 +106,48 @@ export class LoginComponent implements OnInit, OnDestroy {
     validator: MustMatch('password', 'confirmPassword')
   });
 
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
-
-  //Alert Component
-  alerts: any[] = [{}];
-
+  /**
+   * Show an alert with a message
+   * @param {string} msg - Error or warning message
+   * @return {void} - Nothing
+  */
   add(msg: string): void {
     this.alerts.push({
       type: 'danger', msg, timeout: 5000
     });
   }
 
+  /**
+   * Closed an alert
+   * @param {AlertComponent} dismissedAlert
+   * @return {void} - Nothing
+  */
   onClosed(dismissedAlert: AlertComponent): void {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
-  // Getter for easy access to form fields
+  /**
+   * Getter for easy access to login form fields
+   * @return {FormControl} Acces to login form
+  */
   get form() {
     return this.loginForm.controls;
   }
 
+  /**
+   * Getter for easy access to register form fields
+   * @return {FormControl} Acces to register form
+  */
   get formRegister() {
     return this.registerForm.controls;
   }
 
-  // funcion que llama el submit del login
+  /**
+   * Submit login
+   * @return {void} Nothing
+  */
   onSubmit() {
     let user: UserAuth = {
       usernameOrEmail: this.form.usernameOrEmail.value,
@@ -122,7 +178,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  // funcion que llama el submit del register
+  /**
+   * Submit register
+   * @return {void} Nothing
+  */
   onSubmitRegister() {
     
     let userRegister: UserRegister = {
@@ -175,17 +234,28 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Closes suscriptions
+   * @returns {void} - Nothing
+  */
   ngOnDestroy() {
     if (this.subscription)
       this.subscription.unsubscribe();
   }
 
-
+  /**
+   * Change to register section
+   * @returns {void} - Nothing
+  */
   changeSectionRegister() {
     this.sectionLogin = false;
     this.sectionRegister = true;
   }
 
+  /**
+   * Change to login section
+   * @returns {void} - Nothing
+  */
   changeSectionLogin() {
     this.sectionLogin = true;
     this.sectionRegister = false;

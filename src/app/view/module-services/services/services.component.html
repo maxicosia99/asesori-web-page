@@ -1,7 +1,8 @@
 <main class="bg-1 main-top-90">
 
-    <section class="container">
-        <form [formGroup]="myForm">
+    <form [formGroup]="creditform">
+
+        <section class="container">
             <div class="row justify-content-center">
                 <div class="col-10 px-4 col-md-4 text-center">
                     <div class="btn-group special btn-group-sm" btnRadioGroup formControlName="radio">
@@ -10,10 +11,8 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </section>
+        </section>
 
-    <form [formGroup]="creditform">
         <section class="container-fluid pt-1">
             <div class="row justify-content-center">
 
@@ -21,39 +20,39 @@
 
                     <input type="radio" value="estudios_10" id="estudios" formControlName="credit_type_userSelected" (change)="onSelectCreditType($event)">
                     <label for="estudios" class="options mt-0 mb-2">
-                    <div class="media mb-1">
-                        <div class="media-body">
-                            <p class="text-14-medium mt-1">Estudios</p>
+                        <div class="media mb-1">
+                            <div class="media-body">
+                                <p class="text-14-medium mt-1">Estudios</p>
+                            </div>
+                            <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
                         </div>
-                        <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
-                    </div>
-                    <p class="text-14-regular mb-1">Para mi carrera</p>
-                    <p class="tittle-15 mb-1">(De consumo)</p>
-                </label>
+                        <p class="text-14-regular mb-1">Para mi carrera</p>
+                        <p class="tittle-15 mb-1">(De consumo)</p>
+                    </label>
 
                     <input type="radio" value="viaje_9" id="viaje" formControlName="credit_type_userSelected" (change)="onSelectCreditType($event)">
                     <label for="viaje" class="options my-2">
-                    <div class="media mb-1">
-                        <div class="media-body">
-                            <p class="text-14-medium mt-1">Viaje</p>
+                        <div class="media mb-1">
+                            <div class="media-body">
+                                <p class="text-14-medium mt-1">Viaje</p>
+                            </div>
+                            <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
                         </div>
-                        <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
-                    </div>
-                    <p class="text-14-regular mb-1">Para mis sueños</p>
-                    <p class="tittle-15 mb-1">(De consumo)</p>
-                </label>
+                        <p class="text-14-regular mb-1">Para mis sueños</p>
+                        <p class="tittle-15 mb-1">(De consumo)</p>
+                    </label>
 
                     <input type="radio" value="emergencia_9" id="emergencia" formControlName="credit_type_userSelected" (change)="onSelectCreditType($event)">
                     <label for="emergencia" class="options my-2">
-                    <div class="media mb-1">
-                        <div class="media-body">
-                            <p class="text-14-medium mt-1">Emergencia</p>
+                        <div class="media mb-1">
+                            <div class="media-body">
+                                <p class="text-14-medium mt-1">Emergencia</p>
+                            </div>
+                            <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
                         </div>
-                        <img src="/assets/img/iconos/dinero.png" width="25px" height="25px" alt="">
-                    </div>
-                    <p class="text-14-regular mb-1">Para mi consumo</p>
-                    <p class="tittle-15 mb-1">(De consumo)</p>
-                </label>
+                        <p class="text-14-regular mb-1">Para mi consumo</p>
+                        <p class="tittle-15 mb-1">(De consumo)</p>
+                    </label>
 
                 </div>
 

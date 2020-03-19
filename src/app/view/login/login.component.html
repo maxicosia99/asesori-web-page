@@ -47,8 +47,8 @@
 
                 <div class="row justify-content-center py-4">
                     <div class="col-8 text-center tittle-14">
-                        <span>Aun no tienes cuenta,</span>
-                        <summary (click)="changeSectionRegister()" class="color-1 d-inline"> Registrate aquí</summary>
+                        <span>Aun no tienes cuenta, </span>
+                        <summary (click)="changeSectionRegister()" class="color-1 d-inline">Registrate aquí</summary>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
                             <input type="password" formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
                             <span class="floating-label text-uppercase">Password*</span>
                             <div *ngIf="formRegister.password.touched && formRegister.password.errors" class="invalid-feedback">
-                                <div *ngIf="formRegister.password.errors.required">Porfavor ingrese su contraseña!
+                                <div *ngIf="formRegister.password.errors.required">Ingrese su contraseña!
                                 </div>
                                 <div *ngIf="formRegister.password.errors.minlength">Al menos 6 caracteres!
                                 </div>
@@ -122,15 +122,15 @@
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <button type="submit" [disabled]="registerForm.invalid" class="btn button btn-block">REGISTRARSE</button>
                     </div>
                 </div>
 
                 <div class="row justify-content-center py-4">
                     <div class="col-8 text-center tittle-14">
-                        <span>Ya tienes cuenta,</span>
-                        <summary (click)="changeSectionLogin()" class="color-1 d-inline"> Inicia sesión aquí</summary>
+                        <span>Ya tienes cuenta, </span>
+                        <summary (click)="changeSectionLogin()" class="color-1 d-inline">Inicia sesión aquí</summary>
                     </div>
                 </div>
 

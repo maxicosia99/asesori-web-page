@@ -10,13 +10,51 @@ import { HttpClientService } from 'src/app/services/client/http-client.service';
 })
 export class ServicesComponent implements OnInit {
 
+  /**
+    * Represents the component of the services module
+    * @constructor
+    * @param {HttpClientService} httpService - Service for connection to the server
+    * @param {FormBuilder} formbuilder - Service for the use of forms
+  */
+  constructor(
+    private formbuilder: FormBuilder,
+    private httpService: HttpClientService,
+  ) { }
+  
+  /**
+   * Store credit name
+   * @type {string}
+  */
   public credit_name: string;
+  
+  /**
+   * Store credit beneficiaries
+   * @type {string[]}
+  */
   public beneficiaries: string[];
+  
+  /**
+   * Store credit destination
+   * @type {string[]}
+  */
   public destination: string[];
+  
+  /**
+   * Store credit terms
+   * @type {string[]}
+  */
   public terms: string[];
+  
+  /**
+   * Store credit url photo
+   * @type {string}
+  */
   public url_photo: string;
 
-  /* Carousel options */
+  /**
+   * Carousel options
+   * @type {OwlOptions}
+  */
   customOptions: OwlOptions = {
     loop: true,
     freeDrag: true,
@@ -40,11 +78,10 @@ export class ServicesComponent implements OnInit {
     }
   }
 
-  constructor(
-    private formbuilder: FormBuilder,              //form service
-    private httpService: HttpClientService,       //client api service
-  ) { }
-
+  /**
+   * On Init
+   * @return {void} Nothing
+  */
   ngOnInit() {
 
     this.httpService.getInformationCreditByid(this.creditform.get('credit_type_userSelected').value.split("_")[1]).subscribe(res => {
@@ -64,23 +101,35 @@ export class ServicesComponent implements OnInit {
 
   }
 
-  myForm = this.formbuilder.group({
-    radio: '0'
-  });
-
-  /* Credit calculation form */
+  /**
+   * Define credit form
+  */
   creditform = this.formbuilder.group({
+    radio: '0',
     credit_type_userSelected: 'estudios_10'
   });
 
+  /**
+   * Filter credit
+   * @return {void} Nothing
+  */
   creditos() {
     console.log(`creditos`);
   }
 
+  /**
+   * Filter insurance
+   * @return {void} Nothing
+  */
   seguros() {
     console.log(`seguros`);
   }
 
+  /**
+   * Get credit information
+   * @param {Event} event.target.value - Identifier of credit type (id_credit)
+   * @return {void} Nothing
+  */
   onSelectCreditType($event) {
 
     this.httpService.getInformationCreditByid($event.target.value.split("_")[1]).subscribe(res => {

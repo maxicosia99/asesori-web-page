@@ -13,6 +13,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carou
 import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
 import { NgSelectModule } from '@ng-select/ng-select';                  // select
 import { NgxCurrencyModule } from "ngx-currency";                       // currency input $
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 export const customCurrencyMaskConfig = {
@@ -45,7 +46,8 @@ export const customCurrencyMaskConfig = {
     ArchwizardModule,
     NgSelectModule,
     NgxCurrencyModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    AlertModule.forRoot()
   ],
   exports: [
     

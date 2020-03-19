@@ -155,13 +155,13 @@
             </div>
         </div>
 
-        <form [formGroup]="estimateform">
+        <form [formGroup]="serviceform">
 
             <!-- SERVICES TAGS -->
 
             <div class="row kudos-wrap mx-3 px-md-0 justify-content-between">
 
-                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="creditos" id="credito">
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="service_type_userSelected" value="creditos" id="credito">
                 <label for="credito" class="my-2 my-lg-0 px-4 btn-selection">
                     <div class="media py-4">
                         <div class="media">
@@ -174,7 +174,7 @@
                     <span class="badge selected-service-tag">✓</span>
                 </label>
 
-                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="seguros" id="seguros">
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="service_type_userSelected" value="seguros" id="seguros">
                 <label for="seguros" class="my-2 my-lg-0 px-4 btn-selection">
                     <div class="media py-4">
                         <div class="media">
@@ -187,7 +187,7 @@
                     <span class="badge selected-service-tag">✓</span>
                 </label>
 
-                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="tarjetas" id="tarjetas">
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="service_type_userSelected" value="tarjetas" id="tarjetas">
                 <label for="tarjetas" class="my-2 my-lg-0 px-4 btn-selection">
 
                     <div class="media py-4">
@@ -201,7 +201,7 @@
                     <span class="badge selected-service-tag">✓</span>
                 </label>
 
-                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="credit_type_userSelected" value="poliza" id="poliza">
+                <input type="radio" (change)="onSelectServiceTag($event)" formControlName="service_type_userSelected" value="poliza" id="poliza">
                 <label for="poliza" class="my-2 my-lg-0 px-4 btn-selection">
                     <div class="media py-4">
                         <div class="media">
@@ -296,10 +296,18 @@
                 </div>
             </div>
 
+            <div *ngIf="creditSection" class="row justify-content-between mt-4 mb-0 mx-1">
+                <div class="col-12">
+                    <alert *ngIf="(entryAmount.value > (amountRequest.value * 0.9))" type="danger">
+                        La entrada no puede superar el 90% del valor a solicitar!
+                    </alert>
+                </div>
+            </div>
+
             <!-- CALCULATE CREDIT BUTTON -->
-            <div *ngIf="creditSection" class="row mt-5 justify-content-center mx-3 px-md-0">
+            <div *ngIf="creditSection" class="row mt-4 justify-content-center mx-0 px-md-0">
                 <div class="col-md-6 col-lg-3">
-                    <button type="submit" class="btn button btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0" (click)="onSubmitEstimateForm(target)">CALCULAR</button>
+                    <button type="submit" class="btn button btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0 || entryAmount.value > (amountRequest.value * 0.9)" (click)="onSubmitServiceform(target)">CALCULAR</button>
                 </div>
             </div>
 
@@ -925,7 +933,7 @@
 
                             <div class="row my-4 justify-content-center">
                                 <div class="col-10 col-md-6">
-                                    <div class="btn-group special btn-group-sm rounded" btnRadioGroup formControlName="radio">
+                                    <div class="btn-group special btn-group-sm rounded" btnRadioGroup formControlName="filter">
                                         <label btnRadio="0" (click)="todos()" class="btn tittle-7 bg-1" tabindex="0" role="button">TODOS</label>
                                         <label btnRadio="1" (click)="bancos()" class="btn tittle-7 bg-1" tabindex="0" role="button">BANCOS</label>
                                         <label btnRadio="2" (click)="cooperativas()" class="btn tittle-7 bg-1" tabindex="0" role="button">COOPERATIVAS</label>
@@ -1207,7 +1215,7 @@
                             <div class="col-12">
                                 <div class="position-relative">
                                     <p class="floating-label-static text-uppercase">instituciones seleccionadas*</p>
-                                    <p class="tittle-10">{{creditos_entities}}</p>
+                                    <p class="tittle-10">{{credits_entities}}</p>
                                 </div>
                             </div>
                         </div>
@@ -1680,7 +1688,8 @@
                         <form [formGroup]="insuranceform">
 
                             <div *ngIf="cant_insurances!=cont_insurances">
-                                <p class="my-4"><i class="fas fa-spinner color-1"></i> Todavía se están cargando resultados</p>
+                                <p class="my-4"><i class="fas fa-spinner color-1"></i> Todavía se están cargando resultados
+                                </p>
                             </div>
 
                             <div *ngIf="cant_insurances==cont_insurances">
@@ -1712,7 +1721,8 @@
                                                         <div class="row text-center justify-content-center">
                                                             <div class="col-6 col-lg-12">
                                                                 <img class="img-fluid"
-                                                                    [src]="can_access_vehicleInsurance[i].url_photo" alt="Image">
+                                                                    [src]="can_access_vehicleInsurance[i].url_photo"
+                                                                    alt="Image">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1734,9 +1744,11 @@
                                                             </div>
                                                             <div class="col-12 col-md-8 text-md-left">
                                                                 <p class="text-uppercase tittle-10">Aseguradora</p>
-                                                                <p class="tittle-11">{{can_access_vehicleInsurance[i].nombre_corto}}</p>
+                                                                <p class="tittle-11">
+                                                                    {{can_access_vehicleInsurance[i].nombre_corto}}</p>
                                                                 <p class="text-uppercase tittle-10">Producto</p>
-                                                                <p class="tittle-11">{{can_access_vehicleInsurance[i].name}}</p>
+                                                                <p class="tittle-11">
+                                                                    {{can_access_vehicleInsurance[i].name}}</p>
                                                             </div>
                                                         </div>
                                                         <hr>
@@ -1759,14 +1771,17 @@
                                                             </div>
 
                                                             <div class="col-6 col-md-3">
-                                                                <p class="text-uppercase tittle-11">SUP. BANCOS. {{can_access_vehicleInsurance[i].supbancos_percentage}}%</p>
+                                                                <p class="text-uppercase tittle-11">SUP. BANCOS.
+                                                                    {{can_access_vehicleInsurance[i].supbancos_percentage}}%
+                                                                </p>
                                                                 <p class="tittle-7 color-3">
                                                                     ${{can_access_vehicleInsurance[i].supbancos | number:'1.2-2':'fr' }}
                                                                 </p>
                                                             </div>
 
                                                             <div class="col-6 col-md-3">
-                                                                <p class="text-uppercase tittle-11">impuesto S.S.C. 0.50%</p>
+                                                                <p class="text-uppercase tittle-11">impuesto S.S.C.
+                                                                    0.50%</p>
                                                                 <p class="tittle-7 color-3">
                                                                     ${{can_access_vehicleInsurance[i].ssc | number:'1.2-2':'fr' }}
                                                                 </p>
@@ -1978,7 +1993,7 @@
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
-                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
+                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="true"></rating>
                         <span class="tittle-9">99/100</span>
                     </div>
                 </div>
@@ -2001,7 +2016,7 @@
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
-                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
+                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="true"></rating>
                         <span class="tittle-9">99/100</span>
                     </div>
                 </div>
@@ -2024,7 +2039,7 @@
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
-                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
+                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="true"></rating>
                         <span class="tittle-9">99/100</span>
                     </div>
                 </div>
@@ -2047,7 +2062,7 @@
                     </div>
                     <div class="col-6 col-lg-3">
                         <p class="tittle-12">Calificación</p>
-                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="isReadonly"></rating>
+                        <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="true"></rating>
                         <span class="tittle-9">99/100</span>
                     </div>
                 </div>
@@ -2116,7 +2131,7 @@
 
         <div class="row mt-4 mx-4 mx-md-0 justify-content-center">
             <div class="col-md-4">
-                <button type="button" class="btn button btn-block">VER TODOS</button>
+                <button type="button" routerLink="/services" class="btn button btn-block">VER TODOS</button>
             </div>
         </div>
 
