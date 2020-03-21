@@ -12,6 +12,7 @@ import { UserInfo } from '../../../models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { InsuranceInformation } from 'src/app/models/insurance-information';
 import { Insurance } from '../../../models/insurance';
+import { element } from 'protractor';
 
 
 /** Interface representing a slider model */
@@ -157,6 +158,8 @@ export class HomePageComponent implements OnInit {
   */
   public active_credits_select: boolean = false;
   public active_insurance_select: boolean = false;
+  public active_creditCard_select: boolean = false;
+  public active_investmentPolicy_select: boolean = false;
 
   /**
    * Variables to activate credit or insurance values and select
@@ -269,6 +272,12 @@ export class HomePageComponent implements OnInit {
   public id_credit: number = 0;
 
   /**
+   * Variable for the destination credit
+   * @type {string}
+  */
+  public destinedTo: string;
+
+  /**
    * Variables to store credit results
    * @type {any}
   */
@@ -304,6 +313,12 @@ export class HomePageComponent implements OnInit {
   */
   public cantSelectedCreditOptions: number = 0;
 
+  /**
+   * Variable to store message error
+   * @type {string}
+  */
+  public messageErrorCredit: string;
+
   /**----------------------------------------------------INSURANCE VARIABLES------------------------------------------------------------ */
 
   /**
@@ -323,7 +338,7 @@ export class HomePageComponent implements OnInit {
    * @type {any[]}
   */
   public insurance_select: any = [
-    { id: 1, name: 'Vehicular', description: 'Seguros para tu vehículo' },
+    { id: 1, name: 'Vehicular', description: 'Para tu auto público o privado' },
   ];
 
   /**
@@ -399,6 +414,12 @@ export class HomePageComponent implements OnInit {
   */
   public cantInsurnaceUserSelected: number = 0;
 
+  /**
+   * Variable to store message error
+   * @type {string}
+  */
+  public messageErrorInsurance: string;
+
   /**------------------------------------------------------LOGIN VARIABLES-------------------------------------------------------------- */
 
   /**
@@ -441,25 +462,15 @@ export class HomePageComponent implements OnInit {
   openModal_termsConditions(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
     this.modalRef.setClass('modal-dialog-centered');
-    this.modalRef.content.closeBtnName = 'Close';
   }
 
   /**
    * Shows modal confirmation message
    * @return {void} Nothing
   */
-  confirm(): void {
-    console.log(`Confirmed`);
+  confirm(element: HTMLElement): void {
     this.modalRef.hide();
-  }
-
-  /**
-   * Shows modal denial message
-   * @return {void} Nothing
-  */
-  decline(): void {
-    console.log(`Declined`);
-    this.modalRef.hide();
+    this.onSubmitRequestSummaryCredit(element);
   }
 
   /**
@@ -492,6 +503,8 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = true;
       this.active_insurance_select = false;
+      this.active_creditCard_select = false;
+      this.active_investmentPolicy_select = false;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = true;
       this.insuranceSection = false;
@@ -503,6 +516,8 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = true;
+      this.active_creditCard_select = false;
+      this.active_investmentPolicy_select = false;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = false;
       this.insuranceSection = true;
@@ -514,6 +529,8 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = false;
+      this.active_creditCard_select = true;
+      this.active_investmentPolicy_select = false;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = false;
       this.insuranceSection = false;
@@ -525,6 +542,8 @@ export class HomePageComponent implements OnInit {
       /* Para activar los selects*/
       this.active_credits_select = false;
       this.active_insurance_select = false;
+      this.active_creditCard_select = false;
+      this.active_investmentPolicy_select = true;
       /* Para activar seccion de valores de entrada*/
       this.creditSection = false;
       this.insuranceSection = false;
@@ -542,6 +561,7 @@ export class HomePageComponent implements OnInit {
   onSelectCreditOption($event) {
 
     this.id_credit = $event.id;
+    this.destinedTo = $event.description;
 
     this.amountRequest.options = Object.assign({}, this.amountRequest.options, { disabled: false });
     this.entryAmount.options = Object.assign({}, this.entryAmount.options, { disabled: false });
@@ -694,9 +714,10 @@ export class HomePageComponent implements OnInit {
    * Validate contact form
    * @return {void} Nothing
   */
-  onSubmitContactForm() {
+  onSubmitContactForm(element: HTMLElement) {
     this.contactFormSubmitted = true;
     if (this.contactForm.valid) {
+      element.scrollIntoView();
       console.log('Finalizó identificación');
       this.section1 = false;
       this.section2 = true;
@@ -894,6 +915,20 @@ export class HomePageComponent implements OnInit {
     this.section5 = false;
   }
 
+  /**
+   * Move between sections of forms
+   * @param {HTMLElement} el - HTML identifier
+   * @return {void} Nothing
+  */
+  section5_(el: HTMLElement) {
+    el.scrollIntoView();
+    this.section1 = false;
+    this.section2 = false;
+    this.section3 = false;
+    this.section4 = false;
+    this.section5 = true;
+  }
+
 
 
 
@@ -941,9 +976,10 @@ export class HomePageComponent implements OnInit {
    * Validate economic form
    * @return {void} Nothing
   */
-  onSubmiteconomicForm() {
+  onSubmiteconomicForm(element: HTMLElement) {
     this.economicFormSubmitted = true;
     if (this.economicForm.valid) {
+      element.scrollIntoView();
       console.log('Finalizó situacion economica');
       this.section1 = false;
       this.section2 = false;
@@ -1121,8 +1157,8 @@ export class HomePageComponent implements OnInit {
     creditInformation.last_name = this.personalDataForm.value.last_names;
     creditInformation.cedula = this.personalDataForm.value.dni;
 
-    creditInformation.city = this.addressForm.value.city;
-    creditInformation.region_name = 'AZUAY';
+    creditInformation.city = this.addressForm.value.city.name;
+    creditInformation.region_name = this.addressForm.value.province.name;
     creditInformation.country_name = 'ECUADOR';
     creditInformation.address = this.addressForm.value.address;
 
@@ -1143,7 +1179,7 @@ export class HomePageComponent implements OnInit {
     creditInformation.amount_required = this.amountRequest.value;
     creditInformation.monthly_income = this.monthlyIncome.value;
     creditInformation.initial_amount = this.entryAmount.value;
-    creditInformation.destination = `La casa de tus sueños`;
+    creditInformation.destination = this.destinedTo;
 
     const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
       .map((v, i) => v ? this.can_access_credit[i].id : null)
@@ -1173,7 +1209,29 @@ export class HomePageComponent implements OnInit {
 
     creditInformation.creditos = creditos;
 
-    console.log(creditInformation);
+    this.httpService.createCreditInformation(creditInformation).subscribe(res => {
+
+      console.log(creditInformation)
+
+      if (res.status == 200) {
+        let application_id = res.data;
+        this.httpService.sendCreditInformation(application_id).subscribe((res) => {
+          console.log(res);
+        }, (error) => {
+          console.log('error al enviar información de solicitud con id ' + application_id + " a la nueva bd");
+          console.log(error);
+        });
+
+        this.messageErrorCredit = null;
+
+      } else {
+        console.log('Ah ocurrido un error! ' + res.message);
+        this.messageErrorCredit = res.message; //enviar correctamente el mensaje
+      }
+    }, error => {
+      console.log('error al crear información');
+      console.log(error);
+    });
   }
 
   /**
@@ -1497,9 +1555,30 @@ export class HomePageComponent implements OnInit {
 
     insuranceInformation.options = options;
 
-    console.log(insuranceInformation);
-  }
+    this.httpService.createInsuranceInformation(insuranceInformation).subscribe(res => {
+      console.log(insuranceInformation)
+      console.log(res);
 
+      if (res.status == 200) {
+
+        this.httpService.getSendMailInsurance().subscribe(res => {
+          console.log(res);
+        }, error => {
+          console.log('error al enviar correo');
+          console.log(error);
+        });
+
+        this.messageErrorInsurance = null;
+
+      } else {
+        console.log('Ah ocurrido un error! ' + res.message);
+        this.messageErrorInsurance = res.message;
+      }
+    }, error => {
+      console.log('error al crear información');
+      console.log(error);
+    });
+  }
 
 
 
@@ -1563,14 +1642,4 @@ export class HomePageComponent implements OnInit {
       });
     }
   }
-
 }
-
-
-
-
-
-
-
-
-

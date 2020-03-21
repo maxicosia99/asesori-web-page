@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { UserAuth } from '../../models/userAuth';
 import { UserRegister } from 'src/app/models/user-register';
 import { CarInsuranceRequest } from 'src/app/models/car-insurance-request';
+import { InsuranceInformation } from 'src/app/models/insurance-information';
+import { CreditInformation } from 'src/app/models/credit-information';
 
 /*
 * Variable para adicionar información a las peticiones
@@ -109,6 +111,18 @@ export class HttpClientService {
   }
   /* End - Get credit informaction by id  */
 
+  createCreditInformation(body: CreditInformation): Observable<any> {
+    //console.log(JSON.stringify(body));
+    let url = this.getEndUrl(`/api/creditos/guardarSolicitudCredito`);
+    return this.doPostRequest(url, body);
+  }
+
+  sendCreditInformation(application_id: number): Observable<any> {
+    //console.log(JSON.stringify(body));
+    let url = this.getEndUrl(`/api/creditos/enviarSolicitudCredito?applicant_id=${application_id}`);
+    return this.doGetRequest(url);
+  }
+
   
   
   /* Get provinces - cities */
@@ -159,6 +173,16 @@ export class HttpClientService {
   getInsuranceInformation(body: CarInsuranceRequest): Observable<any> {
     let url = this.getEndUrl(`/api/seguros/calcular-cuota`);
     return this.doPostRequest(url, body);
+  }
+
+  createInsuranceInformation(body: InsuranceInformation): Observable<any> {
+    let url = this.getEndUrl(`/api/seguros/solicitar`);
+    return this.doPostRequest(url, body);
+  }
+
+  getSendMailInsurance(): Observable<any> {
+    let url = this.getEndUrl(`/api/seguros/test`);
+    return this.doGetRequest(url);
   }
 
 }

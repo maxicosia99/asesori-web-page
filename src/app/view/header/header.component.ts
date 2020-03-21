@@ -50,8 +50,47 @@ export class HeaderComponent implements OnInit {
     */
     public user: any;
 
+    public animated:boolean = false;
+
     ngOnInit() {
+        
     }
+
+    /**
+     * Animated navbar with window size
+     * @returns {void} - Nothing
+    */
+    ngDoCheck(){
+        if (window.innerWidth <= 768) {
+            this.animated = true;
+        }else{
+            this.animated = false;
+        }
+    }
+
+    /**
+     * Animated navbar with window size
+     * @returns {void} - Nothing
+    */
+    // ngAfterContentChecked(){
+    //     if (window.innerWidth <= 768) {
+    //         this.animated = true;
+    //     }else{
+    //         this.animated = false;
+    //     }
+    // }
+
+    /**
+     * Animated navbar with window size
+     * @returns {void} - Nothing
+    */
+    // ngAfterViewChecked(){
+    //     if (window.innerWidth <= 768) {
+    //         this.animated = true;
+    //     }else{
+    //         this.animated = false;
+    //     }
+    // }
 
     /**
      * Open or close the navbar

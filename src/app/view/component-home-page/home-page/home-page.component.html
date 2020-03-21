@@ -2,17 +2,18 @@
 
     <!-- INITIAL SECTION -->
 
-    <section class="container">
+    <section class="container-fluid">
         <div class="row">
 
-            <div class="col-12 col-md-6 px-5 px-lg-4">
-                <div class="text-center text-lg-left">
-                    <img src="/assets/img/asesori-logo-negative.png" width="95px" height="95px" class="my-4" alt="">
+            <div class="col-12 col-md-6 px-80">
+                <div class="text-center text-lg-left my-md-5">
+                    &nbsp;
+                    <!-- <img src="/assets/img/asesori-logo-negative.png" width="95px" height="95px" class="my-4" alt=""> -->
                 </div>
-                <h1 class="tittle-1 mb-4">¿Necesitas un crédito para tu casa?</h1>
+                <h1 class="tittle-1 mt-5 mb-3">¿Necesitas un crédito para tu casa?</h1>
                 <p class="text-light-16">Asesori te facilita las mejores opciones para que puedas acceder rápido y seguro al crédito que necesites.</p>
-                <div class="row mt-4">
-                    <div class="col-md-12 col-lg-6">
+                <div class="row mt-5">
+                    <div class="col-12 col-lg-6">
                         <button type="button" class="btn button btn-block">INICIA UNA SOLICITUD</button>
                     </div>
                 </div>
@@ -21,8 +22,7 @@
             <div class="col-12 col-md-6 my-4 my-lg-0">
                 <div class="row bg-img align-items-center mx-0">
                     <div class="col">
-                        <h3 class="text-white text-center pb-4">Trabajamos con</h3>
-
+                        <h3 class="text-white text-center text-uppercase pb-4 tittle-16">Trabajamos con</h3>
                         <owl-carousel-o [options]="customOptions">
                             <ng-template carouselSlide>
                                 <div class="bg-0 mx-1 rounded">
@@ -74,7 +74,7 @@
                             <button type="button" class="btn btn-circle">1</button>
                         </div>
                         <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
-                            <p class="text-14">Selecciona el crédito al que deseas aplicar.</p>
+                            <p class="text-14">Selecciona el crédito al que deseas aplicar</p>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                             <button type="button" class="btn btn-circle">2</button>
                         </div>
                         <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
-                            <p class="text-14">Ingresa el monto, entrada y plazo.</p>
+                            <p class="text-14">Ingresa el monto, entrada y plazo</p>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                             <button type="button" class="btn btn-circle">3</button>
                         </div>
                         <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
-                            <p class="text-14">Ingresa tus datos para una solicitud.</p>
+                            <p class="text-14">Ingresa tus datos para una solicitud</p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                             <button type="button" class="btn btn-circle">4</button>
                         </div>
                         <div class="col-9 col-sm-7 col-lg-9 pl-1 pr-0 mt-2">
-                            <p class="text-14">Presentar las mejores opciones de crédito.</p>
+                            <p class="text-14">Presentar las mejores opciones de crédito</p>
                         </div>
                     </div>
                 </div>
@@ -114,9 +114,7 @@
 
     <!-- EMAIL & STEPS SECTION -->
 
-    <section class="container">
-
-        <!-- SERVICES TAGS -->
+    <!-- <section class="container">
         <div class="row px-4 px-md-0">
             <div class="col-12">
                 <h4 class="tittle-9 mt-4 mb-3 text-uppercase"><b>Estas a un solo paso, ingresa tu email </b>
@@ -133,13 +131,12 @@
 
         </div>
 
-        <!-- SEND BUTTON -->
         <div class="row px-4 px-md-0 mt-4 justify-content-end">
             <div class="col-md-4">
                 <button type="button" class="btn button btn-block">CONTINUAR</button>
             </div>
         </div>
-    </section>
+    </section> -->
 
 
     <!-- CALCULATOR & SERVICES OPTIONS -->
@@ -148,10 +145,9 @@
 
         <div class="row px-4 px-md-0">
             <div class="col-12 my-4">
-                <h4 class="tittle-9 mb-4 text-uppercase"><b>Compara las mejores tasas y oportunidades de
-                        financiamiento</b>
+                <h4 class="tittle-9 mb-4 text-uppercase"><b>Selecciona la opción que necesitas</b>
                 </h4>
-                <p class="text-light-14">ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de inversión que ofrecen los Bancos, Cooperativas o Mutualistas, utiliza nuestra calculadora a continuación y compara.</p>
+                <p class="text-light-14">ASESORI pone a tu disposición diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de inversión cerca de tu ubicación a través de nuestros socios.</p>
             </div>
         </div>
 
@@ -261,6 +257,18 @@
                     </ng-select>
                 </div>
 
+                <div *ngIf="active_creditCard_select" class="col-12">
+                    <alert type="warning">
+                        El servicio de <span class="tittle-10">Tarjetas de crédito</span> aún no se encuentra disponible!
+                    </alert>
+                </div>
+
+                <div *ngIf="active_investmentPolicy_select" class="col-12">
+                    <alert type="warning">
+                        El servicio de <span class="tittle-10">Póliza de inversión</span> aún no se encuentra disponible!
+                    </alert>
+                </div>
+
             </div>
 
             <!-- VALUES BOX -->
@@ -274,19 +282,18 @@
                 </div>
                 <div class="my-2 my-lg-0  box-values-slider">
                     <div class="custom-slider">
-                        <p class="header-box-values-slider mb-4 text-uppercase"><b>ingreso mensual*</b></p>
-                        <ng5-slider [(value)]="monthlyIncome.value" [options]="monthlyIncome.options"></ng5-slider>
-                        <p class="tittle-11 text-right mt-2 mb-0">Sueldo mensual</p>
-                    </div>
-                </div>
-                <div class="my-2 my-lg-0  box-values-slider">
-                    <div class="custom-slider">
                         <p class="header-box-values-slider mb-4 text-uppercase"><b>entrada</b></p>
                         <ng5-slider [(value)]="entryAmount.value" [options]="entryAmount.options"></ng5-slider>
                         <p class="tittle-11 text-right mt-2 mb-0">Valor opcional</p>
                     </div>
                 </div>
-
+                <div class="my-2 my-lg-0  box-values-slider">
+                    <div class="custom-slider">
+                        <p class="header-box-values-slider mb-4 text-uppercase"><b>ingreso mensual*</b></p>
+                        <ng5-slider [(value)]="monthlyIncome.value" [options]="monthlyIncome.options"></ng5-slider>
+                        <p class="tittle-11 text-right mt-2 mb-0">Sueldo mensual</p>
+                    </div>
+                </div>
                 <div class="my-2 my-lg-0 box-values-slider">
                     <div class="custom-slider">
                         <p class="header-box-values-slider mb-4 text-uppercase"><b>tiempo plazo*</b></p>
@@ -343,7 +350,7 @@
                                 <p class="mt-4">solicitud</p>
                             </li>
                             <li>
-                                <summary href="#">Solicitud lista</summary>
+                                <summary (click)="section5_(target)">Solicitud lista</summary>
                             </li>
                         </ul>
                     </div>
@@ -595,10 +602,10 @@
                                             <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
                                         </div>
                                         <div class="col-4 d-none d-sm-block">
-                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">CONTINUAR</button>
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (click)="onSubmitContactForm(target)">CONTINUAR</button>
                                         </div>
                                         <div class="col-4 d-block d-sm-none">
-                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">&gt;</button>
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (click)="onSubmitContactForm(target)">&gt;</button>
                                         </div>
                                     </div>
                                 </form>
@@ -895,10 +902,10 @@
                                             <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
                                         </div>
                                         <div class="col-4 d-none d-sm-block">
-                                            <button type="button" [disabled]="!economicForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmiteconomicForm()">CONTINUAR</button>
+                                            <button type="button" [disabled]="!economicForm.valid" class="btn button btn-block" (click)="onSubmiteconomicForm(target)">CONTINUAR</button>
                                         </div>
                                         <div class="col-4 d-block d-sm-none">
-                                            <button type="button" [disabled]="!economicForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmiteconomicForm()">&gt;</button>
+                                            <button type="button" [disabled]="!economicForm.valid" class="btn button btn-block" (click)="onSubmiteconomicForm(target)">&gt;</button>
                                         </div>
                                     </div>
                                 </form>
@@ -1003,6 +1010,7 @@
                                                             </div>
                                                         </div>
                                                         <hr>
+                                                        <p class="color-1 tittle-18 mb-3">Condiciones de crédito</p>
                                                         <div class="row text-center">
                                                             <div class="col-6 col-md-3">
                                                                 <p class="text-uppercase tittle-11">tasa anual de
@@ -1035,7 +1043,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
-                                                <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
+                                                <p class="tittle-3-spacing mt-3 mt-lg-5 text-uppercase">cuota estimada
+                                                </p>
                                                 <h2 class="tittle-5 mt-4">
                                                     ${{can_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
                                                 </h2>
@@ -1112,6 +1121,7 @@
                                                             </div>
                                                         </div>
                                                         <hr>
+                                                        <p class="color-1 tittle-18 mb-3">Condiciones de crédito</p>
                                                         <div class="row text-center">
                                                             <div class="col-6 col-md-3">
                                                                 <p class="text-uppercase tittle-11">tasa anual de
@@ -1144,7 +1154,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
-                                                <p class="tittle-3-spacing mt-4 text-uppercase">cuota estimada</p>
+                                                <p class="tittle-3-spacing mt-3 mt-lg-5 text-uppercase">cuota estimada
+                                                </p>
                                                 <h2 class="tittle-5 mt-4">
                                                     ${{cannot_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
                                                 </h2>
@@ -1207,7 +1218,7 @@
                             <div class="col-12">
                                 <div class="position-relative">
                                     <p class="floating-label-static text-uppercase">estas buscando</p>
-                                    <p class="tittle-10">Crédito para mi casa</p>
+                                    <p class="tittle-10">{{destinedTo}}</p>
                                 </div>
                             </div>
                         </div>
@@ -1252,49 +1263,24 @@
                                 <button type="button" class="btn button btn-block" (click)="section4_3(target)">&lt;</button>
                             </div>
                             <div class="col-4 d-none d-sm-block">
-                                <button type="submit" class="btn button btn-block" (click)="onSubmitRequestSummaryCredit(target)">FINALIZAR</button>
+                                <button type="submit" class="btn button btn-block" (click)="openModal_termsConditions(termsConditions)">FINALIZAR</button>
                             </div>
                             <div class="col-4 d-block d-sm-none">
-                                <button type="submit" class="btn button btn-block" (click)="onSubmitRequestSummaryCredit(target)">✓</button>
+                                <button type="submit" class="btn button btn-block" (click)="openModal_termsConditions(termsConditions)">✓</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 col-lg-8 align-self-center" *ngIf="section5">
 
-                        <h2 class="tittle-1 mb-5 text-center color-1">¡Solicitud lista!</h2>
+                        <h2 class="tittle-1 my-5 text-center color-1">¡Solicitud lista!</h2>
                         <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
                         </p>
 
-                        <p class="mt-5 mb-3 tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud</p>
-
-                        <div class="row mt-5 mb-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="text" class="form-control" required>
-                                    <span class="floating-label text-uppercase">Username*</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="email" class="form-control" required>
-                                    <span class="floating-label text-uppercase">Email*</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="password" class="form-control" required>
-                                    <span class="floating-label text-uppercase">Password*</span>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="mt-5 mb-3 text-center tittle-7">Inicia sesión o crea una cuenta para ver el seguimiento de tu solicitud</p>
 
                         <div class="row my-5 justify-content-center">
-                            <div class="col-12 col-md-4">
+                            <div class="col-12 col-md-5">
                                 <button type="submit" class="btn button btn-block">CREAR CUENTA</button>
                             </div>
                         </div>
@@ -1333,7 +1319,7 @@
                                 <p class="mt-4">solicitud</p>
                             </li>
                             <li>
-                                <summary href="#">Solicitud lista</summary>
+                                <summary (click)="section5_(target)">Solicitud lista</summary>
                             </li>
                         </ul>
                     </div>
@@ -1574,10 +1560,10 @@
                                             <button type="button" class="btn button btn-block" (finalize)="scrollToTop(target)" awPreviousStep>&lt;</button>
                                         </div>
                                         <div class="col-4 d-none d-sm-block">
-                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">CONTINUAR</button>
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (click)="onSubmitContactForm(target)">CONTINUAR</button>
                                         </div>
                                         <div class="col-4 d-block d-sm-none">
-                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (finalize)="scrollToTop(target)" (click)="onSubmitContactForm()">&gt;</button>
+                                            <button type="submit" [disabled]="!contactForm.valid" class="btn button btn-block" (click)="onSubmitContactForm(target)">&gt;</button>
                                         </div>
                                     </div>
                                 </form>
@@ -1871,30 +1857,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row my-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <p class="floating-label-static text-uppercase">monto a solicitar*</p>
-                                    <p class="tittle-10">$ {{amountRequest.value | number : '1.2-2':'fr' }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <p class="floating-label-static text-uppercase">entrada (valor opcional)*</p>
-                                    <p class="tittle-10">$ {{entryAmount.value | number : '1.2-2':'fr' }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <p class="floating-label-static text-uppercase">plazo (meses)*</p>
-                                    <p class="tittle-10">{{term.value}} meses</p>
-                                </div>
-                            </div>
-                        </div> -->
 
                         <div class="row my-5 justify-content-between">
                             <div class="col-4 d-none d-sm-block">
@@ -1912,42 +1874,16 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-8 align-self-center" *ngIf="section5">
+                    <div class="col-12 col-lg-8" *ngIf="section5">
 
-                        <h2 class="tittle-1 mb-5 text-center color-1">¡Solicitud lista!</h2>
-                        <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
+                        <h2 class="tittle-1 my-5 text-center color-1">¡Solicitud lista!</h2>
+                        <p class="text-light-14 text-center">Hemos enviado tu solicitud de seguro a las entidades aseguradoras que has seleccionado, te mantendremos informado a tu correo registrado.
                         </p>
 
-                        <p class="mt-5 mb-3 tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud</p>
-
-                        <div class="row mt-5 mb-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="text" class="form-control" required>
-                                    <span class="floating-label text-uppercase">Username*</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="email" class="form-control" required>
-                                    <span class="floating-label text-uppercase">Email*</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="password" class="form-control" required>
-                                    <span class="floating-label text-uppercase">Password*</span>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="row my-5 justify-content-center">
-                            <div class="col-12 col-md-4">
-                                <button type="submit" class="btn button btn-block">CREAR CUENTA</button>
+                            <div class="col-12 col-md-6">
+                                <button type="submit" class="btn button btn-block"><i class="fas fa-redo-alt"></i> NUEVA
+                                    SOLICITUD</button>
                             </div>
                         </div>
 
@@ -1964,23 +1900,51 @@
 
     <section class="container">
 
-        <div class="row align-items-start">
+        <div class="row">
 
             <!-- RANKING TEXT -->
-            <div class="col-12 col-lg-3 my-2 my-lg-0 px-5 text-center text px-md-3">
-                <h2 class="tittle-4">Ranking Asesori</h2>
-                <p class="text-light-16 mt-5">Te enseñamos una calificación de Asesori hacia las instituciones financieras en base a su tasa de interés, Cantidad de trámites y tiempo en aprobación de tu solicitud
+            <div class="col-12 col-lg-4 my-2 my-lg-0 px-5 text px-md-3">
+                <h2 class="tittle-17">Ranking Asesori</h2>
+                <div class="my-4 line-separator"></div>
+                <p class="text-16">Te enseñamos una calificación de Asesori hacia las instituciones financieras en base a su tasa de interés, Cantidad de trámites y tiempo en aprobación de tu solicitud
                 </p>
             </div>
 
             <!-- RATING FINANCIAL ENTITY -->
-            <div class="col-12 col-lg-9 my-2 my-lg-0">
-                <div class="row  text-center">
+            <div class="col-12 col-lg-8 my-2 my-lg-0">
+
+                <div class="row justify-content-center justify-content-lg-end">
+                    <div class="col-10 col-md-5">
+                        <div class="row">
+                            <p class="tittle-14 col-4 mt-4">Filtrar por</p>
+                            <div class="col-8">
+                                <ng-select class="custom" placeholder="todos" [searchable]="false" [clearable]="false">
+                                    <ng-option>Todos</ng-option>
+                                    <ng-option>Bancos</ng-option>
+                                    <ng-option>Cooperativas</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10 col-md-5 mt-3 mt-md-0">
+                        <div class="row">
+                            <p class="tittle-14 col-4 mt-4">Ordenar por</p>
+                            <div class="col-8">
+                                <ng-select class="custom" placeholder="calificación" [searchable]="false" bindLabel="status" [clearable]="false">
+                                    <ng-option>Calificación</ng-option>
+                                    <ng-option>Tasa</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5 text-center">
                     <div class="col-lg-3">
                         <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-6 col-lg-2">
-                        <p class="tittle-12">Tasa de interés</p>
+                        <p class="tittle-12">Tasa de interés anual</p>
                         <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
@@ -2000,10 +1964,10 @@
                 <hr>
                 <div class="row  text-center">
                     <div class="col-lg-3">
-                        <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png" class="img-fluid" alt="">
+                        <img src="/assets/img/financial-entities/banco-pichincha-188x100.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-6 col-lg-2">
-                        <p class="tittle-12">Tasa de interés</p>
+                        <p class="tittle-12">Tasa de interés anual</p>
                         <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
@@ -2023,10 +1987,10 @@
                 <hr>
                 <div class="row  text-center">
                     <div class="col-lg-3">
-                        <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png" class="img-fluid" alt="">
+                        <img src="/assets/img/financial-entities/banco-austro-188x100.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-6 col-lg-2">
-                        <p class="tittle-12">Tasa de interés</p>
+                        <p class="tittle-12">Tasa de interés anual</p>
                         <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
@@ -2046,10 +2010,10 @@
                 <hr>
                 <div class="row  text-center">
                     <div class="col-lg-3">
-                        <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png" class="img-fluid" alt="">
+                        <img src="/assets/img/financial-entities/cooperativa-jardinAzuayo-188x100.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-6 col-lg-2">
-                        <p class="tittle-12">Tasa de interés</p>
+                        <p class="tittle-12">Tasa de interés anual</p>
                         <p class="tittle-9">9.81%</p>
                     </div>
                     <div class="col-6 col-lg-2">
@@ -2067,6 +2031,19 @@
                     </div>
                 </div>
                 <hr>
+
+                <div class="row mt-4 justify-content-center justify-content-lg-end">
+                    <div class="col-4 col-lg-2">
+                        <button type="button" class="btn button btn-block" disabled>ATRÁS</button>
+                    </div>
+                    <div class="col-2 col-lg-1 text-center pt-3 px-0">
+                        <p class="tittle-10">1 de 5</p>
+                    </div>
+                    <div class="col-4 col-lg-2">
+                        <button type="button" class="btn button btn-block">SIGUIENTE</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -2075,7 +2052,7 @@
 
     <section class="container-fluid">
         <div class="row justify-content-center align-self-center bg-3">
-            <div class="col-12 col-md-9">
+            <div class="col-10 col-md-9">
                 <div class="embed-responsive embed-responsive-16by9">
                     <video class="embed-responsive-item" src="assets/video/video.mp4" controls muted loop type="video/mp4"></video>
                 </div>
@@ -2087,50 +2064,50 @@
 
     <section class="container">
 
-        <div class="row justify-content-center mx-4 mx-md-0 text-center">
+        <div class="row justify-content-center mx-3 mx-md-0 text-center">
             <div class="col-12 col-md-8">
-                <p class="tittle-7 color-2 text-uppercase">Los servicios</p>
-                <p class="tittle-0 text-uppercase">podemos ayudarte</p>
+                <p class="tittle-7 color-2 text-capitalize">Los servicios</p>
+                <p class="tittle-1">Podemos ayudarte</p>
                 <p class="text-light-16">El crédito puede ser complicado. Pero no tiene que ser así. ASESORI pone a tu disposición diferentes opciones cerca de tu ubicación a través de nuestros socios.</p>
             </div>
         </div>
 
-        <div class="row mt-4 text-center mx-4 mx-md-0">
+        <div class="row mt-4 text-center mx-3 mx-md-0">
             <div class="col-md-4 d-flex align-items-stretch my-2 my-lg-0">
                 <div class="card text-center card-service">
-                    <img class="card-img-top" src="/assets/img/services/deudas-credit370x245.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="/assets/img/services/14910@3x.png" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-title tittle-7">CRÉDITOS</p>
                         <p class="card-text  text-light-16">Obtén el crédito que necesitas en donde tu eligas de manera más rápida y ágil, asegurando confianza y confiabilidad.
                         </p>
-                        <a href="#" class="tittle-10">VER MÁS</a>
+                        <summary class="tittle-10 color-5">VER MÁS</summary>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 d-flex align-items-stretch my-2 my-lg-0">
                 <div class="card text-center card-service">
-                    <img class="card-img-top" src="/assets/img/services/house-credit370x245.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="/assets/img/services/3108488@3x.png" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-title tittle-7">TARJETAS DE CRÉDITO</p>
                         <p class="card-text  text-light-16">Deja atrás lo lento y tedioso que resulta el trámite para poder contar con tu tarjeta de crédito.</p>
-                        <a href="#" class="tittle-10">VER MÁS</a>
+                        <summary class="tittle-10 color-5">VER MÁS</summary>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 d-flex align-items-stretch my-2 my-lg-0">
                 <div class="card text-center card-service">
-                    <img class="card-img-top" src="/assets/img/services/prestamo-credit370x245.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="/assets/img/services/2906247@3x.png" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-title tittle-7">INVERSIONES</p>
                         <p class="card-text  text-light-16">Sabias que puedes obtener dinero al acumular tus ahorros a plazo fijo, obtén información de las tasas más seguras y efectivas para ti.</p>
-                        <a href="#" class="tittle-10">VER MÁS</a>
+                        <summary class="tittle-10 color-5">VER MÁS</summary>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-4 mx-4 mx-md-0 justify-content-center">
-            <div class="col-md-4">
+        <div class="row mt-4 mx-3 mx-md-0 justify-content-center">
+            <div class="col-md-3">
                 <button type="button" routerLink="/services" class="btn button btn-block">VER TODOS</button>
             </div>
         </div>
@@ -2149,34 +2126,34 @@
                 </div>
             </div>
 
-            <div class="row px-4 pt-5">
+            <div class="row mx-3 pt-5">
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-1">
                             <i class="fas icon fa-paste"></i>
                         </div>
-                        <div class="col-10">
+                        <div class="col-8">
                             <h3 class="tittle-8 mb-2">Múltiples opciones de créditos</h3>
                         </div>
                     </div>
-                    <p class="text-light-14">Tu solicitud será revisada por las insituciones Financieras, y Asesori te mostrará cual es la mejor para ti.
+                    <p class="text-light-14 pr-5">Tu solicitud será revisada por las insituciones Financieras, y Asesori te mostrará cual es la mejor para ti.
                     </p>
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-1 mr-2">
                             <i class="far icon fa-money-bill-alt"></i>
                         </div>
                         <div class="col-10">
                             <h3 class="tittle-8 mb-2">Transparencia con tus créditos</h3>
                         </div>
                     </div>
-                    <p class="text-light-14">Asesori es transparente, no te cobramos por nuestro servicio, nosotros queremos que siempre obtengas la mejor tasa de interés.
+                    <p class="text-light-14 pr-4">Asesori es transparente, no te cobramos por nuestro servicio, nosotros queremos que siempre obtengas la mejor tasa de interés.
                     </p>
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-1">
                             <i class="fas icon fa-paste"></i>
                         </div>
                         <div class="col-10">
@@ -2188,22 +2165,22 @@
                 </div>
             </div>
 
-            <div class="row px-4 pt-0 pt-md-5">
+            <div class="row mx-3 pt-0 pt-md-5">
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-1">
                             <i class="fas icon fa-stopwatch"></i>
                         </div>
                         <div class="col-10">
                             <h3 class="tittle-8 mb-2">Reduce el tiempo</h3>
                         </div>
                     </div>
-                    <p class="text-light-14">Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una tasa menor de interés
+                    <p class="text-light-14 pr-5">Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una tasa menor de interés
                     </p>
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-1 mr-2">
                             <i class="far icon fa-money-bill-alt"></i>
                         </div>
                         <div class="col-10">
@@ -2215,14 +2192,14 @@
                 </div>
                 <div class="col-md-4 my-3 my-lg-0">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-1">
                             <i class="fas icon fa-paste"></i>
                         </div>
                         <div class="col-10">
                             <h3 class="tittle-8 mb-2">Transparencia</h3>
                         </div>
                     </div>
-                    <p class="text-light-14">Actuamos de forma independiente al no ser una entidad financiera, ofreciéndote información gratuita.
+                    <p class="text-light-14 pr-3">Actuamos de forma independiente al no ser una entidad financiera, ofreciéndote información gratuita.
                     </p>
                 </div>
             </div>
@@ -2230,38 +2207,33 @@
         </div>
     </section>
 
-    <!-- MODALS SECTION -->
+</main>
 
-    <!-- <section class="container">
-
-        <div class="row mx-4 mx-md-0">
+<ng-template #termsConditions>
+    <div class="modal-header">
+        <h4 class="modal-title tittle-5 ml-3 mt-2">Aceptación de términos</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-justify">
+        <div class="row px-3">
             <div class="col-12">
-
-                <button type="button" class="btn btn-primary" (click)="openModal_termsConditions(termsConditions)">MODAL
-                    ACEPTACION
-                    TERMINOS</button>
-
-                <ng-template #termsConditions>
-                    <div class="modal-header">
-                        <h4 class="modal-title tittle-6">Aceptación de términos</h4>
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-
-                    </div>
-                    <div class="modal-body mx-4 text-justify">
-                        <p class="text-light-14">Estimado usuario, al aceptar los términos, trataremos sus datos única y exclusivamente para: (i) la potencial obtención de créditos, así como comunicación relacionada con la misma; y (ii) ser transferidos a Crédito Real, S.A.B.
-                            de C.V., SOFOM, E.R., para la consulta, a través de Sociedades de Información Crediticia sobre sus antecedentes crediticios; cumplimiento de sus obligaciones derivadas de cualquier relación jurídica con Entidades Financieras;
-                            calificaciones de crédito o riesgos; y, el comportamiento de su historial crediticio. Asimismo, usted dispone
-                        </p>
-                    </div>
-                    <div class="modal-footer text-center">
-                        <button type="button" class="btn btn-primary" (click)="confirm()">SI</button>
-                        <button type="button" class="btn btn-default" (click)="decline()">NO</button>
-                    </div>
-                </ng-template>
+                <p class="text-light-14">Estimado usuario, al aceptar los términos, trataremos sus datos única y exclusivamente para: (i) la potencial obtención de créditos, así como comunicación relacionada con la misma; y (ii) ser transferidos a Crédito Real, S.A.B. de C.V.,
+                    SOFOM, E.R., para la consulta, a través de Sociedades de Información Crediticia sobre sus antecedentes crediticios; cumplimiento de sus obligaciones derivadas de cualquier relación jurídica con Entidades Financieras; calificaciones
+                    de crédito o riesgos; y, el comportamiento de su historial crediticio. Asimismo, usted dispone
+                </p>
             </div>
         </div>
-    </section> -->
-
-</main>
+    </div>
+    <div class="modal-footer">
+        <div class="row px-3">
+            <div class="col-12 col-md-9 text-justify">
+                <p class="text-light-14">Permito que se verifique esta información en el Buró de crédito</p>
+            </div>
+            <div class="col-12 col-md-3">
+                <button type="button" class="btn btn-block button" (click)="confirm(target)">ACEPTO</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -3,6 +3,10 @@
 .navbar-light {
     background-color: #ffffff;
     border-color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 
@@ -22,6 +26,22 @@
 
 .navbar-light .navbar-nav>li>a {
     color: #0079ab;
+    padding-top: 15px;
+}
+
+.navbar-light .navbar-nav>li>.btn-outline {
+    color: #0079ab;
+    border: 1px solid #0079ab;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.navbar-light .navbar-nav>li>.btn-outline:hover {
+    color: #fff;
+    border: 1px solid #fff;
+    background-color: #0079ab;
+    cursor: pointer;
 }
 
 .navbar-light .navbar-nav>li>a:hover,
