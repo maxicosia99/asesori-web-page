@@ -12,7 +12,8 @@ import { UserInfo } from '../../../models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { InsuranceInformation } from 'src/app/models/insurance-information';
 import { Insurance } from '../../../models/insurance';
-import { element } from 'protractor';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/client/comunication.service';
 
 
 /** Interface representing a slider model */
@@ -49,12 +50,16 @@ export class HomePageComponent implements OnInit {
     * @param {HttpClientService} httpService - Service for connection to the server
     * @param {FormBuilder} formbuilder - Service for the use of forms
     * @param {AuthenticationService} authenticationService - Authentication service for user data
+    * @param {Router} router - Routing service
+    * @param {DataService} dataService - Service to pass information between components
   */
   constructor(
     private modalService: BsModalService,
     private httpService: HttpClientService,
     private formbuilder: FormBuilder,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private dataService: DataService
   ) { }
 
   /**---------------------------------------------VARIABLES FOR CREDITS AND INSURANCE--------------------------------------------------- */
@@ -185,6 +190,12 @@ export class HomePageComponent implements OnInit {
   section4: boolean = false;  //Summary section
   section5: boolean = false;  //Final application section
 
+  /**
+   * Variable to activate the email section
+   * @type {boolean}
+  */
+  public emailSection: boolean = false;
+
   /**---------------------------------------------------VARIABLES FOR CREDITS----------------------------------------------------------- */
 
   /**
@@ -278,15 +289,6 @@ export class HomePageComponent implements OnInit {
   public destinedTo: string;
 
   /**
-   * Variables to store credit results
-   * @type {any}
-  */
-  public creditOptions: any;        //all credit options
-  public can_access_credit: any;    //financial institutions where you can get credit
-  public cannot_access_credit: any; //financial institutions where you cannot obtain credit
-  public credit_unavailable: any;   //financial institutions where credit is not available
-
-  /**
    * Variable to store the names of the selected financial entities
    * @type {string}
   */
@@ -307,11 +309,7 @@ export class HomePageComponent implements OnInit {
     { id: 9, name: 'Urgencias', description: 'Crédito por emergencias' },
   ];
 
-  /**
-   * Variable to store the amount of results chosen by the user
-   * @type {number}
-  */
-  public cantSelectedCreditOptions: number = 0;
+ 
 
   /**
    * Variable to store message error
@@ -456,6 +454,71 @@ export class HomePageComponent implements OnInit {
   /**----------------------------------------METHODS AND FUNCTIONS FOR CREDITS AND INSURANCE-------------------------------------------- */
 
   /**
+   * Email form (credit, insurance, credit cards, investment policy)
+  */
+  emailform = this.formbuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+  });
+
+  /**
+   * Getter for easy access to email form fields
+   * @return {FormControl} Acces to email form
+  */
+  get emailForm() {
+    return this.emailform.controls;
+  }
+
+  /**
+   * Go forms page
+   * @return {void} Nothing
+  */
+  onSubmitEmailSection(){
+    
+    if (this.serviceform.get('service_type_userSelected').value === 'creditos'){
+      this.router.navigate(['/forms/credit']);
+
+      let credit: any = {
+        amountRequest:this.amountRequest.value,
+        monthlyIncome:this.monthlyIncome.value,
+        entryAmount: this.entryAmount.value,
+        term: this.term.value,
+        region_code: this.region_code,
+        entityType: this.entityType,
+        id_credit: this.id_credit 
+      }
+
+      this.dataService.changeInfomation(credit)
+    }
+
+    if (this.serviceform.get('service_type_userSelected').value === 'seguros'){
+      this.router.navigate(['/forms/insurance']);
+
+      let insurance: any = {
+        vehicleBrand:'marca',
+        vehicleModel:'modelo',
+        vehicleYear: 'year',
+        vehicleDescription: 'vehicleDescription',
+        id_insurance: this.id_insurance 
+      }
+
+      this.dataService.changeInfomation(insurance)
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
    * Allows to open and close the modal terms and conditions
    * @param {TemplateRef<any>} template - Identifier of the modal HTML tag
   */
@@ -595,7 +658,7 @@ export class HomePageComponent implements OnInit {
     this.term.value = 0;
 
     this.creditSectionForm = false;
-    this.insuranceSectionForm = true;
+    this.insuranceSectionForm = false;
 
   }
 
@@ -731,6 +794,7 @@ export class HomePageComponent implements OnInit {
    * On Init
    * @return {void} Nothing
   */
+
   ngOnInit() {
 
     this.personalDataForm.controls['maritalStatus'].setValue({ id: -1, status: 'ESTADO CIVIL' });
@@ -990,20 +1054,11 @@ export class HomePageComponent implements OnInit {
   }
 
   /**
-   * Define credit form
-  */
-  creditform = this.formbuilder.group({
-    can_access_credit_userSelected: new FormArray([]),
-    cannot_access_credit_userSelected: new FormArray([]),
-    filter: '0'
-  });
-
-  /**
    * Validate economic form and generates a summary
    * @return {void} Nothing
   */
   onSubmitCreditform(el: HTMLElement) {
-    if (this.cantSelectedCreditOptions > 0) {
+    //if (this.cantSelectedCreditOptions > 0) {
 
       this.credits_entities = ``;
 
@@ -1014,79 +1069,27 @@ export class HomePageComponent implements OnInit {
       this.section4 = true;
       this.section5 = false;
 
-      const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
-        .map((v, i) => v ? this.can_access_credit[i].id : null)
-        .filter(v => v !== null);
+      // const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
+      //   .map((v, i) => v ? this.can_access_credit[i].id : null)
+      //   .filter(v => v !== null);
 
-      const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
-        .map((v, i) => v ? this.cannot_access_credit[i].id : null)
-        .filter(v => v !== null);
+      // const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
+      //   .map((v, i) => v ? this.cannot_access_credit[i].id : null)
+      //   .filter(v => v !== null);
 
-      for (let entry of selectedCreditsIds1) {
-        let aux = this.can_access_credit.find(x => x.id == entry);
-        this.credits_entities += aux.name_financial_entity + ', ';
-      }
+      // for (let entry of selectedCreditsIds1) {
+      //   let aux = this.can_access_credit.find(x => x.id == entry);
+      //   this.credits_entities += aux.name_financial_entity + ', ';
+      // }
 
-      for (let entry of selectedCreditsIds2) {
-        let aux = this.cannot_access_credit.find(x => x.id == entry);
-        this.credits_entities += aux.name_financial_entity + ', ';
-      }
+      // for (let entry of selectedCreditsIds2) {
+      //   let aux = this.cannot_access_credit.find(x => x.id == entry);
+      //   this.credits_entities += aux.name_financial_entity + ', ';
+      // }
 
-    } else {
-      alert(`seleccione al menos una opción de crédito`);
-    }
-  }
-
-  /**
-   * Get variable to store the results of credits selected by the user
-   * @return {FormArray} Values where the user can obtain the credit
-  */
-  get can_access_credit_userSelected(): FormArray {
-    return this.creditform.get('can_access_credit_userSelected') as FormArray;
-  }
-
-  /**
-   * Get variable to store the results of credits selected by the user
-   * @return {FormArray} Values where the user cannot obtain the credit
-  */
-  get cannot_access_credit_userSelected(): FormArray {
-    return this.creditform.get('cannot_access_credit_userSelected') as FormArray;
-  }
-
-  /**
-   * Add checkbox of can access credit options
-   * @return {void} Nothing
-  */
-  private addCheckboxesCan_access_credit() {
-    this.can_access_credit.forEach((o, i) => {
-      const control = new FormControl(false);
-      (this.creditform.controls.can_access_credit_userSelected as FormArray).push(control);
-    });
-  }
-
-  /**
-   * Add checkbox of cannot access credit options
-   * @return {void} Nothing
-  */
-  private addCheckboxesCannot_access_credit() {
-    this.cannot_access_credit.forEach((o, i) => {
-      const control = new FormControl(false);
-      (this.creditform.controls.cannot_access_credit_userSelected as FormArray).push(control);
-    });
-  }
-
-  /**
-   * Count credit selected options
-   * @return {void} Nothing
-  */
-  cantSelectedUser() {
-    this.cantSelectedCreditOptions =
-      this.creditform.value.can_access_credit_userSelected
-        .map((v, i) => v ? this.can_access_credit[i].id : null)
-        .filter(v => v !== null).length +
-      this.creditform.value.cannot_access_credit_userSelected
-        .map((v, i) => v ? this.cannot_access_credit[i].id : null)
-        .filter(v => v !== null).length;
+    // } else {
+    //   alert(`seleccione al menos una opción de crédito`);
+    // }
   }
 
   /**
@@ -1097,43 +1100,7 @@ export class HomePageComponent implements OnInit {
   onSubmitServiceform(element: HTMLElement) {
 
     element.scrollIntoView({ behavior: 'smooth' });
-
-    if (this.serviceform.get('service_type_userSelected').value === 'creditos') {
-
-      this.creditSectionForm = true;
-      this.insuranceSectionForm = false;
-
-      let amountRequest: number = this.amountRequest.value;
-      let monthlyIncome: number = this.monthlyIncome.value;
-      let entryAmount: number = this.entryAmount.value;
-      let term: number = this.term.value;
-
-      this.httpService.getAllCreditOptions(this.region_code, this.entityType, this.id_credit, amountRequest, monthlyIncome, term, entryAmount).subscribe(res => {
-        if (res.status == 200) {
-
-          if (this.can_access_credit) {
-            this.can_access_credit_userSelected.clear()
-          }
-
-          if (this.cannot_access_credit) {
-            this.cannot_access_credit_userSelected.clear()
-          }
-
-          this.creditOptions = res.data;
-          this.can_access_credit = res.data.can_access_credit;
-          this.cannot_access_credit = res.data.cannot_access_credit;
-          this.credit_unavailable = res.data.credit_unavailable;
-          this.addCheckboxesCan_access_credit();
-          this.addCheckboxesCannot_access_credit();
-
-        } else {
-          console.log('Ah ocurrido un error!' + res.message);
-        }
-      }, error => {
-        console.log('error');
-        console.log(error);
-      });
-    }
+    this.emailSection = true;
   }
 
   /**
@@ -1181,33 +1148,33 @@ export class HomePageComponent implements OnInit {
     creditInformation.initial_amount = this.entryAmount.value;
     creditInformation.destination = this.destinedTo;
 
-    const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
-      .map((v, i) => v ? this.can_access_credit[i].id : null)
-      .filter(v => v !== null);
+    // const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
+    //   .map((v, i) => v ? this.can_access_credit[i].id : null)
+    //   .filter(v => v !== null);
 
-    const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
-      .map((v, i) => v ? this.cannot_access_credit[i].id : null)
-      .filter(v => v !== null);
+    // const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
+    //   .map((v, i) => v ? this.cannot_access_credit[i].id : null)
+    //   .filter(v => v !== null);
 
-    let creditos: Creditos[] = [];
+    // let creditos: Creditos[] = [];
 
-    for (let entry of selectedCreditsIds1) {
-      let aux = this.can_access_credit.find(x => x.id == entry);
-      let credito: Creditos = {} as Creditos;
-      credito.id_financialentity = aux.id_financial_entity;
-      credito.monthly_fee = aux.monthly_payment;
-      creditos.push(credito);
-    }
+    // for (let entry of selectedCreditsIds1) {
+    //   let aux = this.can_access_credit.find(x => x.id == entry);
+    //   let credito: Creditos = {} as Creditos;
+    //   credito.id_financialentity = aux.id_financial_entity;
+    //   credito.monthly_fee = aux.monthly_payment;
+    //   creditos.push(credito);
+    // }
 
-    for (let entry of selectedCreditsIds2) {
-      let aux = this.cannot_access_credit.find(x => x.id == entry);
-      let credito: Creditos = {} as Creditos;
-      credito.id_financialentity = aux.id_financial_entity;
-      credito.monthly_fee = aux.monthly_payment;
-      creditos.push(credito);
-    }
+    // for (let entry of selectedCreditsIds2) {
+    //   let aux = this.cannot_access_credit.find(x => x.id == entry);
+    //   let credito: Creditos = {} as Creditos;
+    //   credito.id_financialentity = aux.id_financial_entity;
+    //   credito.monthly_fee = aux.monthly_payment;
+    //   creditos.push(credito);
+    // }
 
-    creditInformation.creditos = creditos;
+    //creditInformation.creditos = creditos;
 
     this.httpService.createCreditInformation(creditInformation).subscribe(res => {
 
@@ -1232,30 +1199,6 @@ export class HomePageComponent implements OnInit {
       console.log('error al crear información');
       console.log(error);
     });
-  }
-
-  /**
-   * Filter credit options (all)
-   * @return {void} Nothing
-  */
-  todos() {
-    console.log(`todos`);
-  }
-
-  /**
-   * Filter credit options (bank)
-   * @return {void} Nothing
-  */
-  bancos() {
-    console.log(`bancos`);
-  }
-
-  /**
-   * Filter credit options (cooperative)
-   * @return {void} Nothing
-  */
-  cooperativas() {
-    console.log(`cooperativas`);
   }
 
 

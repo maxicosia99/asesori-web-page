@@ -6,27 +6,10 @@ import { HomePageRoutingModule } from './home-page-routing.module';     // Home 
 import { ButtonsModule } from 'ngx-bootstrap/buttons';                  // Ngx-Bootstrap button module
 import { Ng5SliderModule } from 'ng5-slider';                           // Slider module
 import { RatingModule } from 'ngx-bootstrap/rating';                    // Ngx-Bootstrap rating module
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';              // Ngx-Bootstrap dropdown module
-import { ModalModule } from 'ngx-bootstrap';                            // Ngx-Bootstrap Modal module
 import localeFr from '@angular/common/locales/fr';                      // Module for currency type (dollars)
 import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carousel module
-import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
 import { NgSelectModule } from '@ng-select/ng-select';                  // select
-import { NgxCurrencyModule } from "ngx-currency";                       // currency input $
 import { AlertModule } from 'ngx-bootstrap/alert';
-
-
-export const customCurrencyMaskConfig = {
-  align: "left",
-  allowNegative: false,
-  allowZero: true,
-  decimal: ".",
-  precision: 0,
-  prefix: "$ ",
-  suffix: "",
-  thousands: " ",
-  nullable: false
-};
 
 @NgModule({
   declarations: [
@@ -41,12 +24,7 @@ export const customCurrencyMaskConfig = {
     ButtonsModule.forRoot(),
     RatingModule.forRoot(),
     Ng5SliderModule,
-    BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
-    ArchwizardModule,
     NgSelectModule,
-    NgxCurrencyModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     AlertModule.forRoot()
   ],
   exports: [

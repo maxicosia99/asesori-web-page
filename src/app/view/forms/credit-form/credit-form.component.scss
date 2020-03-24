@@ -1,0 +1,148 @@
+.aplication-bar {
+    height: 90px;
+}
+
+.recalculate-text {
+    cursor: pointer;
+}
+
+label:active,
+label:focus,
+[role="button"][aria-pressed="true"] {
+    background-color: #0079a8;
+    color: #ffffff;
+    padding: 10px 10px;
+    font-size: 20px;
+}
+
+label:active,
+label:focus,
+[role="button"][aria-pressed="false"] {
+    background-color: #f4f4f4;
+    color: #3d3d3d;
+    padding: 10px 10px;
+    font-size: 20px;
+}
+
+.btn-group.special {
+    display: flex;
+}
+
+.special .btn {
+    flex: 1
+}
+
+
+/* ESTYLE TO SELECT OPTION */
+
+.kudos-wrap input[type="checkbox"],
+.kudos-wrap input[type="radio"] {
+    display: none;
+}
+
+.kudos-wrap label {
+    border: 2px solid #fff;
+    //border: 2px solid #e6e6ed;
+}
+
+.kudos-wrap label:before {
+    transition-duration: 0.4s;
+    transform: scale(0);
+}
+
+.selected {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 18px 20px;
+    border-radius: 8px;
+    font-family: 'Poppins-Regular';
+    background-color: #0079ab;
+    color: #ffffff;
+    display: none
+}
+
+.no-selected {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 18px 20px;
+    border-radius: 8px;
+    font-family: 'Poppins-Regular';
+    background-color: #ffffff;
+    color: #0079ab;
+    border: 1px solid #0079ab;
+    display: inline-block
+}
+
+.kudos-wrap :checked+label .selected {
+    display: inline-block;
+}
+
+.kudos-wrap :checked+label .no-selected {
+    display: none;
+}
+
+.kudos-wrap label {
+    transition-duration: 0.1s;
+    transform-origin: 50% 50%;
+}
+
+.kudos-wrap :checked+label {
+    border-color: #0079ab;
+}
+
+#global {
+    height: 550px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+
+ul.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 45px;
+    width: 2px;
+    height: 100%;
+}
+
+ul.timeline>li {
+    margin: 50px 0;
+    padding-left: 75px;
+}
+
+ul.timeline>li>p {
+    padding-left: 15px;
+}
+
+ul.timeline>li:before {
+    content: ' ';
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #0079ab;
+    left: 25px;
+    width: 40px;
+    height: 40px;
+    margin: -15px 0;
+}
+
+.row-hover:hover {
+    color: #0079ab;
+}
+
+.result-container {
+    box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
