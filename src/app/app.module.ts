@@ -42,7 +42,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AlertComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   entryComponents: [
     LoginComponent

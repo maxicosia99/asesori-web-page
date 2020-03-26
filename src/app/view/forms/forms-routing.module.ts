@@ -5,6 +5,7 @@ import { InsuranceFormComponent } from './insurance-form/insurance-form.componen
 
 
 const routes: Routes = [
+  
   { path: 'credit', component: CreditFormComponent},
   { path: 'insurance', component: InsuranceFormComponent}
 ];

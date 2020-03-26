@@ -13,6 +13,7 @@ export const routes: Routes = [
   { path: 'homepage', loadChildren: () => import('./view/component-home-page/home-page.module').then(m => m.HomePageModule) },
   { path: 'services', loadChildren: () => import('./view/module-services/module-services.module').then(m => m.ModuleServicesModule) },
   { path: 'forms', loadChildren: () => import('./view/forms/forms.module').then(m => m.FormModule) },
+  //{ path: 'forms', loadChildren: () => import('./view/forms/forms.module').then(m => m.FormModule) },
   //canActivate: [AuthGuard]
   { path: '**', component: P404Component }
 ];

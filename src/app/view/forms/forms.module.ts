@@ -12,7 +12,6 @@ import { NgSelectModule } from '@ng-select/ng-select';                  // selec
 import { ModalModule } from 'ngx-bootstrap';                            // Ngx-Bootstrap Modal module
 import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
 import localeFr from '@angular/common/locales/fr';
-import { CreditResultsComponent } from './credit-form/credit-results/credit-results.component';                      // Module for currency type (dollars)
 
 export const customCurrencyMaskConfig = {
   align: "left",
@@ -27,7 +26,7 @@ export const customCurrencyMaskConfig = {
 };
 
 @NgModule({
-  declarations: [CreditFormComponent, InsuranceFormComponent, CreditResultsComponent],
+  declarations: [CreditFormComponent, InsuranceFormComponent],
   imports: [
     CommonModule,
     FormsRoutingModule,
