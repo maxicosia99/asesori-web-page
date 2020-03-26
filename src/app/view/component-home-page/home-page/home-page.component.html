@@ -306,14 +306,15 @@
     </section>
 
     <!-- EMAIL & STEPS SECTION -->
-    <section *ngIf="emailSection" class="container-fluid bg-5">
-        <form [formGroup]="emailform" (ngSubmit)="onSubmitEmailSection()">
-            <div class="container bg-0 px-5 py-4">
+    <form [formGroup]="emailform" (ngSubmit)="onSubmitEmailSection()">
+        <section *ngIf="emailSection" class="container-fluid bg-5">
+
+            <div class="container bg-0 px-2 px-md-5 py-4">
                 <div class="row px-4 px-md-0">
                     <div class="col-12">
                         <h4 class="tittle-9 mt-4 mb-3 text-uppercase"><b>Estas a un solo paso, ingresa tu email </b>
                         </h4>
-                        <p class="text-center text-md-left text-light-14">Antes de conocer las mejores opciones de crédito es importante que ingreses tu email.</p>
+                        <p class="text-light-14">Antes de conocer las mejores opciones de crédito es importante que ingreses tu email.</p>
                     </div>
 
                     <div class="col-12">
@@ -332,8 +333,8 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </section>
+        </section>
+    </form>
 
 
     <!-- RANKING SECTION -->

@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/models/user-register';
+import { RouterExtService } from 'src/app/services/client/routing.service';
 
 /**
  * Validate if the password and confirmation are the same
@@ -34,7 +35,8 @@ export function MustMatch(controlName: string, matchingControlName: string) {
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
@@ -52,28 +54,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private httpService: HttpClientService,
     private authService: AuthenticationService,
-    public bsModalRef: BsModalRef,
     public router: Router,
+    private routerExtService: RouterExtService
   ) { }
 
-  /**
-   * Variable that receives the route to redirect
-   * @type {any}
-  */
-  @Input() redirect: any;
-  
   /**
    * To activate the login section
    * @type {boolean}
   */
   public sectionLogin: boolean = true;
-  
+
   /**
    * To activate the register section
    * @type {boolean}
   */
   public sectionRegister: boolean = false;
-  
+
   /**
    * Variable to sign out
    * @type {Subscription}
@@ -106,7 +102,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     validator: MustMatch('password', 'confirmPassword')
   });
 
-  ngOnInit() {}
+  ngOnInit() {
+    window.scrollTo(0, 0);
+  }
 
   /**
    * Show an alert with a message
@@ -149,6 +147,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @return {void} Nothing
   */
   onSubmit() {
+
     let user: UserAuth = {
       usernameOrEmail: this.form.usernameOrEmail.value,
       password: this.form.password.value
@@ -157,7 +156,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription = this.httpService.login(user).subscribe((response) => {
       if (response.status == 200) {
         this.authService.setSession(response.data);
-        this.router.navigate([this.redirect]);
+        this.router.navigate([this.routerExtService.getPreviousUrl()]);
         /* ------------------------------ */
         this.httpService.getDataUserlogin().subscribe(() => {
           this.authService.functionGetUserData();
@@ -166,7 +165,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
         /* ------------------------------ */
 
-        this.bsModalRef.hide();
+        //this.bsModalRef.hide();
         this.loginForm.reset();
         this.authService.setSession(response.data);
       } else
@@ -183,7 +182,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @return {void} Nothing
   */
   onSubmitRegister() {
-    
+
     let userRegister: UserRegister = {
       username: this.formRegister.username.value,
       email: this.formRegister.email.value,
@@ -203,7 +202,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           if (response.status == 200) {
             this.authService.setSession(response.data);
-            this.router.navigate([this.redirect]);
+            this.router.navigate([this.routerExtService.getPreviousUrl()]);
             /* ------------------------------ */
             this.httpService.getDataUserlogin().subscribe(() => {
               this.authService.functionGetUserData();
@@ -212,7 +211,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             });
             /* ------------------------------ */
 
-            this.bsModalRef.hide();
+            //this.bsModalRef.hide();
             this.loginForm.reset();
             this.authService.setSession(response.data);
           } else

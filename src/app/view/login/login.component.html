@@ -1,18 +1,13 @@
-<div class="modal-header">
-    <!-- <h4 class="modal-title tittle-6">Bienvenido a ASESORI</h4> -->
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-    </button>
+<section class="container">
 
-</div>
-<!-- <div class="modal-body mx-4 text-justify text-light-14"> -->
-<div class="modal-body mx-4 text-justify">
+    <div class="row bg-img mx-0">
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="row" *ngIf="sectionLogin">
-            <div class="col-12">
-                <p class="tittle-8 text-uppercase">Iniciar sesión</p>
-                <p class="text-light-14">Ingresa la información registrada en tu formulario de solicitud.</p>
+        <div class="col-12 col-md-6 bg-0 pl-5 pl-md-2 pt-5 pr-5 pb-5" *ngIf="sectionLogin">
+            <p class="tittle-8 text-uppercase pt-4">Iniciar sesión</p>
+            <p class="text-light-14">Ingresa la información registrada en tu formulario de solicitud.</p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
                 <div class="position-relative mt-4">
                     <input type="text" formControlName="usernameOrEmail" class="form-control" required [ngClass]="{ 'is-invalid': form.usernameOrEmail.touched && form.usernameOrEmail.errors }">
                     <span class="floating-label text-uppercase">Username o Email*</span>
@@ -27,6 +22,7 @@
 
                     <div *ngIf="form.password.touched && form.password.errors" class="invalid-feedback">
                         <div *ngIf="form.password.errors.required">Porfavor ingrese su contraseña!</div>
+                        <div *ngIf="form.password.errors.minlength">Al menos 6 caracteres!</div>
                     </div>
                 </div>
 
@@ -45,22 +41,21 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center py-4">
+                <div class="row justify-content-center py-5">
                     <div class="col-8 text-center tittle-14">
                         <span>Aun no tienes cuenta, </span>
                         <summary (click)="changeSectionRegister()" class="color-1 d-inline">Registrate aquí</summary>
                     </div>
                 </div>
+            </form>
 
-            </div>
         </div>
-    </form>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
-        <div class="row" *ngIf="sectionRegister">
-            <div class="col-12">
-                <p class="tittle-8 text-uppercase">Registrarse</p>
-                <p class="text-light-14">Ingresa la información registrada en tu formulario de solicitud.</p>
+        <div class="col-12 col-md-6 bg-0 pl-5 pl-md-2 pt-4 pr-5 pb-5" *ngIf="sectionRegister">
+            <p class="tittle-8 text-uppercase">Registrarse</p>
+            <p class="text-light-14">Ingresa la información registrada en tu formulario de solicitud.</p>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
                 <div class="position-relative mt-4">
                     <input type="text" formControlName="username" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.username.touched && formRegister.username.errors }">
                     <span class="floating-label text-uppercase">Username*</span>
@@ -133,8 +128,20 @@
                         <summary (click)="changeSectionLogin()" class="color-1 d-inline">Inicia sesión aquí</summary>
                     </div>
                 </div>
+            </form>
+        </div>
 
+        <div class="col-md-6 d-none d-md-block align-self-end">
+
+            <div class="row align-items-center justify-content-center pb-4">
+                <div class="col-5 col-lg-6 text-center">
+                    <p class="color-0 tittle-8 mt-3">¿Necesitas más información?</p>
+                </div>
+                <div class="col-6 col-lg-4">
+                    <button type="button" class="btn button-transparent btn-block">Contáctanos</button>
+                </div>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+
+</section>

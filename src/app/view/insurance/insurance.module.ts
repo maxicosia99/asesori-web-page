@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 
-import { FormsRoutingModule } from './forms-routing.module';
-import { CreditFormComponent } from './credit-form/credit-form.component';
-import { InsuranceFormComponent } from './insurance-form/insurance-form.component';
+import { InsuranceRoutingModule } from './insurance-routing.module';
+import { ResultInsuranceComponent } from './result-insurance/result-insurance.component';
 
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';     // Forms
 import { ButtonsModule } from 'ngx-bootstrap/buttons';                  // Ngx-Bootstrap button module
 import { NgxCurrencyModule } from "ngx-currency";                       // currency input $
 import { NgSelectModule } from '@ng-select/ng-select';                  // select
 import { ModalModule } from 'ngx-bootstrap';                            // Ngx-Bootstrap Modal module
-import { ArchwizardModule } from 'angular-archwizard';                  // Wizar forms
 import localeFr from '@angular/common/locales/fr';
 
 export const customCurrencyMaskConfig = {
@@ -26,10 +24,12 @@ export const customCurrencyMaskConfig = {
 };
 
 @NgModule({
-  declarations: [CreditFormComponent, InsuranceFormComponent],
+  declarations: [
+    ResultInsuranceComponent
+  ],
   imports: [
     CommonModule,
-    FormsRoutingModule,
+    InsuranceRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     ButtonsModule.forRoot(),
@@ -37,9 +37,8 @@ export const customCurrencyMaskConfig = {
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     NgSelectModule,
     ModalModule.forRoot(),
-    ArchwizardModule,
   ]
 })
-export class FormModule { }
+export class InsuranceModule { }
 
 registerLocaleData(localeFr, 'fr');   //register for the type of currency (dollars)

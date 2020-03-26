@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service'; //authentication service
 import { Subscription } from 'rxjs';                                                  //suscription to login
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
-import { LoginComponent } from 'src/app/view/login/login.component';                  //call login
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,7 +20,6 @@ export class FooterComponent implements OnInit {
     */
     constructor(
         private router: Router,
-        private modalService: BsModalService,
         private authService: AuthenticationService,
     ) { }
 
@@ -30,17 +27,11 @@ export class FooterComponent implements OnInit {
     }
 
     /**
-     * Modal methods
-     * @type {BsModalRef}
-    */
-    modalRef: BsModalRef;
-
-    /**
      * Variable to sign out
      * @type {Subscription}
     */
     private subscription: Subscription;
-    
+
     /**
      * Variable to store user information
      * @type {any}
@@ -53,49 +44,8 @@ export class FooterComponent implements OnInit {
      * @param {boolean} isloginVerified - Check if you are logged in
      * @returns {void} - Nothing
     */
-    openModal(redirect: string, isloginVerified: boolean) {
-
-        if (!isloginVerified) {
-            redirect = this.router.url;
-        }
-
-        const initialState = {
-            redirect: redirect
-        };
-
-        this.modalRef = this.modalService.show(LoginComponent, { initialState });
-        this.modalRef.setClass('modal-dialog-centered');
-        this.modalRef.content.closeBtnName = 'Close';
-    }
-
-    /**
-     * Lets you log out
-     * @param {string} redirect - Route to go at login
-     * @returns {void} - Nothing
-    */
-    onLoggedout(redirect: string) {
-
-        // if (this.router.url === '/stepper') {
-        //     redirect = '/';
-        // } else {
-        //     redirect = this.router.url;
-        // }
-
-        redirect = this.router.url;
-        this.authService.logOut();
-        this.closeSubscriptions();
-        console.log('Ha finalizado sesión!');
-        this.authService.functionClearUserData();
-        this.router.navigate([redirect]);
-    }
-
-    /**
-     * Closes suscriptions
-     * @returns {void} - Nothing
-    */
-    closeSubscriptions() {
-        if (this.subscription)
-            this.subscription.unsubscribe();
+    goTologin() {
+        this.router.navigate(['/login']);
     }
 
     /**
@@ -109,18 +59,5 @@ export class FooterComponent implements OnInit {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Check if a route needs login
-     * @param {string} redirect - Route to go at login
-     * @returns {void} - Nothing
-    */
-    loginValidated(redirect: string) {
-        if (!this.loginVerified()) {
-            this.openModal(redirect, true);
-        } else {
-            this.router.navigate([redirect]);
-        }
     }
 }

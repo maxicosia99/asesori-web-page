@@ -1,10 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Options } from 'ng5-slider';                                                 //options user slider
 import { OwlOptions } from 'ngx-owl-carousel-o';                                      //options carousel images
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
 import { FormBuilder, Validators, FormArray, FormControl, AbstractControl } from '@angular/forms';     //forms
 import { validateCedula } from 'src/app/services/client/validar-cedula';              //service to validate cedula
-import { Creditos } from 'src/app/models/creditos';                                   //part of model to credit request  
 import { CreditInformation } from 'src/app/models/credit-information';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { CarInsuranceRequest } from '../../../models/car-insurance-request';
@@ -46,7 +44,6 @@ export class HomePageComponent implements OnInit {
   /**
     * Represents the component of the homepage module
     * @constructor
-    * @param {BsModalService} modalService - Modal administration service
     * @param {HttpClientService} httpService - Service for connection to the server
     * @param {FormBuilder} formbuilder - Service for the use of forms
     * @param {AuthenticationService} authenticationService - Authentication service for user data
@@ -54,7 +51,6 @@ export class HomePageComponent implements OnInit {
     * @param {DataService} dataService - Service to pass information between components
   */
   constructor(
-    private modalService: BsModalService,
     private httpService: HttpClientService,
     private formbuilder: FormBuilder,
     private authenticationService: AuthenticationService,
@@ -107,7 +103,7 @@ export class HomePageComponent implements OnInit {
    * Modal methods
    * @type {BsModalRef}
   */
-  public modalRef: BsModalRef;
+  //public modalRef: BsModalRef;
 
   /**
    * Location variables
@@ -475,7 +471,7 @@ export class HomePageComponent implements OnInit {
   onSubmitEmailSection(){
     
     if (this.serviceform.get('service_type_userSelected').value === 'creditos'){
-      this.router.navigate(['/forms/credit']);
+      this.router.navigate(['/homepage/credit']);
 
       let credit: any = {
         amountRequest:this.amountRequest.value,
@@ -491,7 +487,7 @@ export class HomePageComponent implements OnInit {
     }
 
     if (this.serviceform.get('service_type_userSelected').value === 'seguros'){
-      this.router.navigate(['/forms/insurance']);
+      this.router.navigate(['/homepage/insurance']);
 
       let insurance: any = {
         vehicleBrand:'marca',
@@ -522,19 +518,19 @@ export class HomePageComponent implements OnInit {
    * Allows to open and close the modal terms and conditions
    * @param {TemplateRef<any>} template - Identifier of the modal HTML tag
   */
-  openModal_termsConditions(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-    this.modalRef.setClass('modal-dialog-centered');
-  }
+  // openModal_termsConditions(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(template);
+  //   this.modalRef.setClass('modal-dialog-centered');
+  // }
 
   /**
    * Shows modal confirmation message
    * @return {void} Nothing
   */
-  confirm(element: HTMLElement): void {
-    this.modalRef.hide();
-    this.onSubmitRequestSummaryCredit(element);
-  }
+  // confirm(element: HTMLElement): void {
+  //   this.modalRef.hide();
+  //   this.onSubmitRequestSummaryCredit(element);
+  // }
 
   /**
    * Method to enable or disable service tag options

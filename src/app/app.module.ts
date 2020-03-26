@@ -13,11 +13,11 @@ import { AppAuthModule } from './services/interceptors/app-auth.module';
 import { LoginComponent } from './view/login/login.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { ModalModule } from 'ngx-bootstrap';
 import { HeaderComponent } from './view/header/header.component';
 import { FooterComponent } from './view/footer/footer.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { RouterExtService } from './services/client/routing.service';
 
 @NgModule({
   imports: [
@@ -30,7 +30,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AlertModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
-    ModalModule.forRoot(),
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AppAuthModule,
@@ -44,10 +43,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     HeaderComponent,
     FooterComponent,
   ],
-  entryComponents: [
-    LoginComponent
-  ],
   providers: [],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private routerExtService: RouterExtService){}
+}

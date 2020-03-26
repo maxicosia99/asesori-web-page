@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service'; //authentication service
 import { Subscription } from 'rxjs';                                                  //suscription to login
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';                           //modal service
-import { LoginComponent } from 'src/app/view/login/login.component';                  //call login
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,7 +20,6 @@ export class HeaderComponent implements OnInit {
     */
     constructor(
         private router: Router,
-        private modalService: BsModalService,
         private authService: AuthenticationService,
     ) { }
 
@@ -30,40 +27,34 @@ export class HeaderComponent implements OnInit {
      * Variable to open or close the navbar
      * @type {boolean}
     */
-    navbarOpen:boolean = false;
-    
-    /**
-     * Modal methods
-     * @type {BsModalRef}
-    */
-    modalRef: BsModalRef;
-    
+    navbarOpen: boolean = false;
+
     /**
      * Variable to sign out
      * @type {Subscription}
     */
     private subscription: Subscription;
-    
+
     /**
      * Variable to store user information
      * @type {any}
     */
     public user: any;
 
-    public animated:boolean = false;
+    public animated: boolean = false;
 
     ngOnInit() {
-        
+
     }
 
     /**
      * Animated navbar with window size
      * @returns {void} - Nothing
     */
-    ngDoCheck(){
+    ngDoCheck() {
         if (window.innerWidth <= 768) {
             this.animated = true;
-        }else{
+        } else {
             this.animated = false;
         }
     }
@@ -106,21 +97,9 @@ export class HeaderComponent implements OnInit {
      * @param {boolean} isloginVerified - Check if you are logged in
      * @returns {void} - Nothing
     */
-    openModal(redirect: string, isloginVerified: boolean) {
-
-        if (!isloginVerified) {
-            redirect = this.router.url;
-        }
-
-        const initialState = {
-            redirect: redirect
-        };
-        
-        this.modalRef = this.modalService.show(LoginComponent, { initialState });
-        this.modalRef.setClass('modal-dialog-centered');
-        this.modalRef.content.closeBtnName = 'Close';
-        this.navbarOpen = !this.navbarOpen;
-    }    
+    goTologin() {
+        this.router.navigate(['/login']);
+    }
 
     /**
      * Lets you log out
@@ -165,18 +144,5 @@ export class HeaderComponent implements OnInit {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Check if a route needs login
-     * @param {string} redirect - Route to go at login
-     * @returns {void} - Nothing
-    */
-    loginValidated(redirect: string) {
-        if (!this.loginVerified()) {
-            this.openModal(redirect, true);
-        } else {
-            this.router.navigate([redirect]);
-        }
     }
 }

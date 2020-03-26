@@ -22,7 +22,7 @@
                         <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/homepage" routerLinkActive="active-link">Testimonios</a>
                     </li>
                     <li *ngIf="!loginVerified(); else elseBlock" class="nav-item">
-                        <button (click)="openModal('',false)" class="btn-outline tittle-10 mt-1 mb-3 mb-md-0">Iniciar sesión</button>
+                        <button (click)="goTologin()" class="btn-outline tittle-10 mt-1 mb-3 mb-md-0">Iniciar sesión</button>
                     </li>
                     <ng-template #elseBlock>
                         <li class="nav-item">

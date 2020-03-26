@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/client/comunication.service';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-credit-form',
-  templateUrl: './credit-form.component.html',
-  styleUrls: ['./credit-form.component.scss']
+  selector: 'app-result-credit',
+  templateUrl: './result-credit.component.html',
+  styleUrls: ['./result-credit.component.scss']
 })
-export class CreditFormComponent implements OnInit {
+export class ResultCreditComponent implements OnInit {
 
   //credit_information: any;
 
   credit_information: any = {
-    amountRequest:50000,
-    monthlyIncome:150,
+    amountRequest: 50000,
+    monthlyIncome: 150,
     entryAmount: 250,
     term: 144,
     region_code: 'A',
     entityType: 0,
-    id_credit: 11 
+    id_credit: 11
   }
 
   constructor(
@@ -141,24 +141,24 @@ export class CreditFormComponent implements OnInit {
    * Filter credit options (all)
    * @return {void} Nothing
   */
- todos() {
-  console.log(`todos`);
-}
+  todos() {
+    console.log(`todos`);
+  }
 
-/**
- * Filter credit options (bank)
- * @return {void} Nothing
-*/
-bancos() {
-  console.log(`bancos`);
-}
+  /**
+   * Filter credit options (bank)
+   * @return {void} Nothing
+  */
+  bancos() {
+    console.log(`bancos`);
+  }
 
-/**
- * Filter credit options (cooperative)
- * @return {void} Nothing
-*/
-cooperativas() {
-  console.log(`cooperativas`);
-}
+  /**
+   * Filter credit options (cooperative)
+   * @return {void} Nothing
+  */
+  cooperativas() {
+    console.log(`cooperativas`);
+  }
 
 }
