@@ -1,0 +1,189 @@
+<section class="container">
+    <div class="row">
+        <div class="d-none d-lg-block col-3">
+            <div class="row">
+                <div class="col bg-4 text-center">
+                    <img class="img-fluid mt-4" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
+
+                    <ul class="timeline text-left text-uppercase tittle-11 color-6">
+                        <li>
+                            <summary>Identificación</summary>
+                            <p class="mt-4">datos personales</p>
+                            <p>domicilio actual</p>
+                            <p>contacto</p>
+                        </li>
+                        <li>
+                            <summary class="color-1">Información económica</summary>
+                            <p class="mt-4 color-1">situación laboral</p>
+                            <p>situación financiera</p>
+                            <p>datos economicos</p>
+                        </li>
+                        <li>
+                            <summary>Mi crédito</summary>
+                            <p class="mt-4">solicitud</p>
+                        </li>
+                        <li>
+                            <summary>Solicitud lista</summary>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-3 mx-1">
+                <div class="col-12">
+                    <p class="tittle-10">Tienes la seguridad y confianza</p>
+                    <p class="text-light-14">Para nosotros es primordial brindarte toda la seguridad posible y confianza que necesitas durante todo el proceso. Estamos avalados por</p>
+                    <owl-carousel-o [options]="customOptions">
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-austro-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-biess-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-bolivariano-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-dinnersClub-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png">
+                            </div>
+                        </ng-template>
+                    </owl-carousel-o>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-9">
+            <div class="row mx-2 mx-md-0 justify-content-center py-5">
+
+                <div class="col-12 col-lg-8">
+
+                    <h2 class="tittle-1 mb-2">Información económica </h2>
+                    <p class="text-light-14">Con Asesori puedes acceder a créditos de forma más fácil y segura, por lo que necesitamos identicarte.</p>
+
+                    <div class="row my-0 my-md-4">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="text" class="form-control text-uppercase" required>
+                                <span class="floating-label text-uppercase">nombre de la empresa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-0 my-md-4">
+                        <div class="col-12 col-md-6 my-md-0 my-4">
+                            <div class="position-relative">
+                                <input type="text" class="form-control text-uppercase" required>
+                                <span class="floating-label text-uppercase">cargo en la empresa</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="position-relative">
+                                <input type="date" class="form-control">
+                                <span class="floating-label text-uppercase">fecha de ingreso</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-0 my-md-4">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="tel" currencyMask class="form-control" required>
+                                <span class="floating-label text-uppercase">sueldo mensual</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-0 my-md-4">
+                        <div class="col-12 col-md-6 my-md-0 my-4">
+                            <div class="position-relative">
+                                <input type="tel" currencyMask class="form-control" required>
+                                <span class="floating-label text-uppercase">otro valor mensual</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="position-relative">
+                                <input type="text" class="form-control text-uppercase" required>
+                                <span class="floating-label text-uppercase">detalle del valor</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row my-0 my-md-4">
+                        <div class="col-12 col-md-6 my-md-0 my-4">
+                            <ng-select class="custom" [items]="provinces" placeholder="provincia*" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
+                            </ng-select>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <ng-select class="custom" [items]="cities" placeholder="ciudad*" [searchable]="true" bindLabel="name" [clearable]="false">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="text" class="form-control text-uppercase" required>
+                                <span class="floating-label text-uppercase">dirección</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="tel" class="form-control" required>
+                                <span class="floating-label text-uppercase">teléfono de contacto</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <p>solo esta parte para independiente</p> -->
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="text" class="form-control" required>
+                                <span class="floating-label text-uppercase">Ruc</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="text" class="form-control text-uppercase" required>
+                                <span class="floating-label text-uppercase">sector</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <div class="position-relative">
+                                <input type="tel" currencyMask class="form-control" required>
+                                <span class="floating-label text-uppercase">promedio mensual
+                                        ventas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-4 justify-content-between">
+                        <div class="col-4 d-none d-sm-block">
+                            <button type="button" class="btn button btn-block">REGRESAR</button>
+                        </div>
+                        <div class="col-4 d-block d-sm-none">
+                            <button type="button" class="btn button btn-block">&lt;</button>
+                        </div>
+                        <div class="col-4 d-none d-sm-block">
+                            <button type="button" class="btn button btn-block" (click)="onSubmitLaborForm()">CONTINUAR</button>
+                        </div>
+                        <div class="col-4 d-block d-sm-none">
+                            <button type="button" class="btn button btn-block" (click)="onSubmitLaborForm()">&gt;</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

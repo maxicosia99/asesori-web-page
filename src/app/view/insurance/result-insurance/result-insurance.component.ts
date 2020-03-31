@@ -80,6 +80,11 @@ export class ResultInsuranceComponent implements OnInit {
     can_access_vehicleInsurance_userSelected: new FormArray([]),
   });
 
+  /**
+   * Calculate vehicle insurance options
+   * @param {HTMLElement} element - HTML identifier
+   * @return {void} Nothing
+  */
   ngOnInit() {
 
     window.scrollTo(0, 0);
@@ -164,7 +169,7 @@ export class ResultInsuranceComponent implements OnInit {
   */
   onSubmitInsuranceForm() {
     if (this.cantInsurnaceUserSelected > 0) {
-      this.router.navigate(['homepage/insurance/results/identificacion']);
+      this.router.navigate(['insurance/results/identification']);
     } else {
       alert(`seleccione al menos una opción de seguro`);
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service'; //authentication service
 import { Subscription } from 'rxjs';                                                  //suscription to login
 import { Router } from '@angular/router';
+import { RouterExtService } from 'src/app/services/client/routing.service';
 
 @Component({
     selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
     constructor(
         private router: Router,
         private authService: AuthenticationService,
+        private routerExtService: RouterExtService
     ) { }
 
     /**
@@ -106,7 +108,7 @@ export class HeaderComponent implements OnInit {
      * @param {string} redirect - Route to go at login
      * @returns {void} - Nothing
     */
-    onLoggedout(redirect: string) {
+    onLoggedout() {
 
         // if (this.router.url === '/stepper') {
         //     redirect = '/';
@@ -114,14 +116,12 @@ export class HeaderComponent implements OnInit {
         //     redirect = this.router.url;
         // }
 
-        redirect = this.router.url;
-
         this.navbarOpen = !this.navbarOpen;
         this.authService.logOut();
         this.closeSubscriptions();
         console.log('Ha finalizado sesión!');
         this.authService.functionClearUserData();
-        this.router.navigate([redirect]);
+        this.router.navigate([this.router.url]);
     }
 
     /**

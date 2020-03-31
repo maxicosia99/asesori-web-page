@@ -1,0 +1,116 @@
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClientService } from 'src/app/services/client/http-client.service';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
+/**
+ * Validate the selection of a select
+ * @param {AbstractControl} control - Object to validate with id
+ * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
+ */
+export function validateSelect(control: AbstractControl) {
+  if (control.value.id === -1) {
+    return { valid: true };
+  }
+  return null;
+}
+
+@Component({
+  selector: 'app-economic-data',
+  templateUrl: './economic-data.component.html',
+  styleUrls: ['./economic-data.component.scss']
+})
+export class EconomicDataComponent implements OnInit {
+
+  constructor(
+    private formbuilder: FormBuilder,
+    private router: Router,
+    private httpService: HttpClientService,
+  ) { }
+
+  /**
+   * Variables for the selection of type housing
+   * @type {any[]}
+  */
+  public typeHousing = [
+    { id: 1, type: "Propia" },
+    { id: 2, type: "Arrendada" }
+  ]
+
+  /**
+   * Define economic form
+  */
+  economicForm = this.formbuilder.group({
+    card_payment: [''],
+    loans_payment: [''],
+    mortgage_payment: [''],
+    rent_payment: [''],
+    services_payment: ['', [Validators.required]],
+    total_properties: ['', [Validators.required]],
+    typeHousing: ['', [Validators.required, validateSelect]]
+  });
+
+  /**
+   * Carousel options
+   * @type {OwlOptions}
+  */
+  public customOptions: OwlOptions = {
+    loop: true,
+    freeDrag: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    dots: true,
+    responsive: {
+      0: {
+        items: 2
+      },
+      400: {
+        items: 4
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    }
+  }
+
+  /**
+   * Variable to verify if the economic form is correct
+   * @type {boolean}
+  */
+  economicFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
+  isFieldValidEconomicForm(field: string) {
+    return (
+      this.economicForm.get(field).errors && this.economicForm.get(field).touched ||
+      this.economicForm.get(field).untouched &&
+      this.economicFormSubmitted && this.economicForm.get(field).errors
+    );
+  }
+
+  /**
+   * Validate economic form
+   * @return {void} Nothing
+  */
+  onSubmiteconomicForm() {
+    this.economicFormSubmitted = true;
+    if (this.economicForm.valid) {
+      this.router.navigate(['credit/results/my-credit']);
+    }
+  }
+
+  ngOnInit() {
+    window.scrollTo(0, 0)
+    this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
+  }
+
+}

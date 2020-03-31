@@ -11,8 +11,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { title: 'Login Page' } },
   { path: 'homepage', loadChildren: () => import('./view/component-home-page/home-page.module').then(m => m.HomePageModule) },
   { path: 'services', loadChildren: () => import('./view/module-services/module-services.module').then(m => m.ModuleServicesModule) },
-  { path: 'homepage/credit', loadChildren: () => import('./view/credit/credit.module').then(m => m.CreditModule) },
-  { path: 'homepage/insurance', loadChildren: () => import('./view/insurance/insurance.module').then(m => m.InsuranceModule) },
+  { path: 'credit', loadChildren: () => import('./view/credit/credit.module').then(m => m.CreditModule) },
+  { path: 'insurance', loadChildren: () => import('./view/insurance/insurance.module').then(m => m.InsuranceModule) },
   //canActivate: [AuthGuard]
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: '**', component: P404Component }

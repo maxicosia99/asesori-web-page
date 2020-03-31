@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppAuthModule } from './services/interceptors/app-auth.module';
 import { LoginComponent } from './view/login/login.component';
-import { TabsModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { HeaderComponent } from './view/header/header.component';
 import { FooterComponent } from './view/footer/footer.component';
@@ -28,7 +27,6 @@ import { RouterExtService } from './services/client/routing.service';
     ReactiveFormsModule,
     HttpClientModule,
     AlertModule.forRoot(),
-    TabsModule.forRoot(),
     ButtonsModule.forRoot(),
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),

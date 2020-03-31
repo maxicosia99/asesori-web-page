@@ -1,277 +1,270 @@
-<!-- RESULTS SECTION TEST -->
+<form [formGroup]="creditform">
 
-<main class="main-top-50">
+    <section class="container-fluid" *ngIf="creditOptions">
 
-    <form [formGroup]="creditform">
+        <div class="container">
 
-        <section class="container-fluid" *ngIf="creditOptions">
+            <div class="row px-4 px-md-0">
 
-            <div class="container">
-
-                <div class="row px-4 px-md-0">
-
-                    <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text">
-                        <span>
+                <div class="col-12 col-lg-12 text-right tittle-9 color-1 recalculate-text">
+                    <span>
                         <i class="fas fa-redo-alt"></i>
                     </span><span class="text-uppercase ml-3">volver a
                         calcular</span>
-                    </div>
-
-                    <div class="col-12 col-lg-12 text-left mt-4">
-                        <p class="text-uppercase tittle-7">Instituciones Financieras en donde puedes aplicar</p>
-                        <p class="text-light-16">Puedes aplicar a todas las opciones o a las que tú seleciones</p>
-                    </div>
-
                 </div>
 
-                <div class="row my-4 justify-content-center">
-                    <div class="col-10 col-lg-6">
-                        <div class="btn-group special btn-group-sm rounded" btnRadioGroup formControlName="filter">
-                            <label btnRadio="0" (click)="todos()" class="btn tittle-7 bg-1" tabindex="0" role="button">TODOS</label>
-                            <label btnRadio="1" (click)="bancos()" class="btn tittle-7 bg-1" tabindex="0" role="button">BANCOS</label>
-                            <label btnRadio="2" (click)="cooperativas()" class="btn tittle-7 bg-1" tabindex="0" role="button">COOPERATIVAS</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- can_access_credit OPTIONS -->
-                <div class="row mt-4 px-4 px-md-0" *ngIf="can_access_credit?.length > 0">
-                    <div class="col-12">
-                        <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE PUEDES OBTENER TU CRÉDITO</h2>
-                    </div>
+                <div class="col-12 col-lg-12 text-left mt-4">
+                    <p class="text-uppercase tittle-7">Instituciones Financieras en donde puedes aplicar</p>
+                    <p class="text-light-16">Puedes aplicar a todas las opciones o a las que tú seleciones</p>
                 </div>
 
             </div>
 
-            <div style="margin: 0 7.6%;" class="result-container mt-3 kudos-wrap" formArrayName="can_access_credit_userSelected" *ngFor="let credit of can_access_credit_userSelected.controls; let i=index">
-                <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i" id="{{can_access_credit[i].id}}">
-                <label for="{{can_access_credit[i].id}}">
-                    <div class="row m-0 p-0">
-                        <div class="col-12 col-lg-10">
-                            <div class="row align-items-center mt-4">
-                                <div class="col-lg-3">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p class="selected">✓ Seleccionado</p>
-                                            <p class="no-selected">Seleccionar</p>
-                                        </div>
-                                    </div>
-                                    <div class="row text-center justify-content-center">
-                                        <div class="col-6 col-lg-12">
-                                            <img class="img-fluid" [src]="can_access_credit[i].url_photo" alt="Image">
-                                            <!-- <img src="/assets/img/banco-pichincha.png" class="img-fluid" alt=""> -->
-                                        </div>
+            <div class="row my-4 justify-content-center">
+                <div class="col-10 col-lg-6">
+                    <div class="btn-group special btn-group-sm rounded" btnRadioGroup formControlName="filter">
+                        <label btnRadio="0" (click)="todos()" class="btn tittle-7 bg-1" tabindex="0" role="button">TODOS</label>
+                        <label btnRadio="1" (click)="bancos()" class="btn tittle-7 bg-1" tabindex="0" role="button">BANCOS</label>
+                        <label btnRadio="2" (click)="cooperativas()" class="btn tittle-7 bg-1" tabindex="0" role="button">COOPERATIVAS</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- can_access_credit OPTIONS -->
+            <div class="row mt-4 px-4 px-md-0" *ngIf="can_access_credit?.length > 0">
+                <div class="col-12">
+                    <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE PUEDES OBTENER TU CRÉDITO</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin: 0 7.6%;" class="result-container mt-3 kudos-wrap" formArrayName="can_access_credit_userSelected" *ngFor="let credit of can_access_credit_userSelected.controls; let i=index">
+            <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i" id="{{can_access_credit[i].id}}">
+            <label for="{{can_access_credit[i].id}}">
+                <div class="row m-0 p-0">
+                    <div class="col-12 col-lg-10">
+                        <div class="row align-items-center mt-4">
+                            <div class="col-lg-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="selected">✓ Seleccionado</p>
+                                        <p class="no-selected">Seleccionar</p>
                                     </div>
                                 </div>
-                                <div class="col-lg-9 py-3">
-                                    <div class="row text-center justify-content-center">
-                                        <div class="col-6 col-md-4">
-                                            <p class="text-uppercase tittle-10 d-none d-md-block">Monto a solicitar</p>
-                                            <p class="text-uppercase tittle-10 d-block d-md-none ">
-                                                Monto</p>
-                                            <p class="tittle-3 d-none d-md-block">
-                                                ${{can_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
-                                            <p class="tittle-5 d-block d-md-none">
-                                                ${{can_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
-                                            <p class="text-uppercase tittle-11">Dólares americanos</p>
-
-                                        </div>
-                                        <div class="col-6 col-md-4">
-                                            <p class="text-uppercase tittle-10">Entrada</p>
-                                            <p class="tittle-3 d-none d-md-block">
-                                                ${{can_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}</p>
-                                            <p class="tittle-5 d-block d-md-none">
-                                                ${{can_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}</p>
-                                            <p class="text-uppercase tittle-11">valor opcional</p>
-                                        </div>
-                                        <div class="col-6 col-md-4 d-none d-md-block">
-                                            <p class="text-uppercase tittle-10">tiempo plazo</p>
-                                            <p class="tittle-3">{{credit_information.term}}</p>
-                                            <p class="text-uppercase tittle-11">meses</p>
-                                        </div>
+                                <div class="row text-center justify-content-center">
+                                    <div class="col-6 col-lg-12">
+                                        <img class="img-fluid" [src]="can_access_credit[i].url_photo" alt="Image">
+                                        <!-- <img src="/assets/img/banco-pichincha.png" class="img-fluid" alt=""> -->
                                     </div>
-                                    <hr>
-                                    <p class="color-1 tittle-18 mb-3">Condiciones de crédito</p>
-                                    <div class="row text-center">
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">tasa anual</p>
-                                            <p class="tittle-5 color-3">
-                                                {{can_access_credit[i].loan_rate | number : '1.2-2' }}%
-                                            </p>
-                                        </div>
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">financiamiento</p>
-                                            <p class="tittle-5 color-3">
-                                                {{can_access_credit[i].financing | number }}%
-                                            </p>
-                                        </div>
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">monto de crédito</p>
-                                            <p class="tittle-5 color-3">
-                                                ${{can_access_credit[i].loan_amount | number : '1.2-2':'fr' }}
-                                            </p>
-                                        </div>
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">credito bancario</p>
-                                            <p class="tittle-5 color-3">
-                                                ${{can_access_credit[i].bank_borrow | number : '1.2-2':'fr' }}
-                                            </p>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 py-3">
+                                <div class="row text-center justify-content-center">
+                                    <div class="col-6 col-md-4">
+                                        <p class="text-uppercase tittle-10 d-none d-md-block">Monto a solicitar</p>
+                                        <p class="text-uppercase tittle-10 d-block d-md-none ">
+                                            Monto</p>
+                                        <p class="tittle-3 d-none d-md-block">
+                                            ${{can_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                        <p class="tittle-5 d-block d-md-none">
+                                            ${{can_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                        <p class="text-uppercase tittle-11">Dólares americanos</p>
+
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <p class="text-uppercase tittle-10">Entrada</p>
+                                        <p class="tittle-3 d-none d-md-block">
+                                            ${{can_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}</p>
+                                        <p class="tittle-5 d-block d-md-none">
+                                            ${{can_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}</p>
+                                        <p class="text-uppercase tittle-11">valor opcional</p>
+                                    </div>
+                                    <div class="col-6 col-md-4 d-none d-md-block">
+                                        <p class="text-uppercase tittle-10">tiempo plazo</p>
+                                        <p class="tittle-3">{{credit_information.term}}</p>
+                                        <p class="text-uppercase tittle-11">meses</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <p class="color-1 tittle-18 mb-3">Condiciones de crédito</p>
+                                <div class="row text-center">
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">tasa anual</p>
+                                        <p class="tittle-5 color-3">
+                                            {{can_access_credit[i].loan_rate | number : '1.2-2' }}%
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">financiamiento</p>
+                                        <p class="tittle-5 color-3">
+                                            {{can_access_credit[i].financing | number }}%
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">monto de crédito</p>
+                                        <p class="tittle-5 color-3">
+                                            ${{can_access_credit[i].loan_amount | number : '1.2-2':'fr' }}
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">credito bancario</p>
+                                        <p class="tittle-5 color-3">
+                                            ${{can_access_credit[i].bank_borrow | number : '1.2-2':'fr' }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
-                            <p class="tittle-3-spacing mt-3 mt-lg-5 text-uppercase">cuota estimada
-                            </p>
-                            <h2 class="tittle-2 mt-4">
-                                ${{can_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
-                            </h2>
-                            <p class="tittle-11 mt-3 mb-3 mb-lg-5 text-uppercase">mensual</p>
-                            <p><a class="tittle-10 color-0" href="#">Más información</a></p>
-                        </div>
                     </div>
-                </label>
-            </div>
-            <!-- END - can_access_credit OPTIONS -->
-
-
-            <div class="container">
-
-                <!-- cannot_access_credit OPTIONS -->
-                <div class="row mt-4 px-4 px-md-0" *ngIf="cannot_access_credit?.length > 0">
-                    <div class="col-12">
-                        <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE NO TIENES LOS NECESARIO PARA OBTENER TU CRÉDITO
+                    <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
+                        <p class="tittle-3-spacing mt-3 mt-lg-5 text-uppercase">cuota estimada
+                        </p>
+                        <h2 class="tittle-2 mt-4">
+                            ${{can_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
                         </h2>
+                        <p class="tittle-11 mt-3 mb-3 mb-lg-5 text-uppercase">mensual</p>
+                        <p><a class="tittle-10 color-0" href="#">Más información</a></p>
                     </div>
                 </div>
+            </label>
+        </div>
+        <!-- END - can_access_credit OPTIONS -->
 
+
+        <div class="container">
+
+            <!-- cannot_access_credit OPTIONS -->
+            <div class="row mt-4 px-4 px-md-0" *ngIf="cannot_access_credit?.length > 0">
+                <div class="col-12">
+                    <h2 class="tittle-8">ENTIDADES FINANCIERAS DONDE NO TIENES LOS NECESARIO PARA OBTENER TU CRÉDITO
+                    </h2>
+                </div>
             </div>
 
-            <div style="margin: 0 7.6%;" class="result-container mt-3 kudos-wrap" formArrayName="cannot_access_credit_userSelected" *ngFor="let credit of cannot_access_credit_userSelected.controls; let i=index">
-                <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i" id="{{cannot_access_credit[i].id}}">
-                <label for="{{cannot_access_credit[i].id}}">
-                    <div class="row m-0 p-0">
-                        <div class="col-12 col-lg-10">
-                            <div class="row align-items-center mt-4">
-                                <div class="col-lg-3">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p class="selected">✓ Seleccionado</p>
-                                            <p class="no-selected">Seleccionar</p>
-                                        </div>
-                                    </div>
-                                    <div class="row text-center justify-content-center">
-                                        <div class="col-6 col-lg-12">
-                                            <img class="img-fluid" [src]="cannot_access_credit[i].url_photo"
-                                                alt="Image">
-                                            <!-- <img src="/assets/img/banco-pichincha.png" class="img-fluid" alt=""> -->
-                                        </div>
+        </div>
+
+        <div style="margin: 0 7.6%;" class="result-container mt-3 kudos-wrap" formArrayName="cannot_access_credit_userSelected" *ngFor="let credit of cannot_access_credit_userSelected.controls; let i=index">
+            <input type="checkbox" (change)="cantSelectedUser()" [formControlName]="i" id="{{cannot_access_credit[i].id}}">
+            <label for="{{cannot_access_credit[i].id}}">
+                <div class="row m-0 p-0">
+                    <div class="col-12 col-lg-10">
+                        <div class="row align-items-center mt-4">
+                            <div class="col-lg-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="selected">✓ Seleccionado</p>
+                                        <p class="no-selected">Seleccionar</p>
                                     </div>
                                 </div>
-                                <div class="col-lg-9 py-3">
-                                    <div class="row text-center justify-content-center">
-                                        <div class="col-6 col-md-4">
-                                            <p class="text-uppercase tittle-10 d-none d-md-block">Monto a solicitar</p>
-                                            <p class="text-uppercase tittle-10 d-block d-md-none ">
-                                                Monto</p>
-                                            <p class="tittle-3 d-none d-md-block">
-                                                ${{cannot_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
-                                            <p class="tittle-5 d-block d-md-none">
-                                                ${{cannot_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
-                                            <p class="text-uppercase tittle-11">Dólares americanos</p>
-                                        </div>
-                                        <div class="col-6 col-md-4">
-                                            <p class="text-uppercase tittle-10">Entrada</p>
-                                            <p class="tittle-3 d-none d-md-block">
-                                                ${{cannot_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}
-                                            </p>
-                                            <p class="tittle-5 d-block d-md-none">
-                                                ${{cannot_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}
-                                            </p>
-                                            <p class="text-uppercase tittle-11">valor opcional</p>
-                                        </div>
-                                        <div class="col-6 col-md-4 d-none d-md-block">
-                                            <p class="text-uppercase tittle-10">tiempo plazo</p>
-                                            <p class="tittle-3">{{credit_information.term}}</p>
-                                            <p class="text-uppercase tittle-11">meses</p>
-                                        </div>
+                                <div class="row text-center justify-content-center">
+                                    <div class="col-6 col-lg-12">
+                                        <img class="img-fluid" [src]="cannot_access_credit[i].url_photo" alt="Image">
+                                        <!-- <img src="/assets/img/banco-pichincha.png" class="img-fluid" alt=""> -->
                                     </div>
-                                    <hr>
-                                    <p class="color-1 tittle-18 mb-3">Condiciones de crédito</p>
-                                    <div class="row text-center">
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">tasa anual</p>
-                                            <p class="tittle-5 color-3">
-                                                {{cannot_access_credit[i].loan_rate | number : '1.2-2' }}%
-                                            </p>
-                                        </div>
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">financiamiento</p>
-                                            <p class="tittle-5 color-3">
-                                                {{cannot_access_credit[i].financing | number }}%
-                                            </p>
-                                        </div>
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">monto de crédito</p>
-                                            <p class="tittle-5 color-3">
-                                                ${{cannot_access_credit[i].loan_amount | number : '1.2-2':'fr' }}
-                                            </p>
-                                        </div>
-                                        <div class="col-6 col-md-3">
-                                            <p class="text-uppercase tittle-11">credito bancario</p>
-                                            <p class="tittle-5 color-3">
-                                                ${{cannot_access_credit[i].bank_borrow | number : '1.2-2':'fr' }}
-                                            </p>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 py-3">
+                                <div class="row text-center justify-content-center">
+                                    <div class="col-6 col-md-4">
+                                        <p class="text-uppercase tittle-10 d-none d-md-block">Monto a solicitar</p>
+                                        <p class="text-uppercase tittle-10 d-block d-md-none ">
+                                            Monto</p>
+                                        <p class="tittle-3 d-none d-md-block">
+                                            ${{cannot_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                        <p class="tittle-5 d-block d-md-none">
+                                            ${{cannot_access_credit[i].borrowed_amount | number:'1.2-2':'fr' }}</p>
+                                        <p class="text-uppercase tittle-11">Dólares americanos</p>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <p class="text-uppercase tittle-10">Entrada</p>
+                                        <p class="tittle-3 d-none d-md-block">
+                                            ${{cannot_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}
+                                        </p>
+                                        <p class="tittle-5 d-block d-md-none">
+                                            ${{cannot_access_credit[i].user_initial_amount | number:'1.2-2':'fr' }}
+                                        </p>
+                                        <p class="text-uppercase tittle-11">valor opcional</p>
+                                    </div>
+                                    <div class="col-6 col-md-4 d-none d-md-block">
+                                        <p class="text-uppercase tittle-10">tiempo plazo</p>
+                                        <p class="tittle-3">{{credit_information.term}}</p>
+                                        <p class="text-uppercase tittle-11">meses</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <p class="color-1 tittle-18 mb-3">Condiciones de crédito</p>
+                                <div class="row text-center">
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">tasa anual</p>
+                                        <p class="tittle-5 color-3">
+                                            {{cannot_access_credit[i].loan_rate | number : '1.2-2' }}%
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">financiamiento</p>
+                                        <p class="tittle-5 color-3">
+                                            {{cannot_access_credit[i].financing | number }}%
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">monto de crédito</p>
+                                        <p class="tittle-5 color-3">
+                                            ${{cannot_access_credit[i].loan_amount | number : '1.2-2':'fr' }}
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <p class="text-uppercase tittle-11">credito bancario</p>
+                                        <p class="tittle-5 color-3">
+                                            ${{cannot_access_credit[i].bank_borrow | number : '1.2-2':'fr' }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
-                            <p class="tittle-3-spacing mt-3 mt-lg-5 text-uppercase">cuota estimada
-                            </p>
-                            <h2 class="tittle-2 mt-4">
-                                ${{cannot_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
-                            </h2>
-                            <p class="tittle-11 mt-3 mb-3 mb-lg-5 text-uppercase">mensual</p>
-                            <p><a class="tittle-10 color-0" href="#">Más información</a></p>
-                        </div>
                     </div>
-                </label>
-            </div>
-            <!-- END - can_access_credit OPTIONS -->
-
-
-            <div class="container">
-
-                <!-- APLICATION BAR -->
-                <div class="row mt-2 text-white aplication-bar bg-2 align-items-center justify-content-center justify-content-md-end">
-
-                    <div *ngIf="cantSelectedCreditOptions > 0" class="col-5 col-lg-3 text-center">
-                        <span class="tittle-10">{{cantSelectedCreditOptions}} seleccionados</span>
+                    <div class="col-12 col-lg-2 mt-2 mt-lg-0 text-white text-center bg-2">
+                        <p class="tittle-3-spacing mt-3 mt-lg-5 text-uppercase">cuota estimada
+                        </p>
+                        <h2 class="tittle-2 mt-4">
+                            ${{cannot_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
+                        </h2>
+                        <p class="tittle-11 mt-3 mb-3 mb-lg-5 text-uppercase">mensual</p>
+                        <p><a class="tittle-10 color-0" href="#">Más información</a></p>
                     </div>
+                </div>
+            </label>
+        </div>
+        <!-- END - can_access_credit OPTIONS -->
 
-                    <div *ngIf="cantSelectedCreditOptions == 0" class="col-5 col-lg-3 text-center">
-                        <span class="tittle-10">Seleccione al menos una opción</span>
-                    </div>
 
-                    <div class="col-6 col-lg-2 tittle-6 text-uppercase text-right">
-                        <summary class="pr-5">aplicar &gt;</summary>
-                        <!-- <summary class="pr-3" (click)="onSubmitCreditform(target)">&gt;</summary> -->
-                    </div>
+        <div class="container">
 
-                    <!-- <div class="col-2 d-block d-md-none tittle-6 text-right">
+            <!-- APLICATION BAR -->
+            <div class="row mt-2 text-white aplication-bar bg-2 align-items-center justify-content-center justify-content-md-end">
+
+                <div *ngIf="cantSelectedCreditOptions > 0" class="col-5 col-lg-3 text-center">
+                    <span class="tittle-10">{{cantSelectedCreditOptions}} seleccionados</span>
+                </div>
+
+                <div *ngIf="cantSelectedCreditOptions == 0" class="col-5 col-lg-3 text-center">
+                    <span class="tittle-10">Seleccione al menos una opción</span>
+                </div>
+
+                <div class="col-6 col-lg-2 tittle-6 text-uppercase text-right">
+                    <summary class="pr-5" (click)="onSubmitCreditform()">aplicar &gt;</summary>
+                    <!-- <summary class="pr-3" (click)="onSubmitCreditform(target)">&gt;</summary> -->
+                </div>
+
+                <!-- <div class="col-2 d-block d-md-none tittle-6 text-right">
                         <summary>&gt;</summary>
                     </div> -->
 
-                </div>
-                <!-- END - APLICATION BAR -->
-
             </div>
+            <!-- END - APLICATION BAR -->
 
-        </section>
+        </div>
 
-    </form>
+    </section>
 
-</main>
+</form>

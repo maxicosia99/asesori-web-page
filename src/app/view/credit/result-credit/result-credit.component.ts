@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/client/comunication.service';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-result-credit',
@@ -26,6 +27,7 @@ export class ResultCreditComponent implements OnInit {
     private dataService: DataService,
     private httpService: HttpClientService,
     private formbuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   /**
@@ -159,6 +161,18 @@ export class ResultCreditComponent implements OnInit {
   */
   cooperativas() {
     console.log(`cooperativas`);
+  }
+
+  /**
+   * Validate results credit form
+   * @return {void} Nothing
+  */
+  onSubmitCreditform() {
+    if (this.cantSelectedCreditOptions > 0) {
+      this.router.navigate(['credit/results/identification']);
+    } else {
+      alert(`seleccione al menos una opción de crédito`);
+    }
   }
 
 }

@@ -1,0 +1,147 @@
+<section class="container">
+    <div class="row">
+        <div class="d-none d-lg-block col-3">
+            <div class="row">
+                <div class="col bg-4 text-center">
+                    <img class="img-fluid mt-4" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
+
+                    <ul class="timeline text-left text-uppercase tittle-11 color-6">
+                        <li>
+                            <summary class="color-1">Identificación</summary>
+                            <p class="mt-4 color-1">datos personales</p>
+                            <p>domicilio actual</p>
+                            <p>contacto</p>
+                        </li>
+                        <li>
+                            <summary>Información vehícular</summary>
+                            <p class="mt-4">el vehículo</p>
+                        </li>
+                        <li>
+                            <summary>Mi seguro</summary>
+                            <p class="mt-4">solicitud</p>
+                        </li>
+                        <li>
+                            <summary>Solicitud lista</summary>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-3 mx-1">
+                <div class="col-12">
+                    <p class="tittle-10">Tienes la seguridad y confianza</p>
+                    <p class="text-light-14">Para nosotros es primordial brindarte toda la seguridad posible y confianza que necesitas durante todo el proceso. Estamos avalados por</p>
+                    <owl-carousel-o [options]="customOptions">
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-austro-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-biess-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-bolivariano-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-dinnersClub-188x100.png">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="bg-0 mx-1 rounded">
+                                <img src="/assets/img/financial-entities/banco-guayaquil-188x100.png">
+                            </div>
+                        </ng-template>
+                    </owl-carousel-o>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-9">
+            <div class="row mx-2 mx-md-0 justify-content-center py-5">
+
+                <div class="col-12 col-lg-8">
+
+                    <h2 class="tittle-1 mb-2">Identificación</h2>
+                    <p class="text-light-14">Con Asesori puedes acceder a créditos en varios Bancos, Mutualistas o Cooperativas de forma más fácil y segura, por lo que necesitamos identicarte. </p>
+
+                    <form [formGroup]="personalDataForm">
+
+                        <div class="row my-4">
+                            <div class="col-12 col-md-6 my-md-0 my-4">
+                                <div class="position-relative">
+                                    <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
+                                    <span class="floating-label text-uppercase">numero de identidad*</span>
+                                    <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
+                                        <span>Ingrese su cédula!</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <ng-select class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <input type="text" formControlName="names" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('names')}">
+                                    <span class="floating-label text-uppercase">nombres*</span>
+                                    <div *ngIf="isFieldValidPersonalData('names')" class="invalid-feedback">
+                                        <span>Ingrese sus nombres!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-0">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <input type="text" formControlName="last_names" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('last_names')}">
+                                    <span class="floating-label text-uppercase">apellidos*</span>
+                                    <div *ngIf="isFieldValidPersonalData('last_names')" class="invalid-feedback">
+                                        <span>Ingrese sus apellidos!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-0 my-md-4">
+                            <div class="col-12 col-md-6 my-md-0 my-4">
+                                <ng-select class="custom" [items]="gender" formControlName="gender" placeholder="genero" [searchable]="false" bindLabel="gender" [clearable]="false">
+                                </ng-select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="position-relative">
+                                    <input type="number" class="form-control" formControlName="age" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('age')}">
+                                    <span class="floating-label text-uppercase">edad*</span>
+                                    <div *ngIf="isFieldValidPersonalData('age')" class="invalid-feedback">
+                                        <span>Ingrese su edad!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="position-relative">
+                                    <input type="date">
+                                    <span class="floating-label text-uppercase">fecha de nacimiento</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-4 justify-content-center">
+                            <div class="col-12 col-md-4">
+                                <button type="submit" [disabled]="!personalDataForm.valid" class="btn button btn-block" (click)="onSubmitPersonalDataForm()">CONTINUAR</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
