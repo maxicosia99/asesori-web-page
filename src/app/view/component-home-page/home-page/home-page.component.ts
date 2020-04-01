@@ -8,7 +8,6 @@ import { UserInfo } from '../../../models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { InsuranceInformation } from 'src/app/models/insurance-information';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/services/client/comunication.service';
 
 
 /** Interface representing a slider model */
@@ -45,14 +44,12 @@ export class HomePageComponent implements OnInit {
     * @param {FormBuilder} formbuilder - Service for the use of forms
     * @param {AuthenticationService} authenticationService - Authentication service for user data
     * @param {Router} router - Routing service
-    * @param {DataService} dataService - Service to pass information between components
   */
   constructor(
     private httpService: HttpClientService,
     private formbuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private router: Router,
-    private dataService: DataService
+    private router: Router
   ) { }
 
   /**---------------------------------------------VARIABLES FOR CREDITS AND INSURANCE--------------------------------------------------- */
@@ -205,10 +202,22 @@ export class HomePageComponent implements OnInit {
   };
 
   /**
-   * Variable for the type of entity: bank, cooperative or both
-   * @type {number}
+   * Slider for monthly income value to credit
+   * @type {SliderModel}
   */
-  public entityType: number = 0;
+ vehicle_year: SliderModel = {
+  value: 0,
+  options: {
+    floor: 1950,
+    ceil: 2020,
+    disabled: false,
+    enforceStep: false,
+    hideLimitLabels: true,
+    translate: (value: number): string => {
+      return '' + value;
+    }
+  }
+};
 
   /**
    * Variable for the type of credit
@@ -221,12 +230,6 @@ export class HomePageComponent implements OnInit {
    * @type {string}
   */
   public destinedTo: string;
-
-  /**
-   * Variable to store the names of the selected financial entities
-   * @type {string}
-  */
-  public credits_entities: string = ``;
 
   /**
    * Variable that stores the types of credits
@@ -243,8 +246,6 @@ export class HomePageComponent implements OnInit {
     { id: 9, name: 'Urgencias', description: 'Crédito por emergencias' },
   ];
 
- 
-
   /**
    * Variable to store message error
    * @type {string}
@@ -258,12 +259,6 @@ export class HomePageComponent implements OnInit {
    * @type {number}
   */
   public id_insurance;
-
-  /**
-   * Variable to store the names of the selected insurance entities
-   * @type {string}
-  */
-  public insurance_entities: string = ``;
 
   /**
    * Variable that stores the types of insurance
@@ -343,36 +338,37 @@ export class HomePageComponent implements OnInit {
    * Go forms page
    * @return {void} Nothing
   */
-  onSubmitEmailSection(){
-    
-    if (this.serviceform.get('service_type_userSelected').value === 'creditos'){
+  onSubmitEmailSection() {
+
+    if (this.serviceform.get('service_type_userSelected').value === 'creditos') {
       this.router.navigate(['credit']);
 
-      let credit: any = {
-        amountRequest:this.amountRequest.value,
-        monthlyIncome:this.monthlyIncome.value,
+      let credit_information: any = {
+        amountRequest: this.amountRequest.value,
+        monthlyIncome: this.monthlyIncome.value,
         entryAmount: this.entryAmount.value,
         term: this.term.value,
         region_code: this.region_code,
-        entityType: this.entityType,
-        id_credit: this.id_credit 
+        entityType: 0,
+        id_credit: this.id_credit,
+        destinedTo: this.destinedTo
       }
-
-      this.dataService.changeInfomation(credit)
+      /** Store credit information in localStorage*/
+      localStorage.setItem('credit_information', JSON.stringify(credit_information));
     }
 
-    if (this.serviceform.get('service_type_userSelected').value === 'seguros'){
+    if (this.serviceform.get('service_type_userSelected').value === 'seguros') {
       this.router.navigate(['insurance']);
 
-      let insurance: any = {
-        vehicleBrand:'marca',
-        vehicleModel:'modelo',
-        vehicleYear: 'year',
-        vehicleDescription: 'vehicleDescription',
-        id_insurance: this.id_insurance 
+      let insurance_information: any = {
+        vehicleBrand: this.vehicleform.value.vehicleBrand.brand_name,
+        vehicleModel: this.vehicleform.value.vehicleModel.model_name,
+        vehicleYear: this.vehicleform.value.vehicleYear.year,
+        vehicleDescription: this.vehicleform.value.vehicleDescription.description,
+        carprice_id: this.vehicleform.value.vehicleDescription.price_id
       }
-
-      this.dataService.changeInfomation(insurance)
+      /** Store credit information in localStorage*/
+      localStorage.setItem('insurance_information', JSON.stringify(insurance_information));
     }
   }
 
@@ -535,7 +531,6 @@ export class HomePageComponent implements OnInit {
     this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
     this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
     this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
-    this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
 
     /*  Get all car brands. */
     this.httpService.getAllCarBrands().subscribe(res => {
@@ -555,43 +550,6 @@ export class HomePageComponent implements OnInit {
     element.scrollIntoView({ behavior: 'smooth' });
   }
 
-
-
-
-  /**-----------------------------------------------METHODS AND FUNCTIONS FOR CREDITS--------------------------------------------------- */
-
-  /**
-   * Validate economic form and generates a summary
-   * @return {void} Nothing
-  */
-  onSubmitCreditform(el: HTMLElement) {
-    //if (this.cantSelectedCreditOptions > 0) {
-
-      this.credits_entities = ``;
-
-      // const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
-      //   .map((v, i) => v ? this.can_access_credit[i].id : null)
-      //   .filter(v => v !== null);
-
-      // const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
-      //   .map((v, i) => v ? this.cannot_access_credit[i].id : null)
-      //   .filter(v => v !== null);
-
-      // for (let entry of selectedCreditsIds1) {
-      //   let aux = this.can_access_credit.find(x => x.id == entry);
-      //   this.credits_entities += aux.name_financial_entity + ', ';
-      // }
-
-      // for (let entry of selectedCreditsIds2) {
-      //   let aux = this.cannot_access_credit.find(x => x.id == entry);
-      //   this.credits_entities += aux.name_financial_entity + ', ';
-      // }
-
-    // } else {
-    //   alert(`seleccione al menos una opción de crédito`);
-    // }
-  }
-
   /**
    * Calculate credit options
    * @param {HTMLElement} element - HTML identifier
@@ -601,102 +559,8 @@ export class HomePageComponent implements OnInit {
 
     element.scrollIntoView({ behavior: 'smooth' });
     this.emailSection = true;
+
   }
-
-  /**
-   * Retrieve all the information for the credit application
-   * @param {HTMLElement} el - HTML identifier
-   * @return {void} Nothing
-  */
-  onSubmitRequestSummaryCredit(el: HTMLElement) {
-
-    el.scrollIntoView();
-
-    let creditInformation: CreditInformation = {} as CreditInformation;
-
-    // creditInformation.user_id = this.user_id;
-    // creditInformation.name = this.personalDataForm.value.names;
-    // creditInformation.last_name = this.personalDataForm.value.last_names;
-    // creditInformation.cedula = this.personalDataForm.value.dni;
-
-    // creditInformation.city = this.addressForm.value.city.name;
-    // creditInformation.region_name = this.addressForm.value.province.name;
-    // creditInformation.country_name = 'ECUADOR';
-    // creditInformation.address = this.addressForm.value.address;
-
-    // creditInformation.email = this.contactForm.value.email;
-    // creditInformation.phone = this.contactForm.value.phone;
-
-    // creditInformation.payments_cards = this.economicForm.value.card_payment;
-    // creditInformation.rental = this.economicForm.value.rent_payment;
-    // creditInformation.payment_loans = this.economicForm.value.loans_payment;
-    // creditInformation.payment_services = this.economicForm.value.services_payment;
-    // creditInformation.housing_type = this.economicForm.value.typeHousing.type;
-    // creditInformation.mortgage_payment = this.economicForm.value.mortgage_payment;
-    // creditInformation.total_possessions = this.economicForm.value.total_properties;
-
-    creditInformation.term = this.term.value;
-    creditInformation.id_credit = this.id_credit;
-
-    creditInformation.amount_required = this.amountRequest.value;
-    creditInformation.monthly_income = this.monthlyIncome.value;
-    creditInformation.initial_amount = this.entryAmount.value;
-    creditInformation.destination = this.destinedTo;
-
-    // const selectedCreditsIds1 = this.creditform.value.can_access_credit_userSelected
-    //   .map((v, i) => v ? this.can_access_credit[i].id : null)
-    //   .filter(v => v !== null);
-
-    // const selectedCreditsIds2 = this.creditform.value.cannot_access_credit_userSelected
-    //   .map((v, i) => v ? this.cannot_access_credit[i].id : null)
-    //   .filter(v => v !== null);
-
-    // let creditos: Creditos[] = [];
-
-    // for (let entry of selectedCreditsIds1) {
-    //   let aux = this.can_access_credit.find(x => x.id == entry);
-    //   let credito: Creditos = {} as Creditos;
-    //   credito.id_financialentity = aux.id_financial_entity;
-    //   credito.monthly_fee = aux.monthly_payment;
-    //   creditos.push(credito);
-    // }
-
-    // for (let entry of selectedCreditsIds2) {
-    //   let aux = this.cannot_access_credit.find(x => x.id == entry);
-    //   let credito: Creditos = {} as Creditos;
-    //   credito.id_financialentity = aux.id_financial_entity;
-    //   credito.monthly_fee = aux.monthly_payment;
-    //   creditos.push(credito);
-    // }
-
-    //creditInformation.creditos = creditos;
-
-    this.httpService.createCreditInformation(creditInformation).subscribe(res => {
-
-      console.log(creditInformation)
-
-      if (res.status == 200) {
-        let application_id = res.data;
-        this.httpService.sendCreditInformation(application_id).subscribe((res) => {
-          console.log(res);
-        }, (error) => {
-          console.log('error al enviar información de solicitud con id ' + application_id + " a la nueva bd");
-          console.log(error);
-        });
-
-        this.messageErrorCredit = null;
-
-      } else {
-        console.log('Ah ocurrido un error! ' + res.message);
-        this.messageErrorCredit = res.message; //enviar correctamente el mensaje
-      }
-    }, error => {
-      console.log('error al crear información');
-      console.log(error);
-    });
-  }
-
-
 
 
 
@@ -714,8 +578,6 @@ export class HomePageComponent implements OnInit {
     vehicleModel: ['', [Validators.required, validateSelect]],
     vehicleYear: ['', [Validators.required, validateSelect]],
     vehicleDescription: ['', [Validators.required, validateSelect]],
-    vehicleColor: ['', [Validators.required, validateSelect]],
-    vehiclePlate: [''],
   });
 
   /**
@@ -796,103 +658,6 @@ export class HomePageComponent implements OnInit {
       //console.log(this.vehicleYear);
     }, error => {
       console.log('error');
-      console.log(error);
-    });
-  }
-
-  /**
-   * Validate insurance form and generates a summary
-   * @return {void} Nothing
-  */
-  onSubmitInsuranceform(el: HTMLElement) {
-
-    //if (this.cantInsurnaceUserSelected > 0) {
-
-      this.insurance_entities = ``;
-
-      el.scrollIntoView();
-      
-      // const selectedInsurancesIds = this.insuranceform.value.can_access_vehicleInsurance_userSelected
-      //   .map((v, i) => v ? this.can_access_vehicleInsurance[i].idaseguradora : null)
-      //   .filter(v => v !== null);
-
-
-      // for (let entry of selectedInsurancesIds) {
-      //   let aux = this.can_access_vehicleInsurance.find(x => x.idaseguradora == entry);
-      //   this.insurance_entities += aux.name + ' - ' + aux.nombre_corto + ', ';
-      // }
-
-    // } else {
-    //   alert(`seleccione al menos una opción de seguro`);
-    // }
-  }
-
-  /**
-   * Retrieve all the information for the insurance application
-   * @param {HTMLElement} el - HTML identifier
-   * @return {void} Nothing
-  */
-  onSubmitRequestSummaryInsurance(el: HTMLElement) {
-
-    el.scrollIntoView();
-    // this.section1 = false;
-    // this.section2 = false;
-    // this.section3 = false;
-    // this.section4 = false;
-    // this.section5 = true;
-
-    let insuranceInformation: InsuranceInformation = {} as InsuranceInformation;
-
-    // insuranceInformation.user_id = this.user_id;
-    // insuranceInformation.name = this.personalDataForm.value.names;
-    // insuranceInformation.last_name = this.personalDataForm.value.last_names;
-    // insuranceInformation.cedula = this.personalDataForm.value.dni;
-
-    // insuranceInformation.city = this.addressForm.value.city.id;
-    // insuranceInformation.address = this.addressForm.value.address;
-
-    // insuranceInformation.email = this.contactForm.value.email;
-    // insuranceInformation.phone = this.contactForm.value.phone;
-
-    insuranceInformation.carprice_id = this.vehicleform.value.vehicleDescription.price_id;
-
-    // const selectedVehicleInsurance = this.insuranceform.value.can_access_vehicleInsurance_userSelected
-    //   .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
-    //   .filter(v => v !== null);
-
-    // let options: Insurance[] = [];
-
-    // for (let entry of selectedVehicleInsurance) {
-    //   let aux = this.can_access_vehicleInsurance.find(x => x.id == entry);
-    //   let insurance: Insurance = {} as Insurance;
-    //   insurance.id_insurancecompany = aux.id_insurance_entity;
-    //   insurance.anual_fee = aux.total_premium;
-    //   options.push(insurance);
-    // }
-
-    //insuranceInformation.options = options;
-
-    this.httpService.createInsuranceInformation(insuranceInformation).subscribe(res => {
-      console.log(insuranceInformation)
-      console.log(res);
-
-      if (res.status == 200) {
-
-        this.httpService.getSendMailInsurance().subscribe(res => {
-          console.log(res);
-        }, error => {
-          console.log('error al enviar correo');
-          console.log(error);
-        });
-
-        this.messageErrorInsurance = null;
-
-      } else {
-        console.log('Ah ocurrido un error! ' + res.message);
-        this.messageErrorInsurance = res.message;
-      }
-    }, error => {
-      console.log('error al crear información');
       console.log(error);
     });
   }

@@ -110,6 +110,18 @@ export class PersonalDataComponent implements OnInit {
   onSubmitPersonalDataForm() {
     this.personalDataFormSubmitted = true;
     if (this.personalDataForm.valid) {
+
+      let personal_data: any = {
+        name:this.personalDataForm.value.names,
+        last_name: this.personalDataForm.value.last_names,
+        cedula: this.personalDataForm.value.dni,
+        // maritalStatus: this.personalDataForm.value.maritalStatus.status,
+        // gender: this.personalDataForm.value.gender.gender,
+        // age: this.personalDataForm.value.age
+      }
+      /** Store personal_data in localStorage*/
+      localStorage.setItem('personal_data', JSON.stringify(personal_data));
+
       this.router.navigate(['insurance/results/identification/location']);
     }
   }

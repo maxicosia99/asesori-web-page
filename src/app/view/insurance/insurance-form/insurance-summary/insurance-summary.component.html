@@ -6,21 +6,21 @@
                     <img class="img-fluid mt-4" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
 
                     <ul class="timeline text-left text-uppercase tittle-11 color-6">
-                        <li>
-                            <summary>Identificación</summary>
-                            <p class="mt-4">datos personales</p>
-                            <p>domicilio actual</p>
-                            <p>contacto</p>
+                        <li class="primero">
+                            <summary class="color-1-opacity">Identificación</summary>
+                            <p class="mt-4 color-1-opacity">datos personales</p>
+                            <p class="color-1-opacity">domicilio actual</p>
+                            <p class="color-1-opacity">contacto</p>
                         </li>
-                        <li>
-                            <summary>Información vehícular</summary>
-                            <p class="mt-4">el vehículo</p>
+                        <li class="segundo">
+                            <summary class="color-1-opacity">Información vehícular</summary>
+                            <p class="mt-4 color-1-opacity">el vehículo</p>
                         </li>
-                        <li>
-                            <summary class="color-1">Mi seguro</summary>
+                        <li class="tercero">
+                            <summary class="color-1 tittle-20">Mi seguro</summary>
                             <p class="mt-4 color-1">solicitud</p>
                         </li>
-                        <li>
+                        <li class="cuarto">
                             <summary>Solicitud lista</summary>
                         </li>
                     </ul>
@@ -81,13 +81,19 @@
                         <div class="col-12">
                             <div class="position-relative">
                                 <p class="floating-label-static text-uppercase">instituciones seleccionadas*</p>
-                                <!-- <p class="tittle-10">{{credits_entities}}</p> -->
+                                <p class="tittle-10">{{insurance_options.insurance_entities}}</p>
                                 <p class="tittle-10">Latina de Seguros</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row my-5 justify-content-between">
+                    <div class="row my-4 justify-content-center">
+                        <div class="col-12 col-md-4">
+                            <button type="button" class="btn button btn-block" (click)="onSubmitSummary()">FINALIZAR</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row my-5 justify-content-between">
                         <div class="col-4 d-none d-sm-block">
                             <button type="button" class="btn button btn-block">REGRESAR</button>
                         </div>
@@ -95,12 +101,12 @@
                             <button type="button" class="btn button btn-block">&lt;</button>
                         </div>
                         <div class="col-4 d-none d-sm-block">
-                            <button type="submit" class="btn button btn-block" (click)="onSubmitSummary()">FINALIZAR</button>
+                            <button type="button" class="btn button btn-block" (click)="onSubmitSummary()">FINALIZAR</button>
                         </div>
                         <div class="col-4 d-block d-sm-none">
-                            <button type="submit" class="btn button btn-block" (click)="onSubmitSummary()">✓</button>
+                            <button type="button" class="btn button btn-block" (click)="onSubmitSummary()">✓</button>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

@@ -1,18 +1,39 @@
 <section class="container">
     <div class="row">
         <div class="col-12">
-            <div class="row mx-2 mx-md-0 justify-content-center py-5">
+            <div class="row mx-2 mx-md-0 justify-content-center">
                 <div class="col-12 col-lg-8 align-self-center">
 
-                    <h2 class="tittle-1 my-5 text-center color-1">¡Solicitud lista!</h2>
+                    <h2 class="tittle-1 mt-4 mb-5 text-center color-1">¡Solicitud lista!</h2>
                     <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
                     </p>
 
                     <p class="mt-5 mb-3 text-center tittle-7">Inicia sesión o crea una cuenta para ver el seguimiento de tu solicitud</p>
 
-                    <div class="row my-5 justify-content-center">
-                        <div class="col-12 col-md-5">
-                            <button type="submit" class="btn button btn-block">CREAR CUENTA</button>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-7">
+                            <div class="position-relative mt-4">
+                                <input type="text" class="form-control" required>
+                                <span class="floating-label text-uppercase">correo electrónico*</span>
+                                <!-- <div *ngIf="form.usernameOrEmail.touched && form.usernameOrEmail.errors" class="invalid-feedback">
+                                    <div *ngIf="form.usernameOrEmail.errors.required">Porfavor ingrese su usuario o correo!
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="position-relative mt-4">
+                                <input type="password" class="form-control" required>
+                                <span class="floating-label text-uppercase">Contraseña*</span>
+                                <!-- <div *ngIf="form.password.touched && form.password.errors" class="invalid-feedback">
+                                    <div *ngIf="form.password.errors.required">Porfavor ingrese su contraseña!</div>
+                                    <div *ngIf="form.password.errors.minlength">Al menos 6 caracteres!</div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-12 col-md-4">
+                            <button type="button" class="btn button btn-block">CREAR CUENTA</button>
                         </div>
                     </div>
 

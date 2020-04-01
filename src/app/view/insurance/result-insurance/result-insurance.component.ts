@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/client/comunication.service';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarInsuranceRequest } from 'src/app/models/car-insurance-request';
+import { Insurance } from 'src/app/models/insurance';
 
 @Component({
   selector: 'app-result-insurance',
@@ -13,7 +13,6 @@ import { CarInsuranceRequest } from 'src/app/models/car-insurance-request';
 export class ResultInsuranceComponent implements OnInit {
 
   constructor(
-    private dataService: DataService,
     private httpService: HttpClientService,
     private formbuilder: FormBuilder,
     private router: Router,
@@ -21,13 +20,7 @@ export class ResultInsuranceComponent implements OnInit {
 
   //insurance_information: any;
 
-  insurance_information: any = {
-    vehicleBrand: 'ALFA ROMEO',
-    vehicleModel: '159',
-    vehicleYear: 2010,
-    vehicleDescription: '159 3.2L 4P 6T/M A/A JTS 260HP ',
-    carprice_id: 2
-  }
+  public insurance_information: any;
 
   /**
    * Variable to store insurance results
@@ -48,6 +41,12 @@ export class ResultInsuranceComponent implements OnInit {
   */
   public subsc1: any;
   public subsc2: any = [];
+
+  /**
+   * Variable to store the names of the selected insurance entities
+   * @type {string}
+  */
+  public insurance_entities: string = ``;
 
   /**
    * Variable to store the amount of results chosen by the user
@@ -86,6 +85,8 @@ export class ResultInsuranceComponent implements OnInit {
    * @return {void} Nothing
   */
   ngOnInit() {
+
+    this.insurance_information = JSON.parse(localStorage.getItem('insurance_information'));
 
     window.scrollTo(0, 0);
 
@@ -164,11 +165,55 @@ export class ResultInsuranceComponent implements OnInit {
   }
 
   /**
+   * Get entity names for summary
+   * @return {void} Nothing
+  */
+  getEntityNames() {
+
+    this.insurance_entities = ``;
+
+    const selectedInsurancesIds = this.insuranceform.value.can_access_vehicleInsurance_userSelected
+      .map((v, i) => v ? this.can_access_vehicleInsurance[i].idaseguradora : null)
+      .filter(v => v !== null);
+
+
+    for (let entry of selectedInsurancesIds) {
+      let aux = this.can_access_vehicleInsurance.find(x => x.idaseguradora == entry);
+      this.insurance_entities += aux.name + ' - ' + aux.nombre_corto + ', ';
+    }
+
+  }
+
+  /**
    * Validate results credit form
    * @return {void} Nothing
   */
   onSubmitInsuranceForm() {
     if (this.cantInsurnaceUserSelected > 0) {
+
+      this.getEntityNames();
+
+      const selectedVehicleInsurance = this.insuranceform.value.can_access_vehicleInsurance_userSelected
+        .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
+        .filter(v => v !== null);
+
+      let insurance_selected: Insurance[] = [];
+
+      for (let entry of selectedVehicleInsurance) {
+        let aux = this.can_access_vehicleInsurance.find(x => x.id == entry);
+        let insurance: Insurance = {} as Insurance;
+        insurance.id_insurancecompany = aux.id_insurance_entity;
+        insurance.anual_fee = aux.total_premium;
+        insurance_selected.push(insurance);
+      }
+
+      let insurance_options: any = {
+        insurance_selected: insurance_selected,
+        insurance_entities : this.insurance_entities
+      }
+
+      /** Store credit information in localStorage*/      
+      localStorage.setItem('insurance_options', JSON.stringify(insurance_options));
       this.router.navigate(['insurance/results/identification']);
     } else {
       alert(`seleccione al menos una opción de seguro`);

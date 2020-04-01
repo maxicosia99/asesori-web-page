@@ -104,6 +104,19 @@ export class EconomicDataComponent implements OnInit {
   onSubmiteconomicForm() {
     this.economicFormSubmitted = true;
     if (this.economicForm.valid) {
+
+      let economic_data: any = {
+        payments_cards: this.economicForm.value.card_payment,
+        rental : this.economicForm.value.rent_payment,
+        payment_loans : this.economicForm.value.loans_payment,
+        payment_services : this.economicForm.value.services_payment,
+        housing_type : this.economicForm.value.typeHousing.type,
+        mortgage_payment : this.economicForm.value.mortgage_payment,
+        total_possessions : this.economicForm.value.total_properties
+      }
+      
+      /** Store economic_data in localStorage*/
+      localStorage.setItem('economic_data', JSON.stringify(economic_data));
       this.router.navigate(['credit/results/my-credit']);
     }
   }

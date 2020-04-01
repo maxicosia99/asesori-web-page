@@ -14,7 +14,7 @@
                 <p class="text-light-16">Asesori te facilita las mejores opciones para que puedas acceder rápido y seguro al crédito que necesites.</p>
                 <div class="row mt-5">
                     <div class="col-12 col-lg-6">
-                        <button type="button" class="btn button btn-block">INICIA UNA SOLICITUD</button>
+                        <button type="button" (click)="moveSection(calculator)" class="btn button btn-block">INICIA UNA SOLICITUD</button>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
 
             <!-- SERVICES TAGS -->
 
-            <div class="row kudos-wrap mx-3 px-md-0 justify-content-between">
+            <div class="row kudos-wrap mx-3 mx-md-0 justify-content-between">
 
                 <input type="radio" (change)="onSelectServiceTag($event)" formControlName="service_type_userSelected" value="creditos" id="credito">
                 <label for="credito" class="my-2 my-lg-0 px-4 btn-selection">
@@ -187,7 +187,7 @@
             </div>
 
             <!-- OPTIONS SELECT -->
-            <div class="row mx-1 mx-md-0 my-4">
+            <div class="row px-3 px-md-0 my-4">
 
                 <!-- CREDITS SELECT -->
                 <div *ngIf="active_credits_select" class="col-12">
@@ -246,7 +246,7 @@
             </div>
 
             <!-- VALUES BOX -->
-            <div *ngIf="creditSection" class="row justify-content-between mx-3 px-md-0">
+            <div *ngIf="creditSection" class="row justify-content-between mx-3 mx-md-0">
                 <div class="my-2 my-lg-0  box-values-slider">
                     <div class="custom-slider">
                         <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
@@ -277,12 +277,83 @@
                 </div>
             </div>
 
-            <div *ngIf="creditSection" class="row justify-content-between mt-4 mb-0 mx-1">
+            <div *ngIf="creditSection" class="row justify-content-between mt-4 mb-0 px-3 px-md-0">
                 <div class="col-12">
                     <alert *ngIf="(entryAmount.value > (amountRequest.value * 0.9))" type="danger">
                         La entrada no puede superar el 90% del valor a solicitar!
                     </alert>
                 </div>
+            </div>
+
+            <!-- <div *ngIf="insuranceSection">
+                <div class="row justify-content-between mx-3 mx-md-0">
+                    <div class="my-2 my-lg-0  box-values-slider-insurance">
+                        <p class="header-box-values-slider mb-4 text-uppercase"><b>marca del vehículo*</b></p>
+                        <div class="caja">
+                            <select class="custom-select">
+                            <option selected>MARCA</option>
+                            <option value="1">PEUGEOT</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="my-2 my-lg-0  box-values-slider-insurance">
+                        <div class="custom-slider">
+                            <p class="header-box-values-slider mb-4 text-uppercase"><b>año</b></p>
+                            <ng5-slider [(value)]="vehicle_year.value" [options]="vehicle_year.options"></ng5-slider>
+                        </div>
+                    </div>
+                    <div class="my-2 my-lg-0  box-values-slider-insurance">
+                        <p class="header-box-values-slider mb-4 text-uppercase"><b>modelo del vehículo*</b></p>
+                        <div class="caja">
+                            <select class="custom-select">
+                            <option selected>MODELO</option>
+                            <option value="1">PEUGEOT</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div *ngIf="insuranceSection" class="container">
+
+                <form [formGroup]="vehicleform">
+
+                    <div class="row px-3 px-md-0">
+                        <div class="col-12 col-md-3 my-2 my-md-0">
+                            <ng-select class="custom" [items]="vehicleBrand" formControlName="vehicleBrand" (change)="changeCarBrand($event)" [searchable]="true" bindLabel="brand_name" placeholder="ss" [clearable]="false">
+                            </ng-select>
+                            <div *ngIf="isFieldValidVehicleform('vehicleBrand')" class="invalid-feedback">
+                                <span>Seleccione una marca!</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2 my-2 my-md-0">
+                            <ng-select class="custom" [items]="vehicleYear" formControlName="vehicleYear" [searchable]="true" bindLabel="year" (change)="changeCarYear($event)" [clearable]="false">
+                            </ng-select>
+                            <div *ngIf="isFieldValidVehicleform('vehicleYear')" class="invalid-feedback">
+                                <span>Seleccione un año!</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 my-2 my-md-0">
+                            <ng-select class="custom" [items]="vehicleModel" formControlName="vehicleModel" [searchable]="true" bindLabel="model_name" (change)="changeCarModel($event)" [clearable]="false">
+                            </ng-select>
+                            <div *ngIf="isFieldValidVehicleform('vehicleModel')" class="invalid-feedback">
+                                <span>Seleccione un modelo!</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 my-2 my-md-0">
+                            <ng-select class="custom" [items]="vehicleDescription" formControlName="vehicleDescription" [searchable]="true" bindLabel="description" [clearable]="false">
+                            </ng-select>
+                            <div *ngIf="isFieldValidVehicleform('vehicleDescription')" class="invalid-feedback">
+                                <span>Seleccione la descripción!</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
             </div>
 
             <!-- REDIRECT TO EMAIL SECTION -->
@@ -291,14 +362,14 @@
             <!-- CALCULATE CREDIT BUTTON -->
             <div *ngIf="creditSection" class="row mt-4 justify-content-center mx-0 px-md-0">
                 <div class="col-md-6 col-lg-3">
-                    <button type="submit" class="btn button-calculate btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0 || entryAmount.value > (amountRequest.value * 0.9)" (click)="onSubmitServiceform(email)">CALCULAR</button>
+                    <button type="button" class="btn button-calculate btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0 || entryAmount.value > (amountRequest.value * 0.9)" (click)="onSubmitServiceform(email)">CALCULAR</button>
                 </div>
             </div>
 
             <!-- CALCULATE INSURANCE BUTTON -->
             <div *ngIf="insuranceSection" class="row mt-4 justify-content-center mx-0 px-md-0">
                 <div class="col-md-6 col-lg-3">
-                    <button type="submit" class="btn button-calculate btn-block" (click)="onSubmitServiceform(email)">CALCULAR</button>
+                    <button type="button" class="btn button-calculate btn-block" (click)="onSubmitServiceform(email)">CALCULAR</button>
                 </div>
             </div>
 

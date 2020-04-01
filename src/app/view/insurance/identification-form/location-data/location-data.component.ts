@@ -115,6 +115,14 @@ export class LocationDataComponent implements OnInit {
   onSubmitaddressForm() {
     this.addressFormSubmitted = true;
     if (this.addressForm.valid) {
+      let location_data: any = {
+        city: this.addressForm.value.city.name,
+        region_name: this.addressForm.value.province.name,
+        country_name: 'ECUADOR',
+        address: this.addressForm.value.address
+      }
+      /** Store location_data in localStorage*/
+      localStorage.setItem('location_data', JSON.stringify(location_data));
       this.router.navigate(['insurance/results/identification/contact']);
     }
   }

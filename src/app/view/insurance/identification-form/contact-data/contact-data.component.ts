@@ -85,6 +85,12 @@ export class ContactDataComponent implements OnInit {
   onSubmitContactForm() {
     this.contactFormSubmitted = true;
     if (this.contactForm.valid) {
+      let contact_data: any = {
+        email: this.contactForm.value.email,
+        phone: this.contactForm.value.phone
+      }
+      /** Store contact_data in localStorage*/
+      localStorage.setItem('contact_data', JSON.stringify(contact_data));
       this.router.navigate(['insurance/results/vehicle']);
     }
   }

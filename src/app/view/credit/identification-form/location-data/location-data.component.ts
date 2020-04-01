@@ -115,6 +115,15 @@ export class LocationDataComponent implements OnInit {
   onSubmitaddressForm() {
     this.addressFormSubmitted = true;
     if (this.addressForm.valid) {
+      
+      let location_data: any = {
+        city: this.addressForm.value.city.name,
+        region_name: this.addressForm.value.province.name,
+        country_name: 'ECUADOR',
+        address: this.addressForm.value.address
+      }
+      /** Store location_data in localStorage*/
+      localStorage.setItem('location_data', JSON.stringify(location_data));
       this.router.navigate(['credit/results/identification/contact']);
     }
   }
@@ -123,11 +132,12 @@ export class LocationDataComponent implements OnInit {
 
     window.scrollTo(0, 0)
 
+    this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
+    this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
-      this.provinces = res.data;
-      this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
-      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+      this.provinces = res.data;      
     }, error => {
       console.log('error');
       console.log(error);

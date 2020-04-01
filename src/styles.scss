@@ -255,6 +255,18 @@ body {
     letter-spacing: 0.9px;
 }
 
+.tittle-19 {
+    font-size: 10px;
+    font-family: 'Poppins-Regular';
+    letter-spacing: 2px;
+}
+
+.tittle-20 {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-family: 'Poppins-SemiBold';
+}
+
 
 /* TEXTS */
 
@@ -326,6 +338,11 @@ body {
 
 .color-1 {
     color: #0079ab;
+}
+
+.color-1-opacity {
+    color: #0079ab;
+    opacity: 0.51;
 }
 
 .color-2 {

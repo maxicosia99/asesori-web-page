@@ -22,15 +22,61 @@ ul.timeline>li>p {
     padding-left: 15px;
 }
 
-ul.timeline>li:before {
-    content: ' ';
-    background: white;
+ul.timeline>li.primero:before {
+    content: '✓'; //aqui
+    font-size: 16px;
+    text-align: center;
+    background: #0079ab;
     display: inline-block;
     position: absolute;
     border-radius: 50%;
-    border: 3px solid #0079ab;
-    left: 25px;
-    width: 40px;
-    height: 40px;
+    border: 2px solid #0079ab;
+    color: #fff;
+    left: 28px;
+    padding: 9px 10px;
+    margin: -12px 0;
+}
+
+ul.timeline>li.segundo:before {
+    content: '✓'; //aqui
+    font-size: 15px;
+    text-align: center;
+    background: #0079ab;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid #0079ab;
+    color: #fff;
+    left: 28px;
+    padding: 9px 10px;
+    margin: -15px 0;
+}
+
+ul.timeline>li.tercero:before {
+    content: '3'; //aqui
+    font-size: 15px;
+    text-align: center;
+    background: #0079ab;
+    color: #737373;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid #0079ab;
+    color: #fff;
+    left: 28px;
+    padding: 9px 11px;
+    margin: -15px 0;
+}
+
+ul.timeline>li.cuarto:before {
+    content: url(/assets/img/asesori-logo-negative-small.png);
+    background: #f6f6f6;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid #c6c6c6;
+    left: 27px;
+    padding: 7px 7px;
     margin: -15px 0;
 }
