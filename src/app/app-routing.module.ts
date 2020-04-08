@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: 'services', loadChildren: () => import('./view/module-services/module-services.module').then(m => m.ModuleServicesModule) },
   { path: 'credit', loadChildren: () => import('./view/credit/credit.module').then(m => m.CreditModule) },
   { path: 'insurance', loadChildren: () => import('./view/insurance/insurance.module').then(m => m.InsuranceModule) },
-  //canActivate: [AuthGuard]
+  { path: 'tracking', loadChildren: () => import('./view/tracing/tracing.module').then(m => m.TracingModule), canActivate: [AuthGuard] },
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: '**', component: P404Component }
 ];

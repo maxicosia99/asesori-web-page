@@ -4,18 +4,6 @@ import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
-/**
- * Validate the selection of a select
- * @param {AbstractControl} control - Object to validate with id
- * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
- */
-export function validateSelect(control: AbstractControl) {
-  if (control.value.id === -1) {
-    return { valid: true };
-  }
-  return null;
-}
-
 @Component({
   selector: 'app-economic-data',
   templateUrl: './economic-data.component.html',
@@ -48,7 +36,7 @@ export class EconomicDataComponent implements OnInit {
     rent_payment: [''],
     services_payment: ['', [Validators.required]],
     total_properties: ['', [Validators.required]],
-    typeHousing: ['', [Validators.required, validateSelect]]
+    typeHousing: [null, [Validators.required]]
   });
 
   /**
@@ -123,7 +111,6 @@ export class EconomicDataComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0)
-    this.economicForm.controls['typeHousing'].setValue({ id: -1, type: 'TIPO DE VIVIENDA*' });
   }
 
 }

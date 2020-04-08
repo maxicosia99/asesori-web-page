@@ -48,17 +48,7 @@ export class VehicleDataComponent implements OnInit {
    * Define vehicle form
   */
   vehicleform = this.formbuilder.group({
-    // vehicleBrand: ['', [Validators.required, validateSelect]],
-    // vehicleModel: ['', [Validators.required, validateSelect]],
-    // vehicleYear: ['', [Validators.required, validateSelect]],
-    // vehicleDescription: ['', [Validators.required, validateSelect]],
-    // vehicleColor: ['', [Validators.required, validateSelect]],
-    //vehicleBrand: ['', [Validators.required]],
-    //vehicleModel: ['', [Validators.required]],
-    //vehicleYear: ['', [Validators.required]],
-    //vehicleDescription: ['', [Validators.required]],
-
-    vehicleColor: ['', [Validators.required]],
+    vehicleColor: [null],
     vehiclePlate: [''],
   });
 
@@ -119,7 +109,7 @@ export class VehicleDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
+    //this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
   }
 
   /**

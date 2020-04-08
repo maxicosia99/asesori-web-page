@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Options } from 'ng5-slider';                                                 //options user slider
 import { OwlOptions } from 'ngx-owl-carousel-o';                                      //options carousel images
 import { FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';     //forms
-import { CreditInformation } from 'src/app/models/credit-information';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { UserInfo } from '../../../models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
-import { InsuranceInformation } from 'src/app/models/insurance-information';
 import { Router } from '@angular/router';
 
 
@@ -14,18 +12,6 @@ import { Router } from '@angular/router';
 interface SliderModel {
   value: number;
   options: Options;
-}
-
-/**
- * Validate the selection of a select
- * @param {AbstractControl} control - Object to validate with id
- * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
- */
-export function validateSelect(control: AbstractControl) {
-  if (control.value.id === -1) {
-    return { valid: true };
-  }
-  return null;
 }
 
 @Component({
@@ -94,12 +80,6 @@ export class HomePageComponent implements OnInit {
   }
 
   /**
-   * Modal methods
-   * @type {BsModalRef}
-  */
-  //public modalRef: BsModalRef;
-
-  /**
    * Location variables
    * @type {string}
   */
@@ -126,6 +106,24 @@ export class HomePageComponent implements OnInit {
    * @type {boolean}
   */
   public emailSection: boolean = false;
+
+  /**
+   * Variable to desactvate the calulator section
+   * @type {boolean}
+  */
+  public calculatorSection: boolean = true;
+
+  /**
+    * Variable to store all provinces from Ecuador
+    * @type {any}
+   */
+  public provinces: any;
+
+  /**
+   * Variable to store all cities from a province
+   * @type {any}
+  */
+  public cities: any;
 
   /**---------------------------------------------------VARIABLES FOR CREDITS----------------------------------------------------------- */
 
@@ -196,7 +194,7 @@ export class HomePageComponent implements OnInit {
       enforceStep: false,
       hideLimitLabels: true,
       translate: (value: number): string => {
-        return '' + value;
+        return '$' + value;
       }
     }
   };
@@ -205,19 +203,19 @@ export class HomePageComponent implements OnInit {
    * Slider for monthly income value to credit
    * @type {SliderModel}
   */
- vehicle_year: SliderModel = {
-  value: 0,
-  options: {
-    floor: 1950,
-    ceil: 2020,
-    disabled: false,
-    enforceStep: false,
-    hideLimitLabels: true,
-    translate: (value: number): string => {
-      return '' + value;
+  vehicle_year: SliderModel = {
+    value: 0,
+    options: {
+      floor: 1950,
+      ceil: 2020,
+      disabled: false,
+      enforceStep: false,
+      hideLimitLabels: true,
+      translate: (value: number): string => {
+        return '' + value;
+      }
     }
-  }
-};
+  };
 
   /**
    * Variable for the type of credit
@@ -324,7 +322,30 @@ export class HomePageComponent implements OnInit {
   */
   emailform = this.formbuilder.group({
     email: ['', [Validators.required, Validators.email]],
+    province: [null, [Validators.required]],
+    city: [null, [Validators.required]]
   });
+
+
+  /**
+   * Variable to verify if the address form is correct
+   * @type {boolean}
+  */
+  emailFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
+  isFieldValidemailForm(field: string) {
+    return (
+      this.emailform.get(field).errors && this.emailform.get(field).touched ||
+      this.emailform.get(field).untouched &&
+      this.emailFormSubmitted && this.emailform.get(field).errors
+    );
+  }
+
 
   /**
    * Getter for easy access to email form fields
@@ -339,6 +360,16 @@ export class HomePageComponent implements OnInit {
    * @return {void} Nothing
   */
   onSubmitEmailSection() {
+
+    let contact_data: any = {
+      email: this.emailform.value.email
+    }
+    /** Store contact_data in localStorage*/
+    localStorage.setItem('contact_data', JSON.stringify(contact_data));
+
+    /** Enviar el valor correcto */
+    console.log(this.emailform.value.province);
+    console.log(this.emailform.value.city);
 
     if (this.serviceform.get('service_type_userSelected').value === 'creditos') {
       this.router.navigate(['credit']);
@@ -491,6 +522,14 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
+    /*  Get all provinces. */
+    this.httpService.getProvinces().subscribe(res => {
+      this.provinces = res.data;
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
+
     /*  Start - Search by location. */
     this.httpService.getCurrentLocation().subscribe(res => {
       this.httpService.verifyProvinceExistence(res.region_code).subscribe(resp => {
@@ -498,6 +537,15 @@ export class HomePageComponent implements OnInit {
         /* In case the location is detected */
         if (resp.status === 200) {
           this.region_code = res.region_code;
+          this.emailform.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
+          /* the cities of the detected province are loaded */
+          this.httpService.getCities(resp.data.id).subscribe(res => {
+            this.cities = []
+            this.cities = res.data;
+          }, error => {
+            console.log('error');
+            console.log(error);
+          });
         }
 
         /* In case the location is not detected */
@@ -527,11 +575,6 @@ export class HomePageComponent implements OnInit {
     });
 
     /* TODO DE SEGUROS */
-    this.vehicleform.controls['vehicleBrand'].setValue({ id: -1, brand_name: 'MARCA*' });
-    this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-    this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
-    this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
-
     /*  Get all car brands. */
     this.httpService.getAllCarBrands().subscribe(res => {
       this.vehicleBrand = res.data;
@@ -557,9 +600,26 @@ export class HomePageComponent implements OnInit {
   */
   onSubmitServiceform(element: HTMLElement) {
 
-    element.scrollIntoView({ behavior: 'smooth' });
+    element.scrollIntoView();
     this.emailSection = true;
+    this.calculatorSection = false;
 
+  }
+
+  /**
+   * Recover the cities of a province
+   * @param {Event} event.id - Province identifier
+   * @return {void} Nothing
+  */
+  changeProvince(event) {
+    this.httpService.getCities(event.id).subscribe(res => {
+      this.emailForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+      this.cities = []
+      this.cities = res.data;
+    }, error => {
+      console.log('error');
+      console.log(error);
+    });
   }
 
 
@@ -574,10 +634,10 @@ export class HomePageComponent implements OnInit {
    * Define vehicle form
   */
   vehicleform = this.formbuilder.group({
-    vehicleBrand: ['', [Validators.required, validateSelect]],
-    vehicleModel: ['', [Validators.required, validateSelect]],
-    vehicleYear: ['', [Validators.required, validateSelect]],
-    vehicleDescription: ['', [Validators.required, validateSelect]],
+    vehicleBrand: [null, [Validators.required]],
+    vehicleModel: [null, [Validators.required]],
+    vehicleYear: [null, [Validators.required]],
+    vehicleDescription: [null, [Validators.required]],
   });
 
   /**
@@ -607,9 +667,9 @@ export class HomePageComponent implements OnInit {
   changeCarBrand(event) {
     let id_brand: number = event.id;
     this.httpService.getYearByBrand(id_brand).subscribe(res => {
-      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-      this.vehicleform.controls['vehicleYear'].setValue({ id: -1, year: 'AÑO*' });
-      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleform.controls['vehicleModel'].setValue(null);
+      this.vehicleform.controls['vehicleYear'].setValue(null);
+      this.vehicleform.controls['vehicleDescription'].setValue(null);
       this.vehicleModel = [];
       this.vehicleYear = [];
       this.vehicleDescription = [];
@@ -630,8 +690,8 @@ export class HomePageComponent implements OnInit {
     let year: number = event.year;
     let id_model: number = event.brand_id;
     this.httpService.getModelByYear(id_model, year).subscribe(res => {
-      this.vehicleform.controls['vehicleModel'].setValue({ id: -1, model_name: 'MODELO*' });
-      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleform.controls['vehicleModel'].setValue(null);
+      this.vehicleform.controls['vehicleDescription'].setValue(null);
       this.vehicleModel = [];
       this.vehicleDescription = [];
       this.vehicleModel = res.data;
@@ -652,7 +712,7 @@ export class HomePageComponent implements OnInit {
     let year: number = event.year;
     let id_brand: number = event.brand_id;
     this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
-      this.vehicleform.controls['vehicleDescription'].setValue({ id: -1, description: 'DESCRIPCIÓN*' });
+      this.vehicleform.controls['vehicleDescription'].setValue(null);
       this.vehicleDescription = [];
       this.vehicleDescription = res.data;
       //console.log(this.vehicleYear);
@@ -661,12 +721,6 @@ export class HomePageComponent implements OnInit {
       console.log(error);
     });
   }
-
-
-
-
-
-
 
 
   /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */

@@ -110,18 +110,18 @@ export class HeaderComponent implements OnInit {
     */
     onLoggedout() {
 
-        // if (this.router.url === '/stepper') {
-        //     redirect = '/';
-        // } else {
-        //     redirect = this.router.url;
-        // }
+        if (this.router.url === '/tracking') {
+            this.router.navigate(['/']);
+        } else {
+            this.router.navigate([this.router.url]);
+        }
 
         this.navbarOpen = !this.navbarOpen;
         this.authService.logOut();
         this.closeSubscriptions();
         console.log('Ha finalizado sesión!');
         this.authService.functionClearUserData();
-        this.router.navigate([this.router.url]);
+        //this.router.navigate([this.router.url]);
     }
 
     /**

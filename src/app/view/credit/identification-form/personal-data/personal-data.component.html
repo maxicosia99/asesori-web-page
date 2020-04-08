@@ -63,7 +63,17 @@
             </div>
         </div>
         <div class="col-12 col-lg-9">
-            <div class="row mx-2 mx-md-0 justify-content-center py-5">
+
+            <!-- <div class="row mx-2 mx-md-0 justify-content-md-end justify-content-sm-start pt-4">
+                <div class="col-9 col-md-3 px-md-0">
+                    <progressbar [value]="percentage"></progressbar>
+                </div>
+                <div class="col-1 col-md-1 text-right">
+                    {{percentage}}%
+                </div>
+            </div> -->
+
+            <div class="row mx-2 mx-md-0 justify-content-center pt-4">
 
                 <div class="col-12 col-lg-8">
 
@@ -75,6 +85,7 @@
                         <div class="row my-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <div class="position-relative">
+                                    <!-- <input #dni (blur)="updatePercentage(dni.value, 5)" type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}"> -->
                                     <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
                                     <span class="floating-label text-uppercase">numero de identidad*</span>
                                     <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
@@ -83,7 +94,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <ng-select class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
+                                <ng-select appearance="outline" class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
                                 </ng-select>
                             </div>
                         </div>
@@ -110,7 +121,7 @@
                             </div>
                         </div>
 
-                        <div class="row my-0 my-md-4">
+                        <!-- <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <ng-select class="custom" [items]="gender" formControlName="gender" placeholder="genero" [searchable]="false" bindLabel="gender" [clearable]="false">
                                 </ng-select>
@@ -124,7 +135,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row my-4">
                             <div class="col-12">
@@ -136,7 +147,8 @@
                         </div>
                         <div class="row my-4 justify-content-center">
                             <div class="col-12 col-md-4">
-                                <button type="button" [disabled]="!personalDataForm.valid" class="btn button btn-block" (click)="onSubmitPersonalDataForm()">CONTINUAR</button>
+                                <!-- <button type="button" [disabled]="!personalDataForm.valid" class="btn button btn-block" (click)="onSubmitPersonalDataForm()">CONTINUAR</button> -->
+                                <button type="button" [disabled]="!personalDataForm.valid" class="btn button btn-block" (click)="openModal_termsConditions(termsConditions)">CONTINUAR</button>
                             </div>
                         </div>
 
@@ -147,3 +159,32 @@
         </div>
     </div>
 </section>
+
+<ng-template #termsConditions>
+    <div class="modal-header">
+        <h4 class="modal-title tittle-5 ml-3 mt-2">Aceptación de términos</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-justify">
+        <div class="row px-3">
+            <div class="col-12">
+                <p class="text-light-14">Estimado usuario, al aceptar los términos, trataremos sus datos única y exclusivamente para: (i) la potencial obtención de créditos, así como comunicación relacionada con la misma; y (ii) ser transferidos a Crédito Real, S.A.B. de C.V.,
+                    SOFOM, E.R., para la consulta, a través de Sociedades de Información Crediticia sobre sus antecedentes crediticios; cumplimiento de sus obligaciones derivadas de cualquier relación jurídica con Entidades Financieras; calificaciones
+                    de crédito o riesgos; y, el comportamiento de su historial crediticio. Asimismo, usted dispone
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row px-3">
+            <div class="col-12 col-md-9 text-justify">
+                <p class="text-light-14">Permito que se verifique esta información en el Buró de crédito</p>
+            </div>
+            <div class="col-12 col-md-3">
+                <button type="button" class="btn btn-block button" (click)="confirm()">ACEPTO</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

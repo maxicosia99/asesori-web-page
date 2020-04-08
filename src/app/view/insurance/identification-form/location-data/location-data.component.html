@@ -83,16 +83,16 @@
 
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
-                                <ng-select class="custom" [items]="provinces" placeholder="provincia*" formControlName="province" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
+                                <ng-select appearance="outline" class="custom" [items]="provinces" placeholder="provincia*" formControlName="province" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
                                 </ng-select>
-                                <div *ngIf="isFieldValidaddressForm('province')" class="invalid-feedback">
+                                <div *ngIf="isFieldValidaddressForm('province')" class="invalid-select">
                                     <span>Seleccione una provincia!</span>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <ng-select class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
+                                <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
                                 </ng-select>
-                                <div *ngIf="isFieldValidaddressForm('city')" class="invalid-feedback">
+                                <div *ngIf="isFieldValidaddressForm('city')" class="invalid-select">
                                     <span>Seleccione una ciudad!</span>
                                 </div>
                             </div>

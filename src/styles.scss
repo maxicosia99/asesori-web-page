@@ -3,7 +3,7 @@
 @import "./assets/css/font.scss";
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
 
 /*------------------------------------*\ END - IMPORTS \*------------------------------------*/
 
@@ -376,38 +376,25 @@ body {
 }
 
 
-/* Label Inside of Input filed */
-
-.ng-select .ng-select-container {
-    padding: 29px 10px;
-    border-radius: 8px;
-    font-family: 'Poppins-Regular';
-    font-size: 14px;
-}
-
-.ng-select .ng-select-container .ng-placeholder {
-    color: #777;
-    font-size: 12px;
-    line-height: 1.33;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-family: 'Poppins-Light';
-}
-
-.ng-select .ng-value {
-    line-height: 1.33;
-    letter-spacing: 2px;
-}
-
-.ng-select .ng-input {
-    margin-top: -15px;
-    margin-left: -10px;
-}
+/* Border Color */
 
 .ng-select.ng-invalid.ng-touched .ng-select-container {
     border-color: #dc3545;
 }
 
+
+/* Arrow Color */
+
+.ng-select.ng-invalid.ng-touched .ng-arrow-wrapper .ng-arrow {
+    border-color: #dc3545 transparent transparent;
+}
+
+
+/* Placeholder Color */
+
+// .ng-select.ng-invalid.ng-touched .ng-select-container .ng-placeholder {
+//     color: #dc3545;
+// }
 .form-control {
     padding: 10px 10px 0 20px;
 }
@@ -548,6 +535,68 @@ input:not(:focus):valid~.floating-label {
 .icon {
     font-size: 25px;
     color: #0A9BC9;
+}
+
+.invalid-select {
+    color: #dc3545;
+    margin-top: .25rem;
+    font-size: 80%;
+}
+
+.ng-select.custom2 {
+    padding-bottom: 14px;
+}
+
+.ng-select.custom2 .ng-select-container {
+    border-bottom: thin solid rgba(0, 0, 0, 0.10);
+    padding-left: 0px;
+}
+
+.ng-select.custom2 .ng-select-container .ng-arrow-wrapper .ng-arrow {
+    color: #0078A9;
+    width: 12px;
+    height: 20px;
+}
+
+.ng-select.custom2 .ng-select-container .ng-value-container .ng-placeholder {
+    position: absolute;
+    color: #333337;
+    font-size: 16px;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Poppins-SemiBold';
+    transform-origin: 0 0;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 1;
+}
+
+.ng-select.custom2 .ng-select-container .ng-value {
+    line-height: 1.33;
+    letter-spacing: 2px;
+    font-family: 'Poppins-SemiBold';
+    font-size: 25px;
+    color: #333333;
+    padding-top: 4px;
+}
+
+.ng-select.custom3 .ng-select-container .ng-value {
+    line-height: 1.33;
+    letter-spacing: 2px;
+    font-family: 'Poppins-SemiBold';
+    font-size: 16px;
+    color: #333333;
+    padding-top: 10px;
+}
+
+.ng-select.custom2 .ng-select-container .ng-value-container .ng-input {
+    bottom: -13px;
+    padding-bottom: 5px;
+}
+
+.ng-select.custom2 .ng-select-container .ng-value-container .ng-input>input {
+    padding-left: 0;
+    padding-bottom: 0;
 }
 
 

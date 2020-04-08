@@ -105,9 +105,9 @@
                         </div>
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
-                                <ng-select class="custom" formControlName="typeHousing" [items]="typeHousing" placeholder="tipo de vivienda*" [searchable]="false" bindLabel="type" [clearable]="false">
+                                <ng-select appearance="outline" class="custom" formControlName="typeHousing" [items]="typeHousing" placeholder="tipo de vivienda*" [searchable]="false" bindLabel="type" [clearable]="false">
                                 </ng-select>
-                                <div *ngIf="isFieldValidEconomicForm('typeHousing')" class="invalid-feedback">
+                                <div *ngIf="isFieldValidEconomicForm('typeHousing')" class="invalid-select">
                                     <span>Seleccione una tipo de propiedad!</span>
                                 </div>
                             </div>

@@ -1,11 +1,10 @@
 import { HttpClientService } from './../../services/client/http-client.service';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { AuthenticationService } from './../../services/auth/authentication.service';
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserAuth } from './../../models/userAuth';
 import { Subscription } from 'rxjs';
-import { BsModalRef } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/models/user-register';
 import { RouterExtService } from 'src/app/services/client/routing.service';
@@ -44,7 +43,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   /**
     * Represents the component of the homepage module
     * @constructor
-    * @param {BsModalService} modalService - Modal administration service
     * @param {HttpClientService} httpService - Service for connection to the server
     * @param {FormBuilder} formbuilder - Service for the use of forms
     * @param {AuthenticationService} authService - Authentication service for user data
@@ -212,7 +210,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             /* ------------------------------ */
 
             //this.bsModalRef.hide();
-            this.loginForm.reset();
+            this.registerForm.reset();
             this.authService.setSession(response.data);
           } else
             this.add(response.error);

@@ -3,18 +3,8 @@ import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
-/**
- * Validate the selection of a select
- * @param {AbstractControl} control - Object to validate with id
- * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
- */
-export function validateSelect(control: AbstractControl) {
-  if (control.value.id === -1) {
-    return { valid: true };
-  }
-  return null;
-}
+import { UserInfo } from 'src/app/models/user-info';
+import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 
 @Component({
   selector: 'app-location-data',
@@ -27,7 +17,20 @@ export class LocationDataComponent implements OnInit {
     private formbuilder: FormBuilder,
     private router: Router,
     private httpService: HttpClientService,
+    private authenticationService: AuthenticationService,
   ) { }
+
+  /**
+   * Variable to check user login
+   * @type {any}
+  */
+  public user: any;
+
+  /**
+   * Variable to store the user id
+   * @type {number}
+  */
+  public user_id: number;
 
   /**
    * Carousel options
@@ -84,9 +87,9 @@ export class LocationDataComponent implements OnInit {
    * Define address form
   */
   addressForm = this.formbuilder.group({
-    province: ['', [Validators.required, validateSelect]],
+    province: [null, [Validators.required]],
     address: ['', Validators.required],
-    city: ['', [Validators.required, validateSelect]]
+    city: [null, [Validators.required]]
   });
 
   /**
@@ -115,7 +118,7 @@ export class LocationDataComponent implements OnInit {
   onSubmitaddressForm() {
     this.addressFormSubmitted = true;
     if (this.addressForm.valid) {
-      
+
       let location_data: any = {
         city: this.addressForm.value.city.name,
         region_name: this.addressForm.value.province.name,
@@ -132,12 +135,9 @@ export class LocationDataComponent implements OnInit {
 
     window.scrollTo(0, 0)
 
-    this.addressForm.controls['province'].setValue({ id: -1, name: 'PROVINCIA*' });
-    this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
-
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
-      this.provinces = res.data;      
+      this.provinces = res.data;
     }, error => {
       console.log('error');
       console.log(error);
@@ -175,6 +175,17 @@ export class LocationDataComponent implements OnInit {
       console.log(error);
     });
     /*  End - Search by location. */
+
+    /* Handling of personal data when logging in */
+    this.recuperateLoginData();
+    this.authenticationService.subsVar = this.authenticationService.getUserData.subscribe(() => {
+      this.recuperateLoginData();
+    });
+    this.authenticationService.subsClearVar = this.authenticationService.clearUserData.subscribe(() => {
+      this.addressForm.controls['address'].setValue("");
+      this.user_id = null;
+      this.hasAddress = false;
+    });
   }
 
   /**
@@ -191,6 +202,44 @@ export class LocationDataComponent implements OnInit {
       console.log('error');
       console.log(error);
     });
+  }
+
+
+
+  /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */
+
+  /**
+   * Check if the user is logged in
+   * @return {boolean} True if you are logged in, false if not
+  */
+  loginVerified(): boolean {
+    let accessToken = localStorage.getItem('currentUser');
+    if (accessToken) {
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      return true;
+    }
+    this.user_id = null;
+    return false;
+  }
+
+  /**
+   * Retrieves the information if the user is logged in.
+   * @return {void} Nothing
+  */
+  recuperateLoginData() {
+    if (this.loginVerified()) {
+      this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
+        this.user_id = this.user.id;
+        if (user) {
+          if (user.address) {
+            this.addressForm.controls['address'].setValue(user.address);
+            this.hasAddress = true;
+          }
+        }
+      }, (error) => {
+        console.log(error);
+      });
+    }
   }
 
 }
