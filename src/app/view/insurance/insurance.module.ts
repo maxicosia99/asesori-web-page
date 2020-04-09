@@ -11,6 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';                  // selec
 import { ModalModule } from 'ngx-bootstrap';                            // Ngx-Bootstrap Modal module
 import localeFr from '@angular/common/locales/fr';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import { IdentificationFormComponent } from './identification-form/identification-form.component';
 import { PersonalDataComponent } from './identification-form/personal-data/personal-data.component';
@@ -57,7 +58,8 @@ export const customCurrencyMaskConfig = {
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     NgSelectModule,
     ModalModule.forRoot(),
-    CarouselModule
+    CarouselModule,
+    ProgressbarModule.forRoot(),
   ]
 })
 export class InsuranceModule { }

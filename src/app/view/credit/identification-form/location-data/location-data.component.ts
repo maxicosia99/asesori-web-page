@@ -60,6 +60,12 @@ export class LocationDataComponent implements OnInit {
   }
 
   /**
+   * Variables for the progress bar
+   * @type {any[]}
+  */
+  public percentage: number = 95;
+
+  /**
    * Variables to retrieve user information
    * @type {boolean}
   */

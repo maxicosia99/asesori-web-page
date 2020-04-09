@@ -123,9 +123,9 @@
 
         <div class="row px-4 px-md-0">
             <div class="col-12 my-4">
-                <h4 class="tittle-9 mb-4 text-uppercase"><b>Selecciona la opción que necesitas</b>
+                <h4 class="tittle-9 mb-4 text-uppercase"><b>COMPARA LAS MEJORES TASAS Y OPORTUNIDADES DE FINANCIAMIENTO</b>
                 </h4>
-                <p class="text-light-14">ASESORI pone a tu disposición diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de inversión cerca de tu ubicación a través de nuestros socios.</p>
+                <p class="text-light-14">ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de inversión que ofrecen los Bancos, Cooperativas o Mutualistas, utiliza nuestra calculadora a continuación y compara.</p>
             </div>
         </div>
 
@@ -294,7 +294,7 @@
 
         <form [formGroup]="vehicleform">
 
-            <div *ngIf="insuranceSection" class="row mx-3 mx-md-0 justify-content-between">
+            <div *ngIf="insuranceSectionValues" class="row mx-3 mx-md-0 justify-content-between">
                 <div class="box-values-insurance my-2 my-md-0">
                     <ng-select class="custom2" [items]="vehicleBrand" formControlName="vehicleBrand" (change)="changeCarBrand($event)" [searchable]="true" bindLabel="brand_name" placeholder="marca*" [clearable]="false">
                     </ng-select>

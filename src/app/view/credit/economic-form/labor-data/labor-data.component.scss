@@ -79,3 +79,55 @@ ul.timeline>li.cuarto:before {
     padding: 7px 7px;
     margin: -15px 0;
 }
+
+
+/*---------------------------------------------------------*/
+
+.kudos-wrap input[type="radio"] {
+    display: none;
+}
+
+.kudos-wrap label .icon-labor {
+    font-size: 38px;
+}
+
+.kudos-wrap label {
+    color: #737373;
+    cursor: pointer;
+}
+
+.kudos-wrap label p {
+    font-size: 16px;
+}
+
+.kudos-wrap :checked+label {
+    color: #0079ab;
+}
+
+.kudos-wrap :checked+label p {
+    font-family: 'Poppins-SemiBold';
+}
+
+.selected {
+    cursor: pointer;
+    font-size: 17px;
+    //padding-right: 5px;
+    color: #0079ab;
+    display: none
+}
+
+.no-selected {
+    cursor: pointer;
+    font-size: 17px;
+    //padding-right: 5px;
+    color: #0079ab;
+    display: inline-block
+}
+
+.kudos-wrap :checked+label .selected {
+    display: inline-block;
+}
+
+.kudos-wrap :checked+label .no-selected {
+    display: none;
+}

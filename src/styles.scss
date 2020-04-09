@@ -267,6 +267,12 @@ body {
     font-family: 'Poppins-SemiBold';
 }
 
+.tittle-21 {
+    font-family: 'Poppins-Medium';
+    line-height: 1.5;
+    font-size: 15px;
+}
+
 
 /* TEXTS */
 
@@ -363,6 +369,19 @@ body {
 
 .color-6 {
     color: #93939c;
+}
+
+.color-7 {
+    color: #333333;
+    opacity: 0.46;
+}
+
+.color-8 {
+    color: #72727c;
+}
+
+.color-9 {
+    color: #004679;
 }
 
 
@@ -597,6 +616,18 @@ input:not(:focus):valid~.floating-label {
 .ng-select.custom2 .ng-select-container .ng-value-container .ng-input>input {
     padding-left: 0;
     padding-bottom: 0;
+}
+
+.separator {
+    width: 150px;
+    height: 2px;
+    background-color: #0079ab;
+}
+
+.separator-right {
+    width: 100px;
+    height: 2px;
+    background-color: #0079ab;
 }
 
 

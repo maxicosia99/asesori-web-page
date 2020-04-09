@@ -21,6 +21,11 @@ export class PersonalDataComponent implements OnInit {
     private authenticationService: AuthenticationService,
   ) { }
 
+  /**
+   * Variables for the progress bar
+   * @type {any[]}
+  */
+  public percentage: number = 95;
 
   /**
   * Variable to check user login

@@ -18,6 +18,12 @@ export class EconomicDataComponent implements OnInit {
   ) { }
 
   /**
+   * Variables for the progress bar
+   * @type {any[]}
+  */
+  public percentage: number = 95;
+
+  /**
    * Variables for the selection of type housing
    * @type {any[]}
   */
@@ -95,14 +101,14 @@ export class EconomicDataComponent implements OnInit {
 
       let economic_data: any = {
         payments_cards: this.economicForm.value.card_payment,
-        rental : this.economicForm.value.rent_payment,
-        payment_loans : this.economicForm.value.loans_payment,
-        payment_services : this.economicForm.value.services_payment,
-        housing_type : this.economicForm.value.typeHousing.type,
-        mortgage_payment : this.economicForm.value.mortgage_payment,
-        total_possessions : this.economicForm.value.total_properties
+        rental: this.economicForm.value.rent_payment,
+        payment_loans: this.economicForm.value.loans_payment,
+        payment_services: this.economicForm.value.services_payment,
+        housing_type: this.economicForm.value.typeHousing.type,
+        mortgage_payment: this.economicForm.value.mortgage_payment,
+        total_possessions: this.economicForm.value.total_properties
       }
-      
+
       /** Store economic_data in localStorage*/
       localStorage.setItem('economic_data', JSON.stringify(economic_data));
       this.router.navigate(['credit/results/my-credit']);

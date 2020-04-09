@@ -18,6 +18,12 @@ export class InsuranceSummaryComponent implements OnInit {
   ) { }
 
   /**
+   * Variables for the progress bar
+   * @type {any[]}
+  */
+  public percentage: number = 95;
+
+  /**
    * Carousel options
    * @type {OwlOptions}
   */
@@ -101,7 +107,7 @@ export class InsuranceSummaryComponent implements OnInit {
 
         this.router.navigate(['insurance/finalize']);
         //console.log(res);
-        
+
         // this.httpService.getSendMailInsurance().subscribe(res => {
         //   console.log(res);
         // }, error => {

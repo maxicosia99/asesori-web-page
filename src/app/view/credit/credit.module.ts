@@ -12,6 +12,7 @@ import localeFr from '@angular/common/locales/fr';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { ResultCreditComponent } from './result-credit/result-credit.component';
 import { IdentificationFormComponent } from './identification-form/identification-form.component';                    // Carousel module
@@ -65,7 +66,8 @@ export const customCurrencyMaskConfig = {
     ModalModule.forRoot(),
     CarouselModule,
     AlertModule.forRoot(),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    CollapseModule.forRoot(),
   ]
 })
 export class CreditModule { }

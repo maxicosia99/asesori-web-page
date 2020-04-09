@@ -18,6 +18,12 @@ export class CreditSummaryComponent implements OnInit {
   ) { }
 
   /**
+    * Variables for the progress bar
+    * @type {any[]}
+   */
+  public percentage: number = 95;
+
+  /**
    * Carousel options
    * @type {OwlOptions}
   */

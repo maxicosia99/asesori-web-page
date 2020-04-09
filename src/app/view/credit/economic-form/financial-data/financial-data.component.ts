@@ -18,6 +18,12 @@ export class FinancialDataComponent implements OnInit {
   ) { }
 
   /**
+   * Variables for the progress bar
+   * @type {any[]}
+  */
+  public percentage: number = 95;
+
+  /**
    * Carousel options
    * @type {OwlOptions}
   */
@@ -43,6 +49,16 @@ export class FinancialDataComponent implements OnInit {
       }
     }
   }
+
+  /**
+  * Service form (credit, insurance, credit cards, investment policy)
+ */
+  financialform = this.formbuilder.group({
+    monthlySalary: [''],
+    otherMonthlyValue: [''],
+    monthlyExpenses: [''],
+    paymentCapacity: ['']
+  });
 
   ngOnInit() {
     window.scrollTo(0, 0)

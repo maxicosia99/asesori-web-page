@@ -101,6 +101,8 @@ export class HomePageComponent implements OnInit {
   public creditSection: boolean = false;
   public insuranceSection: boolean = false;
 
+  public insuranceSectionValues: boolean = false;
+
   /**
    * Variable to activate the email section
    * @type {boolean}
@@ -423,6 +425,9 @@ export class HomePageComponent implements OnInit {
     this.monthlyIncome.value = 0;
     this.term.value = 0;
 
+    /** Para desactivar la sección de valores de seguro */
+    this.insuranceSectionValues = false;
+
     if ($event.target.value === 'creditos') {
       /* Para activar los selects*/
       this.active_credits_select = true;
@@ -495,6 +500,9 @@ export class HomePageComponent implements OnInit {
   onSelectInsuranceOption($event) {
 
     this.id_insurance = $event.id;
+
+    /** Activar sección de valores dependiendo del tipo de seguro */
+    this.insuranceSectionValues = true;
 
     this.amountRequest.options = Object.assign({}, this.amountRequest.options, { disabled: false });
     this.entryAmount.options = Object.assign({}, this.entryAmount.options, { disabled: false });

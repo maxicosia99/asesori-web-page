@@ -21,6 +21,12 @@ export class ContactDataComponent implements OnInit {
   ) { }
 
   /**
+   * Variables for the progress bar
+   * @type {any[]}
+  */
+  public percentage: number = 95;
+
+  /**
    * Variable to check user login
    * @type {any}
   */
@@ -115,7 +121,7 @@ export class ContactDataComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
     this.contactForm.controls['email'].setValue(JSON.parse(localStorage.getItem('contact_data')).email);
-    
+
     /* Handling of personal data when logging in */
     this.recuperateLoginData();
     this.authenticationService.subsVar = this.authenticationService.getUserData.subscribe(() => {

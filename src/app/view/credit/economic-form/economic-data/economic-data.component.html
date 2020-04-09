@@ -63,12 +63,46 @@
             </div>
         </div>
         <div class="col-12 col-lg-9">
-            <div class="row mx-2 mx-md-0 justify-content-center py-5">
+
+            <div class="d-none d-sm-flex row mx-2 mx-md-0 justify-content-sm-end pt-4">
+                <div class="col-9 col-sm-3 px-md-0">
+                    <progressbar [value]="percentage"></progressbar>
+                </div>
+                <div class="col-1 col-sm-1 text-right">
+                    {{percentage}}%
+                </div>
+            </div>
+
+            <div class="row mx-2 mx-md-0 justify-content-center pt-4">
 
                 <div class="col-12 col-lg-8">
 
-                    <h2 class="tittle-1 mb-2">Información económica </h2>
-                    <p class="text-light-14">Con Asesori puedes acceder a créditos de forma más fácil y segura, por lo que necesitamos identicarte.</p>
+                    <h2 class="tittle-1 mb-2 d-none d-sm-block">Información económica</h2>
+                    <p class="tittle-7 text-uppercase d-sm-none d-block color-1">Información económica</p>
+
+                    <div class="row d-sm-none d-flex py-3">
+                        <div class="col-10">
+                            <progressbar [value]="percentage"></progressbar>
+                        </div>
+                        <div class="col-2 text-right">
+                            {{percentage}}%
+                        </div>
+                    </div>
+
+                    <p class="text-light-14 d-none d-sm-block">Con Asesori puedes acceder a créditos de forma más fácil y segura, por lo que necesitamos identicarte.</p>
+
+                    <div class="row pt-4 pb-0 pb-sm-3 justify-content-center">
+                        <div class="col-10 col-sm-4 d-none d-sm-block">
+                            <summary class="text-center text-sm-left tittle-21 color-7">Situación laboral</summary>
+                        </div>
+                        <div class="col-10 col-sm-4 d-none d-sm-block">
+                            <summary class="tittle-21 color-7 text-center">Situación financiera</summary>
+                        </div>
+                        <div class="col-10 col-sm-4">
+                            <p class="tittle-21 text-center color-1">Datos económicos</p>
+                            <div class="mt-4 ml-1 d-none d-sm-block separator"></div>
+                        </div>
+                    </div>
 
                     <form [formGroup]="economicForm">
 

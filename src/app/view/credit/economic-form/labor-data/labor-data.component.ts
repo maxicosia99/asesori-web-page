@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -16,6 +16,12 @@ export class LaborDataComponent implements OnInit {
     private router: Router,
     private httpService: HttpClientService,
   ) { }
+
+  /**
+   * Variables for the progress bar
+   * @type {any[]}
+  */
+  public percentage: number = 95;
 
   /**
    * Carousel options
@@ -55,6 +61,50 @@ export class LaborDataComponent implements OnInit {
    * @type {any}
   */
   public cities: any;
+
+
+  /**
+  * Service form (credit, insurance, credit cards, investment policy)
+ */
+  laborform = this.formbuilder.group({
+    type: new FormControl(),
+    monthlySalary: [''],
+    otherMonthlyValue: ['']
+  });
+
+  isCollapsed = true;
+
+  /**
+   * Variables to activate credit or insurance values and select
+   * @type {boolean}
+  */
+  public dependenciaSection: boolean = false;
+  public independenciaSection: boolean = false;
+  public mixtaSection: boolean = false;
+
+  /**
+   * Method to enable or disable service tag options
+   * @param {Event} event - Identifier of the value service tag
+   * @return {void} Nothing
+  */
+  onSelectType($event) {
+
+    if ($event.target.value === 'dependiente') {
+      this.dependenciaSection = true;
+      this.independenciaSection = false;
+      this.mixtaSection = false;
+    }
+    if ($event.target.value === 'independiente') {
+      this.dependenciaSection = false;
+      this.independenciaSection = true;
+      this.mixtaSection = false;
+    }
+    if ($event.target.value === 'mixta') {
+      this.dependenciaSection = false;
+      this.independenciaSection = false;
+      this.mixtaSection = true;
+    }
+  }
 
   ngOnInit() {
     window.scrollTo(0, 0);

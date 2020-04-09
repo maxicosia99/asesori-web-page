@@ -61,12 +61,40 @@
             </div>
         </div>
         <div class="col-12 col-lg-9">
-            <div class="row mx-2 mx-md-0 justify-content-center py-5">
+
+            <div class="d-none d-sm-flex row mx-2 mx-md-0 justify-content-sm-end pt-4">
+                <div class="col-9 col-sm-3 px-md-0">
+                    <progressbar [value]="percentage"></progressbar>
+                </div>
+                <div class="col-1 col-sm-1 text-right">
+                    {{percentage}}%
+                </div>
+            </div>
+
+            <div class="row mx-2 mx-md-0 justify-content-center pt-4">
 
                 <div class="col-12 col-lg-8">
 
-                    <h2 class="tittle-1 mb-2">Información vehícular</h2>
-                    <p class="text-light-14">La información de tu vehículo es valiosa para obtener la información que necesitas sobre tu seguro. </p>
+                    <h2 class="tittle-1 mb-2 d-none d-sm-block">Información vehícular</h2>
+                    <p class="tittle-7 text-uppercase d-sm-none d-block color-1">Información vehícular</p>
+
+                    <div class="row d-sm-none d-flex py-3">
+                        <div class="col-10">
+                            <progressbar [value]="percentage"></progressbar>
+                        </div>
+                        <div class="col-2 text-right">
+                            {{percentage}}%
+                        </div>
+                    </div>
+
+                    <p class="text-light-14 d-none d-sm-block">La información de tu vehículo es valiosa para obtener la información que necesitas sobre tu seguro. </p>
+
+                    <div class="row pt-4 pb-0 pb-sm-3 justify-content-center justify-content-sm-start">
+                        <div class="col-10 col-sm-4 text-center text-sm-left">
+                            <p class="tittle-8 color-1">El vehículo</p>
+                            <div class="mt-4 d-none d-sm-block separator-right"></div>
+                        </div>
+                    </div>
 
                     <form [formGroup]="vehicleform">
 
