@@ -63,9 +63,7 @@ export class ContactDataComponent implements OnInit {
         items: 4
       }
     }
-  }
-
-  public contact_data: any;
+  }  
 
   /**
    * Variables to retrieve user information
@@ -80,6 +78,7 @@ export class ContactDataComponent implements OnInit {
   contactForm = this.formbuilder.group({
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
+    phone2: [''],
   });
 
   /**
@@ -110,7 +109,8 @@ export class ContactDataComponent implements OnInit {
     if (this.contactForm.valid) {
       let contact_data: any = {
         email: this.contactForm.value.email,
-        phone: this.contactForm.value.phone
+        phone: this.contactForm.value.phone,
+        phone2: this.contactForm.value.phone2,
       }
       /** Store contact_data in localStorage*/
       localStorage.setItem('contact_data', JSON.stringify(contact_data));
@@ -118,9 +118,15 @@ export class ContactDataComponent implements OnInit {
     }
   }
 
+  public personal_data: any;
+  public location_data: any;
+  public economic_data: any;
+  public contact_data: any;
+  public labor_data: any;
+  public financial_data: any;
+
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.contactForm.controls['email'].setValue(JSON.parse(localStorage.getItem('contact_data')).email);
 
     /* Handling of personal data when logging in */
     this.recuperateLoginData();
@@ -135,6 +141,20 @@ export class ContactDataComponent implements OnInit {
       this.hasEmail = false;
       this.hasPhone1 = false;
     });
+
+    /** Verificar contenido del local storage*/
+    this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
+    this.location_data = JSON.parse(localStorage.getItem('location_data'));
+    this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
+    this.economic_data = JSON.parse(localStorage.getItem('economic_data'));
+    this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
+    this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
+
+    if(this.location_data){
+      this.contactForm.controls['email'].setValue(this.contact_data.email);
+      this.contactForm.controls['phone'].setValue(this.contact_data.phone);
+      this.contactForm.controls['phone2'].setValue(this.contact_data.phone2);
+    }
   }
 
   /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */

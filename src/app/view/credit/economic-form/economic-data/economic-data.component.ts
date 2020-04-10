@@ -28,8 +28,8 @@ export class EconomicDataComponent implements OnInit {
    * @type {any[]}
   */
   public typeHousing = [
-    { id: 1, type: "Propia" },
-    { id: 2, type: "Arrendada" }
+    { type: "Propia" },
+    { type: "Arrendada" }
   ]
 
   /**
@@ -115,8 +115,33 @@ export class EconomicDataComponent implements OnInit {
     }
   }
 
+  public personal_data: any;
+  public location_data: any;
+  public contact_data: any;
+  public economic_data: any;
+  public labor_data: any;
+  public financial_data: any;
+
   ngOnInit() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+
+    /** Verificar contenido del local storage*/
+    this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
+    this.location_data = JSON.parse(localStorage.getItem('location_data'));
+    this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
+    this.economic_data = JSON.parse(localStorage.getItem('economic_data'));
+    this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
+    this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
+
+    if (this.economic_data) {
+      this.economicForm.controls['card_payment'].setValue(this.economic_data.payments_cards);  
+      this.economicForm.controls['loans_payment'].setValue(this.economic_data.payment_loans);
+      this.economicForm.controls['mortgage_payment'].setValue(this.economic_data.mortgage_payment);  
+      this.economicForm.controls['rent_payment'].setValue(this.economic_data.rental);  
+      this.economicForm.controls['services_payment'].setValue(this.economic_data.payment_services);  
+      this.economicForm.controls['total_properties'].setValue(this.economic_data.total_possessions);  
+      this.economicForm.controls['typeHousing'].setValue({type:this.economic_data.housing_type});
+    }
   }
 
 }

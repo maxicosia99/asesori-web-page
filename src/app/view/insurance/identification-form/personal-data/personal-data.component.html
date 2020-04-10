@@ -115,8 +115,11 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <ng-select appearance="outline" class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
+                                <ng-select appearance="outline" class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil*" [searchable]="false" bindLabel="status" [clearable]="false">
                                 </ng-select>
+                                <div *ngIf="isFieldValidPersonalData('maritalStatus')" class="invalid-select">
+                                    <span>Seleccione su estado civil!</span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-4 mt-4 mt-md-0">
@@ -161,7 +164,7 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="date">
+                                    <input type="date" formControlName="birthday" class="form-control text-uppercase">
                                     <span class="floating-label text-uppercase">fecha de nacimiento</span>
                                 </div>
                             </div>

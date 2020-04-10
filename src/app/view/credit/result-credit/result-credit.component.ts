@@ -13,6 +13,8 @@ export class ResultCreditComponent implements OnInit {
 
   //credit_information: any;
 
+  //financialentity_type
+
   public credit_information: any;
 
   constructor(
@@ -138,14 +140,17 @@ export class ResultCreditComponent implements OnInit {
       if (res.status == 200) {
 
         if (this.can_access_credit) {
-          this.can_access_credit_userSelected.clear()
+          this.can_access_credit_userSelected.clear();
         }
 
         if (this.cannot_access_credit) {
-          this.cannot_access_credit_userSelected.clear()
+          this.cannot_access_credit_userSelected.clear();
         }
 
         this.creditOptions = res.data;
+
+        console.log(res.data);
+
         this.can_access_credit = res.data.can_access_credit;
         this.cannot_access_credit = res.data.cannot_access_credit;
         this.credit_unavailable = res.data.credit_unavailable;

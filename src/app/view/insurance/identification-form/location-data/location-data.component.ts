@@ -95,7 +95,9 @@ export class LocationDataComponent implements OnInit {
   addressForm = this.formbuilder.group({
     province: [null, [Validators.required]],
     address: ['', Validators.required],
-    city: [null, [Validators.required]]
+    city: [null, [Validators.required]],
+    reference: [''],
+    sector: ['']
   });
 
   /**
@@ -125,16 +127,22 @@ export class LocationDataComponent implements OnInit {
     this.addressFormSubmitted = true;
     if (this.addressForm.valid) {
       let location_data: any = {
-        city: this.addressForm.value.city.name,
-        region_name: this.addressForm.value.province.name,
-        country_name: 'ECUADOR',
-        address: this.addressForm.value.address
+        city: this.addressForm.value.city,
+        province: this.addressForm.value.province,
+        address: this.addressForm.value.address,
+        reference: this.addressForm.value.reference,
+        sector: this.addressForm.value.sector
       }
       /** Store location_data in localStorage*/
       localStorage.setItem('location_data', JSON.stringify(location_data));
       this.router.navigate(['insurance/results/identification/contact']);
     }
   }
+
+  public personal_data: any;
+  public location_data: any;
+  public contact_data: any;
+  public vehicle_data:any;
 
   ngOnInit() {
 
@@ -191,6 +199,20 @@ export class LocationDataComponent implements OnInit {
       this.user_id = null;
       this.hasAddress = false;
     });
+
+    /** Verificar contenido del local storage*/
+    this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
+    this.location_data = JSON.parse(localStorage.getItem('location_data'));
+    this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
+    this.vehicle_data = JSON.parse(localStorage.getItem('vehicle_data'));
+
+    if (this.location_data) {
+      this.addressForm.controls['city'].setValue({ id: this.location_data.city.id, name: this.location_data.city.name });
+      this.addressForm.controls['province'].setValue({ id: this.location_data.province.id, name: this.location_data.province.name });
+      this.addressForm.controls['address'].setValue(this.location_data.address);
+      this.addressForm.controls['reference'].setValue(this.location_data.reference);
+      this.addressForm.controls['sector'].setValue(this.location_data.sector);
+    }
   }
 
   /**
@@ -200,7 +222,7 @@ export class LocationDataComponent implements OnInit {
   */
   changeProvince(event) {
     this.httpService.getCities(event.id).subscribe(res => {
-      this.addressForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+      this.addressForm.controls['city'].setValue(null);
       this.cities = []
       this.cities = res.data;
     }, error => {

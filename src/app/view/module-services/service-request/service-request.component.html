@@ -1,0 +1,62 @@
+<main class="bg-1 main-top-90">
+
+    <br><br>
+
+    <section class="container bg-0 p-5">
+
+        <p class="tittle-9">Para mi carrera</p>
+        <hr class="my-4">
+        <p class="text-light-14">Utiliza nuestra calculadora para conocer las diferentes opciones de créditos que puedes tener.</p>
+
+        <!-- VALUES BOX -->
+        <div class="row pt-4 justify-content-between px-3">
+            <div class="my-2 my-lg-0  box-values-slider">
+                <div class="custom-slider">
+                    <p class="header-box-values-slider mb-4 text-uppercase"><b>monto a solicitar*</b></p>
+                    <ng5-slider [(value)]="amountRequest.value" [options]="amountRequest.options"></ng5-slider>
+                    <p class="tittle-11 text-right mt-2 mb-0">Dólares americanos</p>
+                </div>
+            </div>
+            <div class="my-2 my-lg-0  box-values-slider">
+                <div class="custom-slider">
+                    <p class="header-box-values-slider mb-4 text-uppercase"><b>entrada</b></p>
+                    <ng5-slider [(value)]="entryAmount.value" [options]="entryAmount.options"></ng5-slider>
+                    <p class="tittle-11 text-right mt-2 mb-0">Valor opcional</p>
+                </div>
+            </div>
+            <div class="my-2 my-lg-0  box-values-slider">
+                <div class="custom-slider">
+                    <p class="header-box-values-slider mb-4 text-uppercase"><b>ingreso mensual*</b></p>
+                    <ng5-slider [(value)]="monthlyIncome.value" [options]="monthlyIncome.options"></ng5-slider>
+                    <p class="tittle-11 text-right mt-2 mb-0">Sueldo mensual</p>
+                </div>
+            </div>
+            <div class="my-2 my-lg-0 box-values-slider">
+                <div class="custom-slider">
+                    <p class="header-box-values-slider mb-4 text-uppercase"><b>tiempo plazo*</b></p>
+                    <ng5-slider [(value)]="term.value" [options]="term.options"></ng5-slider>
+                    <p class="tittle-11 text-right mt-2 mb-0">Meses</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-between mt-4">
+            <div class="col-12">
+                <alert *ngIf="(entryAmount.value > (amountRequest.value * 0.9))" type="danger">
+                    La entrada no puede superar el 90% del valor a solicitar!
+                </alert>
+            </div>
+        </div>
+
+        <!-- CALCULATE CREDIT BUTTON -->
+        <div class="row mt-4 justify-content-center px-0">
+            <div class="col-md-6 col-lg-3">
+                <button type="button" class="btn button-calculate btn-block" [disabled]="amountRequest.value == 0 || monthlyIncome.value == 0 || term.value == 0 || entryAmount.value > (amountRequest.value * 0.9)">CALCULAR</button>
+            </div>
+        </div>
+
+    </section>
+
+    <br><br>
+
+</main>

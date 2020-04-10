@@ -9,8 +9,8 @@
                         <li class="primero">
                             <summary class="color-1 tittle-20">Identificación</summary>
                             <p class="mt-4 color-1">datos personales</p>
-                            <p class="color-1-opacity">domicilio actual</p>
-                            <p class="color-1-opacity">contacto</p>
+                            <p [routerLink]="location_data ? '/credit/results/identification/location' : null" [ngClass]="{'pointer': location_data, 'not-allowed':!location_data}" class="color-1-opacity">domicilio actual</p>
+                            <p [routerLink]="contact_data ? '/credit/results/identification/contact' : null" [ngClass]="{'pointer': contact_data, 'not-allowed':!contact_data}" class="color-1-opacity">contacto</p>
                         </li>
                         <li class="segundo">
                             <summary>Información económica</summary>
@@ -109,7 +109,6 @@
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <div class="position-relative">
-                                    <!-- <input #dni (blur)="updatePercentage(dni.value, 5)" type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}"> -->
                                     <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
                                     <span class="floating-label text-uppercase">numero de identidad*</span>
                                     <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
@@ -118,8 +117,11 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <ng-select appearance="outline" class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil" [searchable]="false" bindLabel="status" [clearable]="false">
+                                <ng-select appearance="outline" class="custom" [items]="maritalStatus" formControlName="maritalStatus" placeholder="estado civil*" [searchable]="false" bindLabel="status" [clearable]="false">
                                 </ng-select>
+                                <div *ngIf="isFieldValidPersonalData('maritalStatus')" class="invalid-select">
+                                    <span>Seleccione su estado civil!</span>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-4 mt-4 mt-md-0">
@@ -145,33 +147,16 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row my-0 my-md-4">
-                            <div class="col-12 col-md-6 my-md-0 my-4">
-                                <ng-select class="custom" [items]="gender" formControlName="gender" placeholder="genero" [searchable]="false" bindLabel="gender" [clearable]="false">
-                                </ng-select>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="position-relative">
-                                    <input type="number" class="form-control" formControlName="age" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('age')}">
-                                    <span class="floating-label text-uppercase">edad*</span>
-                                    <div *ngIf="isFieldValidPersonalData('age')" class="invalid-feedback">
-                                        <span>Ingrese su edad!</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="date">
+                                    <input type="date" formControlName="birthday" class="form-control text-uppercase">
                                     <span class="floating-label text-uppercase">fecha de nacimiento</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row my-4 justify-content-center">
                             <div class="col-12 col-md-4">
-                                <!-- <button type="button" [disabled]="!personalDataForm.valid" class="btn button btn-block" (click)="onSubmitPersonalDataForm()">CONTINUAR</button> -->
                                 <button type="button" [disabled]="!personalDataForm.valid" class="btn button btn-block" (click)="openModal_termsConditions(termsConditions)">CONTINUAR</button>
                             </div>
                         </div>

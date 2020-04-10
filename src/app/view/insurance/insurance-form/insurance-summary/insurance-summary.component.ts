@@ -55,6 +55,7 @@ export class InsuranceSummaryComponent implements OnInit {
   public personal_data: any;
   public location_data: any;
   public contact_data: any;
+  public vehicle_data:any;
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -63,6 +64,7 @@ export class InsuranceSummaryComponent implements OnInit {
     this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
     this.location_data = JSON.parse(localStorage.getItem('location_data'));
     this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
+    this.vehicle_data = JSON.parse(localStorage.getItem('vehicle_data'));
   }
 
   /**
@@ -108,12 +110,12 @@ export class InsuranceSummaryComponent implements OnInit {
         this.router.navigate(['insurance/finalize']);
         //console.log(res);
 
-        // this.httpService.getSendMailInsurance().subscribe(res => {
-        //   console.log(res);
-        // }, error => {
-        //   console.log('error al enviar correo');
-        //   console.log(error);
-        // });
+        this.httpService.getSendMailInsurance().subscribe(res => {
+          console.log(res);
+        }, error => {
+          console.log('error al enviar correo');
+          console.log(error);
+        });
 
         //this.messageErrorInsurance = null;
 

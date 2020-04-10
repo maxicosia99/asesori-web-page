@@ -54,8 +54,9 @@ export class VehicleDataComponent implements OnInit {
    * Define vehicle form
   */
   vehicleform = this.formbuilder.group({
-    vehicleColor: [null],
+    vehicleColor: [null, Validators.required],
     vehiclePlate: [''],
+    vehicleDetails: ['']
   });
 
   /**
@@ -63,36 +64,36 @@ export class VehicleDataComponent implements OnInit {
    * @type {any[]}
   */
   public vehicleColors: any = [
-    { id: 1, color_name: 'AMARILLO' },
-    { id: 2, color_name: 'AZUL' },
-    { id: 3, color_name: 'BEIGE' },
-    { id: 4, color_name: 'BLANCO' },
-    { id: 5, color_name: 'BRONCE' },
-    { id: 6, color_name: 'CAFE' },
-    { id: 7, color_name: 'CELESTE' },
-    { id: 8, color_name: 'COBRE' },
-    { id: 9, color_name: 'CREMA' },
-    { id: 10, color_name: 'DORADO' },
-    { id: 11, color_name: 'FUCSIA' },
-    { id: 12, color_name: 'GRIS' },
-    { id: 13, color_name: 'ABANO' },
-    { id: 14, color_name: 'LILA' },
-    { id: 15, color_name: 'MARFIL' },
-    { id: 16, color_name: 'MORADO' },
-    { id: 17, color_name: 'MOSTAZA' },
-    { id: 18, color_name: 'NARANJA' },
-    { id: 18, color_name: 'NEGRO' },
-    { id: 19, color_name: 'OTROS' },
-    { id: 20, color_name: 'PERLA' },
-    { id: 21, color_name: 'PLATA' },
-    { id: 22, color_name: 'PLATEADO' },
-    { id: 23, color_name: 'PLOMO' },
-    { id: 24, color_name: 'ROJO' },
-    { id: 25, color_name: 'ROSADO' },
-    { id: 26, color_name: 'TOMATE' },
-    { id: 27, color_name: 'TURQUEZA' },
-    { id: 28, color_name: 'VERDE' },
-    { id: 29, color_name: 'VINO' },
+    {color_name: 'AMARILLO' },
+    {color_name: 'AZUL' },
+    {color_name: 'BEIGE' },
+    {color_name: 'BLANCO' },
+    {color_name: 'BRONCE' },
+    {color_name: 'CAFE' },
+    {color_name: 'CELESTE' },
+    {color_name: 'COBRE' },
+    {color_name: 'CREMA' },
+    { color_name: 'DORADO' },
+    { color_name: 'FUCSIA' },
+    { color_name: 'GRIS' },
+    { color_name: 'ABANO' },
+    { color_name: 'LILA' },
+    { color_name: 'MARFIL' },
+    { color_name: 'MORADO' },
+    { color_name: 'MOSTAZA' },
+    { color_name: 'NARANJA' },
+    { color_name: 'NEGRO' },
+    { color_name: 'OTROS' },
+    { color_name: 'PERLA' },
+    { color_name: 'PLATA' },
+    { color_name: 'PLATEADO' },
+    { color_name: 'PLOMO' },
+    { color_name: 'ROJO' },
+    { color_name: 'ROSADO' },
+    { color_name: 'TOMATE' },
+    { color_name: 'TURQUEZA' },
+    { color_name: 'VERDE' },
+    { color_name: 'VINO' },
   ]
 
   /**
@@ -114,8 +115,23 @@ export class VehicleDataComponent implements OnInit {
     );
   }
 
+  public personal_data: any;
+  public location_data: any;
+  public contact_data: any;
+  public vehicle_data:any;
+
   ngOnInit() {
-    //this.vehicleform.controls['vehicleColor'].setValue({ id: -1, color_name: 'COLOR*' });
+    /** Verificar contenido del local storage*/
+    this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
+    this.location_data = JSON.parse(localStorage.getItem('location_data'));
+    this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
+    this.vehicle_data = JSON.parse(localStorage.getItem('vehicle_data'));
+
+    if(this.vehicle_data){
+      this.vehicleform.controls['vehicleColor'].setValue({color_name:this.vehicle_data.vehicleColor.color_name});
+      this.vehicleform.controls['vehiclePlate'].setValue(this.vehicle_data.vehiclePlate);
+      this.vehicleform.controls['vehicleDetails'].setValue(this.vehicle_data.vehicleDetails);
+    }
   }
 
   /**
@@ -126,6 +142,14 @@ export class VehicleDataComponent implements OnInit {
   onSubmitVehicleform() {
     this.vehicleformSubmitted = true;
     if (this.vehicleform.valid) {
+
+      let vehicle_data: any = {
+        vehicleColor: this.vehicleform.value.vehicleColor,
+        vehiclePlate: this.vehicleform.value.vehiclePlate,
+        vehicleDetails: this.vehicleform.value.vehicleDetails,
+      }
+      /** Store vehicle_data in localStorage*/
+      localStorage.setItem('vehicle_data', JSON.stringify(vehicle_data));
       this.router.navigate(['insurance/results/my-insurance']);
     }
   }

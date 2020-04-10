@@ -136,9 +136,9 @@
 
                         <div class="row mt-4 mb-0 my-md-4">
                             <div class="col-12">
-                                <ng-select appearance="outline" placeholder="COLOR" class="custom" [items]="vehicleColors" formControlName="vehicleColor" [searchable]="false" bindLabel="color_name" [clearable]="false">
+                                <ng-select appearance="outline" placeholder="COLOR*" class="custom" [items]="vehicleColors" formControlName="vehicleColor" [searchable]="false" bindLabel="color_name" [clearable]="false">
                                 </ng-select>
-                                <div *ngIf="isFieldValidVehicleform('vehicleColor')" class="invalid-feedback">
+                                <div *ngIf="isFieldValidVehicleform('vehicleColor')" class="invalid-select">
                                     <span>Seleccione un color!</span>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                         <div class="row mt-4 mb-0 my-md-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="text" class="form-control text-uppercase" formControlName="vehiclePlate">
+                                    <input type="text" class="form-control text-uppercase" formControlName="vehiclePlate" placeholder="Ej. PYH0156">
                                     <span class="floating-label text-uppercase">placa</span>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                         <div class="row mt-4 mb-0 my-md-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask class="form-control" required>
+                                    <input type="text" class="form-control text-uppercase" formControlName="vehicleDetails" placeholder="Ej. Carro nuevo, cero choques, etc">
                                     <span class="floating-label text-uppercase">detalles del vehiculo</span>
                                 </div>
                             </div>

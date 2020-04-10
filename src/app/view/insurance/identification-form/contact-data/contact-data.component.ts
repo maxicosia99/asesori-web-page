@@ -78,6 +78,7 @@ export class ContactDataComponent implements OnInit {
   contactForm = this.formbuilder.group({
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
+    phone2: [''],
   });
 
   /**
@@ -108,13 +109,19 @@ export class ContactDataComponent implements OnInit {
     if (this.contactForm.valid) {
       let contact_data: any = {
         email: this.contactForm.value.email,
-        phone: this.contactForm.value.phone
+        phone: this.contactForm.value.phone,
+        phone2: this.contactForm.value.phone2,
       }
       /** Store contact_data in localStorage*/
       localStorage.setItem('contact_data', JSON.stringify(contact_data));
       this.router.navigate(['insurance/results/vehicle']);
     }
   }
+
+  public personal_data: any;
+  public location_data: any;
+  public contact_data: any;
+  public vehicle_data:any;
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -133,6 +140,18 @@ export class ContactDataComponent implements OnInit {
       this.hasEmail = false;
       this.hasPhone1 = false;
     });
+
+    /** Verificar contenido del local storage*/
+    this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
+    this.location_data = JSON.parse(localStorage.getItem('location_data'));
+    this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
+    this.vehicle_data = JSON.parse(localStorage.getItem('vehicle_data'));
+
+    if(this.location_data){
+      this.contactForm.controls['email'].setValue(this.contact_data.email);
+      this.contactForm.controls['phone'].setValue(this.contact_data.phone);
+      this.contactForm.controls['phone2'].setValue(this.contact_data.phone2);
+    }
   }
 
   /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */

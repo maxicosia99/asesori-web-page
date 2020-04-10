@@ -5,10 +5,13 @@ import { ModuleServicesRoutingModule } from './module-services-routing.module';
 import { ServicesComponent } from './services/services.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';                  // Ngx-Bootstrap button module
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';     // Forms
-import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carousel module
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ServiceRequestComponent } from './service-request/service-request.component';                    // Carousel module
+import { Ng5SliderModule } from 'ng5-slider';                           // Slider module
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
-  declarations: [ServicesComponent],
+  declarations: [ServicesComponent, ServiceRequestComponent],
   imports: [
     CommonModule,
     ModuleServicesRoutingModule,
@@ -16,6 +19,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';                    // Carou
     ReactiveFormsModule,
     ButtonsModule,
     CarouselModule,
+    Ng5SliderModule,
+    AlertModule.forRoot()
   ]
 })
 export class ModuleServicesModule { }

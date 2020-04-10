@@ -363,7 +363,7 @@
                     <div class="col-12 col-md-6 py-2 py-md-0">
                         <div class="position-relative">
                             <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': emailForm.email.touched && emailForm.email.errors}">
-                            <span class="floating-label text-uppercase">correo electromico*</span>
+                            <span class="floating-label text-uppercase">correo electronico*</span>
                             <div *ngIf="emailForm.email.touched && emailForm.email.errors" class="invalid-feedback">
                                 <span>Ingrese correo electrónico!</span>
                             </div>

@@ -171,7 +171,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="companyName" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">nombre de la empresa</span>
                                     </div>
                                 </div>
@@ -179,7 +179,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="positionCompany" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">cargo en la empresa</span>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="position-relative">
-                                            <input type="text" class="form-control text-uppercase" required>
+                                            <input type="text" formControlName="valueDetail" class="form-control text-uppercase" required>
                                             <span class="floating-label text-uppercase">detalle del valor</span>
                                         </div>
                                     </div>
@@ -216,11 +216,11 @@
 
                             <div class="row my-0 my-md-4">
                                 <div class="col-12 col-md-6 my-md-0 my-4">
-                                    <ng-select appearance="outline" class="custom" [items]="provinces" placeholder="provincia*" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
+                                    <ng-select appearance="outline" class="custom" [items]="provinces" placeholder="provincia*" formControlName="province" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
                                     </ng-select>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" [searchable]="true" bindLabel="name" [clearable]="false">
+                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
                                     </ng-select>
                                 </div>
                             </div>
@@ -228,7 +228,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="address" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">dirección</span>
                                     </div>
                                 </div>
@@ -236,7 +236,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" class="form-control" required>
+                                        <input type="number" formControlName="phone" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">teléfono de contacto</span>
                                     </div>
                                 </div>
@@ -247,7 +247,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" formControlName="ruc" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">Ruc</span>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="sector" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">sector</span>
                                     </div>
                                 </div>
@@ -263,7 +263,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" currencyMask class="form-control" required>
+                                        <input type="tel" currencyMask formControlName="averageSales" class="form-control" required>
                                         <span class="floating-label text-uppercase">promedio mensual
                                             ventas</span>
                                     </div>
@@ -278,7 +278,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="companyName" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">nombre de la empresa</span>
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="positionCompany" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">cargo en la empresa</span>
                                     </div>
                                 </div>
@@ -313,7 +313,7 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="position-relative">
-                                            <input type="text" class="form-control text-uppercase" required>
+                                            <input type="text" formControlName="valueDetail" class="form-control text-uppercase" required>
                                             <span class="floating-label text-uppercase">detalle del valor</span>
                                         </div>
                                     </div>
@@ -323,11 +323,11 @@
 
                             <div class="row my-0 my-md-4">
                                 <div class="col-12 col-md-6 my-md-0 my-4">
-                                    <ng-select appearance="outline" class="custom" [items]="provinces" placeholder="provincia*" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
+                                    <ng-select appearance="outline" class="custom" [items]="provinces" placeholder="provincia*" formControlName="province" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
                                     </ng-select>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" [searchable]="true" bindLabel="name" [clearable]="false">
+                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
                                     </ng-select>
                                 </div>
                             </div>
@@ -335,7 +335,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="address" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">dirección</span>
                                     </div>
                                 </div>
@@ -343,7 +343,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" class="form-control" required>
+                                        <input type="number" formControlName="phone" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">teléfono de contacto</span>
                                     </div>
                                 </div>
@@ -354,7 +354,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" formControlName="ruc" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">Ruc</span>
                                     </div>
                                 </div>
@@ -362,7 +362,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" class="form-control text-uppercase" required>
+                                        <input type="text" formControlName="sector" class="form-control text-uppercase" required>
                                         <span class="floating-label text-uppercase">sector</span>
                                     </div>
                                 </div>
@@ -370,7 +370,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" currencyMask class="form-control" required>
+                                        <input type="tel" currencyMask formControlName="averageSales" class="form-control" required>
                                         <span class="floating-label text-uppercase">promedio mensual
                                             ventas</span>
                                     </div>
@@ -397,7 +397,7 @@
 
                         <div class="row my-5 justify-content-center">
                             <div class="col-12 col-md-4">
-                                <button type="button" class="btn button btn-block" [disabled]="false" (click)="onSubmitLaborForm()">CONTINUAR</button>
+                                <button type="button" class="btn button btn-block" [disabled]="laborform.controls.type.value == null" (click)="onSubmitLaborForm()">CONTINUAR</button>
                             </div>
                         </div>
 

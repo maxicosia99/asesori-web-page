@@ -630,6 +630,18 @@ input:not(:focus):valid~.floating-label {
     background-color: #0079ab;
 }
 
+.progress .progress-bar {
+    background-color: #0079ab;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.not-allowed {
+    cursor: not-allowed;
+}
+
 
 /* MEDIA QUERIES */
 

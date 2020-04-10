@@ -79,21 +79,12 @@ export class PersonalDataComponent implements OnInit {
    * @type {any[]}
   */
   public maritalStatus: any = [
-    { id: 1, status: 'CASADO' },
-    { id: 2, status: 'SOLTERO' },
-    { id: 3, status: 'DIVORCIADO' },
-    { id: 4, status: 'VIUDO' },
-    { id: 4, status: 'UNION LIBRE' },
+    { status: 'CASADO' },
+    { status: 'SOLTERO' },
+    { status: 'DIVORCIADO' },
+    { status: 'VIUDO' },
+    { status: 'UNION LIBRE' },
   ];
-
-  /**
-   * Variables for the selection of gender
-   * @type {any[]}
-  */
-  public gender: any = [
-    { id: 1, gender: 'HOMBRE' },
-    { id: 2, gender: 'MUJER' }
-  ]
 
   /**
    * Define personal data form
@@ -102,10 +93,8 @@ export class PersonalDataComponent implements OnInit {
     names: ['', Validators.required],
     last_names: ['', Validators.required],
     dni: ['', [Validators.required, validateCedula]],
-    maritalStatus: null,
-    gender: [''],
-    //age: ['', [Validators.required]]
-    age: ['']
+    maritalStatus: [null, Validators.required],
+    birthday: ['']
   });
 
   /**
@@ -139,9 +128,8 @@ export class PersonalDataComponent implements OnInit {
         name: this.personalDataForm.value.names,
         last_name: this.personalDataForm.value.last_names,
         cedula: this.personalDataForm.value.dni,
-        // maritalStatus: this.personalDataForm.value.maritalStatus.status,
-        // gender: this.personalDataForm.value.gender.gender,
-        // age: this.personalDataForm.value.age
+        maritalStatus: this.personalDataForm.value.maritalStatus.status,
+        birthday:this.personalDataForm.value.birthday
       }
       /** Store personal_data in localStorage*/
       localStorage.setItem('personal_data', JSON.stringify(personal_data));
@@ -150,9 +138,13 @@ export class PersonalDataComponent implements OnInit {
     }
   }
 
+  public personal_data: any;
+  public location_data: any;
+  public contact_data: any;
+  public vehicle_data:any;
+
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.personalDataForm.controls['gender'].setValue({ id: -1, gender: 'GÉNERO' });
 
     /* Handling of personal data when logging in */
     this.recuperateLoginData();
@@ -169,6 +161,24 @@ export class PersonalDataComponent implements OnInit {
       this.hasNames = false;
       this.hasLastNames = false;
     });
+
+    /** Verificar contenido del local storage*/
+    this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
+    this.location_data = JSON.parse(localStorage.getItem('location_data'));
+    this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
+    this.vehicle_data = JSON.parse(localStorage.getItem('vehicle_data'));
+
+    if(this.personal_data){
+      this.personalDataForm.controls['names'].setValue(this.personal_data.name);
+      this.personalDataForm.controls['last_names'].setValue(this.personal_data.last_name);
+      this.personalDataForm.controls['dni'].setValue(this.personal_data.cedula);
+      
+      if(this.personal_data.maritalStatus){
+        this.personalDataForm.controls['maritalStatus'].setValue({status:this.personal_data.maritalStatus});
+      }
+
+      this.personalDataForm.controls['birthday'].setValue(this.personal_data.birthday);
+    }
   }
 
   /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */

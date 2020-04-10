@@ -87,6 +87,8 @@ export class CreditSummaryComponent implements OnInit {
   public location_data: any;
   public contact_data: any;
   public economic_data: any;
+  public labor_data: any;
+  public financial_data: any;
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -97,6 +99,8 @@ export class CreditSummaryComponent implements OnInit {
     this.location_data = JSON.parse(localStorage.getItem('location_data'));
     this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
     this.economic_data = JSON.parse(localStorage.getItem('economic_data'));
+    this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
+    this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
     this.destinedTo = this.credit_information.destinedTo;
     this.amountRequest = this.credit_information.amountRequest;
