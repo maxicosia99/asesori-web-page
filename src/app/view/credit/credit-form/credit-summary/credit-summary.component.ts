@@ -126,9 +126,9 @@ export class CreditSummaryComponent implements OnInit {
     creditInformation.last_name = this.personal_data.last_name;
     creditInformation.cedula = this.personal_data.cedula;
 
-    creditInformation.city = this.location_data.city;
-    creditInformation.region_name = this.location_data.region_name;
-    creditInformation.country_name = this.location_data.country_name;
+    creditInformation.city = this.location_data.city.name;
+    creditInformation.region_name = this.location_data.province.name;
+    creditInformation.country_name = 'ECUADOR';
     creditInformation.address = this.location_data.address;
 
     creditInformation.email = this.contact_data.email;
@@ -164,6 +164,8 @@ export class CreditSummaryComponent implements OnInit {
         localStorage.removeItem('economic_data');
         localStorage.removeItem('personal_data');
         localStorage.removeItem('location_data');
+        localStorage.removeItem('labor_data');
+        localStorage.removeItem('financial_data');
         //localStorage.removeItem('contact_data');
         //localStorage.clear();
 

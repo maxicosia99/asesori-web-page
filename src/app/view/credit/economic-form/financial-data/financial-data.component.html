@@ -7,20 +7,20 @@
 
                     <ul class="timeline text-left text-uppercase tittle-19 color-6">
                         <li class="primero">
-                            <summary class="color-1-opacity">Identificación</summary>
-                            <p class="mt-4 color-1-opacity">datos personales</p>
-                            <p class="color-1-opacity">domicilio actual</p>
-                            <p class="color-1-opacity">contacto</p>
+                            <summary [routerLink]="personal_data ? '/credit/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">Identificación</summary>
+                            <p class="mt-4" [routerLink]="personal_data ? '/credit/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales</p>
+                            <p [routerLink]="location_data ? '/credit/results/identification/location' : null" [ngClass]="{'pointer color-1': location_data, 'not-allowed':!location_data}">domicilio actual</p>
+                            <p [routerLink]="contact_data ? '/credit/results/identification/contact' : null" [ngClass]="{'pointer color-1': contact_data, 'not-allowed':!contact_data}">contacto</p>
                         </li>
                         <li class="segundo">
-                            <summary class="color-1 tittle-20">Información económica</summary>
-                            <p class="mt-4 color-1-opacity">situación laboral</p>
+                            <summary [routerLink]="labor_data ? '/credit/results/economic' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}" class="tittle-20">Información económica</summary>
+                            <p class="mt-4" [routerLink]="labor_data ? '/credit/results/economic/labor' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">situación laboral</p>
                             <p class="color-1">situación financiera</p>
-                            <p class="color-1-opacity">datos económicos</p>
+                            <p [routerLink]="economic_data ? '/credit/results/economic/economic' : null" [ngClass]="{'pointer color-1': economic_data, 'not-allowed':!economic_data}">datos económicos</p>
                         </li>
                         <li class="tercero">
-                            <summary>Mi crédito</summary>
-                            <p class="mt-4">solicitud</p>
+                            <summary [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">Mi crédito</summary>
+                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">solicitud</p>
                         </li>
                         <li class="cuarto">
                             <summary>Solicitud lista</summary>
@@ -93,14 +93,14 @@
 
                     <div class="row pt-4 pb-0 pb-sm-3 justify-content-center">
                         <div class="col-10 col-sm-4 d-none d-sm-block">
-                            <summary class="text-center text-sm-left tittle-21 color-7">Situación laboral</summary>
+                            <summary [routerLink]="labor_data ? '/credit/results/economic/labor' : null" [ngClass]="{'pointer': labor_data, 'not-allowed':!labor_data}" class="text-center text-sm-left tittle-21 color-7">Situación laboral</summary>
                         </div>
                         <div class="col-10 col-sm-4">
                             <p class="tittle-21 color-1 text-center">Situación financiera</p>
                             <div class="mt-4 ml-1 d-none d-sm-block separator"></div>
                         </div>
                         <div class="col-10 col-sm-4 d-none d-sm-block">
-                            <summary class="tittle-21 text-center color-7">Datos económicos</summary>
+                            <summary [routerLink]="economic_data ? '/credit/results/economic/economic' : null" [ngClass]="{'pointer': economic_data, 'not-allowed':!economic_data}" class="tittle-21 text-center color-7">Datos económicos</summary>
                         </div>
                     </div>
 

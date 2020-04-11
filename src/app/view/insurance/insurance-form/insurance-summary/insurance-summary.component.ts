@@ -82,7 +82,7 @@ export class InsuranceSummaryComponent implements OnInit {
     insuranceInformation.last_name = this.personal_data.last_name;
     insuranceInformation.cedula = this.personal_data.cedula;
 
-    insuranceInformation.city = this.location_data.city;
+    insuranceInformation.city = this.location_data.city.name;
     insuranceInformation.address = this.location_data.address;
 
     insuranceInformation.email = this.contact_data.email;
@@ -99,17 +99,9 @@ export class InsuranceSummaryComponent implements OnInit {
     this.httpService.createInsuranceInformation(insuranceInformation).subscribe(res => {
       //console.log(res);
       if (res.status == 200) {
-
-        localStorage.removeItem('insurance_information');
-        localStorage.removeItem('insurance_options');
-        localStorage.removeItem('personal_data');
-        localStorage.removeItem('location_data');
-        localStorage.removeItem('contact_data');
-        //localStorage.clear();
-
+        localStorage.clear();
         this.router.navigate(['insurance/finalize']);
         //console.log(res);
-
         this.httpService.getSendMailInsurance().subscribe(res => {
           console.log(res);
         }, error => {

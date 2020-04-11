@@ -9,18 +9,18 @@
                         <li class="primero">
                             <summary class="color-1 tittle-20">Identificación</summary>
                             <p class="mt-4 color-1">datos personales</p>
-                            <p [routerLink]="location_data ? '/credit/results/identification/location' : null" [ngClass]="{'pointer': location_data, 'not-allowed':!location_data}" class="color-1-opacity">domicilio actual</p>
-                            <p [routerLink]="contact_data ? '/credit/results/identification/contact' : null" [ngClass]="{'pointer': contact_data, 'not-allowed':!contact_data}" class="color-1-opacity">contacto</p>
+                            <p [routerLink]="location_data ? '/credit/results/identification/location' : null" [ngClass]="{'pointer color-1': location_data, 'not-allowed':!location_data}">domicilio actual</p>
+                            <p [routerLink]="contact_data ? '/credit/results/identification/contact' : null" [ngClass]="{'pointer color-1': contact_data, 'not-allowed':!contact_data}">contacto</p>
                         </li>
                         <li class="segundo">
-                            <summary>Información económica</summary>
-                            <p class="mt-4">situación laboral</p>
-                            <p>situación financiera</p>
-                            <p>datos económicos</p>
+                            <summary [routerLink]="labor_data ? '/credit/results/economic' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">Información económica</summary>
+                            <p class="mt-4" [routerLink]="labor_data ? '/credit/results/economic/labor' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">situación laboral</p>
+                            <p [routerLink]="financial_data ? '/credit/results/economic/financial' : null" [ngClass]="{'pointer color-1': financial_data, 'not-allowed':!financial_data}">situación financiera</p>
+                            <p [routerLink]="economic_data ? '/credit/results/economic/economic' : null" [ngClass]="{'pointer color-1': economic_data, 'not-allowed':!economic_data}">datos económicos</p>
                         </li>
                         <li class="tercero">
-                            <summary>Mi crédito</summary>
-                            <p class="mt-4">solicitud</p>
+                            <summary [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">Mi crédito</summary>
+                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">solicitud</p>
                         </li>
                         <li class="cuarto">
                             <summary>Solicitud lista</summary>
@@ -97,10 +97,10 @@
                             <div class="mt-4 d-none d-sm-block separator"></div>
                         </div>
                         <div class="col-10 col-sm-4 d-none d-sm-block">
-                            <summary class="tittle-8 text-center text-sm-left color-7">Domicilio actual</summary>
+                            <p [routerLink]="location_data ? '/credit/results/identification/location' : null" [ngClass]="{'pointer': location_data, 'not-allowed':!location_data}" class="tittle-8 text-center text-sm-left color-7">Domicilio actual</p>
                         </div>
                         <div class="col-10 col-sm-4 d-none d-sm-block">
-                            <summary class="tittle-8 text-center text-sm-left color-7">Contacto</summary>
+                            <p [routerLink]="contact_data ? '/credit/results/identification/contact' : null" [ngClass]="{'pointer': contact_data, 'not-allowed':!contact_data}" class="tittle-8 text-center text-sm-left color-7">Contacto</p>
                         </div>
                     </div>
 

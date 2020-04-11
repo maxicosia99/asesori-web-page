@@ -5,7 +5,7 @@
                 <div class="col bg-4 text-center">
                     <img class="img-fluid mt-4" width="95px" height="95px" src="/assets/img/asesori-logo-negative.png">
 
-                    <ul class="timeline text-left text-uppercase tittle-19 color-6">
+                    <!-- <ul class="timeline text-left text-uppercase tittle-19 color-6">
                         <li class="primero">
                             <summary class="color-1-opacity">Identificación</summary>
                             <p class="mt-4 color-1-opacity">datos personales</p>
@@ -25,7 +25,32 @@
                         <li class="cuarto">
                             <summary>Solicitud lista</summary>
                         </li>
+                    </ul> -->
+
+
+                    <ul class="timeline text-left text-uppercase tittle-19 color-6">
+                        <li class="primero">
+                            <summary [routerLink]="personal_data ? '/credit/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}" class="tittle-20">Identificación</summary>
+                            <p class="mt-4" [routerLink]="personal_data ? '/credit/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales</p>
+                            <p [routerLink]="location_data ? '/credit/results/identification/location' : null" [ngClass]="{'pointer color-1': location_data, 'not-allowed':!location_data}">domicilio actual</p>
+                            <p [routerLink]="contact_data ? '/credit/results/identification/contact' : null" [ngClass]="{'pointer color-1': contact_data, 'not-allowed':!contact_data}">contacto</p>
+                        </li>
+                        <li class="segundo">
+                            <summary [routerLink]="labor_data ? '/credit/results/economic' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">Información económica</summary>
+                            <p class="mt-4" [routerLink]="labor_data ? '/credit/results/economic/labor' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">situación laboral</p>
+                            <p [routerLink]="financial_data ? '/credit/results/economic/financial' : null" [ngClass]="{'pointer color-1': financial_data, 'not-allowed':!financial_data}">situación financiera</p>
+                            <p [routerLink]="economic_data ? '/credit/results/economic/economic' : null" [ngClass]="{'pointer color-1': economic_data, 'not-allowed':!economic_data}">datos económicos</p>
+                        </li>
+                        <li class="tercero">
+                            <summary class="color-1 tittle-20">Mi crédito</summary>
+                            <p class="mt-4 color-1">solicitud</p>
+                        </li>
+                        <li class="cuarto">
+                            <summary>Solicitud lista</summary>
+                        </li>
                     </ul>
+
+
                 </div>
             </div>
             <div class="row mt-3 mx-1">

@@ -150,7 +150,7 @@ export class ContactDataComponent implements OnInit {
     this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
-    if(this.location_data){
+    if(this.contact_data){
       this.contactForm.controls['email'].setValue(this.contact_data.email);
       this.contactForm.controls['phone'].setValue(this.contact_data.phone);
       this.contactForm.controls['phone2'].setValue(this.contact_data.phone2);
