@@ -97,7 +97,7 @@ export class ResultCreditComponent implements OnInit {
    * @return {void} Nothing
   */
   cantSelectedUser() {
-    
+
     this.cantSelectedCreditOptions =
       this.creditform.value.can_access_credit_userSelected
         .map((v, i) => v ? this.can_access_credit[i].id : null)
@@ -148,12 +148,9 @@ export class ResultCreditComponent implements OnInit {
         }
 
         this.creditOptions = res.data;
-
-        console.log(res.data);
-
         this.can_access_credit = res.data.can_access_credit;
         this.cannot_access_credit = res.data.cannot_access_credit;
-        this.credit_unavailable = res.data.credit_unavailable;
+        //this.credit_unavailable = res.data.credit_unavailable;
         this.addCheckboxesCan_access_credit();
         this.addCheckboxesCannot_access_credit();
 
@@ -173,7 +170,25 @@ export class ResultCreditComponent implements OnInit {
    * @return {void} Nothing
   */
   todos() {
-    console.log(`todos`);
+
+    if (this.can_access_credit) {
+      this.can_access_credit_userSelected.clear();
+    }
+
+    if (this.cannot_access_credit) {
+      this.cannot_access_credit_userSelected.clear();
+    }
+
+    this.can_access_credit =  this.creditOptions.can_access_credit.filter(function(financialentity_type) {
+      return financialentity_type.financialentity_type > 0;
+    });
+
+    this.cannot_access_credit =  this.creditOptions.cannot_access_credit.filter(function(financialentity_type) {
+      return financialentity_type.financialentity_type > 0;
+    });
+
+    this.addCheckboxesCan_access_credit();
+    this.addCheckboxesCannot_access_credit();
   }
 
   /**
@@ -181,7 +196,25 @@ export class ResultCreditComponent implements OnInit {
    * @return {void} Nothing
   */
   bancos() {
-    console.log(`bancos`);
+
+    if (this.can_access_credit) {
+      this.can_access_credit_userSelected.clear();
+    }
+
+    if (this.cannot_access_credit) {
+      this.cannot_access_credit_userSelected.clear();
+    }
+
+    this.can_access_credit =  this.creditOptions.can_access_credit.filter(function(financialentity_type) {
+      return financialentity_type.financialentity_type == 1;
+    });
+
+    this.cannot_access_credit =  this.creditOptions.cannot_access_credit.filter(function(financialentity_type) {
+      return financialentity_type.financialentity_type == 1;
+    });
+
+    this.addCheckboxesCan_access_credit();
+    this.addCheckboxesCannot_access_credit();
   }
 
   /**
@@ -189,7 +222,25 @@ export class ResultCreditComponent implements OnInit {
    * @return {void} Nothing
   */
   cooperativas() {
-    console.log(`cooperativas`);
+
+    if (this.can_access_credit) {
+      this.can_access_credit_userSelected.clear();
+    }
+
+    if (this.cannot_access_credit) {
+      this.cannot_access_credit_userSelected.clear();
+    }
+
+    this.can_access_credit =  this.creditOptions.can_access_credit.filter(function(financialentity_type) {
+      return financialentity_type.financialentity_type == 2;
+    });
+
+    this.cannot_access_credit =  this.creditOptions.cannot_access_credit.filter(function(financialentity_type) {
+      return financialentity_type.financialentity_type == 2;
+    });
+
+    this.addCheckboxesCan_access_credit();
+    this.addCheckboxesCannot_access_credit();
   }
 
   /**
@@ -229,10 +280,10 @@ export class ResultCreditComponent implements OnInit {
 
       let credit_options: any = {
         credit_selected: credit_selected,
-        credits_entities : this.credits_entities
+        credits_entities: this.credits_entities
       }
 
-      /** Store credit information in localStorage*/      
+      /** Store credit information in localStorage*/
       localStorage.setItem('credit_options', JSON.stringify(credit_options));
       this.router.navigate(['credit/results/identification']);
     } else {
