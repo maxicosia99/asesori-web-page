@@ -16,7 +16,7 @@
 
                             <div class="col-12 col-md-7">
 
-                                <div class="position-relative mt-3">
+                                <!-- <div class="position-relative mt-3">
                                     <input type="text" formControlName="username" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.username.touched && formRegister.username.errors }">
                                     <span class="floating-label text-uppercase">Username*</span>
                                     <div *ngIf="formRegister.username.touched && formRegister.username.errors" class="invalid-feedback">
@@ -27,10 +27,10 @@
                                         <div *ngIf="formRegister.username.errors.maxlength">Máximo 15 caracteres!
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="position-relative mt-4">
-                                    <input type="text" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.email.touched && formRegister.email.errors }">
-                                    <span class="floating-label text-uppercase">Email*</span>
+                                    <input type="text" formControlName="email" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': formRegister.email.touched && formRegister.email.errors }">
+                                    <label class="floating-label">Email*</label>
                                     <div *ngIf="formRegister.email.touched && formRegister.email.errors" class="invalid-feedback">
                                         <div *ngIf="formRegister.email.errors.required">Porfavor ingrese su email!
                                         </div>
@@ -39,7 +39,18 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-4">
+                                <div class="position-relative mt-4">
+                                    <input type="password" formControlName="password" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
+                                    <label class="floating-label">Password*</label>
+                                    <div *ngIf="formRegister.password.touched && formRegister.password.errors" class="invalid-feedback">
+                                        <div *ngIf="formRegister.password.errors.required">Ingrese su contraseña!
+                                        </div>
+                                        <div *ngIf="formRegister.password.errors.minlength">Al menos 6 caracteres!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row mt-4">
                                     <div class="col-12 col-md-6">
                                         <div class="position-relative">
                                             <input type="password" formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
@@ -59,7 +70,6 @@
                                             <div *ngIf="formRegister.confirmPassword.touched && formRegister.confirmPassword.errors" class="invalid-feedback">
                                                 <div *ngIf="formRegister.confirmPassword.errors.required">Confirme la contraseña!
                                                 </div>
-                                                <!-- Problema al mostrar mensaje de error -->
                                                 <div *ngIf="formRegister.confirmPassword.errors.MustMatch">No coinciden!
                                                 </div>
 
@@ -68,7 +78,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
+
+
 
                                 <div *ngFor="let alert of alerts">
                                     <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">

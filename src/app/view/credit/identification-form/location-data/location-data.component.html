@@ -8,19 +8,26 @@
                     <ul class="timeline text-left text-uppercase tittle-19 color-6">
                         <li class="primero">
                             <summary [routerLink]="personal_data ? '/credit/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}" class="tittle-20">Identificación</summary>
-                            <p class="mt-4" [routerLink]="personal_data ? '/credit/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales</p>
+                            <p class="mt-4" [routerLink]="personal_data ? '/credit/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales
+                            </p>
                             <p class="color-1">domicilio actual</p>
                             <p [routerLink]="contact_data ? '/credit/results/identification/contact' : null" [ngClass]="{'pointer color-1': contact_data, 'not-allowed':!contact_data}">contacto</p>
                         </li>
                         <li class="segundo">
-                            <summary [routerLink]="labor_data ? '/credit/results/economic' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">Información económica</summary>
-                            <p class="mt-4" [routerLink]="labor_data ? '/credit/results/economic/labor' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">situación laboral</p>
-                            <p [routerLink]="financial_data ? '/credit/results/economic/financial' : null" [ngClass]="{'pointer color-1': financial_data, 'not-allowed':!financial_data}">situación financiera</p>
-                            <p [routerLink]="economic_data ? '/credit/results/economic/economic' : null" [ngClass]="{'pointer color-1': economic_data, 'not-allowed':!economic_data}">datos económicos</p>
+                            <summary [routerLink]="labor_data ? '/credit/results/economic' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">Información económica
+                            </summary>
+                            <p class="mt-4" [routerLink]="labor_data ? '/credit/results/economic/labor' : null" [ngClass]="{'pointer color-1': labor_data, 'not-allowed':!labor_data}">situación laboral
+                            </p>
+                            <p [routerLink]="financial_data ? '/credit/results/economic/financial' : null" [ngClass]="{'pointer color-1': financial_data, 'not-allowed':!financial_data}">situación financiera
+                            </p>
+                            <p [routerLink]="economic_data ? '/credit/results/economic/economic' : null" [ngClass]="{'pointer color-1': economic_data, 'not-allowed':!economic_data}">datos económicos
+                            </p>
                         </li>
                         <li class="tercero">
-                            <summary [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">Mi crédito</summary>
-                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">solicitud</p>
+                            <summary [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">
+                                Mi crédito</summary>
+                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && economic_data && labor_data && financial_data) ? '/credit/results/my-credit/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && economic_data && labor_data && financial_data), 'not-allowed':!(personal_data && location_data && contact_data && economic_data && labor_data && financial_data)}">
+                                solicitud</p>
                         </li>
                         <li class="cuarto">
                             <summary>Solicitud lista</summary>
@@ -124,28 +131,41 @@
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
+
                                 <div class="position-relative">
-                                    <input type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
-                                    <span class="floating-label text-uppercase">direccion*</span>
+                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                    <label class="floating-label">dirección</label>
                                     <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                         <span>Ingrese su dirección!</span>
                                     </div>
                                 </div>
+
+                                <!-- <div class="position-relative">
+                                    <input type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                    <span class="floating-label text-uppercase">dirección*</span>
+                                    <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
+                                        <span>Ingrese su dirección!</span>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="text" formControlName="reference" class="form-control text-uppercase" required>
+                                <!-- <div class="position-relative">
+                                    <input type="text" formControlName="reference" class="form-control text-uppercase">
                                     <span class="floating-label text-uppercase">referencia</span>
+                                </div> -->
+                                <div class="position-relative">
+                                    <input class="floating-input form-control text-uppercase" type="text" formControlName="reference" placeholder=" ">
+                                    <label class="floating-label">referencia</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="text" formControlName="sector" class="form-control text-uppercase" required>
-                                    <span class="floating-label text-uppercase">sector</span>
+                                    <input class="floating-input form-control text-uppercase" type="text" formControlName="sector" placeholder=" ">
+                                    <label class="floating-label">sector</label>
                                 </div>
                             </div>
                         </div>

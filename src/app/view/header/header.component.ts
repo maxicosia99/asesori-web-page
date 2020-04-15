@@ -100,6 +100,7 @@ export class HeaderComponent implements OnInit {
      * @returns {void} - Nothing
     */
     goTologin() {
+        this.navbarOpen = !this.navbarOpen;
         this.router.navigate(['/login']);
     }
 

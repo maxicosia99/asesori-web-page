@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { validateCedula } from 'src/app/services/client/validar-cedula';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService, BsDatepickerConfig } from 'ngx-bootstrap';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { UserInfo } from 'src/app/models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
@@ -21,7 +21,11 @@ export class PersonalDataComponent implements OnInit {
     private modalService: BsModalService,
     private httpService: HttpClientService,
     private authenticationService: AuthenticationService,
-  ) { }
+  ) {
+    this.dpConfig.containerClass = 'theme-dark-blue';
+  }
+
+  public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
   /**
   * Variable to check user login

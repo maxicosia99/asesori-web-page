@@ -317,7 +317,7 @@
                     </div>
                 </div>
                 <div class="box-values-insurance my-2 my-md-0">
-                    <ng-select class="custom2 custom3" [items]="vehicleDescription" formControlName="vehicleDescription" placeholder="descripcion*" [searchable]="true" bindLabel="description" [clearable]="false">
+                    <ng-select class="custom2 custom3" [items]="vehicleDescription" formControlName="vehicleDescription" placeholder="descripcion*" [searchable]="false" bindLabel="description" [clearable]="false">
                     </ng-select>
                     <div *ngIf="isFieldValidVehicleform('vehicleDescription')" class="invalid-select">
                         <span>Seleccione la descripción!</span>
@@ -362,8 +362,8 @@
 
                     <div class="col-12 col-md-6 py-2 py-md-0">
                         <div class="position-relative">
-                            <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="form-control" required [ngClass]="{ 'is-invalid': emailForm.email.touched && emailForm.email.errors}">
-                            <span class="floating-label text-uppercase">correo electronico*</span>
+                            <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="floating-input form-control" placeholder=" " required [ngClass]="{ 'is-invalid': emailForm.email.touched && emailForm.email.errors}">
+                            <label class="floating-label">correo electronico*</label>
                             <div *ngIf="emailForm.email.touched && emailForm.email.errors" class="invalid-feedback">
                                 <span>Ingrese correo electrónico!</span>
                             </div>
@@ -371,7 +371,7 @@
                     </div>
 
                     <div class="col-12 col-md-3 py-2 py-md-0">
-                        <ng-select appearance="outline" class="custom" [items]="provinces" placeholder="provincia*" formControlName="province" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
+                        <ng-select appearance="outline" [items]="provinces" placeholder="provincia*" formControlName="province" (change)="changeProvince($event)" [searchable]="true" bindLabel="name" [clearable]="false">
                         </ng-select>
                         <div *ngIf="isFieldValidemailForm('province')" class="invalid-select">
                             <span>Seleccione una provincia!</span>
@@ -379,7 +379,7 @@
                     </div>
 
                     <div class="col-12 col-md-3 py-2 py-md-0">
-                        <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false" required>
+                        <ng-select appearance="outline" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false" required>
                         </ng-select>
                         <div *ngIf="isFieldValidemailForm('city')" class="invalid-select">
                             <span>Seleccione una ciudad!</span>

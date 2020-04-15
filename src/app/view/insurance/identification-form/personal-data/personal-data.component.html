@@ -103,13 +103,14 @@
                         </div>
                     </div>
 
+
                     <form [formGroup]="personalDataForm">
 
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <div class="position-relative">
-                                    <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
-                                    <span class="floating-label text-uppercase">numero de identidad*</span>
+                                    <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}">
+                                    <label class="floating-label text-uppercase">número de identidad*</label>
                                     <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
                                         <span>Ingrese su cédula!</span>
                                     </div>
@@ -126,8 +127,8 @@
                         <div class="row mb-4 mt-4 mt-md-0">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="text" formControlName="names" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('names')}">
-                                    <span class="floating-label text-uppercase">nombres*</span>
+                                    <input type="text" formControlName="names" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('names')}">
+                                    <label class="floating-label">nombres*</label>
                                     <div *ngIf="isFieldValidPersonalData('names')" class="invalid-feedback">
                                         <span>Ingrese sus nombres!</span>
                                     </div>
@@ -137,8 +138,8 @@
                         <div class="row my-0">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="text" formControlName="last_names" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('last_names')}">
-                                    <span class="floating-label text-uppercase">apellidos*</span>
+                                    <input type="text" formControlName="last_names" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('last_names')}">
+                                    <label class="floating-label">apellidos*</label>
                                     <div *ngIf="isFieldValidPersonalData('last_names')" class="invalid-feedback">
                                         <span>Ingrese sus apellidos!</span>
                                     </div>
@@ -146,27 +147,11 @@
                             </div>
                         </div>
 
-                        <!-- <div class="row my-0 my-md-4">
-                            <div class="col-12 col-md-6 my-md-0 my-4">
-                                <ng-select class="custom" [items]="gender" formControlName="gender" placeholder="genero" [searchable]="false" bindLabel="gender" [clearable]="false">
-                                </ng-select>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="position-relative">
-                                    <input type="number" class="form-control" formControlName="age" required [ngClass]="{ 'is-invalid': isFieldValidPersonalData('age')}">
-                                    <span class="floating-label text-uppercase">edad*</span>
-                                    <div *ngIf="isFieldValidPersonalData('age')" class="invalid-feedback">
-                                        <span>Ingrese su edad!</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="date" formControlName="birthday">
-                                    <span class="floating-label text-uppercase">fecha de nacimiento</span>
+                                    <input type="text" formControlName="birthday" placeholder=" " [bsConfig]="dpConfig" class="floating-input form-control" bsDatepicker>
+                                    <label class="floating-label">fecha de nacimiento</label>
                                 </div>
                             </div>
                         </div>

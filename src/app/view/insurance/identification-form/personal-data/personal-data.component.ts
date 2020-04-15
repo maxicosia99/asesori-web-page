@@ -6,6 +6,7 @@ import { validateCedula } from 'src/app/services/client/validar-cedula';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { UserInfo } from 'src/app/models/user-info';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-personal-data',
@@ -19,7 +20,11 @@ export class PersonalDataComponent implements OnInit {
     private router: Router,
     private httpService: HttpClientService,
     private authenticationService: AuthenticationService,
-  ) { }
+  ) {
+    this.dpConfig.containerClass = 'theme-dark-blue';
+  }
+
+  public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
   /**
    * Variables for the progress bar

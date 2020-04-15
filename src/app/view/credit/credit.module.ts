@@ -13,6 +13,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { ResultCreditComponent } from './result-credit/result-credit.component';
 import { IdentificationFormComponent } from './identification-form/identification-form.component';                    // Carousel module
@@ -68,6 +69,7 @@ export const customCurrencyMaskConfig = {
     AlertModule.forRoot(),
     ProgressbarModule.forRoot(),
     CollapseModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ]
 })
 export class CreditModule { }

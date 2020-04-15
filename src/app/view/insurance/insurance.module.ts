@@ -12,6 +12,7 @@ import { ModalModule } from 'ngx-bootstrap';                            // Ngx-B
 import localeFr from '@angular/common/locales/fr';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { IdentificationFormComponent } from './identification-form/identification-form.component';
 import { PersonalDataComponent } from './identification-form/personal-data/personal-data.component';
@@ -60,6 +61,7 @@ export const customCurrencyMaskConfig = {
     ModalModule.forRoot(),
     CarouselModule,
     ProgressbarModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ]
 })
 export class InsuranceModule { }

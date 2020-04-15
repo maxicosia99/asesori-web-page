@@ -122,28 +122,41 @@
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
+
                                 <div class="position-relative">
-                                    <input type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
-                                    <span class="floating-label text-uppercase">direccion*</span>
+                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                    <label class="floating-label">dirección</label>
                                     <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                         <span>Ingrese su dirección!</span>
                                     </div>
                                 </div>
+
+                                <!-- <div class="position-relative">
+                                    <input type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" class="form-control text-uppercase" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                    <span class="floating-label text-uppercase">dirección*</span>
+                                    <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
+                                        <span>Ingrese su dirección!</span>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
-                                <div class="position-relative">
-                                    <input type="text" formControlName="reference" class="form-control text-uppercase" required>
+                                <!-- <div class="position-relative">
+                                    <input type="text" formControlName="reference" class="form-control text-uppercase">
                                     <span class="floating-label text-uppercase">referencia</span>
+                                </div> -->
+                                <div class="position-relative">
+                                    <input class="floating-input form-control text-uppercase" type="text" formControlName="reference" placeholder=" ">
+                                    <label class="floating-label">referencia</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="text" formControlName="sector" class="form-control text-uppercase" required>
-                                    <span class="floating-label text-uppercase">sector</span>
+                                    <input class="floating-input form-control text-uppercase" type="text" formControlName="sector" placeholder=" ">
+                                    <label class="floating-label">sector</label>
                                 </div>
                             </div>
                         </div>

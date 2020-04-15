@@ -109,28 +109,28 @@
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask class="form-control" formControlName="card_payment">
-                                    <span class="floating-label text-uppercase">pago de tarjetas</span>
+                                    <input type="tel" currencyMask formControlName="card_payment" class="floating-input form-control" placeholder=" ">
+                                    <label class="floating-label">pago de tarjetas</label>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask class="form-control" formControlName="mortgage_payment">
-                                    <span class="floating-label text-uppercase">pago de hipotecas</span>
+                                    <input type="tel" currencyMask formControlName="mortgage_payment" class="floating-input form-control" placeholder=" ">
+                                    <label class="floating-label">pago de hipotecas</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask class="form-control" formControlName="loans_payment">
-                                    <span class="floating-label text-uppercase">pago por préstamos</span>
+                                    <input type="tel" currencyMask formControlName="loans_payment" class="floating-input form-control" placeholder=" ">
+                                    <label class="floating-label">pago por préstamos</label>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="total_properties" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('total_properties')}">
-                                    <span class="floating-label text-uppercase">total de bienes*</span>
+                                    <input type="tel" currencyMask formControlName="total_properties" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('total_properties')}">
+                                    <label class="floating-label">total de bienes*</label>
                                     <div *ngIf="isFieldValidEconomicForm('total_properties')" class="invalid-feedback">
                                         <span>Ingrese total de bienes!</span>
                                     </div>
@@ -147,16 +147,16 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask class="form-control" formControlName="rent_payment">
-                                    <span class="floating-label text-uppercase">pago por arriendo</span>
+                                    <input type="tel" currencyMask formControlName="rent_payment" class="floating-input form-control" placeholder=" ">
+                                    <label class="floating-label">pago por arriendo</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="services_payment" class="form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('services_payment')}">
-                                    <span class="floating-label text-uppercase">pago de servicios*</span>
+                                    <input type="tel" currencyMask formControlName="services_payment" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('services_payment')}">
+                                    <label class="floating-label">pago de servicios*</label>
                                     <div *ngIf="isFieldValidEconomicForm('services_payment')" class="invalid-feedback">
                                         <span>Ingrese total de servicios!</span>
                                     </div>

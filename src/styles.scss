@@ -414,77 +414,122 @@ body {
 // .ng-select.ng-invalid.ng-touched .ng-select-container .ng-placeholder {
 //     color: #dc3545;
 // }
-.form-control {
-    padding: 10px 10px 0 20px;
-}
+// .form-control {
+//     padding: 18px 20px 0 20px;
+// }
 
-input[type=text],
-input[type=number],
-input[type=email],
-input[type=date],
-input[type=tel],
-input[type=password] {
-    width: 100%;
-    height: 60px;
-    border: #c9c9c9 solid 1px;
-    border-radius: 9px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    padding: 10px 10px 0 20px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    position: relative;
-    font-family: 'Poppins-Regular';
-    font-size: 14px;
-    line-height: 1.33;
-    letter-spacing: 2px;
-}
+/*--------------------------------------------------------------------------------------------------------------*/
 
-input:focus~.floating-label input:not(:focus):valid:disabled~.floating-label {
-    top: 5px;
-    font-size: 10px;
-    line-height: 1.33;
-    letter-spacing: 2px;
-    opacity: 1;
-}
-
-input:focus~.floating-label,
-input:valid~.floating-label,
-input:disabled~.floating-label {
-    top: 5px;
-    opacity: 1;
-    font-size: 10px;
-    line-height: 1.33;
-    letter-spacing: 2px;
-}
-
-input:focus~.floating-label,
-input:not(:focus):valid~.floating-label {
-    left: 20px
-}
-
-.floating-label {
-    position: absolute;
-    pointer-events: none;
-    left: 20px;
-    top: 23px;
-    transition: .2s ease all;
-    color: #777;
-    font-size: 12px;
-    line-height: 1.33;
-    letter-spacing: 2px;
-}
-
+// input[type=text],
+// input[type=number],
+// input[type=email],
+// input[type=date],
+// input[type=tel],
+// input[type=password] {
+//     width: 100%;
+//     height: 60px;
+//     border: #c9c9c9 solid 1px;
+//     border-radius: 9px;
+//     box-sizing: border-box;
+//     -webkit-box-sizing: border-box;
+//     -moz-box-sizing: border-box;
+//     padding: 10px 10px 0 20px;
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     position: relative;
+//     font-family: 'Poppins-Regular';
+//     font-size: 14px;
+//     line-height: 1.33;
+//     letter-spacing: 2px;
+// }
+// input:focus~.floating-label input:not(:focus):valid:disabled~.floating-label {
+//     top: 5px;
+//     font-size: 10px;
+//     line-height: 1.33;
+//     letter-spacing: 2px;
+//     opacity: 1;
+// }
+// input:focus~.floating-label,
+// input:valid~.floating-label,
+// input:disabled~.floating-label {
+//     top: 5px;
+//     opacity: 1;
+//     font-size: 10px;
+//     line-height: 1.33;
+//     letter-spacing: 2px;
+// }
+// input:focus~.floating-label,
+// input:not(:focus):valid~.floating-label {
+//     left: 20px
+// }
+// .floating-label {
+//     position: absolute;
+//     pointer-events: none;
+//     left: 20px;
+//     top: 23px;
+//     transition: .2s ease all;
+//     color: #777;
+//     font-size: 12px;
+//     line-height: 1.33;
+//     letter-spacing: 2px;
+// }
 .floating-label-static {
     color: #777;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 0.33;
     letter-spacing: 2px;
 }
 
 
 /* ------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+/****  floating-Lable style start ****/
+
+.position-relative {
+    position: relative;
+}
+
+.floating-input {
+    padding: 18px 20px 0 20px;
+    display: block;
+    width: 100%;
+    height: 60px;
+    background-color: transparent;
+    font-family: 'Poppins-Regular';
+    font-size: 14px;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    border: #c9c9c9 solid 1px;
+    border-radius: 9px;
+}
+
+.floating-label {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 25px;
+    text-transform: uppercase;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.floating-input:focus~label,
+.floating-input:not(:placeholder-shown)~label {
+    top: 6px;
+    opacity: 1;
+    font-size: 10px;
+    line-height: 1.33;
+    letter-spacing: 2px;
+}
+
+
+/****  floating-Lable style end ****/
 
 .button-calculate {
     padding: 15px;
@@ -609,13 +654,21 @@ input:not(:focus):valid~.floating-label {
 }
 
 .ng-select.custom2 .ng-select-container .ng-value-container .ng-input {
-    bottom: -13px;
-    padding-bottom: 5px;
+    padding-left: 0;
+    padding-right: 30px;
 }
 
-.ng-select.custom2 .ng-select-container .ng-value-container .ng-input>input {
-    padding-left: 0;
-    padding-bottom: 0;
+.ng-select .ng-select-container .ng-value-container .ng-input {
+    padding-left: 20px;
+    padding-right: 45px;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-input>input {
+    font-family: 'Poppins-Regular';
+    font-size: 14px;
+    line-height: 1.33;
+    letter-spacing: 2px;
+    //text-transform: uppercase;
 }
 
 .separator {
