@@ -128,6 +128,8 @@ export class ContactDataComponent implements OnInit {
   ngOnInit() {
     window.scrollTo(0, 0);
 
+    this.contactForm.controls['email'].setValue(JSON.parse(localStorage.getItem('email_data')).email);
+
     /* Handling of personal data when logging in */
     this.recuperateLoginData();
     this.authenticationService.subsVar = this.authenticationService.getUserData.subscribe(() => {
@@ -151,7 +153,7 @@ export class ContactDataComponent implements OnInit {
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
     if(this.contact_data){
-      this.contactForm.controls['email'].setValue(this.contact_data.email);
+      //this.contactForm.controls['email'].setValue(this.contact_data.email);
       this.contactForm.controls['phone'].setValue(this.contact_data.phone);
       this.contactForm.controls['phone2'].setValue(this.contact_data.phone2);
     }

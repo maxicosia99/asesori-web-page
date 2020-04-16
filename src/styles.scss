@@ -399,15 +399,16 @@ body {
 
 .ng-select.ng-invalid.ng-touched .ng-select-container {
     border-color: #dc3545;
+    //border-color: #c9c9c9;
+    background-color: rgba(255, 6, 0, 0.02);
 }
 
 
 /* Arrow Color */
 
-.ng-select.ng-invalid.ng-touched .ng-arrow-wrapper .ng-arrow {
-    border-color: #dc3545 transparent transparent;
-}
-
+// .ng-select.ng-invalid.ng-touched .ng-arrow-wrapper .ng-arrow {
+//     border-color: #dc3545 transparent transparent;
+// }
 
 /* Placeholder Color */
 
@@ -605,6 +606,7 @@ body {
     color: #dc3545;
     margin-top: .25rem;
     font-size: 80%;
+    text-align: right;
 }
 
 .ng-select.custom2 {
@@ -693,6 +695,18 @@ body {
 
 .not-allowed {
     cursor: not-allowed;
+}
+
+.custom-select.is-invalid,
+.form-control.is-invalid,
+.was-validated .custom-select:invalid,
+.was-validated .form-control:invalid {
+    //border-color: #c9c9c9;
+    background-color: rgba(255, 6, 0, 0.02);
+}
+
+.form-control.is-invalid~.invalid-feedback {
+    text-align: right;
 }
 
 

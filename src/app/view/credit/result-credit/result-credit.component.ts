@@ -136,7 +136,7 @@ export class ResultCreditComponent implements OnInit {
 
   ngOnInit() {
     this.credit_information = JSON.parse(localStorage.getItem('credit_information'));
-    this.httpService.getAllCreditOptions(this.credit_information.region_code, this.credit_information.entityType, this.credit_information.id_credit, this.credit_information.amountRequest, this.credit_information.monthlyIncome, this.credit_information.term, this.credit_information.entryAmount).subscribe(res => {
+    this.httpService.getAllCreditOptions(this.credit_information.city_code, 0, this.credit_information.id_credit, this.credit_information.amountRequest, this.credit_information.monthlyIncome, this.credit_information.term, this.credit_information.entryAmount).subscribe(res => {
       if (res.status == 200) {
 
         if (this.can_access_credit) {

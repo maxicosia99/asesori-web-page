@@ -62,24 +62,41 @@ export class LaborDataComponent implements OnInit {
   */
   public cities: any;
 
-
-  /**
-  * Service form (credit, insurance, credit cards, investment policy)
- */
   laborform = this.formbuilder.group({
     type: new FormControl(null, Validators.required),
-    companyName: [''],
-    positionCompany: [''],
-    monthlySalary: [''],
+  });
+
+  dependienteform = this.formbuilder.group({
+    companyName: ['', [Validators.required]],
+    positionCompany: ['', [Validators.required]],
+    monthlySalary: ['', [Validators.required]],
     otherMonthlyValue: [''],
     valueDetail: [''],
-    province: [null],
-    city: [null],
+    province: [null, [Validators.required]],
+    city: [null, [Validators.required]],
     address: [''],
     phone: [''],
-    ruc: [''],
-    sector: [''],
-    averageSales: ['']
+  });
+
+  independienteform = this.formbuilder.group({
+    ruc: ['', [Validators.required]],
+    sector: ['', [Validators.required]],
+    averageSales: ['', [Validators.required]]
+  });
+
+  mixtaform = this.formbuilder.group({
+    companyName: ['', [Validators.required]],
+    positionCompany: ['', [Validators.required]],
+    monthlySalary: ['', [Validators.required]],
+    otherMonthlyValue: [''],
+    valueDetail: [''],
+    province: [null, [Validators.required]],
+    city: [null, [Validators.required]],
+    address: [''],
+    phone: [''],
+    ruc: ['', [Validators.required]],
+    sector: ['', [Validators.required]],
+    averageSales: ['', [Validators.required]]
   });
 
   isCollapsed = true;
@@ -139,7 +156,8 @@ export class LaborDataComponent implements OnInit {
 
         /* In case the location is detected */
         if (resp.status === 200) {
-          this.laborform.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
+          this.dependienteform.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
+          this.mixtaform.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
           /* the cities of the detected province are loaded */
           this.httpService.getCities(resp.data.id).subscribe(res => {
             this.cities = []
@@ -173,40 +191,62 @@ export class LaborDataComponent implements OnInit {
     this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
-    if(this.labor_data){
+    if (this.labor_data) {
 
-      if(this.labor_data.type === 'dependiente'){
+      if (this.labor_data.type === 'dependiente') {
         this.dependenciaSection = true;
+
+        this.laborform.controls['type'].setValue(this.labor_data.type);
+        this.dependienteform.controls['companyName'].setValue(this.labor_data.companyName);
+        this.dependienteform.controls['positionCompany'].setValue(this.labor_data.positionCompany);
+        this.dependienteform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
+        this.dependienteform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+        this.dependienteform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
+
+        if (this.labor_data.province) {
+          this.dependienteform.controls['province'].setValue({ id: this.labor_data.province.id, name: this.labor_data.province.name });
+        }
+
+        if (this.labor_data.city) {
+          this.dependienteform.controls['city'].setValue({ id: this.labor_data.city.id, name: this.labor_data.city.name });
+        }
+
+        this.dependienteform.controls['address'].setValue(this.labor_data.address);
+        this.dependienteform.controls['phone'].setValue(this.labor_data.phone);
+
       }
-  
-      if(this.labor_data.type === 'independiente'){
+
+      if (this.labor_data.type === 'independiente') {
         this.independenciaSection = true;
+        this.laborform.controls['type'].setValue(this.labor_data.type);
+        this.independienteform.controls['ruc'].setValue(this.labor_data.ruc);
+        this.independienteform.controls['sector'].setValue(this.labor_data.sector);
+        this.independienteform.controls['averageSales'].setValue(this.labor_data.averageSales);
       }
-  
-      if(this.labor_data.type === 'mixta'){
+
+      if (this.labor_data.type === 'mixta') {
         this.mixtaSection = true;
-      }
+        this.laborform.controls['type'].setValue(this.labor_data.type);
+        this.mixtaform.controls['companyName'].setValue(this.labor_data.companyName);
+        this.mixtaform.controls['positionCompany'].setValue(this.labor_data.positionCompany);
+        this.mixtaform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
+        this.mixtaform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+        this.mixtaform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
 
-      this.laborform.controls['type'].setValue(this.labor_data.type);
-      this.laborform.controls['companyName'].setValue(this.labor_data.companyName);
-      this.laborform.controls['positionCompany'].setValue(this.labor_data.positionCompany);
-      this.laborform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
-      this.laborform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
-      this.laborform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
-      
-      if(this.labor_data.province){
-        this.laborform.controls['province'].setValue({id: this.labor_data.province.id, name: this.labor_data.province.name});
-      }
+        if (this.labor_data.province) {
+          this.mixtaform.controls['province'].setValue({ id: this.labor_data.province.id, name: this.labor_data.province.name });
+        }
 
-      if(this.labor_data.city){
-        this.laborform.controls['city'].setValue({id: this.labor_data.city.id, name: this.labor_data.city.name});
+        if (this.labor_data.city) {
+          this.mixtaform.controls['city'].setValue({ id: this.labor_data.city.id, name: this.labor_data.city.name });
+        }
+
+        this.mixtaform.controls['address'].setValue(this.labor_data.address);
+        this.mixtaform.controls['phone'].setValue(this.labor_data.phone);
+        this.mixtaform.controls['ruc'].setValue(this.labor_data.ruc);
+        this.mixtaform.controls['sector'].setValue(this.labor_data.sector);
+        this.mixtaform.controls['averageSales'].setValue(this.labor_data.averageSales);
       }
-      
-      this.laborform.controls['address'].setValue(this.labor_data.address);
-      this.laborform.controls['phone'].setValue(this.labor_data.phone);
-      this.laborform.controls['ruc'].setValue(this.labor_data.ruc);
-      this.laborform.controls['sector'].setValue(this.labor_data.sector);
-      this.laborform.controls['averageSales'].setValue(this.labor_data.averageSales);
     }
   }
 
@@ -246,34 +286,129 @@ export class LaborDataComponent implements OnInit {
   }
 
   /**
-   * Validate contact form
-   * @return {void} Nothing
+   * Variable to verify if the dependiente form is correct
+   * @type {boolean}
   */
-  onSubmitLaborForm() {
+  dependienteFormSubmitted: boolean;
 
-    //this.laborFormSubmitted = true;
-    //if (this.laborform.valid) {
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
+  isFieldValidDependienteform(field: string) {
+    return (
+      this.dependienteform.get(field).errors && this.dependienteform.get(field).touched ||
+      this.dependienteform.get(field).untouched &&
+      this.dependienteFormSubmitted && this.dependienteform.get(field).errors
+    );
+  }
+
+  /**
+   * Variable to verify if the dependiente form is correct
+   * @type {boolean}
+  */
+  independienteFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
+  isFieldValidIndependienteform(field: string) {
+    return (
+      this.independienteform.get(field).errors && this.independienteform.get(field).touched ||
+      this.independienteform.get(field).untouched &&
+      this.independienteFormSubmitted && this.independienteform.get(field).errors
+    );
+  }
+
+  /**
+   * Variable to verify if the dependiente form is correct
+   * @type {boolean}
+  */
+  mixtaFormSubmitted: boolean;
+
+  /**
+   * Validate a form field
+   * @param {string} field - Field of the form to be validated
+   * @return {boolean} - True if the field is correct, false if it is not
+  */
+  isFieldValidMixtaform(field: string) {
+    return (
+      this.mixtaform.get(field).errors && this.mixtaform.get(field).touched ||
+      this.mixtaform.get(field).untouched &&
+      this.mixtaFormSubmitted && this.mixtaform.get(field).errors
+    );
+  }
+
+  onSubmitDependienteForm() {
+
+    this.dependienteFormSubmitted = true;
+    if (this.dependienteform.valid) {
 
       let labor_data: any = {
         type: this.laborform.value.type,
-        companyName: this.laborform.value.companyName,
-        positionCompany: this.laborform.value.positionCompany,
-        monthlySalary: this.laborform.value.monthlySalary,
-        otherMonthlyValue: this.laborform.value.otherMonthlyValue,
-        valueDetail: this.laborform.value.valueDetail,
-        province: this.laborform.value.province,
-        city: this.laborform.value.city,
-        address: this.laborform.value.address,
-        phone: this.laborform.value.phone,
-        ruc: this.laborform.value.ruc,
-        sector: this.laborform.value.sector,
-        averageSales: this.laborform.value.averageSales
+        companyName: this.dependienteform.value.companyName,
+        positionCompany: this.dependienteform.value.positionCompany,
+        monthlySalary: this.dependienteform.value.monthlySalary,
+        otherMonthlyValue: this.dependienteform.value.otherMonthlyValue,
+        valueDetail: this.dependienteform.value.valueDetail,
+        province: this.dependienteform.value.province,
+        city: this.dependienteform.value.city,
+        address: this.dependienteform.value.address,
+        phone: this.dependienteform.value.phone
       }
 
       /** Store location_data in localStorage*/
       localStorage.setItem('labor_data', JSON.stringify(labor_data));
       this.router.navigate(['credit/results/economic/financial']);
-    //}
+    }
+  }
+
+  onSubmitIndependienteForm() {
+
+    this.independienteFormSubmitted = true;
+    if (this.independienteform.valid) {
+
+      let labor_data: any = {
+        type: this.laborform.value.type,
+        ruc: this.independienteform.value.ruc,
+        sector: this.independienteform.value.sector,
+        averageSales: this.independienteform.value.averageSales
+      }
+
+      /** Store location_data in localStorage*/
+      localStorage.setItem('labor_data', JSON.stringify(labor_data));
+      this.router.navigate(['credit/results/economic/financial']);
+    }
+  }
+
+  onSubmitMixtaForm() {
+
+    this.mixtaFormSubmitted = true;
+    if (this.mixtaform.valid) {
+
+      let labor_data: any = {
+        type: this.laborform.value.type,
+        companyName: this.mixtaform.value.companyName,
+        positionCompany: this.mixtaform.value.positionCompany,
+        monthlySalary: this.mixtaform.value.monthlySalary,
+        otherMonthlyValue: this.mixtaform.value.otherMonthlyValue,
+        valueDetail: this.mixtaform.value.valueDetail,
+        province: this.mixtaform.value.province,
+        city: this.mixtaform.value.city,
+        address: this.mixtaform.value.address,
+        phone: this.mixtaform.value.phone,
+        ruc: this.mixtaform.value.ruc,
+        sector: this.mixtaform.value.sector,
+        averageSales: this.mixtaform.value.averageSales
+      }
+
+      /** Store location_data in localStorage*/
+      localStorage.setItem('labor_data', JSON.stringify(labor_data));
+      this.router.navigate(['credit/results/economic/financial']);
+    }
   }
 
 }

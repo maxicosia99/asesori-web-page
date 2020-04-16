@@ -8,7 +8,7 @@
                     <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
                     </p>
 
-                    <p class="mt-4 mb-3 text-center tittle-7">Inicia sesión o crea una cuenta para ver el seguimiento de tu solicitud</p>
+                    <p class="mt-4 mb-3 text-center tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud, o <u class="pointer">inicia sesión</u></p>
 
                     <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
 
@@ -40,7 +40,9 @@
                                 </div>
 
                                 <div class="position-relative mt-4">
-                                    <input type="password" formControlName="password" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
+                                    <input [type]="show ? 'text' : 'password'" type="password" formControlName="password" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
+                                    <summary *ngIf="!show" class="ptxt tittle-14 text-uppercase" (click)="password()">Mostrar</summary>
+                                    <summary *ngIf="show" class="ptxt tittle-14 text-uppercase" (click)="password()">Ocultar</summary>
                                     <label class="floating-label">Password*</label>
                                     <div *ngIf="formRegister.password.touched && formRegister.password.errors" class="invalid-feedback">
                                         <div *ngIf="formRegister.password.errors.required">Ingrese su contraseña!

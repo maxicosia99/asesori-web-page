@@ -88,7 +88,7 @@ export class FinalizeRequestComponent implements OnInit {
     }
 
     window.scrollTo(0, 0);
-    this.registerForm.controls['email'].setValue(JSON.parse(localStorage.getItem('contact_data')).email);
+    this.registerForm.controls['email'].setValue(JSON.parse(localStorage.getItem('email_data')).email);
   }
 
   /**
@@ -184,6 +184,12 @@ export class FinalizeRequestComponent implements OnInit {
     }
     //this.user_id = null;
     return false;
+  }
+
+  public show: boolean = false;
+
+  password(){
+    this.show = !this.show;
   }
 
 }

@@ -7,3 +7,16 @@
     -o-background-size: cover;
     background-size: cover;
 }
+
+.ptxt {
+    position: absolute;
+    top: 45%;
+    right: 20px;
+    z-index: 1;
+    color: #72727c;
+    transition: .3s ease all;
+}
+
+.ptxt:hover {
+    color: #333333;
+}

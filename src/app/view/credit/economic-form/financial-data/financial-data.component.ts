@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -54,11 +54,11 @@ export class FinancialDataComponent implements OnInit {
   * Service form (credit, insurance, credit cards, investment policy)
  */
   financialform = this.formbuilder.group({
-    monthlySalary: [''],
+    monthlySalary: ['', [Validators.required]],
     otherMonthlyValue: [''],
     valueDetail: [''],
-    monthlyExpenses: [''],
-    paymentCapacity: ['']
+    monthlyExpenses: ['', [Validators.required]],
+    paymentCapacity: ['', [Validators.required]]
   });
 
   public personal_data: any;

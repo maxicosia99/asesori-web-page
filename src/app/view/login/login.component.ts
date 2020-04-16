@@ -104,6 +104,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     window.scrollTo(0, 0);
   }
 
+  public show: boolean = false;
+
+  password(){
+    this.show = !this.show;
+  }
+
   /**
    * Show an alert with a message
    * @param {string} msg - Error or warning message

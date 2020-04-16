@@ -363,15 +363,11 @@ export class HomePageComponent implements OnInit {
   */
   onSubmitEmailSection() {
 
-    let contact_data: any = {
+    let email_data: any = {
       email: this.emailform.value.email
     }
     /** Store contact_data in localStorage*/
-    localStorage.setItem('contact_data', JSON.stringify(contact_data));
-
-    /** Enviar el valor correcto */
-    console.log(this.emailform.value.province);
-    console.log(this.emailform.value.city);
+    localStorage.setItem('email_data', JSON.stringify(email_data));
 
     if (this.serviceform.get('service_type_userSelected').value === 'creditos') {
       this.router.navigate(['credit']);
@@ -381,8 +377,7 @@ export class HomePageComponent implements OnInit {
         monthlyIncome: this.monthlyIncome.value,
         entryAmount: this.entryAmount.value,
         term: this.term.value,
-        region_code: this.region_code,
-        entityType: 0,
+        city_code: this.region_code, //reemplazar por this.emailform.value.city.id
         id_credit: this.id_credit,
         destinedTo: this.destinedTo
       }

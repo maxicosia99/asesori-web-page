@@ -144,4 +144,15 @@ export class EconomicDataComponent implements OnInit {
     }
   }
 
+  public withRent: boolean = false;
+
+  changeTypeHousing(event){
+    if(event.type === 'Propia'){
+      this.withRent = false;
+    }
+    if(event.type === 'Arrendada'){
+      this.withRent = true;
+    }
+  }
+
 }

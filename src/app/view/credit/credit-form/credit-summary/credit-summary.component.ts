@@ -166,7 +166,7 @@ export class CreditSummaryComponent implements OnInit {
         localStorage.removeItem('location_data');
         localStorage.removeItem('labor_data');
         localStorage.removeItem('financial_data');
-        //localStorage.removeItem('contact_data');
+        localStorage.removeItem('contact_data');
         //localStorage.clear();
 
         this.router.navigate(['credit/finalize']);
