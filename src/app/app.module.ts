@@ -17,6 +17,7 @@ import { FooterComponent } from './view/footer/footer.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterExtService } from './services/client/routing.service';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { RouterExtService } from './services/client/routing.service';
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     AppAuthModule,
+    PopoverModule.forRoot()
   ],
   declarations: [
     AppComponent,

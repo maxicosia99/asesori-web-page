@@ -80,14 +80,28 @@ export class FinancialDataComponent implements OnInit {
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
     if (this.financial_data) {
-      this.financialform.controls['monthlySalary'].setValue(this.financial_data.monthlySalary);  
-      this.financialform.controls['otherMonthlyValue'].setValue(this.financial_data.otherMonthlyValue);
+
+      if(this.financial_data.monthlySalary){
+        this.financialform.controls['monthlySalary'].setValue(this.financial_data.monthlySalary);  
+      }
+
+      if(this.financial_data.otherMonthlyValue){
+        this.financialform.controls['otherMonthlyValue'].setValue(this.financial_data.otherMonthlyValue);
+      }
+
       this.financialform.controls['valueDetail'].setValue(this.financial_data.valueDetail);  
       this.financialform.controls['monthlyExpenses'].setValue(this.financial_data.monthlyExpenses);  
       this.financialform.controls['paymentCapacity'].setValue(this.financial_data.paymentCapacity);  
     } else if (this.labor_data) {
-      this.financialform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
-      this.financialform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+
+      if(this.labor_data.monthlySalary){
+        this.financialform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
+      }
+
+      if(this.labor_data.otherMonthlyValue){
+        this.financialform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+      }
+      
       this.financialform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
     }
   }

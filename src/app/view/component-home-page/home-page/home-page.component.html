@@ -3,14 +3,15 @@
     <!-- INITIAL SECTION -->
 
     <section class="container-fluid">
-        <div class="row">
-
+        <div class="row justify-content-center">
+            <div class="col-4 d-block d-md-none text-center">
+                <img src="/assets/img/asesori-logo-negative.png" width="90px" height="90px" class="" alt="ASESORI" routerLink="/homepage">
+            </div>
             <div class="col-12 col-md-6 px-80">
-                <div class="text-center text-lg-left my-md-5">
+                <div class="text-center text-lg-left my-md-5 d-none d-md-block">
                     &nbsp;
-                    <!-- <img src="/assets/img/asesori-logo-negative.png" width="95px" height="95px" class="my-4" alt=""> -->
                 </div>
-                <h1 class="tittle-1 mt-5 mb-3">¿Necesitas un crédito para tu casa?</h1>
+                <h1 class="tittle-1 mt-4 mt-md-5 mb-3">¿Necesitas un crédito para tu casa?</h1>
                 <p class="text-light-16">Asesori te facilita las mejores opciones para que puedas acceder rápido y seguro al crédito que necesites.</p>
                 <div class="row mt-5">
                     <div class="col-12 col-lg-6">
@@ -123,7 +124,8 @@
 
         <div class="row px-4 px-md-0">
             <div class="col-12 my-4">
-                <h4 class="tittle-9 mb-4 text-uppercase"><b>COMPARA LAS MEJORES TASAS Y OPORTUNIDADES DE FINANCIAMIENTO</b>
+                <h4 class="tittle-9 mb-4 text-uppercase"><b>COMPARA LAS MEJORES TASAS Y OPORTUNIDADES DE
+                        FINANCIAMIENTO</b>
                 </h4>
                 <p class="text-light-14">ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de inversión que ofrecen los Bancos, Cooperativas o Mutualistas, utiliza nuestra calculadora a continuación y compara.</p>
             </div>
@@ -340,7 +342,7 @@
         <!-- CALCULATE INSURANCE BUTTON -->
         <div *ngIf="insuranceSection" class="row my-5 justify-content-center mx-0 px-md-0">
             <div class="col-md-6 col-lg-3">
-                <button type="button" class="btn button-calculate btn-block" (click)="onSubmitServiceform(calculator)">CALCULAR</button>
+                <button type="button" class="btn button-calculate btn-block" [disabled]="!vehicleform.valid" (click)="onSubmitServiceform(calculator)">CALCULAR</button>
             </div>
         </div>
 

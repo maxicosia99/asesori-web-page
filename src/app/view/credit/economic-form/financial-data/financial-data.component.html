@@ -1,5 +1,10 @@
 <section class="container">
-    <div class="row">
+    <div class="row justify-content-center">
+
+        <div class="col-4 d-block d-md-none text-center">
+            <img src="/assets/img/asesori-logo-negative.png" width="90px" height="90px" class="" alt="ASESORI" routerLink="/homepage">
+        </div>
+
         <div class="d-none d-lg-block col-3">
             <div class="row">
                 <div class="col bg-4 text-center">
@@ -110,7 +115,7 @@
                             <div class="col-12">
                                 <div class="position-relative">
                                     <input type="tel" currencyMask formControlName="monthlySalary" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('monthlySalary')}">
-                                    <label class="floating-label">sueldo mensual</label>
+                                    <label class="floating-label">sueldo mensual*</label>
                                     <div *ngIf="isFieldValidfinancialform('monthlySalary')" class="invalid-feedback">
                                         <span>Ingrese el sueldo mensual!</span>
                                     </div>
@@ -127,7 +132,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="position-relative">
                                     <input type="text" formControlName="valueDetail" class="floating-input form-control" placeholder=" ">
-                                    <label class="floating-label">detalle del valor*</label>
+                                    <label class="floating-label">detalle del valor</label>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +140,7 @@
                             <div class="col-12">
                                 <div class="position-relative">
                                     <input type="tel" currencyMask formControlName="monthlyExpenses" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('monthlyExpenses')}">
-                                    <label class="floating-label">gastos al mes</label>
+                                    <label class="floating-label">gastos al mes*</label>
                                     <div *ngIf="isFieldValidfinancialform('monthlyExpenses')" class="invalid-feedback">
                                         <span>Ingrese los gastos al mes!</span>
                                     </div>
@@ -146,7 +151,7 @@
                             <div class="col-12">
                                 <div class="position-relative">
                                     <input type="tel" currencyMask formControlName="paymentCapacity" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('paymentCapacity')}">
-                                    <label class="floating-label">mi capacidad de pago mensual es</label>
+                                    <label class="floating-label">mi capacidad de pago mensual es*</label>
                                     <div *ngIf="isFieldValidfinancialform('paymentCapacity')" class="invalid-feedback">
                                         <span>Ingrese los gastos al mes!</span>
                                     </div>

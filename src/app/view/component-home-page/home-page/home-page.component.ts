@@ -302,12 +302,7 @@ export class HomePageComponent implements OnInit {
    * Variables to retrieve user information
    * @type {boolean}
   */
-  public hasCedula: boolean = false;
   public hasEmail: boolean = false;
-  public hasPhone1: boolean = false;
-  public hasAddress: boolean = false;
-  public hasNames: boolean = false;
-  public hasLastNames: boolean = false;
 
 
 
@@ -525,6 +520,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
+    window.scrollTo(0, 0);
+
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
       this.provinces = res.data;
@@ -616,7 +613,7 @@ export class HomePageComponent implements OnInit {
   */
   changeProvince(event) {
     this.httpService.getCities(event.id).subscribe(res => {
-      this.emailForm.controls['city'].setValue({ id: -1, name: 'CIUDAD*' });
+      this.emailform.controls['city'].setValue(null);
       this.cities = []
       this.cities = res.data;
     }, error => {

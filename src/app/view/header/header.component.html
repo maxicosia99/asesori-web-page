@@ -1,14 +1,35 @@
 <header>
     <nav class="navbar fixed-top navbar-expand-md navbar-light ">
-        <div class="container py-0">
+        <div class="container py-4 py-md-0 ">
 
-            <a class="navbar-brand" routerLink="/homepage">
+            <a class="navbar-brand d-none d-md-block" routerLink="/homepage">
                 <img src="/assets/img/asesori-logo-negative.png" width="70px" height="70px" alt="">
             </a>
 
             <button class="navbar-toggler" type="button" (click)="toggleNavbar()" aria-controls="collapseBasic">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <li *ngIf="!loginVerified()" class="nav-item d-block d-md-none">
+                <button (click)="goTologin()" class="btn-outline tittle-23 align-self-center">Iniciar sesión</button>
+            </li>
+
+            <div *ngIf="loginVerified()" class="d-block d-md-none">
+                <ng-template #popTemplate>
+                    <div class="row">
+                        <div class="col-12">
+                            <summary routerLink="/tracking" routerLinkActive="active-link" class="nav-link tittle-13 color-3">Mis solicitudes</summary>
+                            <summary (click)="onLoggedout()" class="nav-link tittle-13 color-3">Cerrar sesión</summary>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" [popover]="popTemplate" placement="bottom" [outsideClick]="true" (onHidden)="collapseMovile()">
+                        <a (click)="isCollapsedMovile = !isCollapsedMovile" class="nav-link tittle-10 mt-1 pointer"><u> {{user.name}} <i *ngIf="!isCollapsedMovile" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsedMovile" class="fas fa-angle-down pr-3"></i></u></a>
+                    </li>
+                </ul>
+            </div>
 
             <div class="collapse navbar-collapse" id="collapseBasic" [collapse]="!navbarOpen" [isAnimated]="animated">
                 <ul class="navbar-nav ml-auto">
@@ -21,15 +42,19 @@
                     <li class="nav-item">
                         <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/homepage" routerLinkActive="active-link">Testimonios</a>
                     </li>
-                    <li *ngIf="!loginVerified(); else elseBlock" class="nav-item">
-                        <button (click)="goTologin()" class="btn-outline tittle-10 mt-1 mb-3 mb-md-0">Iniciar sesión</button>
+                    <li *ngIf="!loginVerified(); else elseBlock" class="nav-item d-none d-md-block">
+                        <button (click)="goTologin()" class="btn-outline tittle-10 mt-1 mb-3 mb-md-0">Iniciar
+                            sesión</button>
                     </li>
                     <ng-template #elseBlock>
-                        <li class="nav-item">
-                            <a class="nav-link tittle-10 mt-1"><i class="fas fa-user-circle"></i> {{user.username}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a (click)="onLoggedout()" class="nav-link tittle-10 mt-1">Salir</a>
+
+                        <ng-template #popTemplate>
+                            <summary routerLink="/tracking" routerLinkActive="active-link" class="nav-link tittle-13 color-3">Mis solicitudes</summary>
+                            <summary (click)="onLoggedout()" class="nav-link tittle-13 color-3">Cerrar sesión</summary>
+                        </ng-template>
+
+                        <li class="nav-item d-none d-md-block" [popover]="popTemplate" placement="bottom" [outsideClick]="true" (onHidden)="collapse()">
+                            <a (click)="isCollapsed = !isCollapsed" class="nav-link tittle-10 mt-1 pointer"><i class="fas fa-user-circle"></i><u> {{user.name}} <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i></u></a>
                         </li>
                     </ng-template>
                 </ul>

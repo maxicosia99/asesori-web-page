@@ -2,32 +2,23 @@
     <div class="row">
         <div class="col-12">
             <div class="row mx-2 mx-md-0 justify-content-center">
-                <div class="col-12 col-lg-8 align-self-center">
 
+                <div class="col-4 d-block d-md-none text-center">
+                    <img src="/assets/img/asesori-logo-negative.png" width="90px" height="90px" class="" alt="ASESORI" routerLink="/homepage">
+                </div>
+
+                <div class="col-12 col-lg-8 align-self-center mt-3 mt-md-5">
                     <h2 class="tittle-1 mt-2 mb-4 text-center color-1">¡Solicitud lista!</h2>
                     <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
                     </p>
 
-                    <p class="mt-4 mb-3 text-center tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud, o <u class="pointer">inicia sesión</u></p>
+                    <form *ngIf="!loginVerified(); else elseBlock" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
 
-                    <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+                        <p class="mt-4 mb-3 text-center tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud, o <u class="pointer" routerLink="/login" routerLinkActive="active-link">inicia sesión</u></p>
 
                         <div class="row justify-content-center">
-
                             <div class="col-12 col-md-7">
 
-                                <!-- <div class="position-relative mt-3">
-                                    <input type="text" formControlName="username" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.username.touched && formRegister.username.errors }">
-                                    <span class="floating-label text-uppercase">Username*</span>
-                                    <div *ngIf="formRegister.username.touched && formRegister.username.errors" class="invalid-feedback">
-                                        <div *ngIf="formRegister.username.errors.required">Porfavor ingrese su usuario!
-                                        </div>
-                                        <div *ngIf="formRegister.username.errors.minlength">Al menos 3 caracteres!
-                                        </div>
-                                        <div *ngIf="formRegister.username.errors.maxlength">Máximo 15 caracteres!
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="position-relative mt-4">
                                     <input type="text" formControlName="email" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': formRegister.email.touched && formRegister.email.errors }">
                                     <label class="floating-label">Email*</label>
@@ -52,45 +43,12 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="row mt-4">
-                                    <div class="col-12 col-md-6">
-                                        <div class="position-relative">
-                                            <input type="password" formControlName="password" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
-                                            <span class="floating-label text-uppercase">Password*</span>
-                                            <div *ngIf="formRegister.password.touched && formRegister.password.errors" class="invalid-feedback">
-                                                <div *ngIf="formRegister.password.errors.required">Ingrese su contraseña!
-                                                </div>
-                                                <div *ngIf="formRegister.password.errors.minlength">Al menos 6 caracteres!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 mt-4 mt-md-0">
-                                        <div class="position-relative">
-                                            <input type="password" formControlName="confirmPassword" class="form-control" required [ngClass]="{ 'is-invalid': formRegister.confirmPassword.touched && formRegister.confirmPassword.errors }">
-                                            <span class="floating-label text-uppercase">Repetir password*</span>
-                                            <div *ngIf="formRegister.confirmPassword.touched && formRegister.confirmPassword.errors" class="invalid-feedback">
-                                                <div *ngIf="formRegister.confirmPassword.errors.required">Confirme la contraseña!
-                                                </div>
-                                                <div *ngIf="formRegister.confirmPassword.errors.MustMatch">No coinciden!
-                                                </div>
-
-                                                <div *ngIf="formRegister.confirmPassword.errors.minlength">Al menos 6 caracteres!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
-
-
                                 <div *ngFor="let alert of alerts">
                                     <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">
                                         {{ alert.msg }}</alert>
                                 </div>
 
                             </div>
-
                         </div>
 
                         <div class="row justify-content-center">
@@ -100,26 +58,13 @@
                         </div>
                     </form>
 
-
-
-                    <!-- <div class="row justify-content-center">
-                        <div class="col-12 col-md-7">
-                            <div class="position-relative mt-4">
-                                <input type="text" class="form-control" required>
-                                <span class="floating-label text-uppercase">correo electrónico*</span>
-                            </div>
-                            <div class="position-relative mt-4">
-                                <input type="password" class="form-control" required>
-                                <span class="floating-label text-uppercase">Contraseña*</span>
+                    <ng-template #elseBlock>
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <p class="text-light-14 text-center">Revisa el estado de tu solicitud, <span class="pointer color-2 text-14-regular" routerLink="/tracking" routerLinkActive="active-link">aquí</span></p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row mt-4 justify-content-center">
-                        <div class="col-12 col-md-4">
-                            <button type="button" class="btn button btn-block">CREAR CUENTA</button>
-                        </div>
-                    </div> -->
+                    </ng-template>
 
                 </div>
             </div>

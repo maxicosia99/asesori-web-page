@@ -80,13 +80,6 @@ export class FinalizeRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    if (this.loginVerified()) {
-      console.log(`Mostrar boton de ir al seguimiento!`);
-    }else{
-      console.log(`Mostrar el formulario de crear cuenta!`);
-    }
-
     window.scrollTo(0, 0);
     this.registerForm.controls['email'].setValue(JSON.parse(localStorage.getItem('email_data')).email);
   }
@@ -188,7 +181,7 @@ export class FinalizeRequestComponent implements OnInit {
 
   public show: boolean = false;
 
-  password(){
+  password() {
     this.show = !this.show;
   }
 

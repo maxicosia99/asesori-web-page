@@ -25,6 +25,9 @@ export class HeaderComponent implements OnInit {
         private routerExtService: RouterExtService
     ) { }
 
+    isCollapsed = true;
+    isCollapsedMovile = true;
+
     /**
      * Variable to open or close the navbar
      * @type {boolean}
@@ -100,7 +103,6 @@ export class HeaderComponent implements OnInit {
      * @returns {void} - Nothing
     */
     goTologin() {
-        this.navbarOpen = !this.navbarOpen;
         this.router.navigate(['/login']);
     }
 
@@ -117,7 +119,6 @@ export class HeaderComponent implements OnInit {
             this.router.navigate([this.router.url]);
         }
 
-        this.navbarOpen = !this.navbarOpen;
         this.authService.logOut();
         this.closeSubscriptions();
         console.log('Ha finalizado sesión!');
@@ -145,5 +146,21 @@ export class HeaderComponent implements OnInit {
             return true;
         }
         return false;
+    }
+
+    collapse(){
+        if(this.isCollapsed){
+            this.isCollapsed = this.isCollapsed;
+        }else{
+            this.isCollapsed = !this.isCollapsed;
+        }
+    }
+
+    collapseMovile(){
+        if(this.isCollapsedMovile){
+            this.isCollapsedMovile = this.isCollapsedMovile;
+        }else{
+            this.isCollapsedMovile = !this.isCollapsedMovile;
+        }
     }
 }

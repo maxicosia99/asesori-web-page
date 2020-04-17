@@ -1,5 +1,10 @@
 <section class="container">
-    <div class="row">
+    <div class="row justify-content-center">
+
+        <div class="col-4 d-block d-md-none text-center">
+            <img src="/assets/img/asesori-logo-negative.png" width="90px" height="90px" class="" alt="ASESORI" routerLink="/homepage">
+        </div>
+
         <div class="d-none d-lg-block col-3">
             <div class="row">
                 <div class="col bg-4 text-center">
@@ -125,7 +130,7 @@
 
                                 <div class="position-relative">
                                     <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
-                                    <label class="floating-label">dirección</label>
+                                    <label class="floating-label">dirección*</label>
                                     <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                         <span>Ingrese su dirección!</span>
                                     </div>

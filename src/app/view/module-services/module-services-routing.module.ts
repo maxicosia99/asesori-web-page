@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ServicesComponent } from './services/services.component';
-import { ServiceRequestComponent } from './service-request/service-request.component';
+import { CreditServicesComponent } from './credit-services/credit-services.component';
+import { InsuranceServicesComponent } from './insurance-services/insurance-services.component';
+import { CreditRequestComponent } from './credit-request/credit-request.component';
+import { InsuranceRequestComponent } from './insurance-request/insurance-request.component';
 
 
 const routes: Routes = [
-  { path: '', component: ServicesComponent, data: { title: 'Página de servicios' }},
-  { path: 'request', component: ServiceRequestComponent, data: { title: 'Solicitd' }},
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: 'credit', component: CreditServicesComponent, data: { title: 'Página de servicios de créditos' }},
+  { path: 'insurance', component: InsuranceServicesComponent, data: { title: 'Página de servicios de seguros' }},
+  { path: 'request-credit', component: CreditRequestComponent, data: { title: 'Solicitd de crédito' }},
+  { path: 'request-insurance', component: InsuranceRequestComponent, data: { title: 'Solicitd de seguro' }},
+  { path: '', redirectTo: 'credit', pathMatch: 'full' },
 ];
 
 @NgModule({
