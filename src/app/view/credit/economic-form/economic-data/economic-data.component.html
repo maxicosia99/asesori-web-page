@@ -134,7 +134,7 @@
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="total_properties" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('total_properties')}">
+                                    <input type="tel" currencyMask formControlName="total_properties" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('total_properties')}" (blur)="updatePercentageTotal_properties()">
                                     <label class="floating-label">total de bienes*</label>
                                     <div *ngIf="isFieldValidEconomicForm('total_properties')" class="invalid-feedback">
                                         <span>Ingrese total de bienes!</span>
@@ -156,7 +156,7 @@
                                     <label class="floating-label">pago por arriendo</label>
                                 </div>
                                 <div *ngIf="!withRent" class="position-relative">
-                                    <input type="tel" currencyMask formControlName="services_payment" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('services_payment')}">
+                                    <input type="tel" currencyMask formControlName="services_payment" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('services_payment')}" (blur)="updatePercentageServices_payment()">
                                     <label class="floating-label">pago de servicios*</label>
                                     <div *ngIf="isFieldValidEconomicForm('services_payment')" class="invalid-feedback">
                                         <span>Ingrese total de servicios!</span>
@@ -167,7 +167,7 @@
                         <div *ngIf="withRent" class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="services_payment" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('services_payment')}">
+                                    <input type="tel" currencyMask formControlName="services_payment" class="floating-input form-control" required [ngClass]="{ 'is-invalid': isFieldValidEconomicForm('services_payment')}" (blur)="updatePercentageServices_payment()">
                                     <label class="floating-label">pago de servicios*</label>
                                     <div *ngIf="isFieldValidEconomicForm('services_payment')" class="invalid-feedback">
                                         <span>Ingrese total de servicios!</span>

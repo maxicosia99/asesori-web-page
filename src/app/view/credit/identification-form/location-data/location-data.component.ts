@@ -63,7 +63,7 @@ export class LocationDataComponent implements OnInit {
    * Variables for the progress bar
    * @type {any[]}
   */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
    * Variables to retrieve user information
@@ -97,7 +97,7 @@ export class LocationDataComponent implements OnInit {
     address: ['', Validators.required],
     city: [null, [Validators.required]],
     reference: [''],
-    sector:['']
+    sector: ['']
   });
 
   /**
@@ -139,6 +139,7 @@ export class LocationDataComponent implements OnInit {
 
       /** Store location_data in localStorage*/
       localStorage.setItem('location_data', JSON.stringify(location_data));
+      localStorage.setItem('percentage', this.percentage.toString());
       this.router.navigate(['credit/results/identification/contact']);
     }
   }
@@ -148,11 +149,12 @@ export class LocationDataComponent implements OnInit {
   public contact_data: any;
   public economic_data: any;
   public labor_data: any;
-  public financial_data:any;
+  public financial_data: any;
 
   ngOnInit() {
 
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    this.percentage = +localStorage.getItem('percentage');
 
     /*  Get all provinces. */
     this.httpService.getProvinces().subscribe(res => {
@@ -170,6 +172,9 @@ export class LocationDataComponent implements OnInit {
         if (resp.status === 200) {
           this.region_code = res.region_code;
           this.addressForm.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
+          
+          this.updatePercentageProvince();
+          
           /* the cities of the detected province are loaded */
           this.httpService.getCities(resp.data.id).subscribe(res => {
             this.cities = []
@@ -204,6 +209,7 @@ export class LocationDataComponent implements OnInit {
       this.addressForm.controls['address'].setValue("");
       this.user_id = null;
       this.hasAddress = false;
+      this.updatePercentageAddress();
     });
 
     /** Verificar contenido del local storage*/
@@ -214,12 +220,24 @@ export class LocationDataComponent implements OnInit {
     this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
-    if(this.location_data){
-      this.addressForm.controls['city'].setValue({id: this.location_data.city.id, name: this.location_data.city.name});
-      this.addressForm.controls['province'].setValue({id: this.location_data.province.id, name: this.location_data.province.name});
+    if (this.location_data) {
+
       this.addressForm.controls['address'].setValue(this.location_data.address);
       this.addressForm.controls['reference'].setValue(this.location_data.reference);
       this.addressForm.controls['sector'].setValue(this.location_data.sector);
+
+      this.percentageAddress = true;
+
+      if (this.location_data.province) {
+        this.addressForm.controls['province'].setValue({ id: this.location_data.province.id, name: this.location_data.province.name });
+        this.percentageProvince = true;
+      }
+
+      if(this.location_data.city){
+        this.addressForm.controls['city'].setValue({ id: this.location_data.city.id, name: this.location_data.city.name });
+        this.percentageCity = true;
+      }
+      
     }
   }
 
@@ -229,8 +247,20 @@ export class LocationDataComponent implements OnInit {
    * @return {void} Nothing
   */
   changeProvince(event) {
+
+    if (!this.percentageProvince) {
+      this.percentageProvince = true;
+      this.percentage += this.increase;
+    }
+
     this.httpService.getCities(event.id).subscribe(res => {
       this.addressForm.controls['city'].setValue(null);
+
+      if (this.percentageCity) {
+        this.percentageCity = false;
+        this.percentage -= this.increase;
+      }
+
       this.cities = []
       this.cities = res.data;
     }, error => {
@@ -269,11 +299,44 @@ export class LocationDataComponent implements OnInit {
           if (user.address) {
             this.addressForm.controls['address'].setValue(user.address);
             this.hasAddress = true;
+            this.updatePercentageAddress();
           }
         }
       }, (error) => {
         console.log(error);
       });
+    }
+  }
+
+  /**--------------------------------------------------------------------------------------------------------------------------- */
+
+  public percentageProvince: boolean = false;
+  public percentageAddress: boolean = false;
+  public percentageCity: boolean = false;
+
+  public increase: number = 4;
+
+  updatePercentageProvince() {
+    if (!this.percentageProvince) {
+      this.percentageProvince = true;
+      this.percentage += this.increase;
+    }
+  }
+
+  updatePercentageCity() {
+    if (!this.percentageCity) {
+      this.percentageCity = true;
+      this.percentage += this.increase;
+    }
+  }
+
+  updatePercentageAddress() {
+    if (this.addressForm.value.address.length > 0 && !this.percentageAddress) {
+      this.percentageAddress = true;
+      this.percentage += this.increase;
+    } else if (this.addressForm.value.address.length == 0 && this.percentageAddress) {
+      this.percentageAddress = false;
+      this.percentage -= this.increase;
     }
   }
 

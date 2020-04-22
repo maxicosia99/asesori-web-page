@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('city')}">
+                                <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" (change)="updatePercentageCity()" [searchable]="true" bindLabel="name" [clearable]="false" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('city')}">
                                 </ng-select>
                                 <div *ngIf="isFieldValidaddressForm('city')" class="invalid-select">
                                     <span>Seleccione una ciudad!</span>
@@ -138,7 +138,7 @@
                             <div class="col-12">
 
                                 <div class="position-relative">
-                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}" (blur)="updatePercentageAddress()">
                                     <label class="floating-label">dirección*</label>
                                     <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                         <span>Ingrese su dirección!</span>

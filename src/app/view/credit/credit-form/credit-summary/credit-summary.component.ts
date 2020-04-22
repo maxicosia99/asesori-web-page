@@ -21,7 +21,7 @@ export class CreditSummaryComponent implements OnInit {
     * Variables for the progress bar
     * @type {any[]}
    */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
    * Carousel options
@@ -92,6 +92,7 @@ export class CreditSummaryComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.percentage = +localStorage.getItem('percentage');
 
     this.credit_information = JSON.parse(localStorage.getItem('credit_information'));
     this.credit_options = JSON.parse(localStorage.getItem('credit_options'));
@@ -167,6 +168,7 @@ export class CreditSummaryComponent implements OnInit {
         localStorage.removeItem('labor_data');
         localStorage.removeItem('financial_data');
         localStorage.removeItem('contact_data');
+        localStorage.removeItem('percentage');
         //localStorage.clear();
 
         this.router.navigate(['credit/finalize']);

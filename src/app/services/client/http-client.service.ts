@@ -185,4 +185,16 @@ export class HttpClientService {
     return this.doGetRequest(url);
   }
 
+  /* -------------------------- SEGUIMIENTO DE USUARIO A LOS CRÉDITO ------------------------ */
+
+  getInformationCredits(user_id: number): Observable<any> {
+    let url = this.getEndUrl(`/api/credittracking/findApplications?user_id=${user_id}`);
+    return this.doGetRequest(url);
+  }
+
+  getEntityByCreditId(creditapplication_id: number): Observable<any> {
+    let url = this.getEndUrl(`/api/credittracking/findEntitiesOfApplication?application_id=${creditapplication_id}`);
+    return this.doGetRequest(url);
+  }
+
 }

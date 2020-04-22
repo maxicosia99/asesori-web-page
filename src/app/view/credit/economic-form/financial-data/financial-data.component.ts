@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+
+export function validateEntryMoney(control: AbstractControl) {
+  if (control.value === 0) {
+    return { valid: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-financial-data',
@@ -21,7 +28,7 @@ export class FinancialDataComponent implements OnInit {
    * Variables for the progress bar
    * @type {any[]}
   */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
    * Carousel options
@@ -54,11 +61,11 @@ export class FinancialDataComponent implements OnInit {
   * Service form (credit, insurance, credit cards, investment policy)
  */
   financialform = this.formbuilder.group({
-    monthlySalary: ['', [Validators.required]],
+    monthlySalary: ['', [Validators.required, validateEntryMoney]],
     otherMonthlyValue: [''],
     valueDetail: [''],
-    monthlyExpenses: ['', [Validators.required]],
-    paymentCapacity: ['', [Validators.required]]
+    monthlyExpenses: ['', [Validators.required, validateEntryMoney]],
+    paymentCapacity: ['', [Validators.required, validateEntryMoney]]
   });
 
   public personal_data: any;
@@ -70,6 +77,7 @@ export class FinancialDataComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.percentage = +localStorage.getItem('percentage');
 
     /** Verificar contenido del local storage*/
     this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
@@ -81,27 +89,28 @@ export class FinancialDataComponent implements OnInit {
 
     if (this.financial_data) {
 
-      if(this.financial_data.monthlySalary){
-        this.financialform.controls['monthlySalary'].setValue(this.financial_data.monthlySalary);  
+      if (this.financial_data.monthlySalary) {
+        this.financialform.controls['monthlySalary'].setValue(this.financial_data.monthlySalary);
       }
 
-      if(this.financial_data.otherMonthlyValue){
+      if (this.financial_data.otherMonthlyValue) {
         this.financialform.controls['otherMonthlyValue'].setValue(this.financial_data.otherMonthlyValue);
       }
 
-      this.financialform.controls['valueDetail'].setValue(this.financial_data.valueDetail);  
-      this.financialform.controls['monthlyExpenses'].setValue(this.financial_data.monthlyExpenses);  
-      this.financialform.controls['paymentCapacity'].setValue(this.financial_data.paymentCapacity);  
+      this.financialform.controls['valueDetail'].setValue(this.financial_data.valueDetail);
+      this.financialform.controls['monthlyExpenses'].setValue(this.financial_data.monthlyExpenses);
+      this.financialform.controls['paymentCapacity'].setValue(this.financial_data.paymentCapacity);
+
     } else if (this.labor_data) {
 
-      if(this.labor_data.monthlySalary){
+      if (this.labor_data.monthlySalary) {
         this.financialform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
       }
 
-      if(this.labor_data.otherMonthlyValue){
+      if (this.labor_data.otherMonthlyValue) {
         this.financialform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
       }
-      
+
       this.financialform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
     }
   }
@@ -130,9 +139,9 @@ export class FinancialDataComponent implements OnInit {
    * @return {void} Nothing
   */
   onSubmitLFinancialForm() {
-    //this.FinancialFormSubmitted = true;
-    //if (this.financialform.valid) {
-      
+    this.FinancialFormSubmitted = true;
+    if (this.financialform.valid) {
+
       let financial_data: any = {
         monthlySalary: this.financialform.value.monthlySalary,
         otherMonthlyValue: this.financialform.value.otherMonthlyValue,
@@ -143,8 +152,48 @@ export class FinancialDataComponent implements OnInit {
 
       /** Store location_data in localStorage*/
       localStorage.setItem('financial_data', JSON.stringify(financial_data));
+      localStorage.setItem('percentage', this.percentage.toString());
       this.router.navigate(['credit/results/economic/economic']);
-    //}
+    }
+  }
+
+
+  /*------------------------------------------------------------------------------------------------------------------------ */
+
+  public percentageMonthlySalary: boolean = false;
+  public percentageMonthlyExpenses: boolean = false;
+  public percentagePaymentCapacity: boolean = false;
+
+  public increase: number = 4;
+
+  updatePercentageMonthlySalary() {
+    if (this.financialform.value.monthlySalary > 0 && !this.percentageMonthlySalary) {
+      this.percentageMonthlySalary = true;
+      this.percentage += this.increase;
+    } else if (this.financialform.value.monthlySalary == 0 && this.percentageMonthlySalary) {
+      this.percentageMonthlySalary = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentageMonthlyExpenses() {
+    if (this.financialform.value.monthlyExpenses > 0 && !this.percentageMonthlyExpenses) {
+      this.percentageMonthlyExpenses = true;
+      this.percentage += this.increase;
+    } else if (this.financialform.value.monthlyExpenses == 0 && this.percentageMonthlyExpenses) {
+      this.percentageMonthlyExpenses = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentagePaymentCapacity() {
+    if (this.financialform.value.paymentCapacity > 0 && !this.percentagePaymentCapacity) {
+      this.percentagePaymentCapacity = true;
+      this.percentage += this.increase;
+    } else if (this.financialform.value.paymentCapacity == 0 && this.percentagePaymentCapacity) {
+      this.percentagePaymentCapacity = false;
+      this.percentage -= this.increase;
+    }
   }
 
 }

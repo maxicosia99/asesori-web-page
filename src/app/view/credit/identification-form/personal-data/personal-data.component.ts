@@ -96,7 +96,7 @@ export class PersonalDataComponent implements OnInit {
    * Variables for the progress bar
    * @type {any[]}
   */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
    * Define personal data form
@@ -160,10 +160,11 @@ export class PersonalDataComponent implements OnInit {
         last_name: this.personalDataForm.value.last_names,
         cedula: this.personalDataForm.value.dni,
         maritalStatus: this.personalDataForm.value.maritalStatus.status,
-        birthday:this.personalDataForm.value.birthday
+        birthday: this.personalDataForm.value.birthday
       }
       /** Store personal_data in localStorage*/
       localStorage.setItem('personal_data', JSON.stringify(personal_data));
+      localStorage.setItem('percentage', this.percentage.toString());
       this.router.navigate(['credit/results/identification/location']);
     }
   }
@@ -172,7 +173,7 @@ export class PersonalDataComponent implements OnInit {
   public location_data: any;
   public contact_data: any;
   public economic_data: any;
-  public labor_data:any;
+  public labor_data: any;
   public financial_data: any;
 
   ngOnInit() {
@@ -192,6 +193,9 @@ export class PersonalDataComponent implements OnInit {
       this.hasCedula = false;
       this.hasNames = false;
       this.hasLastNames = false;
+      this.updatePercentageDni();
+      this.updatePercentageNames();
+      this.updatePercentageLast_names();
     });
 
     /** Verificar contenido del local storage*/
@@ -202,27 +206,28 @@ export class PersonalDataComponent implements OnInit {
     this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
-    if(this.personal_data){
+    if (this.personal_data) {
       this.personalDataForm.controls['names'].setValue(this.personal_data.name);
       this.personalDataForm.controls['last_names'].setValue(this.personal_data.last_name);
       this.personalDataForm.controls['dni'].setValue(this.personal_data.cedula);
       
-      if(this.personal_data.maritalStatus){
-        this.personalDataForm.controls['maritalStatus'].setValue({status:this.personal_data.maritalStatus});
-      }  
-      
+      this.percentageDni = true;
+      this.percentageNames = true;
+      this.percentageLast_names = true;
+
+      if (this.personal_data.maritalStatus) {
+        this.personalDataForm.controls['maritalStatus'].setValue({ status: this.personal_data.maritalStatus });
+        this.percentageMaritalStatus = true;
+      }
+
       this.personalDataForm.controls['birthday'].setValue(this.personal_data.birthday);
     }
 
-  }
+    if(localStorage.getItem('percentage')) {
+      this.percentage = +localStorage.getItem('percentage');
+    }
 
-  // updatePercentage(value: string, percent: number){
-  //   if(value.length > 0){
-  //     this.percentage += percent;
-  //   }else{
-  //     this.percentage -= percent;
-  //   }
-  // }
+  }
 
 
   /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */
@@ -253,19 +258,71 @@ export class PersonalDataComponent implements OnInit {
           if (user.cedula) {
             this.personalDataForm.controls['dni'].setValue(user.cedula);
             this.hasCedula = true;
+            this.updatePercentageDni();
           }
           if (user.name) {
             this.personalDataForm.controls['names'].setValue(user.name);
             this.hasNames = true;
+            this.updatePercentageNames();
           }
           if (user.last_name) {
             this.personalDataForm.controls['last_names'].setValue(user.last_name);
             this.hasLastNames = true;
+            this.updatePercentageLast_names();
           }
         }
       }, (error) => {
         console.log(error);
       });
+    }
+  }
+
+  /**----------------------------------------------------------------------------------------------------------------------------------- */
+
+  public percentageNames: boolean = false;
+  public percentageLast_names: boolean = false;
+  public percentageDni: boolean = false;
+  public percentageMaritalStatus: boolean = false;
+  public percentageBirthday: boolean = false;
+
+  public increase: number = 4;
+
+  //updatePercentageDni(element: any){
+  updatePercentageDni() {
+    //console.log(element.getAttribute('formControlName'));
+    if (this.personalDataForm.value.dni.length > 0 && !this.percentageDni) {
+      this.percentageDni = true;
+      this.percentage += this.increase;
+    } else if (this.personalDataForm.value.dni.length == 0 && this.percentageDni) {
+      this.percentageDni = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentageMaritalStatus() {
+    if (!this.percentageMaritalStatus) {
+      this.percentageMaritalStatus = true;
+      this.percentage += this.increase;
+    }
+  }
+
+  updatePercentageNames() {
+    if (this.personalDataForm.value.names.length > 0 && !this.percentageNames) {
+      this.percentageNames = true;
+      this.percentage += this.increase;
+    } else if (this.personalDataForm.value.names.length == 0 && this.percentageNames) {
+      this.percentageNames = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentageLast_names() {
+    if (this.personalDataForm.value.last_names.length > 0 && !this.percentageLast_names) {
+      this.percentageLast_names = true;
+      this.percentage += this.increase;
+    } else if (this.personalDataForm.value.last_names.length == 0 && this.percentageLast_names) {
+      this.percentageLast_names = false;
+      this.percentage -= this.increase;
     }
   }
 

@@ -202,7 +202,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" formControlName="companyName" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidDependienteform('companyName')}">
+                                        <input type="text" formControlName="companyName" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidDependienteform('companyName')}" (blur)="updatePercentageDCompanyName()">
                                         <label class="floating-label">nombre de la empresa*</label>
                                         <div *ngIf="isFieldValidDependienteform('companyName')" class="invalid-feedback">
                                             <span>Ingrese el nombre de la empresa!</span>
@@ -213,7 +213,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" formControlName="positionCompany" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidDependienteform('positionCompany')}">
+                                        <input type="text" formControlName="positionCompany" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidDependienteform('positionCompany')}" (blur)="updatePercentageDPositionCompany()">
                                         <label class="floating-label">cargo en la empresa*</label>
                                         <div *ngIf="isFieldValidDependienteform('positionCompany')" class="invalid-feedback">
                                             <span>Ingrese el cargo en la empresa!</span>
@@ -224,7 +224,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" currencyMask formControlName="monthlySalary" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidDependienteform('monthlySalary')}">
+                                        <input type="tel" currencyMask formControlName="monthlySalary" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidDependienteform('monthlySalary')}" (blur)="updatePercentageDMonthlySalary()">
                                         <label class="floating-label">sueldo mensual*</label>
                                         <div *ngIf="isFieldValidDependienteform('monthlySalary')" class="invalid-feedback">
                                             <span>Ingrese el sueldo mensual!</span>
@@ -263,7 +263,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
+                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" (change)="updatePercentageDCity()" [searchable]="true" bindLabel="name" [clearable]="false">
                                     </ng-select>
                                     <div *ngIf="isFieldValidDependienteform('city')" class="invalid-select">
                                         <span>Seleccione una ciudad!</span>
@@ -298,7 +298,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" formControlName="ruc" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidIndependienteform('ruc')}">
+                                        <input type="tel" formControlName="ruc" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidIndependienteform('ruc')}" (blur)="updatePercentageIRuc()">
                                         <label class="floating-label">Ruc*</label>
                                         <div *ngIf="isFieldValidIndependienteform('ruc')" class="invalid-feedback">
                                             <span>Ingrese el RUC de la empresa!</span>
@@ -309,7 +309,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" formControlName="sector" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidIndependienteform('sector')}">
+                                        <input type="text" formControlName="sector" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidIndependienteform('sector')}" (blur)="updatePercentageISector()">
                                         <label class="floating-label">sector*</label>
                                         <div *ngIf="isFieldValidIndependienteform('sector')" class="invalid-feedback">
                                             <span>Seleccione el sector!</span>
@@ -320,7 +320,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" currencyMask formControlName="averageSales" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidIndependienteform('averageSales')}">
+                                        <input type="tel" currencyMask formControlName="averageSales" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidIndependienteform('averageSales')}" (blur)="updatePercentageIAverageSales()">
                                         <label class="floating-label">promedio mensual ventas*</label>
                                         <div *ngIf="isFieldValidIndependienteform('averageSales')" class="invalid-feedback">
                                             <span>Ingrese el promedio mensual de ventas!</span>
@@ -341,7 +341,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" formControlName="companyName" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('companyName')}">
+                                        <input type="text" formControlName="companyName" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('companyName')}" (blur)="updatePercentageMCompanyName()">
                                         <label class="floating-label">nombre de la empresa*</label>
                                         <div *ngIf="isFieldValidMixtaform('companyName')" class="invalid-feedback">
                                             <span>Ingrese el nombre de la empresa!</span>
@@ -352,7 +352,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" formControlName="positionCompany" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('positionCompany')}">
+                                        <input type="text" formControlName="positionCompany" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('positionCompany')}" (blur)="updatePercentageMPositionCompany()">
                                         <label class="floating-label">cargo en la empresa*</label>
                                         <div *ngIf="isFieldValidMixtaform('positionCompany')" class="invalid-feedback">
                                             <span>Ingrese el cargo en la empresa!</span>
@@ -363,7 +363,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" currencyMask formControlName="monthlySalary" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('monthlySalary')}">
+                                        <input type="tel" currencyMask formControlName="monthlySalary" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('monthlySalary')}" (blur)="updatePercentageMMonthlySalary()">
                                         <label class="floating-label">sueldo mensual*</label>
                                         <div *ngIf="isFieldValidMixtaform('monthlySalary')" class="invalid-feedback">
                                             <span>Ingrese el sueldo mensual!</span>
@@ -402,7 +402,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
+                                    <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" (change)="updatePercentageMCity()" [searchable]="true" bindLabel="name" [clearable]="false">
                                     </ng-select>
                                     <div *ngIf="isFieldValidMixtaform('city')" class="invalid-select">
                                         <span>Seleccione una ciudad!</span>
@@ -432,7 +432,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" formControlName="ruc" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('ruc')}">
+                                        <input type="tel" formControlName="ruc" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('ruc')}" (blur)="updatePercentageMRuc()">
                                         <label class="floating-label">Ruc*</label>
                                         <div *ngIf="isFieldValidMixtaform('ruc')" class="invalid-feedback">
                                             <span>Ingrese el RUC de la empresa!</span>
@@ -443,7 +443,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="text" formControlName="sector" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('sector')}">
+                                        <input type="text" formControlName="sector" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('sector')}" (blur)="updatePercentageMSector()">
                                         <label class="floating-label">sector*</label>
                                         <div *ngIf="isFieldValidMixtaform('sector')" class="invalid-feedback">
                                             <span>Seleccione el sector!</span>
@@ -454,7 +454,7 @@
                             <div class="row my-4">
                                 <div class="col-12">
                                     <div class="position-relative">
-                                        <input type="tel" currencyMask formControlName="averageSales" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('averageSales')}">
+                                        <input type="tel" currencyMask formControlName="averageSales" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidMixtaform('averageSales')}" (blur)="updatePercentageMAverageSales()">
                                         <label class="floating-label">promedio mensual ventas*</label>
                                         <div *ngIf="isFieldValidMixtaform('averageSales')" class="invalid-feedback">
                                             <span>Ingrese el promedio mensual de ventas!</span>

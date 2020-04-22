@@ -4,6 +4,13 @@ import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
+export function validateEntryMoney(control: AbstractControl) {
+  if (control.value === 0) {
+    return { valid: true };
+  }
+  return null;
+}
+
 @Component({
   selector: 'app-economic-data',
   templateUrl: './economic-data.component.html',
@@ -21,7 +28,7 @@ export class EconomicDataComponent implements OnInit {
    * Variables for the progress bar
    * @type {any[]}
   */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
    * Variables for the selection of type housing
@@ -40,8 +47,8 @@ export class EconomicDataComponent implements OnInit {
     loans_payment: [''],
     mortgage_payment: [''],
     rent_payment: [''],
-    services_payment: ['', [Validators.required]],
-    total_properties: ['', [Validators.required]],
+    services_payment: ['', [Validators.required, validateEntryMoney]],
+    total_properties: ['', [Validators.required, validateEntryMoney]],
     typeHousing: [null, [Validators.required]]
   });
 
@@ -124,6 +131,7 @@ export class EconomicDataComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.percentage = +localStorage.getItem('percentage');
 
     /** Verificar contenido del local storage*/
     this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
@@ -147,11 +155,49 @@ export class EconomicDataComponent implements OnInit {
   public withRent: boolean = false;
 
   changeTypeHousing(event){
+
+    this.updatePercentageTypeHousing();
+
     if(event.type === 'Propia'){
       this.withRent = false;
     }
     if(event.type === 'Arrendada'){
       this.withRent = true;
+    }
+  }
+
+  /**---------------------------------------------------------------------------------------------------------------- */
+
+  public percentageServices_payment: boolean = false;
+  public percentageTotal_properties: boolean = false;
+  public percentageTypeHousing: boolean = false;
+  
+  public increase: number = 4;
+
+  updatePercentageServices_payment() {
+    if (this.economicForm.value.services_payment > 0 && !this.percentageServices_payment) {
+      this.percentageServices_payment = true;
+      this.percentage += this.increase;
+    } else if (this.economicForm.value.services_payment == 0 && this.percentageServices_payment) {
+      this.percentageServices_payment = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentageTotal_properties() {
+    if (this.economicForm.value.total_properties > 0 && !this.percentageTotal_properties) {
+      this.percentageTotal_properties = true;
+      this.percentage += this.increase;
+    } else if (this.economicForm.value.total_properties == 0 && this.percentageTotal_properties) {
+      this.percentageTotal_properties = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentageTypeHousing() {
+    if (!this.percentageTypeHousing) {
+      this.percentageTypeHousing = true;
+      this.percentage += this.increase;
     }
   }
 

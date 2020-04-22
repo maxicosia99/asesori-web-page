@@ -285,6 +285,13 @@ body {
     letter-spacing: 1.17px;
 }
 
+.tittle-24 {
+    font-family: 'Poppins-Light';
+    font-size: 13px;
+    letter-spacing: 2.67px;
+    line-height: 1;
+}
+
 
 /* TEXTS */
 
@@ -320,6 +327,13 @@ body {
     color: #8c8b8d;
 }
 
+.text-light-15 {
+    font-size: 15px;
+    line-height: 2;
+    letter-spacing: 0.86px;
+    color: #93939c;
+}
+
 
 /* BACKGROUNDS */
 
@@ -345,6 +359,10 @@ body {
 
 .bg-5 {
     background-color: #fafafa;
+}
+
+.bg-6 {
+    background-color: #f2f5f9;
 }
 
 
@@ -394,6 +412,10 @@ body {
 
 .color-9 {
     color: #004679;
+}
+
+.color-10 {
+    color: #333337;
 }
 
 
@@ -719,6 +741,17 @@ body {
 
 .form-control.is-invalid~.invalid-feedback {
     text-align: right;
+}
+
+.card.custom-panel,
+.card.custom-panel .card-header,
+.panel.custom-panel {
+    background-color: #ffffff;
+    //color: #fff;
+}
+
+.panel.custom-panel .panel-body {
+    background-color: #fff;
 }
 
 

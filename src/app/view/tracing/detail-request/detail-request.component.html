@@ -1,0 +1,215 @@
+<section class="container">
+
+    <div class="row justify-content-center px-4">
+        <div class="col-4 d-block d-md-none text-center">
+            <img src="/assets/img/asesori-logo-negative.png" width="90px" height="90px" class="" alt="ASESORI" routerLink="/homepage">
+        </div>
+        <div class="col-12 mt-4">
+            <summary class="tittle-10 pb-5 color-3" [routerLink]="['/tracking/home']"><i class="fas fa-angle-left"></i> Regresar
+            </summary>
+            <h2 class="tittle-1 mb-4 text-center color-10 d-none d-md-block">Seguimiento de solicitudes</h2>
+            <p class="tittle-7 text-center mb-5 d-block d-md-none">Seguimiento de solicitudes</p>
+            <p class="tittle-7 color-1">Tu solicitud</p>
+        </div>
+    </div>
+
+    <div class="row mx-4 mt-4 text-white detail-bar bg-2 align-items-center justify-content-center justify-content-md-end">
+        <div class="col-8 col-md-3 text-center text-md-right">
+            <p class="tittle-6 my-0 mr-md-4">En trámite</p>
+        </div>
+    </div>
+
+    <div class="row px-4 py-5">
+        <div class="col-12">
+            <div class="float-left tittle-8 color-10">Crédito Hipotecario</div>
+            <summary (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" class="float-right"><span *ngIf="isCollapsed" class="tittle-10 color-3">Mostrar</span><span *ngIf="!isCollapsed" class="tittle-10 color-3">Ocultar</span> <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i>
+            </summary>
+        </div>
+    </div>
+
+    <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+
+        <div class="row px-4">
+            <div class="col-12">
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <p class="floating-label-static text-uppercase">estas buscando</p>
+                            <!-- <p class="tittle-24">{{destinedTo}}</p> -->
+                            <p class="tittle-24">Crédito para mi casa</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <p class="floating-label-static text-uppercase">instituciones seleccionadas*</p>
+                            <!-- <p class="tittle-24">{{credits_entities}}</p> -->
+                            <p class="tittle-24">Banco del Austro, Banco del Pichincha, Banco de Machala</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <p class="floating-label-static text-uppercase">monto a solicitar*</p>
+                            <!-- <p class="tittle-24">$ {{amountRequest | number : '1.2-2':'fr' }}</p> -->
+                            <p class="tittle-24">$ {{400 | number : '1.2-2':'fr' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <p class="floating-label-static text-uppercase">entrada (valor opcional)*</p>
+                            <!-- <p class="tittle-24">$ {{entryAmount | number : '1.2-2':'fr' }}</p> -->
+                            <p class="tittle-24">$ {{400 | number : '1.2-2':'fr' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <p class="floating-label-static text-uppercase">ingreso mensual*</p>
+                            <!-- <p class="tittle-24">$ {{monthlyIncome | number : '1.2-2':'fr' }}</p> -->
+                            <p class="tittle-24">$ {{400 | number : '1.2-2':'fr' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-12">
+                        <div class="position-relative">
+                            <p class="floating-label-static text-uppercase">plazo (meses)*</p>
+                            <!-- <p class="tittle-24">{{term}} meses</p> -->
+                            <p class="tittle-24">12 meses</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row px-4 mt-3">
+        <div class="col-12">
+            <p class="tittle-7 color-1">Detalles</p>
+        </div>
+    </div>
+
+    <!-- <div class="row p-4 align-items-center justify-content-center">
+        <div class="col-md-2 text-center">
+            <img class="align-self-center" src="/assets/img/asesori-logo-negative.png" width="80px" height="80px" alt="Asesori" style="opacity: 0.5;">
+        </div>
+        <div class="col-md-8">
+            <p class="text-light-15 mt-3 text-center text-md-left">Aquí se indicarán las Insittuciones financieras que han aprobado o no tu solicitud, y el tramite respectivo que debes seguir para continuar con tu crédito</p>
+        </div>
+    </div> -->
+
+    <div class="row px-4 mt-4">
+        <div class="col-sm-6 col-md-3 col-lg-2">
+            <button class="btn btn-block btn-approved tittle-10">2 Aprobados</button>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-2 mt-4 mt-sm-0">
+            <button class="btn btn-block btn-denied tittle-10">1 Negados</button>
+        </div>
+    </div>
+
+    <div style="margin: 2%;" class="my-4 px-4" *ngFor="let entity of entity_data; let index = index">
+        <div class="row result-container">
+            <div class="col-lg-10">
+                <div class="row align-items-center py-3">
+                    <div class="col-lg-3">
+                        <div class="row text-center justify-content-center">
+                            <div class="col-6 col-lg-12">
+                                <img class="img-fluid" [src]="entity.url_financialEntity_photo" alt="Image">
+                                <!-- <img src="/assets/img/banco-pichincha.png" class="img-fluid" alt=""> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 py-3">
+                        <div class="row pb-3">
+                            <div class="col">
+                                <p class="color-1 tittle-18 text-center text-md-left">Condiciones de crédito</p>
+                            </div>
+                        </div>
+                        <div class="row text-center px-4">
+                            <div class="col-6 col-md-3">
+                                <p class="text-uppercase tittle-11">tasa anual</p>
+                                <!-- <p class="tittle-5 color-3">
+                                        {{can_access_credit[i].loan_rate | number : '1.2-2' }}%
+                                    </p> -->
+                                <p class="tittle-5 color-3">
+                                    ${{400 | number : '1.2-2':'fr' }}
+                                </p>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <p class="text-uppercase tittle-11">financiamiento</p>
+                                <!-- <p class="tittle-5 color-3">
+                                        {{can_access_credit[i].financing | number }}%
+                                    </p> -->
+                                <p class="tittle-5 color-3">
+                                    {{40 | number }}%
+                                </p>
+                            </div>
+                            <div class="col-6 col-md-3 mt-4 mt-md-0">
+                                <p class="text-uppercase tittle-11">monto de crédito</p>
+                                <!-- <p class="tittle-5 color-3">
+                                        ${{can_access_credit[i].loan_amount | number : '1.2-2':'fr' }}
+                                    </p> -->
+                                <p class="tittle-5 color-3">
+                                    ${{400 | number : '1.2-2':'fr' }}
+                                </p>
+                            </div>
+                            <div class="col-6 col-md-3 mt-4 mt-md-0">
+                                <p class="text-uppercase tittle-11">credito bancario</p>
+                                <!-- <p class="tittle-5 color-3">
+                                        ${{can_access_credit[i].bank_borrow | number : '1.2-2':'fr' }}
+                                    </p> -->
+                                <p class="tittle-5 color-3">
+                                    ${{400 | number : '1.2-2':'fr' }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row pt-4 px-4 justify-content-end d-none d-lg-flex">
+                            <div class="col-4">
+                                <summary class="color-1 pointer tittle-18 text-right"><u>Más información</u></summary>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 text-white text-center bg-2 pt-5">
+                <p class="tittle-3-spacing text-uppercase">APROBADO</p>
+                <!-- <h2 class="tittle-2 mt-4">
+                    ${{can_access_credit[i].monthly_payment | number : '1.2-2':'fr' }}
+                </h2> -->
+                <h2 class="tittle-2 mt-4">
+                    ${{1100 | number : '1.2-2':'fr' }}
+                </h2>
+                <p class="tittle-11 mt-3 text-uppercase">mensual</p>
+                <div class="row pb-5 pb-lg-4 justify-content-center">
+                    <div class="col-12 col-sm-9 col-lg-12">
+                        <button class="btn btn-block button-credit text-uppercase">obtener crédito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-2 text-white text-center bg-2 pt-5">
+                <p class="tittle-3-spacing text-uppercase pt-4 pb-3">NEGADO</p>
+                <div class="row pb-5 pb-lg-0 justify-content-center">
+                    <div class="col-12 col-sm-9 col-lg-12">
+                        <button class="btn btn-block button-credit text-uppercase">Ver detalles</button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row py-4 px-4 justify-content-end d-block d-lg-none">
+                <div class="col-12">
+                    <summary class="color-1 pointer tittle-18"><u>Más información</u></summary>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
