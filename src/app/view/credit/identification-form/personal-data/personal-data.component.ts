@@ -23,6 +23,7 @@ export class PersonalDataComponent implements OnInit {
     private authenticationService: AuthenticationService,
   ) {
     this.dpConfig.containerClass = 'theme-dark-blue';
+    this.dpConfig.dateInputFormat = 'MM/DD/YYYY';
   }
 
   public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
@@ -106,7 +107,7 @@ export class PersonalDataComponent implements OnInit {
     last_names: ['', Validators.required],
     dni: ['', [Validators.required, validateCedula]],
     maritalStatus: [null, Validators.required],
-    birthday: ['']
+    birthday: null
   });
 
   /**
@@ -210,7 +211,7 @@ export class PersonalDataComponent implements OnInit {
       this.personalDataForm.controls['names'].setValue(this.personal_data.name);
       this.personalDataForm.controls['last_names'].setValue(this.personal_data.last_name);
       this.personalDataForm.controls['dni'].setValue(this.personal_data.cedula);
-      
+
       this.percentageDni = true;
       this.percentageNames = true;
       this.percentageLast_names = true;
@@ -223,7 +224,7 @@ export class PersonalDataComponent implements OnInit {
       this.personalDataForm.controls['birthday'].setValue(this.personal_data.birthday);
     }
 
-    if(localStorage.getItem('percentage')) {
+    if (localStorage.getItem('percentage')) {
       this.percentage = +localStorage.getItem('percentage');
     }
 

@@ -128,28 +128,61 @@ export class LaborDataComponent implements OnInit {
       this.independenciaSection = false;
       this.mixtaSection = false;
       this.percentage = +localStorage.getItem('percentage');
-      //this.independienteform.reset(this.independienteform.value);
-      //this.mixtaform.reset(this.mixtaform.value);
-      // this.independienteform.reset();
-      // this.mixtaform.reset();
+      this.percentage += this.totalPercentageD;
+
+      if (this.labor_data) {
+
+        if (this.labor_data.type === 'dependiente') {
+          this.percentage = +localStorage.getItem('percentage');
+        }
+        if (this.labor_data.type === 'independiente') {
+          this.percentage -= 33;
+        }
+        if (this.labor_data.type === 'mixta') {
+          this.percentage -= 32;
+        }
+      }
     }
     if ($event.target.value === 'independiente') {
       this.dependenciaSection = false;
       this.independenciaSection = true;
       this.mixtaSection = false;
       this.percentage = +localStorage.getItem('percentage');
-      //this.dependienteform.reset(this.dependienteform.value);
-      //this.mixtaform.reset(this.mixtaform.value);
-      // this.dependienteform.reset();
-      // this.mixtaform.reset();
+      this.percentage += this.totalPercentageI;
+
+      if (this.labor_data) {
+
+        if (this.labor_data.type === 'dependiente') {
+          this.percentage -= 30;
+        }
+        if (this.labor_data.type === 'independiente') {
+          this.percentage = +localStorage.getItem('percentage');
+        }
+        if (this.labor_data.type === 'mixta') {
+          this.percentage -= 32;
+        }
+      }
     }
     if ($event.target.value === 'mixta') {
       this.dependenciaSection = false;
       this.independenciaSection = false;
       this.mixtaSection = true;
       this.percentage = +localStorage.getItem('percentage');
-      //this.independienteform.reset(this.independienteform.value);
-      //this.dependienteform.reset(this.dependienteform.value);
+      this.percentage += this.totalPercentageM;
+
+      if (this.labor_data) {
+
+        if (this.labor_data.type === 'dependiente') {
+          this.percentage -= 30;
+        }
+        if (this.labor_data.type === 'independiente') {
+          this.percentage -= 33;
+        }
+        if (this.labor_data.type === 'mixta') {
+          this.percentage = +localStorage.getItem('percentage');
+        }
+
+      }
     }
   }
 
@@ -205,7 +238,7 @@ export class LaborDataComponent implements OnInit {
           this.dependienteform.controls['city'].setValue({ id: this.labor_data.city.id, name: this.labor_data.city.name });
           this.percentageDCity = true;
         }
-        
+
         this.dependienteform.controls['address'].setValue(this.labor_data.address);
         this.dependienteform.controls['phone'].setValue(this.labor_data.phone);
 
@@ -264,14 +297,14 @@ export class LaborDataComponent implements OnInit {
    * @return {void} Nothing
   */
   changeProvince(event) {
-    
-    if(this.laborform.get('type').value === 'dependiente'){
+
+    if (this.laborform.get('type').value === 'dependiente') {
       this.updatePercentageDProvince();
     }
-    if(this.laborform.get('type').value === 'mixta'){
+    if (this.laborform.get('type').value === 'mixta') {
       this.updatePercentageMProvince();
     }
-    
+
     this.httpService.getCities(event.id).subscribe(res => {
       this.dependienteform.controls['city'].setValue(null);
       this.mixtaform.controls['city'].setValue(null);
@@ -438,16 +471,20 @@ export class LaborDataComponent implements OnInit {
   public percentageDMonthlySalary: boolean = false;
   public percentageDProvince: boolean = false;
   public percentageDCity: boolean = false;
-  
+
   public increaseD: number = 6;
+
+  public totalPercentageD: number = 0;
 
   updatePercentageDCompanyName() {
     if (this.dependienteform.value.companyName.length > 0 && !this.percentageDCompanyName) {
       this.percentageDCompanyName = true;
       this.percentage += this.increaseD;
+      this.totalPercentageD += this.increaseD;
     } else if (this.dependienteform.value.companyName.length == 0 && this.percentageDCompanyName) {
       this.percentageDCompanyName = false;
       this.percentage -= this.increaseD;
+      this.totalPercentageD -= this.increaseD;
     }
   }
 
@@ -455,9 +492,11 @@ export class LaborDataComponent implements OnInit {
     if (this.dependienteform.value.positionCompany.length > 0 && !this.percentageDPositionCompany) {
       this.percentageDPositionCompany = true;
       this.percentage += this.increaseD;
+      this.totalPercentageD += this.increaseD;
     } else if (this.dependienteform.value.positionCompany.length == 0 && this.percentageDPositionCompany) {
       this.percentageDPositionCompany = false;
       this.percentage -= this.increaseD;
+      this.totalPercentageD -= this.increaseD;
     }
   }
 
@@ -465,9 +504,11 @@ export class LaborDataComponent implements OnInit {
     if (this.dependienteform.value.monthlySalary > 0 && !this.percentageDMonthlySalary) {
       this.percentageDMonthlySalary = true;
       this.percentage += this.increaseD;
+      this.totalPercentageD += this.increaseD;
     } else if (this.dependienteform.value.monthlySalary == 0 && this.percentageDMonthlySalary) {
       this.percentageDMonthlySalary = false;
       this.percentage -= this.increaseD;
+      this.totalPercentageD -= this.increaseD;
     }
   }
 
@@ -475,6 +516,7 @@ export class LaborDataComponent implements OnInit {
     if (!this.percentageDProvince) {
       this.percentageDProvince = true;
       this.percentage += this.increaseD;
+      this.totalPercentageD += this.increaseD;
     }
   }
 
@@ -482,22 +524,27 @@ export class LaborDataComponent implements OnInit {
     if (!this.percentageDCity) {
       this.percentageDCity = true;
       this.percentage += this.increaseD;
+      this.totalPercentageD += this.increaseD;
     }
   }
 
   public percentageIRuc: boolean = false;
   public percentageISector: boolean = false;
   public percentageIAverageSales: boolean = false;
-  
+
   public increaseI: number = 11;
+  public totalPercentageI: number = 0;
+
 
   updatePercentageIRuc() {
     if (this.independienteform.value.ruc.length > 0 && !this.percentageIRuc) {
       this.percentageIRuc = true;
       this.percentage += this.increaseI;
+      this.totalPercentageI += this.increaseI;
     } else if (this.independienteform.value.ruc.length == 0 && this.percentageIRuc) {
       this.percentageIRuc = false;
       this.percentage -= this.increaseI;
+      this.totalPercentageI -= this.increaseI;
     }
   }
 
@@ -505,9 +552,11 @@ export class LaborDataComponent implements OnInit {
     if (this.independienteform.value.sector.length > 0 && !this.percentageISector) {
       this.percentageISector = true;
       this.percentage += this.increaseI;
+      this.totalPercentageI += this.increaseI;
     } else if (this.independienteform.value.sector.length == 0 && this.percentageISector) {
       this.percentageISector = false;
       this.percentage -= this.increaseI;
+      this.totalPercentageI -= this.increaseI;
     }
   }
 
@@ -515,9 +564,11 @@ export class LaborDataComponent implements OnInit {
     if (this.independienteform.value.averageSales > 0 && !this.percentageIAverageSales) {
       this.percentageIAverageSales = true;
       this.percentage += this.increaseI;
+      this.totalPercentageI += this.increaseI;
     } else if (this.independienteform.value.averageSales == 0 && this.percentageIAverageSales) {
       this.percentageIAverageSales = false;
       this.percentage -= this.increaseI;
+      this.totalPercentageI -= this.increaseI;
     }
   }
 
@@ -529,16 +580,19 @@ export class LaborDataComponent implements OnInit {
   public percentageMRuc: boolean = false;
   public percentageMSector: boolean = false;
   public percentageMAverageSales: boolean = false;
-  
+
   public increaseM: number = 4;
+  public totalPercentageM: number = 0;
 
   updatePercentageMCompanyName() {
     if (this.mixtaform.value.companyName.length > 0 && !this.percentageMCompanyName) {
       this.percentageMCompanyName = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     } else if (this.mixtaform.value.companyName.length == 0 && this.percentageMCompanyName) {
       this.percentageMCompanyName = false;
       this.percentage -= this.increaseM;
+      this.totalPercentageM -= this.increaseM;
     }
   }
 
@@ -546,9 +600,11 @@ export class LaborDataComponent implements OnInit {
     if (this.mixtaform.value.positionCompany.length > 0 && !this.percentageMPositionCompany) {
       this.percentageMPositionCompany = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     } else if (this.mixtaform.value.positionCompany.length == 0 && this.percentageMPositionCompany) {
       this.percentageMPositionCompany = false;
       this.percentage -= this.increaseM;
+      this.totalPercentageM -= this.increaseM;
     }
   }
 
@@ -556,9 +612,11 @@ export class LaborDataComponent implements OnInit {
     if (this.mixtaform.value.monthlySalary > 0 && !this.percentageMMonthlySalary) {
       this.percentageMMonthlySalary = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     } else if (this.mixtaform.value.monthlySalary == 0 && this.percentageMMonthlySalary) {
       this.percentageMMonthlySalary = false;
       this.percentage -= this.increaseM;
+      this.totalPercentageM -= this.increaseM;
     }
   }
 
@@ -566,6 +624,7 @@ export class LaborDataComponent implements OnInit {
     if (!this.percentageMProvince) {
       this.percentageMProvince = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     }
   }
 
@@ -573,6 +632,7 @@ export class LaborDataComponent implements OnInit {
     if (!this.percentageMCity) {
       this.percentageMCity = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     }
   }
 
@@ -580,9 +640,11 @@ export class LaborDataComponent implements OnInit {
     if (this.mixtaform.value.ruc.length > 0 && !this.percentageMRuc) {
       this.percentageMRuc = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     } else if (this.mixtaform.value.ruc.length == 0 && this.percentageMRuc) {
       this.percentageMRuc = false;
       this.percentage -= this.increaseM;
+      this.totalPercentageM -= this.increaseM;
     }
   }
 
@@ -590,9 +652,11 @@ export class LaborDataComponent implements OnInit {
     if (this.mixtaform.value.sector.length > 0 && !this.percentageMSector) {
       this.percentageMSector = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     } else if (this.mixtaform.value.sector.length == 0 && this.percentageMSector) {
       this.percentageISector = false;
       this.percentage -= this.increaseM;
+      this.totalPercentageM -= this.increaseM;
     }
   }
 
@@ -600,9 +664,11 @@ export class LaborDataComponent implements OnInit {
     if (this.mixtaform.value.averageSales > 0 && !this.percentageMAverageSales) {
       this.percentageMAverageSales = true;
       this.percentage += this.increaseM;
+      this.totalPercentageM += this.increaseM;
     } else if (this.mixtaform.value.averageSales == 0 && this.percentageMAverageSales) {
       this.percentageMAverageSales = false;
       this.percentage -= this.increaseM;
+      this.totalPercentageM -= this.increaseM;
     }
   }
 

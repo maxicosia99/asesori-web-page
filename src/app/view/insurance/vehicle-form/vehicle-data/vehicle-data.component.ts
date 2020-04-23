@@ -21,7 +21,7 @@ export class VehicleDataComponent implements OnInit {
    * Variables for the progress bar
    * @type {any[]}
   */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
    * Carousel options
@@ -121,6 +121,9 @@ export class VehicleDataComponent implements OnInit {
   public vehicle_data:any;
 
   ngOnInit() {
+    window.scrollTo(0, 0);
+    this.percentage = +localStorage.getItem('percentage');
+
     /** Verificar contenido del local storage*/
     this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
     this.location_data = JSON.parse(localStorage.getItem('location_data'));
@@ -128,7 +131,12 @@ export class VehicleDataComponent implements OnInit {
     this.vehicle_data = JSON.parse(localStorage.getItem('vehicle_data'));
 
     if(this.vehicle_data){
-      this.vehicleform.controls['vehicleColor'].setValue({color_name:this.vehicle_data.vehicleColor.color_name});
+      
+      if (this.vehicle_data.vehicleColor) {
+        this.vehicleform.controls['vehicleColor'].setValue({color_name:this.vehicle_data.vehicleColor.color_name});
+        this.percentageColor = true;
+      }
+      
       this.vehicleform.controls['vehiclePlate'].setValue(this.vehicle_data.vehiclePlate);
       this.vehicleform.controls['vehicleDetails'].setValue(this.vehicle_data.vehicleDetails);
     }
@@ -150,7 +158,21 @@ export class VehicleDataComponent implements OnInit {
       }
       /** Store vehicle_data in localStorage*/
       localStorage.setItem('vehicle_data', JSON.stringify(vehicle_data));
+      localStorage.setItem('percentage', this.percentage.toString());
       this.router.navigate(['insurance/results/my-insurance']);
+    }
+  }
+
+  /**-------------------------------------------------------------------------------------------------------------------------------- */
+
+  public percentageColor: boolean = false;
+
+  public increase: number = 5;
+
+  updatePercentageColor() {
+    if (!this.percentageColor) {
+      this.percentageColor = true;
+      this.percentage += this.increase;
     }
   }
 

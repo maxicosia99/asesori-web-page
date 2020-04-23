@@ -24,7 +24,7 @@ export class ContactDataComponent implements OnInit {
    * Variables for the progress bar
    * @type {any[]}
   */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
   * Variable to check user login
@@ -78,7 +78,7 @@ export class ContactDataComponent implements OnInit {
   contactForm = this.formbuilder.group({
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
-    phone2: [''],
+    phone2: ['', Validators.required],
   });
 
   /**
@@ -114,6 +114,7 @@ export class ContactDataComponent implements OnInit {
       }
       /** Store contact_data in localStorage*/
       localStorage.setItem('contact_data', JSON.stringify(contact_data));
+      localStorage.setItem('percentage', this.percentage.toString());
       this.router.navigate(['insurance/results/vehicle']);
     }
   }
@@ -121,11 +122,11 @@ export class ContactDataComponent implements OnInit {
   public personal_data: any;
   public location_data: any;
   public contact_data: any;
-  public vehicle_data:any;
+  public vehicle_data: any;
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.contactForm.controls['email'].setValue(JSON.parse(localStorage.getItem('email_data')).email);
+    this.percentage = +localStorage.getItem('percentage');
 
     /* Handling of personal data when logging in */
     this.recuperateLoginData();
@@ -134,11 +135,13 @@ export class ContactDataComponent implements OnInit {
     });
     this.authenticationService.subsClearVar = this.authenticationService.clearUserData.subscribe(() => {
 
-      this.contactForm.controls['email'].setValue("");
+      //this.contactForm.controls['email'].setValue("");
       this.contactForm.controls['phone'].setValue("");
       this.user_id = null;
       this.hasEmail = false;
       this.hasPhone1 = false;
+      this.updatePercentageEmail();
+      this.updatePercentagePhone();
     });
 
     /** Verificar contenido del local storage*/
@@ -147,10 +150,17 @@ export class ContactDataComponent implements OnInit {
     this.contact_data = JSON.parse(localStorage.getItem('contact_data'));
     this.vehicle_data = JSON.parse(localStorage.getItem('vehicle_data'));
 
-    if(this.contact_data){
-      //this.contactForm.controls['email'].setValue(this.contact_data.email);
+    if (this.contact_data) {
       this.contactForm.controls['phone'].setValue(this.contact_data.phone);
       this.contactForm.controls['phone2'].setValue(this.contact_data.phone2);
+      this.contactForm.controls['email'].setValue(this.contact_data.email);
+      this.percentagePhone = true;
+      this.percentagePhone2 = true;
+      this.percentageEmail = true;
+    } else {
+      this.contactForm.controls['email'].setValue(JSON.parse(localStorage.getItem('email_data')).email);
+      this.percentageEmail = true;
+      this.percentage += this.increase;
     }
   }
 
@@ -182,15 +192,56 @@ export class ContactDataComponent implements OnInit {
           if (user.email) {
             this.contactForm.controls['email'].setValue(user.email);
             this.hasEmail = true;
+            this.updatePercentageEmail();
           }
           if (user.phone1) {
             this.contactForm.controls['phone'].setValue(user.phone1);
             this.hasPhone1 = true;
+            this.updatePercentagePhone();
           }
         }
       }, (error) => {
         console.log(error);
       });
+    }
+  }
+
+  /**---------------------------------------------------------------------------------------------------------------------------------- */
+
+  public percentageEmail: boolean = false;
+  public percentagePhone: boolean = false;
+  public percentagePhone2: boolean = false;
+
+  public increase: number = 9;
+
+  updatePercentagePhone() {
+    if (this.contactForm.value.phone.length > 0 && !this.percentagePhone) {
+      this.percentagePhone = true;
+      this.percentage += this.increase;
+    } else if (this.contactForm.value.phone.length == 0 && this.percentagePhone) {
+      this.percentagePhone = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentagePhone2() {
+    if (this.contactForm.value.phone2.length > 0 && !this.percentagePhone2) {
+      this.percentagePhone2 = true;
+      this.percentage += this.increase;
+    } else if (this.contactForm.value.phone2.length == 0 && this.percentagePhone2) {
+      this.percentagePhone2 = false;
+      this.percentage -= this.increase;
+    }
+
+  }
+
+  updatePercentageEmail() {
+    if (this.contactForm.value.email.length > 0 && !this.percentageEmail) {
+      this.percentageEmail = true;
+      this.percentage += this.increase;
+    } else if (this.contactForm.value.email.length == 0 && this.percentageEmail) {
+      this.percentageEmail = false;
+      this.percentage -= this.increase;
     }
   }
 

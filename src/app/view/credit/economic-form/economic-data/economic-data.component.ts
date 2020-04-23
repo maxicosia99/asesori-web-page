@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -106,11 +106,20 @@ export class EconomicDataComponent implements OnInit {
     this.economicFormSubmitted = true;
     if (this.economicForm.valid) {
 
+      let services_payment: number = 0;
+
+      if (!this.economicForm.get('services_payment')) {
+        services_payment = this.economicForm.value.services_payment2;
+      }
+      if (!this.economicForm.get('services_payment2')) {
+        services_payment = this.economicForm.value.services_payment;
+      }
+
       let economic_data: any = {
         payments_cards: this.economicForm.value.card_payment,
         rental: this.economicForm.value.rent_payment,
         payment_loans: this.economicForm.value.loans_payment,
-        payment_services: this.economicForm.value.services_payment,
+        payment_services: services_payment,
         housing_type: this.economicForm.value.typeHousing.type,
         mortgage_payment: this.economicForm.value.mortgage_payment,
         total_possessions: this.economicForm.value.total_properties
@@ -118,6 +127,7 @@ export class EconomicDataComponent implements OnInit {
 
       /** Store economic_data in localStorage*/
       localStorage.setItem('economic_data', JSON.stringify(economic_data));
+      localStorage.setItem('percentage', this.percentage.toString());
       this.router.navigate(['credit/results/my-credit']);
     }
   }
@@ -142,27 +152,67 @@ export class EconomicDataComponent implements OnInit {
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
     if (this.economic_data) {
-      this.economicForm.controls['card_payment'].setValue(this.economic_data.payments_cards);  
+      this.economicForm.controls['card_payment'].setValue(this.economic_data.payments_cards);
       this.economicForm.controls['loans_payment'].setValue(this.economic_data.payment_loans);
-      this.economicForm.controls['mortgage_payment'].setValue(this.economic_data.mortgage_payment);  
-      this.economicForm.controls['rent_payment'].setValue(this.economic_data.rental);  
-      this.economicForm.controls['services_payment'].setValue(this.economic_data.payment_services);  
-      this.economicForm.controls['total_properties'].setValue(this.economic_data.total_possessions);  
-      this.economicForm.controls['typeHousing'].setValue({type:this.economic_data.housing_type});
+      this.economicForm.controls['mortgage_payment'].setValue(this.economic_data.mortgage_payment);
+      this.economicForm.controls['rent_payment'].setValue(this.economic_data.rental);
+      this.economicForm.controls['total_properties'].setValue(this.economic_data.total_possessions);
+
+      this.percentageTotal_properties = true;
+
+      if (this.economic_data.housing_type) {
+        this.economicForm.controls['typeHousing'].setValue({ type: this.economic_data.housing_type });
+
+        if (this.economic_data.housing_type === 'Arrendada') {
+          const validators = [Validators.required, validateEntryMoney];
+          this.economicForm.addControl('services_payment2', new FormControl('', validators));
+          this.economicForm.controls['services_payment2'].setValue(this.economic_data.payment_services);
+          this.percentageServices_payment = true;
+          this.economicForm.removeControl('services_payment');
+          this.withRent = true;
+        }
+        if (this.economic_data.housing_type === 'Propia') {
+          this.economicForm.controls['services_payment'].setValue(this.economic_data.payment_services);
+          this.percentageServices_payment = true;
+        }
+
+        this.percentageTypeHousing = true;
+
+      }
     }
   }
 
   public withRent: boolean = false;
 
-  changeTypeHousing(event){
+  changeTypeHousing(event) {
 
     this.updatePercentageTypeHousing();
 
-    if(event.type === 'Propia'){
+    if (event.type === 'Propia') {
       this.withRent = false;
+
+      this.percentageServices_payment2 = false;
+
+      if (!this.economicForm.get('services_payment')) {
+        const validators = [Validators.required, validateEntryMoney];
+        this.economicForm.addControl('services_payment', new FormControl('', validators));
+        this.economicForm.controls['services_payment'].setValue(this.economicForm.value.services_payment2);
+        this.economicForm.removeControl('services_payment2');
+      }
+
     }
-    if(event.type === 'Arrendada'){
+    if (event.type === 'Arrendada') {
       this.withRent = true;
+
+      this.percentageServices_payment2 = true;
+
+      if (this.economicForm.get('services_payment')) {
+        const validators = [Validators.required, validateEntryMoney];
+        this.economicForm.addControl('services_payment2', new FormControl('', validators));
+        this.economicForm.controls['services_payment2'].setValue(this.economicForm.value.services_payment);
+        this.economicForm.removeControl('services_payment');
+      }
+
     }
   }
 
@@ -170,8 +220,9 @@ export class EconomicDataComponent implements OnInit {
 
   public percentageServices_payment: boolean = false;
   public percentageTotal_properties: boolean = false;
+  public percentageServices_payment2: boolean = false;
   public percentageTypeHousing: boolean = false;
-  
+
   public increase: number = 4;
 
   updatePercentageServices_payment() {
@@ -190,6 +241,16 @@ export class EconomicDataComponent implements OnInit {
       this.percentage += this.increase;
     } else if (this.economicForm.value.total_properties == 0 && this.percentageTotal_properties) {
       this.percentageTotal_properties = false;
+      this.percentage -= this.increase;
+    }
+  }
+
+  updatePercentageServices_payment2() {
+    if (this.economicForm.value.services_payment2 > 0 && !this.percentageServices_payment2) {
+      this.percentageServices_payment2 = true;
+      this.percentage += this.increase;
+    } else if (this.economicForm.value.services_payment2 == 0 && this.percentageServices_payment2) {
+      this.percentageServices_payment2 = false;
       this.percentage -= this.increase;
     }
   }

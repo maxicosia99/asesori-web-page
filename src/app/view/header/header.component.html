@@ -49,12 +49,12 @@
                     <ng-template #elseBlock>
 
                         <ng-template #popTemplate>
-                            <summary routerLink="/tracking" routerLinkActive="active-link" class="nav-link tittle-13 color-3">Mis solicitudes</summary>
-                            <summary (click)="onLoggedout()" class="nav-link tittle-13 color-3">Cerrar sesión</summary>
+                            <summary routerLink="/tracking" (click)="popOptions.hide()" routerLinkActive="active-link" class="nav-link tittle-13 color-3">Mis solicitudes</summary>
+                            <summary (click)="onLoggedout(); popOptions.hide()" class="nav-link tittle-13 color-3">Cerrar sesión</summary>
                         </ng-template>
 
-                        <li class="nav-item d-none d-md-block" [popover]="popTemplate" placement="bottom" [outsideClick]="true" (onHidden)="collapse()">
-                            <a (click)="isCollapsed = !isCollapsed" class="nav-link tittle-10 mt-1 pointer"><i class="fas fa-user-circle"></i><u> {{user.name}} <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i></u></a>
+                        <li class="nav-item d-none d-md-block" [popover]="popTemplate" #popOptions="bs-popover" placement="bottom" [outsideClick]="true" (onHidden)="collapse()">
+                            <a (click)="isCollapsed = !isCollapsed" class="nav-link tittle-10 mt-1 pointer"><i class="fas fa-user-circle"></i><u> {{user.email}} <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i></u></a>
                         </li>
                     </ng-template>
                 </ul>

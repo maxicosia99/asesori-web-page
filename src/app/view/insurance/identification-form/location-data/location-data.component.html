@@ -13,17 +13,22 @@
                     <ul class="timeline text-left text-uppercase tittle-19 color-6">
                         <li class="primero">
                             <summary [routerLink]="personal_data ? '/insurance/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}" class="tittle-20">Identificación</summary>
-                            <p class="mt-4" [routerLink]="personal_data ? '/insurance/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales</p>
+                            <p class="mt-4" [routerLink]="personal_data ? '/insurance/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales
+                            </p>
                             <p class="color-1">domicilio actual</p>
                             <p [routerLink]="contact_data ? '/insurance/results/identification/contact' : null" [ngClass]="{'pointer color-1': contact_data, 'not-allowed':!contact_data}">contacto</p>
                         </li>
                         <li class="segundo">
-                            <summary [routerLink]="vehicle_data ? '/insurance/results/vehicle' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">Información vehícular</summary>
-                            <p class="mt-4" [routerLink]="vehicle_data ? '/insurance/results/vehicle/data' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">el vehículo</p>
+                            <summary [routerLink]="vehicle_data ? '/insurance/results/vehicle' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">Información vehícular
+                            </summary>
+                            <p class="mt-4" [routerLink]="vehicle_data ? '/insurance/results/vehicle/data' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">el vehículo
+                            </p>
                         </li>
                         <li class="tercero">
-                            <summary [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">Mi seguro</summary>
-                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">solicitud</p>
+                            <summary [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">
+                                Mi seguro</summary>
+                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">
+                                solicitud</p>
                         </li>
                         <li class="cuarto">
                             <summary>Solicitud lista</summary>
@@ -118,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" [searchable]="true" bindLabel="name" [clearable]="false">
+                                <ng-select appearance="outline" class="custom" [items]="cities" placeholder="ciudad*" formControlName="city" (change)="updatePercentageCity()" [searchable]="true" bindLabel="name" [clearable]="false" required [ngClass]="{ 'is-invalid': isFieldValidaddressForm('city')}">
                                 </ng-select>
                                 <div *ngIf="isFieldValidaddressForm('city')" class="invalid-select">
                                     <span>Seleccione una ciudad!</span>
@@ -129,7 +134,7 @@
                             <div class="col-12">
 
                                 <div class="position-relative">
-                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}">
+                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}" (blur)="updatePercentageAddress()">
                                     <label class="floating-label">dirección*</label>
                                     <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                         <span>Ingrese su dirección!</span>

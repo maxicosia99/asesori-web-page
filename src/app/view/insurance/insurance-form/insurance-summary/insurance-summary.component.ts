@@ -21,7 +21,7 @@ export class InsuranceSummaryComponent implements OnInit {
    * Variables for the progress bar
    * @type {any[]}
   */
-  public percentage: number = 95;
+  public percentage: number = 0;
 
   /**
    * Carousel options
@@ -59,6 +59,7 @@ export class InsuranceSummaryComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.percentage = +localStorage.getItem('percentage');
     this.insurance_information = JSON.parse(localStorage.getItem('insurance_information'));
     this.insurance_options = JSON.parse(localStorage.getItem('insurance_options'));
     this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
@@ -99,7 +100,16 @@ export class InsuranceSummaryComponent implements OnInit {
     this.httpService.createInsuranceInformation(insuranceInformation).subscribe(res => {
       //console.log(res);
       if (res.status == 200) {
-        localStorage.clear();
+        
+        localStorage.removeItem('percentage');
+        localStorage.removeItem('insurance_information');
+        localStorage.removeItem('insurance_options');
+        localStorage.removeItem('personal_data');
+        localStorage.removeItem('location_data');
+        localStorage.removeItem('contact_data');
+        localStorage.removeItem('vehicle_data');
+        //localStorage.clear();
+
         this.router.navigate(['insurance/finalize']);
         //console.log(res);
         this.httpService.getSendMailInsurance().subscribe(res => {

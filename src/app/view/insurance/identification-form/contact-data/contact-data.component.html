@@ -13,17 +13,23 @@
                     <ul class="timeline text-left text-uppercase tittle-19 color-6">
                         <li class="primero">
                             <summary [routerLink]="personal_data ? '/insurance/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}" class="tittle-20">Identificación</summary>
-                            <p class="mt-4" [routerLink]="personal_data ? '/insurance/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales</p>
-                            <p [routerLink]="location_data ? '/insurance/results/identification/location' : null" [ngClass]="{'pointer color-1': location_data, 'not-allowed':!location_data}">domicilio actual</p>
+                            <p class="mt-4" [routerLink]="personal_data ? '/insurance/results/identification' : null" [ngClass]="{'pointer color-1': personal_data, 'not-allowed':!personal_data}">datos personales
+                            </p>
+                            <p [routerLink]="location_data ? '/insurance/results/identification/location' : null" [ngClass]="{'pointer color-1': location_data, 'not-allowed':!location_data}">domicilio actual
+                            </p>
                             <p class="color-1">contacto</p>
                         </li>
                         <li class="segundo">
-                            <summary [routerLink]="vehicle_data ? '/insurance/results/vehicle' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">Información vehícular</summary>
-                            <p class="mt-4" [routerLink]="vehicle_data ? '/insurance/results/vehicle/data' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">el vehículo</p>
+                            <summary [routerLink]="vehicle_data ? '/insurance/results/vehicle' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">Información vehícular
+                            </summary>
+                            <p class="mt-4" [routerLink]="vehicle_data ? '/insurance/results/vehicle/data' : null" [ngClass]="{'pointer color-1': vehicle_data, 'not-allowed':!vehicle_data}">el vehículo
+                            </p>
                         </li>
                         <li class="tercero">
-                            <summary [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">Mi seguro</summary>
-                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">solicitud</p>
+                            <summary [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">
+                                Mi seguro</summary>
+                            <p class="mt-4" [routerLink]="(personal_data && location_data && contact_data && vehicle_data) ? '/insurance/results/my-insurance/summary' : null" [ngClass]="{'pointer color-1': (personal_data && location_data && contact_data && vehicle_data), 'not-allowed':!(personal_data && location_data && contact_data && vehicle_data)}">
+                                solicitud</p>
                         </li>
                         <li class="cuarto">
                             <summary>Solicitud lista</summary>
@@ -111,7 +117,7 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" [attr.disabled]="hasPhone1 ? '' : null" formControlName="phone" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}">
+                                    <input type="tel" [attr.disabled]="hasPhone1 ? '' : null" formControlName="phone" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}" (blur)="updatePercentagePhone()">
                                     <label class="floating-label">telefono para contacto*</label>
                                     <div *ngIf="isFieldValidContactForm('phone')" class="invalid-feedback">
                                         <span>Ingrese teléfono!</span>
@@ -122,7 +128,7 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" formControlName="phone2" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone2')}">
+                                    <input type="tel" formControlName="phone2" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone2')}" (blur)="updatePercentagePhone2()">
                                     <label class="floating-label">telefono opcional de contacto*</label>
                                     <div *ngIf="isFieldValidContactForm('phone2')" class="invalid-feedback">
                                         <span>Ingrese otro teléfono!</span>
@@ -133,7 +139,7 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}">
+                                    <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}" (blur)="updatePercentageEmail()">
                                     <label class="floating-label">correo electrónico*</label>
                                     <div *ngIf="isFieldValidContactForm('email')" class="invalid-feedback">
                                         <span>Ingrese correo electrónico!</span>

@@ -91,6 +91,7 @@ export class FinancialDataComponent implements OnInit {
 
       if (this.financial_data.monthlySalary) {
         this.financialform.controls['monthlySalary'].setValue(this.financial_data.monthlySalary);
+        this.percentageMonthlySalary = true;
       }
 
       if (this.financial_data.otherMonthlyValue) {
@@ -101,10 +102,15 @@ export class FinancialDataComponent implements OnInit {
       this.financialform.controls['monthlyExpenses'].setValue(this.financial_data.monthlyExpenses);
       this.financialform.controls['paymentCapacity'].setValue(this.financial_data.paymentCapacity);
 
+      this.percentagePaymentCapacity = true;
+      this.percentageMonthlyExpenses = true;
+
     } else if (this.labor_data) {
 
       if (this.labor_data.monthlySalary) {
         this.financialform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
+        this.percentageMonthlySalary = true;
+        this.percentage += this.increase;
       }
 
       if (this.labor_data.otherMonthlyValue) {
