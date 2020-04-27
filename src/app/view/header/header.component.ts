@@ -113,7 +113,7 @@ export class HeaderComponent implements OnInit {
     */
     onLoggedout() {
 
-        if (this.router.url === '/tracking' || this.router.url === '/tracking/home') {
+        if (this.router.url.includes('/tracking')) {
             this.router.navigate(['/']);
         } else {
             this.router.navigate([this.router.url]);

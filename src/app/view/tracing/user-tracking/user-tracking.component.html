@@ -21,8 +21,8 @@
                     </div>
                     <div class="col-12 col-md-10 mt-3 mt-md-0">
                         <p class="tittle-7">Crédito {{credit.credittype_name}}</p>
-                        <p class="text-light-16">{{credit.application_date | date:'longDate' }}.</p>
-                        <p class="text-light-14">{{credit.credit_destination}}, Banco del Austro, Banco del Pichincha, $ {{credit.amount_required | number : '1.2-2':'fr' }} ,{{credit.formatted_term}}…
+                        <p class="text-light-16">{{credit.application_date | date:'fullDate' }}.</p>
+                        <p class="text-light-14">{{credit.credit_destination}}, Banco del Austro, Banco del Pichincha, $ {{credit.amount_required | number : '1.2-2':'es-EC' }} ,{{credit.formatted_term}}…
                         </p>
                         <div class="row">
                             <div class="col-sm-6 col-md-5 col-lg-4 mt-4 mt-md-0">

@@ -97,7 +97,7 @@ export class PersonalDataComponent implements OnInit {
   personalDataForm = this.formbuilder.group({
     names: ['', Validators.required],
     last_names: ['', Validators.required],
-    dni: ['', [Validators.required, validateCedula]],
+    dni: ['', [Validators.required,validateCedula]],
     maritalStatus: [null, Validators.required],
     birthday: null
   });
@@ -119,6 +119,10 @@ export class PersonalDataComponent implements OnInit {
       this.personalDataForm.get(field).untouched &&
       this.personalDataFormSubmitted && this.personalDataForm.get(field).errors
     );
+  }
+
+  verifyDni():  boolean  {
+    return this.personalDataForm.hasError('validateCedula');
   }
 
   /**

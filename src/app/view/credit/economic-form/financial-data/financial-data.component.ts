@@ -89,28 +89,19 @@ export class FinancialDataComponent implements OnInit {
 
     if (this.financial_data) {
 
-      if (this.financial_data.monthlySalary) {
-        this.financialform.controls['monthlySalary'].setValue(this.financial_data.monthlySalary);
-        this.percentageMonthlySalary = true;
-      }
-
-      if (this.financial_data.otherMonthlyValue) {
-        this.financialform.controls['otherMonthlyValue'].setValue(this.financial_data.otherMonthlyValue);
-      }
-
-      this.financialform.controls['valueDetail'].setValue(this.financial_data.valueDetail);
       this.financialform.controls['monthlyExpenses'].setValue(this.financial_data.monthlyExpenses);
       this.financialform.controls['paymentCapacity'].setValue(this.financial_data.paymentCapacity);
 
       this.percentagePaymentCapacity = true;
       this.percentageMonthlyExpenses = true;
 
-    } else if (this.labor_data) {
+    }
+    
+    if (this.labor_data) {
 
       if (this.labor_data.monthlySalary) {
         this.financialform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
         this.percentageMonthlySalary = true;
-        this.percentage += this.increase;
       }
 
       if (this.labor_data.otherMonthlyValue) {
@@ -149,20 +140,32 @@ export class FinancialDataComponent implements OnInit {
     if (this.financialform.valid) {
 
       let financial_data: any = {
-        monthlySalary: this.financialform.value.monthlySalary,
-        otherMonthlyValue: this.financialform.value.otherMonthlyValue,
-        valueDetail: this.financialform.value.valueDetail,
         monthlyExpenses: this.financialform.value.monthlyExpenses,
         paymentCapacity: this.financialform.value.paymentCapacity
       }
 
+      this.labor_data.monthlySalary = this.financialform.value.monthlySalary;
+      this.labor_data.otherMonthlyValue = this.financialform.value.otherMonthlyValue;
+      this.labor_data.valueDetail = this.financialform.value.valueDetail;
+
       /** Store location_data in localStorage*/
       localStorage.setItem('financial_data', JSON.stringify(financial_data));
+      localStorage.setItem('labor_data', JSON.stringify(this.labor_data));
       localStorage.setItem('percentage', this.percentage.toString());
       this.router.navigate(['credit/results/economic/economic']);
     }
   }
 
+  // public active: boolean = false;
+
+  // onKey(event: any) {
+  //   console.log(event.target.value);
+  //   if (this.financialform.value.monthlySalary > 0 ) {
+  //     this.active = true;
+  //   } else {
+  //     this.active = false;
+  //   }
+  // }
 
   /*------------------------------------------------------------------------------------------------------------------------ */
 

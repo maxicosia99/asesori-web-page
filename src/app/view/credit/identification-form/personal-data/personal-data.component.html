@@ -114,10 +114,16 @@
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <div class="position-relative">
-                                    <input type="text" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('dni')}" (blur)="updatePercentageDni()">
+                                    <input type="tel" numeric maxlength="10" [attr.disabled]="hasCedula ? '' : null" formControlName="dni" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': personalDataForm.controls.dni.touched && personalDataForm.controls.dni.errors}"
+                                        (keyup)="updatePercentageDni()">
                                     <label class="floating-label text-uppercase">número de identidad*</label>
-                                    <div *ngIf="isFieldValidPersonalData('dni')" class="invalid-feedback">
-                                        <span>Ingrese su cédula!</span>
+                                    <div *ngIf="personalDataForm.controls.dni.touched && personalDataForm.controls.dni.errors || personalDataForm.controls.dni.untouched && personalDataForm.controls.dni.errors" class="invalid-feedback">
+                                        <div *ngIf="personalDataForm.controls.dni.errors.required">
+                                            <span>Ingrese su cedula!</span>
+                                        </div>
+                                        <div *ngIf="!verifyDni()">
+                                            <span>Cedula incorrecta!</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +138,7 @@
                         <div class="row mb-4 mt-4 mt-md-0">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="text" formControlName="names" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('names')}" (blur)="updatePercentageNames()">
+                                    <input type="text" formControlName="names" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('names')}" (keyup)="updatePercentageNames()">
                                     <label class="floating-label">nombres*</label>
                                     <div *ngIf="isFieldValidPersonalData('names')" class="invalid-feedback">
                                         <span>Ingrese sus nombres!</span>
@@ -143,7 +149,7 @@
                         <div class="row my-0">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="text" formControlName="last_names" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('last_names')}" (blur)="updatePercentageLast_names()">
+                                    <input type="text" formControlName="last_names" class="floating-input form-control text-uppercase" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidPersonalData('last_names')}" (keyup)="updatePercentageLast_names()">
                                     <label class="floating-label">apellidos*</label>
                                     <div *ngIf="isFieldValidPersonalData('last_names')" class="invalid-feedback">
                                         <span>Ingrese sus apellidos!</span>

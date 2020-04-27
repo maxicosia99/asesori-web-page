@@ -113,10 +113,16 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" [attr.disabled]="hasPhone1 ? '' : null" formControlName="phone" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone')}" (blur)="updatePercentagePhone()">
+                                    <input type="tel" numeric maxlength="10" [attr.disabled]="hasPhone1 ? '' : null" formControlName="phone" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': contactForm.controls.phone.touched && contactForm.controls.phone.errors}"
+                                        (keyup)="updatePercentagePhone()">
                                     <label class="floating-label">telefono para contacto*</label>
-                                    <div *ngIf="isFieldValidContactForm('phone')" class="invalid-feedback">
-                                        <span>Ingrese teléfono!</span>
+                                    <div *ngIf="contactForm.controls.phone.touched && contactForm.controls.phone.errors" class="invalid-feedback">
+                                        <div *ngIf="contactForm.controls.phone.errors.required">
+                                            <span>Ingrese su teléfono!</span>
+                                        </div>
+                                        <div *ngIf="!contactForm.controls.phone.errors.minlegth">
+                                            <span>Teléfono incorrecto!</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -124,10 +130,15 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" formControlName="phone2" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('phone2')}" (blur)="updatePercentagePhone2()">
+                                    <input type="tel" numeric maxlength="10" formControlName="phone2" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': contactForm.controls.phone2.touched && contactForm.controls.phone2.errors}" (keyup)="updatePercentagePhone2()">
                                     <label class="floating-label">telefono opcional de contacto*</label>
-                                    <div *ngIf="isFieldValidContactForm('phone2')" class="invalid-feedback">
-                                        <span>Ingrese otro teléfono!</span>
+                                    <div *ngIf="contactForm.controls.phone2.touched && contactForm.controls.phone2.errors" class="invalid-feedback">
+                                        <div *ngIf="contactForm.controls.phone2.errors.required">
+                                            <span>Ingrese un teléfono!</span>
+                                        </div>
+                                        <div *ngIf="!contactForm.controls.phone2.errors.minlegth">
+                                            <span>Teléfono incorrecto!</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -135,10 +146,16 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="email" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidContactForm('email')}" (blur)="updatePercentageEmail()">
+                                    <input type="email" maxlength="40" [attr.disabled]="hasEmail ? '' : null" formControlName="email" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': contactForm.controls.email.touched && contactForm.controls.email.errors}"
+                                        (keyup)="updatePercentageEmail()">
                                     <label class="floating-label">correo electrónico*</label>
-                                    <div *ngIf="isFieldValidContactForm('email')" class="invalid-feedback">
-                                        <span>Ingrese correo electrónico!</span>
+                                    <div *ngIf="contactForm.controls.email.touched && contactForm.controls.email.errors" class="invalid-feedback">
+                                        <div *ngIf="contactForm.controls.email.errors.required">
+                                            <span>Ingrese un correo electrónico!</span>
+                                        </div>
+                                        <div *ngIf="!contactForm.controls.email.errors.maxlegth">
+                                            <span>No puede superar 40 caracteres!</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

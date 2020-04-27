@@ -114,7 +114,7 @@
                         <div class="row mt-4 mb-0 my-md-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="monthlySalary" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('monthlySalary')}" (blur)="updatePercentageMonthlySalary()">
+                                    <input type="tel" currencyMask formControlName="monthlySalary" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('monthlySalary')}" (keyup)="updatePercentageMonthlySalary()">
                                     <label class="floating-label">sueldo mensual*</label>
                                     <div *ngIf="isFieldValidfinancialform('monthlySalary')" class="invalid-feedback">
                                         <span>Ingrese el sueldo mensual!</span>
@@ -125,13 +125,13 @@
                         <div class="row my-0 my-md-4">
                             <div class="col-12 col-md-6 my-md-0 my-4">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="otherMonthlyValue" class="floating-input form-control" placeholder=" ">
+                                    <input type="tel" (keyup)="onKey($event)" currencyMask formControlName="otherMonthlyValue" class="floating-input form-control" placeholder=" ">
                                     <label class="floating-label">otro valor mensual</label>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="position-relative">
-                                    <input type="text" formControlName="valueDetail" class="floating-input form-control" placeholder=" ">
+                                    <input type="text" formControlName="valueDetail" class="floating-input form-control text-uppercase" placeholder=" ">
                                     <label class="floating-label">detalle del valor</label>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="monthlyExpenses" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('monthlyExpenses')}" (blur)="updatePercentageMonthlyExpenses()">
+                                    <input type="tel" currencyMask formControlName="monthlyExpenses" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('monthlyExpenses')}" (keyup)="updatePercentageMonthlyExpenses()">
                                     <label class="floating-label">gastos al mes*</label>
                                     <div *ngIf="isFieldValidfinancialform('monthlyExpenses')" class="invalid-feedback">
                                         <span>Ingrese los gastos al mes!</span>
@@ -150,7 +150,7 @@
                         <div class="row my-4">
                             <div class="col-12">
                                 <div class="position-relative">
-                                    <input type="tel" currencyMask formControlName="paymentCapacity" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('paymentCapacity')}" (blur)="updatePercentagePaymentCapacity()">
+                                    <input type="tel" currencyMask formControlName="paymentCapacity" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidfinancialform('paymentCapacity')}" (keyup)="updatePercentagePaymentCapacity()">
                                     <label class="floating-label">mi capacidad de pago mensual es*</label>
                                     <div *ngIf="isFieldValidfinancialform('paymentCapacity')" class="invalid-feedback">
                                         <span>Ingrese los gastos al mes!</span>

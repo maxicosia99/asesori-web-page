@@ -1,17 +1,14 @@
 import { AbstractControl } from '@angular/forms';
 
-export function validateCedula(control: AbstractControl) {
+export function validateRuc(control: AbstractControl) {
 
     let cedula: string = control.value;
 
-    // Preguntamos si la cedula consta de 10 digitos
-    if (cedula.length === 10 || cedula.length === 13) {
+    if (cedula.length === 13) {
 
-        if (cedula.length === 13) {
-            let ultimosDigitos = cedula.substring(10, 13);
-            if (ultimosDigitos !== '001') {
-                return { valid: true };
-            }
+        let ultimosDigitos = cedula.substring(10, 13);
+        if (ultimosDigitos !== '001') {
+            return { valid: true };
         }
 
         // Obtenemos el digito de la region que sonlos dos primeros digitos

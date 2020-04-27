@@ -76,9 +76,9 @@ export class ContactDataComponent implements OnInit {
    * Define contact form
   */
   contactForm = this.formbuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', Validators.required],
-    phone2: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
+    phone: ['', [Validators.required, Validators.minLength(10)]],
+    phone2: ['', [Validators.required, Validators.minLength(10)]],
   });
 
   /**

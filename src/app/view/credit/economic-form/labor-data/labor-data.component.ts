@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators, AbstractControl } from '@angular/
 import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { validateRuc } from 'src/app/services/client/validar-ruc';
 
 export function validateEntryMoney(control: AbstractControl) {
   if (control.value === 0) {
@@ -86,7 +87,7 @@ export class LaborDataComponent implements OnInit {
   });
 
   independienteform = this.formbuilder.group({
-    ruc: ['', [Validators.required]],
+    ruc: ['', [Validators.required, validateRuc]],
     sector: ['', [Validators.required]],
     averageSales: ['', [Validators.required, validateEntryMoney]]
   });
@@ -101,7 +102,7 @@ export class LaborDataComponent implements OnInit {
     city: [null, [Validators.required]],
     address: [''],
     phone: [''],
-    ruc: ['', [Validators.required]],
+    ruc: ['', [Validators.required, validateRuc]],
     sector: ['', [Validators.required]],
     averageSales: ['', [Validators.required, validateEntryMoney]]
   });
@@ -194,6 +195,7 @@ export class LaborDataComponent implements OnInit {
   public financial_data: any;
 
   ngOnInit() {
+
     window.scrollTo(0, 0);
     this.percentage = +localStorage.getItem('percentage');
 
@@ -373,6 +375,10 @@ export class LaborDataComponent implements OnInit {
     );
   }
 
+  verifyRucInd():  boolean  {
+    return this.independienteform.hasError('validateRuc');
+  }
+
   /**
    * Variable to verify if the dependiente form is correct
    * @type {boolean}
@@ -390,6 +396,10 @@ export class LaborDataComponent implements OnInit {
       this.mixtaform.get(field).untouched &&
       this.mixtaFormSubmitted && this.mixtaform.get(field).errors
     );
+  }
+
+  verifyRucMix():  boolean  {
+    return this.mixtaform.hasError('validateRuc');
   }
 
   onSubmitDependienteForm() {

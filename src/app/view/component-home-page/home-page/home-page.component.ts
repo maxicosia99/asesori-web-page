@@ -542,6 +542,7 @@ export class HomePageComponent implements OnInit {
           this.httpService.getCities(resp.data.id).subscribe(res => {
             this.cities = []
             this.cities = res.data;
+            //console.log(this.cities);
           }, error => {
             console.log('error');
             console.log(error);

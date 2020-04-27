@@ -138,7 +138,7 @@
                             <div class="col-12">
 
                                 <div class="position-relative">
-                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}" (blur)="updatePercentageAddress()">
+                                    <input class="floating-input form-control text-uppercase" type="text" [attr.disabled]="hasAddress ? '' : null" formControlName="address" required placeholder=" " [ngClass]="{ 'is-invalid': isFieldValidaddressForm('address')}" (keyup)="updatePercentageAddress()">
                                     <label class="floating-label">dirección*</label>
                                     <div *ngIf="isFieldValidaddressForm('address')" class="invalid-feedback">
                                         <span>Ingrese su dirección!</span>
