@@ -235,7 +235,7 @@ export class PersonalDataComponent implements OnInit {
   }
 
 
-  /**------------------------------------------------METHODS AND FUNCTIONS FOR LOGIN---------------------------------------------------- */
+  /**----------------------------------------METHODS AND FUNCTIONS FOR LOGIN-------------------------------------------------- */
 
   /**
    * Check if the user is logged in

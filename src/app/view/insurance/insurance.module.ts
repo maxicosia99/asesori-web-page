@@ -23,7 +23,7 @@ import { VehicleDataComponent } from './vehicle-form/vehicle-data/vehicle-data.c
 import { InsuranceFormComponent } from './insurance-form/insurance-form.component';
 import { InsuranceSummaryComponent } from './insurance-form/insurance-summary/insurance-summary.component';
 import { FinalizeRequestComponent } from './finalize-request/finalize-request.component';
-import { NumericDirective } from 'src/app/services/client/numeric.directive';
+import { NumericDirective } from './numeric.directive';
 
 export const customCurrencyMaskConfig = {
   align: "left",

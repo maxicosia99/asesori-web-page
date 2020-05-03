@@ -171,14 +171,17 @@ export class LocationDataComponent implements OnInit {
         /* In case the location is detected */
         if (resp.status === 200) {
           this.region_code = res.region_code;
-          this.addressForm.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
-          
+
+          let currentprovince = this.provinces.find(x => x.apicode === this.region_code);
+
+          this.addressForm.controls['province'].setValue({ id: currentprovince.id, name: currentprovince.name });
           this.updatePercentageProvince();
-          
           /* the cities of the detected province are loaded */
-          this.httpService.getCities(resp.data.id).subscribe(res => {
+
+          this.httpService.getCities(currentprovince.id).subscribe(res => {
             this.cities = []
             this.cities = res.data;
+            //console.log(this.cities);
           }, error => {
             console.log('error');
             console.log(error);
@@ -233,11 +236,11 @@ export class LocationDataComponent implements OnInit {
         this.percentageProvince = true;
       }
 
-      if(this.location_data.city){
+      if (this.location_data.city) {
         this.addressForm.controls['city'].setValue({ id: this.location_data.city.id, name: this.location_data.city.name });
         this.percentageCity = true;
       }
-      
+
     }
   }
 

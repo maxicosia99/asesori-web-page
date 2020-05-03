@@ -224,7 +224,12 @@ export class LaborDataComponent implements OnInit {
         this.dependienteform.controls['companyName'].setValue(this.labor_data.companyName);
         this.dependienteform.controls['positionCompany'].setValue(this.labor_data.positionCompany);
         this.dependienteform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
-        this.dependienteform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+        
+        if(this.labor_data.otherMonthlyValue){
+          this.dependienteform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+          this.active = true;
+        }
+        
         this.dependienteform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
 
         this.percentageDCompanyName = true;
@@ -263,7 +268,12 @@ export class LaborDataComponent implements OnInit {
         this.mixtaform.controls['companyName'].setValue(this.labor_data.companyName);
         this.mixtaform.controls['positionCompany'].setValue(this.labor_data.positionCompany);
         this.mixtaform.controls['monthlySalary'].setValue(this.labor_data.monthlySalary);
-        this.mixtaform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+        
+        if(this.labor_data.otherMonthlyValue){
+          this.mixtaform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+          this.Mactive = true;
+        }
+        
         this.mixtaform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
 
         this.percentageMCompanyName = true;
@@ -356,6 +366,16 @@ export class LaborDataComponent implements OnInit {
     );
   }
 
+  public active: boolean = false;
+
+  validateOtherMonthlyValue() {
+    if (this.dependienteform.value.otherMonthlyValue > 0 ) {
+      this.active = true;
+    } else {
+      this.active = false;
+    }
+  }
+
   /**
    * Variable to verify if the dependiente form is correct
    * @type {boolean}
@@ -402,6 +422,16 @@ export class LaborDataComponent implements OnInit {
     return this.mixtaform.hasError('validateRuc');
   }
 
+  public Mactive: boolean = false;
+
+  validateMOtherMonthlyValue() {
+    if (this.mixtaform.value.otherMonthlyValue > 0 ) {
+      this.Mactive = true;
+    } else {
+      this.Mactive = false;
+    }
+  }
+
   onSubmitDependienteForm() {
 
     this.dependienteFormSubmitted = true;
@@ -417,7 +447,10 @@ export class LaborDataComponent implements OnInit {
         province: this.dependienteform.value.province,
         city: this.dependienteform.value.city,
         address: this.dependienteform.value.address,
-        phone: this.dependienteform.value.phone
+        phone: this.dependienteform.value.phone,
+        ruc: "",
+        sector: "",
+        averageSales: ""
       }
 
       /** Store location_data in localStorage*/
@@ -434,6 +467,15 @@ export class LaborDataComponent implements OnInit {
 
       let labor_data: any = {
         type: this.laborform.value.type,
+        companyName: "",
+        positionCompany: "",
+        monthlySalary: "",
+        otherMonthlyValue: "",
+        valueDetail: "",
+        province: "",
+        city: "",
+        address: "",
+        phone: "",
         ruc: this.independienteform.value.ruc,
         sector: this.independienteform.value.sector,
         averageSales: this.independienteform.value.averageSales

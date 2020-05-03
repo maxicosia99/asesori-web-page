@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { UserRegister } from 'src/app/models/user-register';
+import { Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UserAuth } from 'src/app/models/userAuth';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
@@ -8,29 +7,6 @@ import { AuthenticationService } from 'src/app/services/auth/authentication.serv
 import { Router } from '@angular/router';
 import { RouterExtService } from 'src/app/services/client/routing.service';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
-
-/**
- * Validate if the password and confirmation are the same
- * @param {string} controlName - Password
- * @param {string} matchingControlName - COnfirm password
- * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
- */
-export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
-    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-      // return if another validator has already found an error on the matchingControl
-      return;
-    }
-    // set error on matchingControl if validation fails
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ mustMatch: true });
-    } else {
-      matchingControl.setErrors(null);
-    }
-  }
-}
 
 @Component({
   selector: 'app-finalize-request',
@@ -63,12 +39,8 @@ export class FinalizeRequestComponent implements OnInit {
    * Define register form
   */
   registerForm = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', [Validators.required]]
-  }, {
-    validator: MustMatch('password', 'confirmPassword')
   });
 
   /**
@@ -79,9 +51,34 @@ export class FinalizeRequestComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  public request_data: any;
+
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.registerForm.controls['email'].setValue(JSON.parse(localStorage.getItem('email_data')).email);
+
+    this.request_data = JSON.parse(sessionStorage.getItem('request_data'));
+
+    if (this.loginVerified()) {
+      this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
+        console.log(res);
+      }, error => {
+        console.log('error al crear información');
+        console.log(error);
+      });
+    }
+
+    this.registerForm.controls['email'].setValue(JSON.parse(sessionStorage.getItem('email_data')).email);
+  }
+
+  unir() {
+    if (this.loginVerified()) {
+      this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
+        console.log(res);
+      }, error => {
+        console.log('error al crear información');
+        console.log(error);
+      });
+    }
   }
 
   /**
@@ -110,20 +107,15 @@ export class FinalizeRequestComponent implements OnInit {
   */
   onSubmitRegister() {
 
-    let userRegister: UserRegister = {
-      username: this.formRegister.username.value,
-      email: this.formRegister.email.value,
+    let userRegister: UserAuth = {
+      username: this.formRegister.email.value,
       password: this.formRegister.password.value
     }
 
     this.subscription = this.httpService.register(userRegister).subscribe((response) => {
       if (response.status == 200) {
 
-        let user: UserAuth = {} as UserAuth;
-        user.usernameOrEmail = userRegister.email;
-        user.password = userRegister.password;
-
-        this.subscription = this.httpService.login(user).subscribe((response) => {
+        this.subscription = this.httpService.login(userRegister).subscribe((response) => {
 
           //console.log(response);
 
@@ -139,12 +131,11 @@ export class FinalizeRequestComponent implements OnInit {
             });
             /* ------------------------------ */
 
-            //this.bsModalRef.hide();
             this.registerForm.reset();
             this.authService.setSession(response.data);
           } else {
-            this.add(response.error);
-            console.log(response.error);
+            this.add(response.errors);
+            console.log(response.errors);
           }
         }, (error) => {
           console.log(error);
@@ -172,10 +163,8 @@ export class FinalizeRequestComponent implements OnInit {
   loginVerified(): boolean {
     let accessToken = localStorage.getItem('currentUser');
     if (accessToken) {
-      //this.user = JSON.parse(localStorage.getItem('currentUser'));
       return true;
     }
-    //this.user_id = null;
     return false;
   }
 

@@ -3,6 +3,7 @@ import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Creditos } from 'src/app/models/creditos';
+import { CreditFee } from '../../../models/credit-fee';
 
 @Component({
   selector: 'app-result-credit',
@@ -125,18 +126,30 @@ export class ResultCreditComponent implements OnInit {
 
     for (let entry of selectedCreditsIds1) {
       let aux = this.can_access_credit.find(x => x.id == entry);
-      this.credits_entities += aux.name_financial_entity + ', ';
+      this.credits_entities += aux.financialentity_name + ', ';
     }
 
     for (let entry of selectedCreditsIds2) {
       let aux = this.cannot_access_credit.find(x => x.id == entry);
-      this.credits_entities += aux.name_financial_entity + ', ';
+      this.credits_entities += aux.financialentity_name + ', ';
     }
   }
 
   ngOnInit() {
+
     this.credit_information = JSON.parse(localStorage.getItem('credit_information'));
-    this.httpService.getAllCreditOptions(this.credit_information.city_code, 0, this.credit_information.id_credit, this.credit_information.amountRequest, this.credit_information.monthlyIncome, this.credit_information.term, this.credit_information.entryAmount).subscribe(res => {
+
+    let creditFee: CreditFee = {
+      credit_id: this.credit_information.credit_id,
+      loan_amount: this.credit_information.loan_amount,
+      montly_income: this.credit_information.montly_income,
+      credit_term: this.credit_information.credit_term,
+      initial_amount: this.credit_information.initial_amount,
+      city_id: this.credit_information.city_id
+    }
+
+    this.httpService.getAllCreditOptions(creditFee).subscribe(res => {
+
       if (res.status == 200) {
 
         if (this.can_access_credit) {
@@ -155,7 +168,7 @@ export class ResultCreditComponent implements OnInit {
         this.addCheckboxesCannot_access_credit();
 
       } else {
-        console.log('Ah ocurrido un error!' + res.message);
+        console.log('Ah ocurrido un error!' + res.errors);
       }
     }, error => {
       console.log('error');
@@ -179,11 +192,11 @@ export class ResultCreditComponent implements OnInit {
       this.cannot_access_credit_userSelected.clear();
     }
 
-    this.can_access_credit =  this.creditOptions.can_access_credit.filter(function(financialentity_type) {
+    this.can_access_credit = this.creditOptions.can_access_credit.filter(function (financialentity_type) {
       return financialentity_type.financialentity_type > 0;
     });
 
-    this.cannot_access_credit =  this.creditOptions.cannot_access_credit.filter(function(financialentity_type) {
+    this.cannot_access_credit = this.creditOptions.cannot_access_credit.filter(function (financialentity_type) {
       return financialentity_type.financialentity_type > 0;
     });
 
@@ -205,11 +218,11 @@ export class ResultCreditComponent implements OnInit {
       this.cannot_access_credit_userSelected.clear();
     }
 
-    this.can_access_credit =  this.creditOptions.can_access_credit.filter(function(financialentity_type) {
+    this.can_access_credit = this.creditOptions.can_access_credit.filter(function (financialentity_type) {
       return financialentity_type.financialentity_type == 1;
     });
 
-    this.cannot_access_credit =  this.creditOptions.cannot_access_credit.filter(function(financialentity_type) {
+    this.cannot_access_credit = this.creditOptions.cannot_access_credit.filter(function (financialentity_type) {
       return financialentity_type.financialentity_type == 1;
     });
 
@@ -231,11 +244,11 @@ export class ResultCreditComponent implements OnInit {
       this.cannot_access_credit_userSelected.clear();
     }
 
-    this.can_access_credit =  this.creditOptions.can_access_credit.filter(function(financialentity_type) {
+    this.can_access_credit = this.creditOptions.can_access_credit.filter(function (financialentity_type) {
       return financialentity_type.financialentity_type == 2;
     });
 
-    this.cannot_access_credit =  this.creditOptions.cannot_access_credit.filter(function(financialentity_type) {
+    this.cannot_access_credit = this.creditOptions.cannot_access_credit.filter(function (financialentity_type) {
       return financialentity_type.financialentity_type == 2;
     });
 
@@ -265,16 +278,18 @@ export class ResultCreditComponent implements OnInit {
       for (let entry of selectedCreditsIds1) {
         let aux = this.can_access_credit.find(x => x.id == entry);
         let credito: Creditos = {} as Creditos;
-        credito.id_financialentity = aux.id_financial_entity;
+        credito.financialentity_id = aux.financialentity_id;
         credito.monthly_fee = aux.monthly_payment;
+        credito.info = aux.info;
         credit_selected.push(credito);
       }
 
       for (let entry of selectedCreditsIds2) {
         let aux = this.cannot_access_credit.find(x => x.id == entry);
         let credito: Creditos = {} as Creditos;
-        credito.id_financialentity = aux.id_financial_entity;
+        credito.financialentity_id = aux.financialentity_id;
         credito.monthly_fee = aux.monthly_payment;
+        credito.info = aux.info;
         credit_selected.push(credito);
       }
 

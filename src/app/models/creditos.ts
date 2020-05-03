@@ -1,4 +1,5 @@
 export interface Creditos {
-    id_financialentity: number;
+    financialentity_id: number;
     monthly_fee: number;
+    info: string;
 }

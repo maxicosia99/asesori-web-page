@@ -59,7 +59,7 @@ export class UserTrackingComponent implements OnInit {
     if (this.loginVerified()) {
       this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
         this.user_id = this.user.id;
-        this.httpService.getInformationCredits(this.user_id).subscribe(res => {
+        this.httpService.getInformationCredits().subscribe(res => {
           this.credit_data = res.data;
           console.log(res.data);
         }, error => {

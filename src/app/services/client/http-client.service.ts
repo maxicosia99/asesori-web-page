@@ -6,12 +6,13 @@ import { UserRegister } from 'src/app/models/user-register';
 import { CarInsuranceRequest } from 'src/app/models/car-insurance-request';
 import { InsuranceInformation } from 'src/app/models/insurance-information';
 import { CreditInformation } from 'src/app/models/credit-information';
+import { CreditFee } from 'src/app/models/credit-fee';
 
 /*
 * Variable para adicionar información a las peticiones
-*/ 
+*/
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
@@ -20,9 +21,9 @@ const httpOptions = {
 export class HttpClientService {
 
   //private SEVER_URL: string = 'http://10.101.214.140:8080';
-  private SEVER_URL: string = 'https://asesori-server-demo.herokuapp.com';
+  private SEVER_URL: string = 'https://asesori-server.herokuapp.com';
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   private getEndUrl(endPoint: string): string {
     return `${this.SEVER_URL}${endPoint}`;
@@ -51,20 +52,24 @@ export class HttpClientService {
     return this.doGetRequest(url + "/test");
   }
 
+  /**------------------------------------------------LOGIN------------------------------------------------------------- */
+
   public login(user: UserAuth): Observable<any> {
-    let url = this.getEndUrl('/api/auth/signinClient');
+    let url = this.getEndUrl('/api/v1/auth/signinClient');
     return this.doPostRequest(url, user);
   }
 
-  public register(userRegister: UserRegister): Observable<any> {
-    let url = this.getEndUrl('/api/auth/signupClient');
-    return this.doPostRequest(url, userRegister);
+  public register(user: UserAuth): Observable<any> {
+    let url = this.getEndUrl('/api/v1/auth/signupClient');
+    return this.doPostRequest(url, user);
   }
 
   public getDataUserlogin(): Observable<any> {
-    let url = this.getEndUrl('/api/user/me');
+    let url = this.getEndUrl('/api/v1/user/me');
     return this.doGetRequest(url);
   }
+
+  /**---------------------------------------------UBICACION---------------------------------------------------------- */
 
   /*  Start - Search by location. */
   getCurrentLocation(): Observable<any> {
@@ -72,34 +77,30 @@ export class HttpClientService {
     return this.doGetRequest(url);
   }
 
-  verifyLocationExistence(region_code: string): Observable<any> {
-    let url = this.getEndUrl(`/api/provincias/verificarExistenciaProvincia?region_code=${region_code}`);
+  /* Get provinces - cities */
+  getProvinces(): Observable<any> {
+    let url = this.getEndUrl(`/api/v1/provinces`);
     return this.doGetRequest(url);
   }
 
+  getCities(idProvince: number): Observable<any> {
+    let url = this.getEndUrl(`/api/v1/provinces/${idProvince}/cities`);
+    return this.doGetRequest(url);
+  }
+  /* End - Get provinces - cities  */
+
   verifyProvinceExistence(region_code: string): Observable<any> {
-    let url = this.getEndUrl(`/api/provincias/buscar?region_code=${region_code}`);
+    let url = this.getEndUrl(`/api/v1/provinces/checkExistence?region_code=${region_code}`);
     return this.doGetRequest(url);
   }
   /*  End - Search by location. */
 
-  
-  
+  /**----------------------------------------CREDITOS------------------------------------------------------------ */
+
   /* Get all credit options  */
-  getAllCreditOptions(region_code: string, entityType: number, id_credit: number, loan_amount: number, montly_income: number, credit_term: number, initial_amount: number): Observable<any> {
-    let url;
-
-    if (entityType === undefined) {
-      entityType = 0;
-    }
-
-    if (initial_amount === null || initial_amount === 0) {
-      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&search_type=${entityType}&region_code=${region_code}`);
-    } else {
-      url = this.getEndUrl(`/api/creditos/calcularCuota?id_credit=${id_credit}&loan_amount=${loan_amount}&montly_income=${montly_income}&credit_term=${credit_term}&initial_amount=${initial_amount}&search_type=${entityType}&region_code=${region_code}`);
-    }
-
-    return this.doGetRequest(url);
+  getAllCreditOptions(body: CreditFee): Observable<any> {
+    let url = this.getEndUrl(`/api/v1/credits/creditFee`);
+    return this.doPostRequest(url,body);
   }
   /* End - Get all credit options  */
 
@@ -113,35 +114,21 @@ export class HttpClientService {
 
   createCreditInformation(body: CreditInformation): Observable<any> {
     //console.log(JSON.stringify(body));
-    let url = this.getEndUrl(`/api/creditos/guardarSolicitudCredito`);
+    let url = this.getEndUrl(`/api/v1/creditApplications`);
     return this.doPostRequest(url, body);
   }
 
-  sendCreditInformation(application_id: number): Observable<any> {
+  linkUserOnRequest(idCreditRequest: number): Observable<any> {
     //console.log(JSON.stringify(body));
-    let url = this.getEndUrl(`/api/creditos/enviarSolicitudCredito?applicant_id=${application_id}`);
-    return this.doGetRequest(url);
+    let url = this.getEndUrl(`/api/v1/creditApplications/${idCreditRequest}/linkUserOnRequest`);
+    return this.doPutRequest(url);
   }
-
-  
-  
-  /* Get provinces - cities */
-  getProvinces(): Observable<any> {
-    let url = this.getEndUrl(`/api/provincias/findAll`);
-    return this.doGetRequest(url);
-  }
-
-  getCities(idProvince: number): Observable<any> {
-    let url = this.getEndUrl(`/api/ciudades/${idProvince}`);
-    return this.doGetRequest(url);
-  }
-  /* End - Get provinces - cities  */
 
 
   /* ---------------------------------  SEGUROS DE VEHICULOS ------------------------------ */
 
   getAllCarBrands(): Observable<any> {
-    let url = this.getEndUrl(`/api/autos/marcas?categoria=1`);
+    let url = this.getEndUrl(`/api/v1/cars/categories/1/brands`);
     return this.doGetRequest(url);
   }
 
@@ -187,13 +174,13 @@ export class HttpClientService {
 
   /* -------------------------- SEGUIMIENTO DE USUARIO A LOS CRÉDITO ------------------------ */
 
-  getInformationCredits(user_id: number): Observable<any> {
-    let url = this.getEndUrl(`/api/credittracking/findApplications?user_id=${user_id}`);
+  getInformationCredits(): Observable<any> {
+    let url = this.getEndUrl(`/api/v1/creditApplications`);
     return this.doGetRequest(url);
   }
 
   getEntityByCreditId(creditapplication_id: number): Observable<any> {
-    let url = this.getEndUrl(`/api/credittracking/findEntitiesOfApplication?application_id=${creditapplication_id}`);
+    let url = this.getEndUrl(`/api/v1/creditApplications/${creditapplication_id}/financialEntities`);
     return this.doGetRequest(url);
   }
 

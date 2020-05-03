@@ -21,7 +21,7 @@
 
                                 <div class="position-relative mt-4">
                                     <input type="text" formControlName="email" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': formRegister.email.touched && formRegister.email.errors }">
-                                    <label class="floating-label">Email*</label>
+                                    <label class="floating-label">correo electrónico*</label>
                                     <div *ngIf="formRegister.email.touched && formRegister.email.errors" class="invalid-feedback">
                                         <div *ngIf="formRegister.email.errors.required">Porfavor ingrese su email!
                                         </div>
@@ -61,7 +61,7 @@
                     <ng-template #elseBlock>
                         <div class="row my-4">
                             <div class="col-12">
-                                <p class="text-light-14 text-center">Revisa el estado de tu solicitud, <span class="pointer color-2 text-14-regular" routerLink="/tracking" routerLinkActive="active-link">aquí</span></p>
+                                <p class="text-light-14 text-center">Revisa el estado de tu solicitud, <span class="pointer color-2 text-14-regular" routerLink="/tracking" (click)="unir()" routerLinkActive="active-link">aquí</span></p>
                             </div>
                         </div>
                     </ng-template>

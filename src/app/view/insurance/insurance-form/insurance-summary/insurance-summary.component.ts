@@ -122,7 +122,7 @@ export class InsuranceSummaryComponent implements OnInit {
         //this.messageErrorInsurance = null;
 
       } else {
-        console.log('Ah ocurrido un error! ' + res.message);
+        console.log('Ah ocurrido un error! ' + res.errors);
         //this.messageErrorInsurance = res.message;
       }
     }, error => {

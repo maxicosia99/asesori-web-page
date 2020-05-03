@@ -27,7 +27,7 @@ import { LaborDataComponent } from './economic-form/labor-data/labor-data.compon
 import { CreditFormComponent } from './credit-form/credit-form.component';
 import { CreditSummaryComponent } from './credit-form/credit-summary/credit-summary.component';
 import { FinalizeRequestComponent } from './finalize-request/finalize-request.component';
-import { NumericDirective } from 'src/app/services/client/numeric.directive';
+import { NumericDirective } from './numeric.directive';
 
 export const customCurrencyMaskConfig = {
   align: "left",

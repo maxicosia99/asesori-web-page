@@ -106,6 +106,7 @@ export class FinancialDataComponent implements OnInit {
 
       if (this.labor_data.otherMonthlyValue) {
         this.financialform.controls['otherMonthlyValue'].setValue(this.labor_data.otherMonthlyValue);
+        this.active = true;
       }
 
       this.financialform.controls['valueDetail'].setValue(this.labor_data.valueDetail);
@@ -156,16 +157,16 @@ export class FinancialDataComponent implements OnInit {
     }
   }
 
-  // public active: boolean = false;
+  public active: boolean = false;
 
-  // onKey(event: any) {
-  //   console.log(event.target.value);
-  //   if (this.financialform.value.monthlySalary > 0 ) {
-  //     this.active = true;
-  //   } else {
-  //     this.active = false;
-  //   }
-  // }
+  onKey() {
+    //console.log(event.target.value);
+    if (this.financialform.value.otherMonthlyValue > 0 ) {
+      this.active = true;
+    } else {
+      this.active = false;
+    }
+  }
 
   /*------------------------------------------------------------------------------------------------------------------------ */
 

@@ -18,15 +18,15 @@
                 <ng-template #popTemplate>
                     <div class="row">
                         <div class="col-12">
-                            <summary routerLink="/tracking" routerLinkActive="active-link" class="nav-link tittle-13 color-3">Mis solicitudes</summary>
-                            <summary (click)="onLoggedout()" class="nav-link tittle-13 color-3">Cerrar sesión</summary>
+                            <summary routerLink="/tracking" (click)="popOptions.hide()" routerLinkActive="active-link" class="nav-link tittle-13 color-3">Mis solicitudes</summary>
+                            <summary (click)="onLoggedout(); popOptions.hide()" class="nav-link tittle-13 color-3">Cerrar sesión</summary>
                         </div>
                     </div>
                 </ng-template>
 
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" [popover]="popTemplate" placement="bottom" [outsideClick]="true" (onHidden)="collapseMovile()">
-                        <a (click)="isCollapsedMovile = !isCollapsedMovile" class="nav-link tittle-10 mt-1 pointer"><u> {{user.email}} <i *ngIf="!isCollapsedMovile" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsedMovile" class="fas fa-angle-down pr-3"></i></u></a>
+                    <li class="nav-item" [popover]="popTemplate" #popOptions="bs-popover" placement="bottom" [outsideClick]="true" (onHidden)="collapseMovile()">
+                        <a (click)="isCollapsedMovile = !isCollapsedMovile" class="nav-link tittle-10 mt-1 pointer"><u> {{user.username}} <i *ngIf="!isCollapsedMovile" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsedMovile" class="fas fa-angle-down pr-3"></i></u></a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
                         </ng-template>
 
                         <li class="nav-item d-none d-md-block" [popover]="popTemplate" #popOptions="bs-popover" placement="bottom" [outsideClick]="true" (onHidden)="collapse()">
-                            <a (click)="isCollapsed = !isCollapsed" class="nav-link tittle-10 mt-1 pointer"><i class="fas fa-user-circle"></i><u> {{user.email}} <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i></u></a>
+                            <a (click)="isCollapsed = !isCollapsed" class="nav-link tittle-10 mt-1 pointer"><i class="fas fa-user-circle"></i><u> {{user.username}} <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i></u></a>
                         </li>
                     </ng-template>
                 </ul>

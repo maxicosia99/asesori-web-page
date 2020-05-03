@@ -41,7 +41,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     AlertComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent,
+    FooterComponent
   ],
   providers: [],
   bootstrap: [ AppComponent ]

@@ -77,8 +77,8 @@ export class ContactDataComponent implements OnInit {
   */
   contactForm = this.formbuilder.group({
     email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
-    phone: ['', [Validators.required, Validators.minLength(10)]],
-    phone2: ['', [Validators.required, Validators.minLength(10)]],
+    phone: ['', [Validators.required, Validators.minLength(7)]],
+    phone2: ['', [Validators.required, Validators.minLength(7)]],
   });
 
   /**
@@ -162,7 +162,7 @@ export class ContactDataComponent implements OnInit {
       this.percentagePhone2 = true;
       this.percentageEmail = true;
     }else{
-      this.contactForm.controls['email'].setValue(JSON.parse(localStorage.getItem('email_data')).email);
+      this.contactForm.controls['email'].setValue(JSON.parse(sessionStorage.getItem('email_data')).email);
       this.percentageEmail = true;
       this.percentage += this.increase;
     }

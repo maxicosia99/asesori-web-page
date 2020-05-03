@@ -318,7 +318,7 @@ export class CreditRequestComponent implements OnInit {
       email: this.emailform.value.email
     }
     /** Store contact_data in localStorage*/
-    localStorage.setItem('email_data', JSON.stringify(email_data));
+    sessionStorage.setItem('email_data', JSON.stringify(email_data));
 
     this.router.navigate(['credit']);
 

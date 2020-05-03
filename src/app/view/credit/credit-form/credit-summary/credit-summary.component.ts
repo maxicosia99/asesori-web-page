@@ -104,10 +104,10 @@ export class CreditSummaryComponent implements OnInit {
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
     this.destinedTo = this.credit_information.destinedTo;
-    this.amountRequest = this.credit_information.amountRequest;
-    this.entryAmount = this.credit_information.entryAmount;
-    this.term = this.credit_information.term;
-    this.monthlyIncome = this.credit_information.monthlyIncome;
+    this.amountRequest = this.credit_information.loan_amount;
+    this.entryAmount = this.credit_information.initial_amount;
+    this.term = this.credit_information.credit_term;
+    this.monthlyIncome = this.credit_information.montly_income;
     this.credits_entities = this.credit_options.credits_entities;
   }
 
@@ -120,71 +120,82 @@ export class CreditSummaryComponent implements OnInit {
 
     let creditInformation: CreditInformation = {} as CreditInformation;
 
-    /**Ver el ID de usuario */
-    creditInformation.user_id = 1;
+    creditInformation.applicant_name = this.personal_data.name;
+    creditInformation.applicant_lastname = this.personal_data.last_name;
+    creditInformation.applicant_dni = this.personal_data.cedula;
+    creditInformation.applicant_civil_status = this.personal_data.maritalStatus;
+    creditInformation.applicant_birthdate = this.personal_data.birthday;
+    
+    creditInformation.home_city_id = this.location_data.city.id;
+    creditInformation.applicant_home_address = this.location_data.address;
+    creditInformation.applicant_home_address_reference = this.location_data.reference;
+    creditInformation.applicant_home_address_sector = this.location_data.sector;
 
-    creditInformation.name = this.personal_data.name;
-    creditInformation.last_name = this.personal_data.last_name;
-    creditInformation.cedula = this.personal_data.cedula;
+    creditInformation.applicant_mail = this.contact_data.email;
+    creditInformation.applicant_phone1 = this.contact_data.phone;
+    creditInformation.applicant_phone2 = this.contact_data.phone2;
 
-    creditInformation.city = this.location_data.city.name;
-    creditInformation.region_name = this.location_data.province.name;
-    creditInformation.country_name = 'ECUADOR';
-    creditInformation.address = this.location_data.address;
+    creditInformation.company_name = this.labor_data.companyName;
+    creditInformation.company_position = this.labor_data.positionCompany;
+    creditInformation.monthly_salary = this.labor_data.monthlySalary;
+    creditInformation.other_monthly_value = this.labor_data.otherMonthlyValue;
+    creditInformation.detail_other_monthly_value = this.labor_data.valueDetail;
+    creditInformation.company_city_id = this.labor_data.city.id;
+    creditInformation.company_address = this.labor_data.address;
+    creditInformation.company_phone = this.labor_data.phone;
 
-    creditInformation.email = this.contact_data.email;
-    creditInformation.phone = this.contact_data.phone;
+    /**Pilas aqui */
+    creditInformation.applicant_ruc = this.labor_data.ruc;
+    creditInformation.commercial_sector = this.labor_data.sector;
+    creditInformation.average_monthly_sales = this.labor_data.averageSales;
+    /**Pilas aqui */
 
-    creditInformation.payments_cards = this.economic_data.payments_cards;
-    creditInformation.rental = this.economic_data.rental;
-    creditInformation.payment_loans = this.economic_data.payment_loans;
-    creditInformation.payment_services = this.economic_data.payment_services;
+    creditInformation.monthly_expenses = this.financial_data.monthlyExpenses;
+    creditInformation.payment_capacity = this.financial_data.paymentCapacity;
+
+
+    creditInformation.cards_payment = this.economic_data.payments_cards;
+    creditInformation.rental_payment = this.economic_data.rental;
+    creditInformation.loans_payment = this.economic_data.payment_loans;
+    creditInformation.services_payment = this.economic_data.payment_services;
     creditInformation.housing_type = this.economic_data.housing_type;
     creditInformation.mortgage_payment = this.economic_data.mortgage_payment;
-    creditInformation.total_possessions = this.economic_data.total_possessions;
+    creditInformation.total_assets_appraisal = this.economic_data.total_possessions;
 
-    creditInformation.term = this.term;
-    creditInformation.id_credit = this.credit_information.id_credit;
-    creditInformation.amount_required = this.amountRequest;
+    creditInformation.credit_term = this.term;
+    creditInformation.credittype_id = this.credit_information.credit_id;
+    creditInformation.request_city_id = this.credit_information.city_id;
+    creditInformation.required_amount = this.amountRequest;
     creditInformation.monthly_income = this.monthlyIncome;
     creditInformation.initial_amount = this.entryAmount;
-    creditInformation.destination = this.destinedTo;
+    creditInformation.credit_destination = this.destinedTo;
 
     let creditos: Creditos[] = this.credit_options.credit_selected;
 
-    creditInformation.creditos = creditos;
+    creditInformation.selected_credits = creditos;
 
     this.httpService.createCreditInformation(creditInformation).subscribe(res => {
 
-      //console.log(creditInformation)
+      //console.log(res);
 
       if (res.status == 200) {
 
-        localStorage.removeItem('credit_information');
-        localStorage.removeItem('credit_options');
-        localStorage.removeItem('economic_data');
-        localStorage.removeItem('personal_data');
-        localStorage.removeItem('location_data');
-        localStorage.removeItem('labor_data');
-        localStorage.removeItem('financial_data');
-        localStorage.removeItem('contact_data');
-        localStorage.removeItem('percentage');
+        sessionStorage.setItem('request_data', JSON.stringify(res.data));
         //localStorage.clear();
-
         this.router.navigate(['credit/finalize']);
 
-        let application_id = res.data;
-        this.httpService.sendCreditInformation(application_id).subscribe((res) => {
-          console.log(res);
-        }, (error) => {
-          console.log('error al enviar información de solicitud con id ' + application_id + " a la nueva bd");
-          console.log(error);
-        });
+        // let application_id = res.data;
+        // this.httpService.sendCreditInformation(application_id).subscribe((res) => {
+        //   console.log(res);
+        // }, (error) => {
+        //   console.log('error al enviar información de solicitud con id ' + application_id + " a la nueva bd");
+        //   console.log(error);
+        // });
 
         //this.messageErrorCredit = null;
 
       } else {
-        console.log('Ah ocurrido un error! ' + res.message);
+        console.log('Ah ocurrido un error! ' + res.errors);
         //this.messageErrorCredit = res.message;
       }
     }, error => {

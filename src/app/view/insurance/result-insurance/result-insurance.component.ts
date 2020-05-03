@@ -144,7 +144,7 @@ export class ResultInsuranceComponent implements OnInit {
                 }
               } else {
                 console.log(res);
-                console.log('Ah ocurrido un error!' + res.message);
+                console.log('Ah ocurrido un error!' + res.errors);
               }
             }, error => {
               console.log('error');
@@ -155,7 +155,7 @@ export class ResultInsuranceComponent implements OnInit {
 
       } else {
         console.log(res);
-        console.log('Ah ocurrido un error!' + res.message);
+        console.log('Ah ocurrido un error!' + res.errors);
       }
     }, error => {
       console.log('error');

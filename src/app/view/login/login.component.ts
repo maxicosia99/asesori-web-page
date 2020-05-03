@@ -153,7 +153,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
 
     let user: UserAuth = {
-      usernameOrEmail: this.form.usernameOrEmail.value,
+      username: this.form.usernameOrEmail.value,
       password: this.form.password.value
     }
 
@@ -197,7 +197,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (response.status == 200) {
 
         let user: UserAuth = {} as UserAuth;
-        user.usernameOrEmail = userRegister.email;
+        user.username = userRegister.email;
         user.password = userRegister.password;
 
         this.subscription = this.httpService.login(user).subscribe((response) => {
