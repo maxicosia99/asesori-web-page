@@ -169,11 +169,16 @@ export class InsuranceRequestComponent implements OnInit {
         /* In case the location is detected */
         if (resp.status === 200) {
           this.region_code = res.region_code;
-          this.emailform.controls['province'].setValue({ id: resp.data.id, name: resp.data.name });
+
+          let currentprovince = this.provinces.find(x => x.apicode === this.region_code);
+
+          this.emailform.controls['province'].setValue({ id: currentprovince.id, name: currentprovince.name });
           /* the cities of the detected province are loaded */
-          this.httpService.getCities(resp.data.id).subscribe(res => {
+
+          this.httpService.getCities(currentprovince.id).subscribe(res => {
             this.cities = []
             this.cities = res.data;
+            //console.log(this.cities);
           }, error => {
             console.log('error');
             console.log(error);
@@ -231,11 +236,9 @@ export class InsuranceRequestComponent implements OnInit {
     this.router.navigate(['insurance']);
 
     let insurance_information: any = {
-      vehicleBrand: this.vehicleform.value.vehicleBrand.brand_name,
-      vehicleModel: this.vehicleform.value.vehicleModel.model_name,
-      vehicleYear: this.vehicleform.value.vehicleYear.year,
-      vehicleDescription: this.vehicleform.value.vehicleDescription.description,
-      carprice_id: this.vehicleform.value.vehicleDescription.price_id
+      carId : this.vehicleform.value.vehicleDescription.carId,
+      car_year: this.vehicleform.value.vehicleDescription.year,
+      request_city_id: this.emailform.value.city.id
     }
     /** Store credit information in localStorage*/
     localStorage.setItem('insurance_information', JSON.stringify(insurance_information));
@@ -287,7 +290,7 @@ export class InsuranceRequestComponent implements OnInit {
   */
   changeCarYear(event) {
     let year: number = event.year;
-    let id_model: number = event.brand_id;
+    let id_model: number = event.brandId;
     this.httpService.getModelByYear(id_model, year).subscribe(res => {
       this.vehicleform.controls['vehicleModel'].setValue(null);
       this.vehicleform.controls['vehicleDescription'].setValue(null);
@@ -307,10 +310,11 @@ export class InsuranceRequestComponent implements OnInit {
    * @return {void} Nothing
   */
   changeCarModel(event) {
-    let id_model: number = event.model_id;
+    let id_model: number = event.modelId;
     let year: number = event.year;
-    let id_brand: number = event.brand_id;
+    let id_brand: number = event.brandId;
     this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
+      console.log(res.data);
       this.vehicleform.controls['vehicleDescription'].setValue(null);
       this.vehicleDescription = [];
       this.vehicleDescription = res.data;

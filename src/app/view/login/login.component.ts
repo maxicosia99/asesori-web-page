@@ -9,29 +9,6 @@ import { Router } from '@angular/router';
 import { UserRegister } from 'src/app/models/user-register';
 import { RouterExtService } from 'src/app/services/client/routing.service';
 
-/**
- * Validate if the password and confirmation are the same
- * @param {string} controlName - Password
- * @param {string} matchingControlName - COnfirm password
- * @return {boolean} - If it is true, the object has an error, if it is null, the object is correct
- */
-export function MustMatch(controlName: string, matchingControlName: string) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
-    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-      // return if another validator has already found an error on the matchingControl
-      return;
-    }
-    // set error on matchingControl if validation fails
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ mustMatch: true });
-    } else {
-      matchingControl.setErrors(null);
-    }
-  }
-}
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './login.component.html',
@@ -92,12 +69,8 @@ export class LoginComponent implements OnInit, OnDestroy {
    * Define register form
   */
   registerForm = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', [Validators.required]]
-  }, {
-    validator: MustMatch('password', 'confirmPassword')
   });
 
   ngOnInit() {
@@ -157,7 +130,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: this.form.password.value
     }
 
+    console.log(user);
+
     this.subscription = this.httpService.login(user).subscribe((response) => {
+      
       if (response.status == 200) {
         this.authService.setSession(response.data);
         this.router.navigate([this.routerExtService.getPreviousUrl()]);
@@ -173,11 +149,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginForm.reset();
         this.authService.setSession(response.data);
       } else
-        this.add(response.error);
+        this.add('La información ingresada es incorrecta, revisa nuevamente; puede ser el correo o la contraseña');
     }, (error) => {
       console.log(error);
-      this.authService.redirectInternalServerError();
-      this.add('Servidor no disponible ' + error);
+      //this.authService.redirectInternalServerError();
+      this.add('La información ingresada es incorrecta, revisa nuevamente; puede ser el correo o la contraseña');
     });
   }
 
@@ -187,20 +163,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   */
   onSubmitRegister() {
 
-    let userRegister: UserRegister = {
-      username: this.formRegister.username.value,
-      email: this.formRegister.email.value,
+    let userRegister: UserAuth = {
+      username: this.formRegister.email.value,
       password: this.formRegister.password.value
     }
 
     this.subscription = this.httpService.register(userRegister).subscribe((response) => {
       if (response.status == 200) {
 
-        let user: UserAuth = {} as UserAuth;
-        user.username = userRegister.email;
-        user.password = userRegister.password;
-
-        this.subscription = this.httpService.login(user).subscribe((response) => {
+        this.subscription = this.httpService.login(userRegister).subscribe((response) => {
 
           //console.log(response);
 

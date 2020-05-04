@@ -55,7 +55,7 @@ export class InsuranceSummaryComponent implements OnInit {
   public personal_data: any;
   public location_data: any;
   public contact_data: any;
-  public vehicle_data:any;
+  public vehicle_data: any;
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -77,47 +77,45 @@ export class InsuranceSummaryComponent implements OnInit {
 
     let insuranceInformation: InsuranceInformation = {} as InsuranceInformation;
 
-    insuranceInformation.user_id = 1; //error
+    insuranceInformation.car_id = this.insurance_information.carId;
+    insuranceInformation.car_year = this.insurance_information.car_year;
+    insuranceInformation.applicant_mail = this.contact_data.email;
+    insuranceInformation.request_city_id = this.insurance_information.request_city_id;
 
-    insuranceInformation.name = this.personal_data.name;
-    insuranceInformation.last_name = this.personal_data.last_name;
-    insuranceInformation.cedula = this.personal_data.cedula;
+    insuranceInformation.applicant_dni = this.personal_data.cedula;
+    insuranceInformation.applicant_civil_status = this.personal_data.maritalStatus;
+    insuranceInformation.applicant_name = this.personal_data.name;
+    insuranceInformation.applicant_lastname = this.personal_data.last_name;
+    insuranceInformation.applicant_birthdate = this.personal_data.birthday;
 
-    insuranceInformation.city = this.location_data.city.name;
-    insuranceInformation.address = this.location_data.address;
+    insuranceInformation.home_city_id = this.location_data.city.id;
+    insuranceInformation.applicant_home_address = this.location_data.address;
+    insuranceInformation.applicant_home_address_reference = this.location_data.reference;
+    insuranceInformation.applicant_home_address_sector = this.location_data.sector;
 
-    insuranceInformation.email = this.contact_data.email;
-    insuranceInformation.phone = this.contact_data.phone;
+    insuranceInformation.applicant_phone1 = this.contact_data.phone;
+    insuranceInformation.applicant_phone2 = this.contact_data.phone2;
 
-    insuranceInformation.carprice_id = this.insurance_information.carprice_id;
+    insuranceInformation.car_color = this.vehicle_data.vehicleColor.color_name;
+    insuranceInformation.car_license = this.vehicle_data.vehiclePlate;
+    insuranceInformation.car_details = this.vehicle_data.vehicleDetails;
 
-    let options: Insurance[] = this.insurance_options.insurance_selected;
+    let selected_options: Insurance[] = this.insurance_options.insurance_selected;
 
-    insuranceInformation.options = options;
-
-    //console.log(insuranceInformation);
+    insuranceInformation.selected_options = selected_options;
 
     this.httpService.createInsuranceInformation(insuranceInformation).subscribe(res => {
-      //console.log(res);
       if (res.status == 200) {
         
-        localStorage.removeItem('percentage');
-        localStorage.removeItem('insurance_information');
-        localStorage.removeItem('insurance_options');
-        localStorage.removeItem('personal_data');
-        localStorage.removeItem('location_data');
-        localStorage.removeItem('contact_data');
-        localStorage.removeItem('vehicle_data');
-        //localStorage.clear();
-
+        localStorage.clear();
         this.router.navigate(['insurance/finalize']);
-        //console.log(res);
-        this.httpService.getSendMailInsurance().subscribe(res => {
-          console.log(res);
-        }, error => {
-          console.log('error al enviar correo');
-          console.log(error);
-        });
+        
+        // this.httpService.getSendMailInsurance().subscribe(res => {
+        //   console.log(res);
+        // }, error => {
+        //   console.log('error al enviar correo');
+        //   console.log(error);
+        // });
 
         //this.messageErrorInsurance = null;
 
@@ -125,10 +123,9 @@ export class InsuranceSummaryComponent implements OnInit {
         console.log('Ah ocurrido un error! ' + res.errors);
         //this.messageErrorInsurance = res.message;
       }
-    }, error => {
+    }, errors => {
       console.log('error al crear información');
-      console.log(error);
+      console.log(errors);
     });
   }
-
 }

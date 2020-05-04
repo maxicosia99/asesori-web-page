@@ -1,4 +1,4 @@
 export interface Insurance {
-    id_insurancecompany: number;
+    insurancecompany_id: number;
     anual_fee: number;
 }

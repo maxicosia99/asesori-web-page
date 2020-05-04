@@ -90,7 +90,25 @@ export class CreditSummaryComponent implements OnInit {
   public labor_data: any;
   public financial_data: any;
 
+  /**
+   * Check if the user is logged in
+   * @return {boolean} True if you are logged in, false if not
+  */
+  loginVerified(): boolean {
+    let accessToken = localStorage.getItem('currentUser');
+    if (accessToken) {
+      console.log(JSON.parse(localStorage.getItem('currentUser')));
+      return true;
+    }
+    return false;
+  }
+
   ngOnInit() {
+
+    if (this.loginVerified()) {
+      console.log(`yes`);
+    }
+
     window.scrollTo(0, 0);
     this.percentage = +localStorage.getItem('percentage');
 
@@ -125,7 +143,7 @@ export class CreditSummaryComponent implements OnInit {
     creditInformation.applicant_dni = this.personal_data.cedula;
     creditInformation.applicant_civil_status = this.personal_data.maritalStatus;
     creditInformation.applicant_birthdate = this.personal_data.birthday;
-    
+
     creditInformation.home_city_id = this.location_data.city.id;
     creditInformation.applicant_home_address = this.location_data.address;
     creditInformation.applicant_home_address_reference = this.location_data.reference;
@@ -144,15 +162,12 @@ export class CreditSummaryComponent implements OnInit {
     creditInformation.company_address = this.labor_data.address;
     creditInformation.company_phone = this.labor_data.phone;
 
-    /**Pilas aqui */
     creditInformation.applicant_ruc = this.labor_data.ruc;
     creditInformation.commercial_sector = this.labor_data.sector;
     creditInformation.average_monthly_sales = this.labor_data.averageSales;
-    /**Pilas aqui */
 
     creditInformation.monthly_expenses = this.financial_data.monthlyExpenses;
     creditInformation.payment_capacity = this.financial_data.paymentCapacity;
-
 
     creditInformation.cards_payment = this.economic_data.payments_cards;
     creditInformation.rental_payment = this.economic_data.rental;
@@ -174,15 +189,77 @@ export class CreditSummaryComponent implements OnInit {
 
     creditInformation.selected_credits = creditos;
 
+
+
+    let prueba: any = {
+      credittype_id: 11,
+      credit_destination: "Para tu casa",
+      required_amount: 150000,
+      initial_amount: 2000,
+      monthly_income: 4500,
+      credit_term: 180,
+      applicant_mail: "edisson10@gmail.com",
+      request_city_id: 10101,
+
+      applicant_dni: "0105874911",
+      applicant_civil_status: "SOLTERO",
+      applicant_name: "Edisson Fernando",
+      applicant_lastname: "Sigua Loja",
+      applicant_birthdate: "14-07-1996",
+
+      home_city_id: 10101,
+      applicant_home_address: "Panamericana Sur",
+      applicant_home_address_reference: "Estacion Bus",
+      applicant_home_address_sector: "Zhucay",
+
+      applicant_phone1: "0979552994",
+      applicant_phone2: "2884762",
+
+      company_name: "Ucuenca",
+      company_position: "Profesor",
+      monthly_salary: 3500,
+      other_monthly_value: 1500,
+      detail_other_monthly_value: "Venta Ganado",
+      company_city_id: 10101,
+      company_address: "12 de Abril y Avenida Loja",
+      company_phone: "2884563",
+
+      applicant_ruc: "0010105874911",
+      commercial_sector: "Tecnologico",
+      average_monthly_sales: 3500,
+
+      monthly_expenses: 1000,
+      payment_capacity: 3000,
+
+      cards_payment: 1000,
+      mortgage_payment: 1000,
+      loans_payment: 1000,
+      total_assets_appraisal: 100000,
+      services_payment: 600,
+      housing_type: "ARRENDADA",
+      rental_payment: 200,
+      selected_credits: [
+        {
+          financialentity_id: 1,
+          monthly_fee: 450.266541,
+          info: "Necesitas 90.000 $. Tu entrada de 10.000 $ te permite completar tu crédito y solo te será necesario pedir al banco 0 $ para completar la cantidad que necesitas"
+        }
+      ]
+    }
+
+
+
+
+
     this.httpService.createCreditInformation(creditInformation).subscribe(res => {
 
-      //console.log(res);
+      console.log(res);
 
       if (res.status == 200) {
 
-        sessionStorage.setItem('request_data', JSON.stringify(res.data));
+        //sessionStorage.setItem('request_data', JSON.stringify(res.data));
         //localStorage.clear();
-        this.router.navigate(['credit/finalize']);
+        //this.router.navigate(['credit/finalize']);
 
         // let application_id = res.data;
         // this.httpService.sendCreditInformation(application_id).subscribe((res) => {

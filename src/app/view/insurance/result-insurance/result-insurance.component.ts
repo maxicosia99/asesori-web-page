@@ -95,21 +95,8 @@ export class ResultInsuranceComponent implements OnInit {
     this.cant_insurances = 0;
 
     let request: CarInsuranceRequest = {} as CarInsuranceRequest;
-    request.insured_dni = '1718570250';
-    request.insured_age = 23;
-    request.insured_name = 'Bryan Alexander';
-    request.insured_lastname = 'Aguilar Yaguana';
-    request.insured_gender = 'MASCULINO';
-    request.insured_marital_status = 'CASADO';
-    request.region_code = 'A';
-    request.city = 'Cuenca';
-    request.car_year = this.insurance_information.vehicleYear;
-    request.car_brand = this.insurance_information.vehicleBrand;
-    request.car_model = this.insurance_information.vehicleModel;
-    request.car_description = this.insurance_information.vehicleDescription;
-    request.carprice_id = this.insurance_information.carprice_id;
-    request.car_color = 'ROJO';
-    request.car_license_plate = '';
+    request.car_year = this.insurance_information.car_year;
+    request.car_id = this.insurance_information.carId;
 
     if (this.subsc1) {
       this.subsc1.unsubscribe();
@@ -121,34 +108,29 @@ export class ResultInsuranceComponent implements OnInit {
     this.subsc1 = this.httpService.getAllInsuranceCompanies().subscribe(res => {
       if (res.status == 200) {
         let insurances = res.data;
-        //console.log(insurances);
         this.cant_insurances = insurances.length;
         for (let entry of insurances) {
           request.insurancecompany_id = entry.id;
           this.subsc2.push(
             this.httpService.getInsuranceInformation(request).subscribe(resp => {
               this.cont_insurances = this.cont_insurances + 1;
-              //console.log(resp);
-              if (res.status == 200) {
-                //element.scrollIntoView({ behavior: 'smooth' });
-                if (resp.data && resp.data.aseguradoras.length > 0) {
+              if (res.status == 200) {               
+                if (resp.data) {
+                  //console.log(resp.data);
                   if (this.can_access_vehicleInsurance) {
                     this.can_access_vehicleInsurance_userSelected.clear()
                   }
-                  //console.log(resp.data.aseguradoras[0]);
-                  this.can_access_vehicleInsurance.push(resp.data.aseguradoras[0]);
+                  this.can_access_vehicleInsurance.push(resp.data);
                   this.can_access_vehicleInsurance.forEach((o, i) => {
                     const control = new FormControl(false);
                     (this.insuranceform.controls.can_access_vehicleInsurance_userSelected as FormArray).push(control);
                   });
                 }
-              } else {
-                console.log(res);
+              } else { 
                 console.log('Ah ocurrido un error!' + res.errors);
               }
             }, error => {
-              console.log('error');
-              console.log(error);
+              console.log(`Error: `+error);
             })
           );
         }
@@ -202,7 +184,7 @@ export class ResultInsuranceComponent implements OnInit {
       for (let entry of selectedVehicleInsurance) {
         let aux = this.can_access_vehicleInsurance.find(x => x.id == entry);
         let insurance: Insurance = {} as Insurance;
-        insurance.id_insurancecompany = aux.id_insurance_entity;
+        insurance.insurancecompany_id = aux.id_insurance_entity;
         insurance.anual_fee = aux.total_premium;
         insurance_selected.push(insurance);
       }

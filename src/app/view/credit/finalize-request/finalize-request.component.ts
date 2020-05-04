@@ -58,28 +58,28 @@ export class FinalizeRequestComponent implements OnInit {
 
     this.request_data = JSON.parse(sessionStorage.getItem('request_data'));
 
-    if (this.loginVerified()) {
-      this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
-        console.log(res);
-      }, error => {
-        console.log('error al crear información');
-        console.log(error);
-      });
-    }
+    // if (this.loginVerified()) {
+    //   this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
+    //     console.log(res);
+    //   }, error => {
+    //     console.log('error al crear información');
+    //     console.log(error);
+    //   });
+    // }
 
     this.registerForm.controls['email'].setValue(JSON.parse(sessionStorage.getItem('email_data')).email);
   }
 
-  unir() {
-    if (this.loginVerified()) {
-      this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
-        console.log(res);
-      }, error => {
-        console.log('error al crear información');
-        console.log(error);
-      });
-    }
-  }
+  // unir() {
+  //   if (this.loginVerified()) {
+  //     this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
+  //       console.log(res);
+  //     }, error => {
+  //       console.log('error al crear información');
+  //       console.log(error);
+  //     });
+  //   }
+  // }
 
   /**
    * Closed an alert
@@ -163,6 +163,7 @@ export class FinalizeRequestComponent implements OnInit {
   loginVerified(): boolean {
     let accessToken = localStorage.getItem('currentUser');
     if (accessToken) {
+      console.log(accessToken);
       return true;
     }
     return false;

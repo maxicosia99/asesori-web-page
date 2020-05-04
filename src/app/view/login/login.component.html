@@ -74,7 +74,7 @@
 
                 <div class="position-relative mt-4">
                     <input type="email" formControlName="email" class="floating-input form-control" placeholder=" " required [ngClass]="{ 'is-invalid': formRegister.email.touched && formRegister.email.errors }">
-                    <label class="floating-label">Email*</label>
+                    <label class="floating-label">Correo electrónico*</label>
                     <div *ngIf="formRegister.email.touched && formRegister.email.errors" class="invalid-feedback">
                         <div *ngIf="formRegister.email.errors.required">Porfavor ingrese su email!
                         </div>

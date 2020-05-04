@@ -107,7 +107,7 @@ export class HttpClientService {
 
   /* Get credit informaction by id  */
   getInformationCreditByid(idCredit: number): Observable<any> {
-    let url = this.getEndUrl(`/api/creditos/condiciones?idcredito=${idCredit}`);
+    let url = this.getEndUrl(`/api/v1/credits/${idCredit}/terms`);
     return this.doGetRequest(url);
   }
   /* End - Get credit informaction by id  */
@@ -133,37 +133,32 @@ export class HttpClientService {
   }
 
   getYearByBrand(id_brand: number): Observable<any> {
-    let url = this.getEndUrl(`/api/autos/anos?marca=${id_brand}`);
+    let url = this.getEndUrl(`/api/v1/cars/brands/${id_brand}/years`);
     return this.doGetRequest(url);
   }
 
-  getModelByYear(id_model: number, year: number): Observable<any> {
-    let url = this.getEndUrl(`/api/autos/modelos?marca=${id_model}&ano=${year}`);
+  getModelByYear(brandId: number, year: number): Observable<any> {
+    let url = this.getEndUrl(`/api/v1/cars/brands/${brandId}/years/${year}/models`);
     return this.doGetRequest(url);
   }
 
   getDescriptionByModel(id_model: number, id_brand: number, year: number, ): Observable<any> {
-    let url = this.getEndUrl(`/api/autos/descripciones?marca=${id_brand}&ano=${year}&modelo=${id_model}`);
-    return this.doGetRequest(url);
-  }
-
-  getAllInsuranceOptions(id_car: number): Observable<any> {
-    let url = this.getEndUrl(`/api/seguros/buscarcuota?auto=${id_car}`);
+    let url = this.getEndUrl(`/api/v1/cars/brands/${id_brand}/years/${year}/models/${id_model}/descriptions`);
     return this.doGetRequest(url);
   }
 
   getAllInsuranceCompanies(): Observable<any> {
-    let url = this.getEndUrl(`/api/seguros/aseguradoras`);
+    let url = this.getEndUrl(`/api/v1/insurances/companies`);
     return this.doGetRequest(url);
   }
 
   getInsuranceInformation(body: CarInsuranceRequest): Observable<any> {
-    let url = this.getEndUrl(`/api/seguros/calcular-cuota`);
+    let url = this.getEndUrl(`/api/v1/insurances/carInsuranceFee`);
     return this.doPostRequest(url, body);
   }
 
   createInsuranceInformation(body: InsuranceInformation): Observable<any> {
-    let url = this.getEndUrl(`/api/seguros/solicitar`);
+    let url = this.getEndUrl(`/api/v1/insuranceApplications`);
     return this.doPostRequest(url, body);
   }
 

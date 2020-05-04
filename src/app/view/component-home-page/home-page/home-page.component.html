@@ -298,7 +298,7 @@
 
             <div *ngIf="insuranceSectionValues" class="row mx-3 mx-md-0 justify-content-between">
                 <div class="box-values-insurance my-2 my-md-0">
-                    <ng-select class="custom2" [items]="vehicleBrand" formControlName="vehicleBrand" (change)="changeCarBrand($event)" [searchable]="true" bindLabel="brand_name" placeholder="marca*" [clearable]="false">
+                    <ng-select class="custom2" [items]="vehicleBrand" formControlName="vehicleBrand" (change)="changeCarBrand($event)" [searchable]="true" bindLabel="brandName" placeholder="marca*" [clearable]="false">
                     </ng-select>
                     <div *ngIf="isFieldValidVehicleform('vehicleBrand')" class="invalid-select">
                         <span>Seleccione una marca!</span>
@@ -312,7 +312,7 @@
                     </div>
                 </div>
                 <div class="box-values-insurance my-2 my-md-0">
-                    <ng-select class="custom2" [items]="vehicleModel" formControlName="vehicleModel" placeholder="modelo*" [searchable]="true" bindLabel="model_name" (change)="changeCarModel($event)" [clearable]="false">
+                    <ng-select class="custom2" [items]="vehicleModel" formControlName="vehicleModel" placeholder="modelo*" [searchable]="true" bindLabel="modelName" (change)="changeCarModel($event)" [clearable]="false">
                     </ng-select>
                     <div *ngIf="isFieldValidVehicleform('vehicleModel')" class="invalid-select">
                         <span>Seleccione un modelo!</span>

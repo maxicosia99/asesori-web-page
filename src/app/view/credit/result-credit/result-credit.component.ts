@@ -148,7 +148,11 @@ export class ResultCreditComponent implements OnInit {
       city_id: this.credit_information.city_id
     }
 
+    console.log(creditFee);
+
     this.httpService.getAllCreditOptions(creditFee).subscribe(res => {
+
+      console.log(res);
 
       if (res.status == 200) {
 
