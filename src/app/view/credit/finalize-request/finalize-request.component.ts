@@ -70,16 +70,16 @@ export class FinalizeRequestComponent implements OnInit {
     this.registerForm.controls['email'].setValue(JSON.parse(sessionStorage.getItem('email_data')).email);
   }
 
-  // unir() {
-  //   if (this.loginVerified()) {
-  //     this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
-  //       console.log(res);
-  //     }, error => {
-  //       console.log('error al crear información');
-  //       console.log(error);
-  //     });
-  //   }
-  // }
+  unir() {
+    if (this.loginVerified()) {
+      // this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
+      //   console.log(res);
+      // }, error => {
+      //   console.log('error al crear información');
+      //   console.log(error);
+      // });
+    }
+  }
 
   /**
    * Closed an alert
