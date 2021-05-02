@@ -63,7 +63,7 @@ export class ContactDataComponent implements OnInit {
         items: 4
       }
     }
-  }  
+  }
 
   /**
    * Variables to retrieve user information
@@ -154,14 +154,14 @@ export class ContactDataComponent implements OnInit {
     this.labor_data = JSON.parse(localStorage.getItem('labor_data'));
     this.financial_data = JSON.parse(localStorage.getItem('financial_data'));
 
-    if(this.contact_data){
+    if (this.contact_data) {
       this.contactForm.controls['phone'].setValue(this.contact_data.phone);
       this.contactForm.controls['phone2'].setValue(this.contact_data.phone2);
       this.contactForm.controls['email'].setValue(this.contact_data.email);
       this.percentagePhone = true;
       this.percentagePhone2 = true;
       this.percentageEmail = true;
-    }else{
+    } else {
       this.contactForm.controls['email'].setValue(JSON.parse(sessionStorage.getItem('email_data')).email);
       this.percentageEmail = true;
       this.percentage += this.increase;
@@ -190,23 +190,52 @@ export class ContactDataComponent implements OnInit {
   */
   recuperateLoginData() {
     if (this.loginVerified()) {
-      this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
-        this.user_id = this.user.id;
-        if (user) {
-          if (user.email) {
-            this.contactForm.controls['email'].setValue(user.email);
-            this.hasEmail = true;
-            this.updatePercentageEmail();
-          }
-          if (user.phone1) {
-            this.contactForm.controls['phone'].setValue(user.phone1);
-            this.hasPhone1 = true;
-            this.updatePercentagePhone();
-          }
+      // this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
+      //   this.user_id = this.user.id;
+      //   if (user) {
+      //     if (user.email) {
+      //       this.contactForm.controls['email'].setValue(user.email);
+      //       this.hasEmail = true;
+      //       this.updatePercentageEmail();
+      //     }
+      //     if (user.phone1) {
+      //       this.contactForm.controls['phone'].setValue(user.phone1);
+      //       this.hasPhone1 = true;
+      //       this.updatePercentagePhone();
+      //     }
+      //   }
+      // }, (error) => {
+      //   console.log(error);
+      // });
+
+
+      /**
+       * Para pruebas sin servidor
+       */
+
+      let user: UserInfo = {} as UserInfo;
+
+      this.user_id = this.user.id;
+      user.id = 1;
+      user.username = 'test@gmail.com';
+      user.name = 'testuser';
+      user.last_name = 'testuser';
+      user.cedula = '0100000000';
+      user.address = 'address';
+      user.phone1 = '0987654321';
+
+      if (user) {
+        if (user.email) {
+          this.contactForm.controls['email'].setValue(user.email);
+          this.hasEmail = true;
+          this.updatePercentageEmail();
         }
-      }, (error) => {
-        console.log(error);
-      });
+        if (user.phone1) {
+          this.contactForm.controls['phone'].setValue(user.phone1);
+          this.hasPhone1 = true;
+          this.updatePercentagePhone();
+        }
+      }
     }
   }
 
@@ -218,7 +247,7 @@ export class ContactDataComponent implements OnInit {
 
   public increase: number = 4;
 
-  updatePercentagePhone(){
+  updatePercentagePhone() {
     if (this.contactForm.value.phone.length > 0 && !this.percentagePhone) {
       this.percentagePhone = true;
       this.percentage += this.increase;
@@ -228,7 +257,7 @@ export class ContactDataComponent implements OnInit {
     }
   }
 
-  updatePercentagePhone2(){
+  updatePercentagePhone2() {
     if (this.contactForm.value.phone2.length > 0 && !this.percentagePhone2) {
       this.percentagePhone2 = true;
       this.percentage += this.increase;
@@ -239,7 +268,7 @@ export class ContactDataComponent implements OnInit {
 
   }
 
-  updatePercentageEmail(){
+  updatePercentageEmail() {
     if (this.contactForm.value.email.length > 0 && !this.percentageEmail) {
       this.percentageEmail = true;
       this.percentage += this.increase;

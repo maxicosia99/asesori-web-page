@@ -4,6 +4,8 @@ import { FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Creditos } from 'src/app/models/creditos';
 import { CreditFee } from '../../../models/credit-fee';
+import { ICreditFee, ICreditInformation } from 'src/app/data/interfaces/icredit.metadata';
+import { CREDIT_DATA_ITEMS } from 'src/app/data/constants/credit.conts';
 
 @Component({
   selector: 'app-result-credit',
@@ -28,10 +30,19 @@ export class ResultCreditComponent implements OnInit {
    * Variables to store credit results
    * @type {any}
   */
-  public creditOptions: any;        //all credit options
-  public can_access_credit: any;    //financial institutions where you can get credit
-  public cannot_access_credit: any; //financial institutions where you cannot obtain credit
-  public credit_unavailable: any;   //financial institutions where credit is not available
+  // public creditOptions: any;        //all credit options
+  // public can_access_credit: any;    //financial institutions where you can get credit
+  // public cannot_access_credit: any; //financial institutions where you cannot obtain credit
+  // public credit_unavailable: any;   //financial institutions where credit is not available
+
+  /**
+   * Para pruebas sin servidor
+   */
+  public creditOptions: ICreditFee = CREDIT_DATA_ITEMS;
+  public can_access_credit: ICreditInformation[] = CREDIT_DATA_ITEMS['can_access_credit'];
+  public cannot_access_credit: ICreditInformation[] = CREDIT_DATA_ITEMS['cannot_access_credit'];
+  public credit_unavailable: ICreditInformation[] = CREDIT_DATA_ITEMS['credit_unavailable'];
+
 
   /**
   * Variable to store the amount of results chosen by the user
@@ -137,47 +148,58 @@ export class ResultCreditComponent implements OnInit {
 
   ngOnInit() {
 
-    this.credit_information = JSON.parse(localStorage.getItem('credit_information'));
-
-    let creditFee: CreditFee = {
-      credit_id: this.credit_information.credit_id,
-      loan_amount: this.credit_information.loan_amount,
-      montly_income: this.credit_information.montly_income,
-      credit_term: this.credit_information.credit_term,
-      initial_amount: this.credit_information.initial_amount,
-      city_id: this.credit_information.city_id
+    /**
+     * Para pruebas sin servidor
+     */
+    if (this.can_access_credit) {
+      this.can_access_credit_userSelected.clear();
     }
 
-    console.log(creditFee);
+    if (this.cannot_access_credit) {
+      this.cannot_access_credit_userSelected.clear();
+    }
+    this.addCheckboxesCan_access_credit();
+    this.addCheckboxesCannot_access_credit();
 
-    this.httpService.getAllCreditOptions(creditFee).subscribe(res => {
+    this.credit_information = JSON.parse(localStorage.getItem('credit_information'));
 
-      console.log(res);
+    // let creditFee: CreditFee = {
+    //   credit_id: this.credit_information.credit_id,
+    //   loan_amount: this.credit_information.loan_amount,
+    //   montly_income: this.credit_information.montly_income,
+    //   credit_term: this.credit_information.credit_term,
+    //   initial_amount: this.credit_information.initial_amount,
+    //   city_id: this.credit_information.city_id
+    // }
 
-      if (res.status == 200) {
+    // this.httpService.getAllCreditOptions(creditFee).subscribe(res => {
 
-        if (this.can_access_credit) {
-          this.can_access_credit_userSelected.clear();
-        }
+    //   console.log(res);
 
-        if (this.cannot_access_credit) {
-          this.cannot_access_credit_userSelected.clear();
-        }
+    //   if (res.status == 200) {
 
-        this.creditOptions = res.data;
-        this.can_access_credit = res.data.can_access_credit;
-        this.cannot_access_credit = res.data.cannot_access_credit;
-        //this.credit_unavailable = res.data.credit_unavailable;
-        this.addCheckboxesCan_access_credit();
-        this.addCheckboxesCannot_access_credit();
+    //     if (this.can_access_credit) {
+    //       this.can_access_credit_userSelected.clear();
+    //     }
 
-      } else {
-        console.log('Ah ocurrido un error!' + res.errors);
-      }
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    //     if (this.cannot_access_credit) {
+    //       this.cannot_access_credit_userSelected.clear();
+    //     }
+
+    //     this.creditOptions = res.data;
+    //     this.can_access_credit = res.data.can_access_credit;
+    //     this.cannot_access_credit = res.data.cannot_access_credit;
+    //     //this.credit_unavailable = res.data.credit_unavailable;
+    //     this.addCheckboxesCan_access_credit();
+    //     this.addCheckboxesCannot_access_credit();
+
+    //   } else {
+    //     console.log('Ah ocurrido un error!' + res.errors);
+    //   }
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
 
   }
 

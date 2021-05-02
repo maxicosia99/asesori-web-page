@@ -4,6 +4,8 @@ import { FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarInsuranceRequest } from 'src/app/models/car-insurance-request';
 import { Insurance } from 'src/app/models/insurance';
+import { ICompanyInsurance, IInsuranceFee } from 'src/app/data/interfaces/iinsurance.metadata';
+import { INSURANCEFEE_DATA_ITEMS } from 'src/app/data/constants/insurance.conts';
 
 @Component({
   selector: 'app-result-insurance',
@@ -26,7 +28,8 @@ export class ResultInsuranceComponent implements OnInit {
    * Variable to store insurance results
    * @type {any}
   */
-  public can_access_vehicleInsurance: any;
+  // public can_access_vehicleInsurance: any;
+  public can_access_vehicleInsurance: IInsuranceFee[] = INSURANCEFEE_DATA_ITEMS;
 
   /**
    * Variables necessary to store the results
@@ -68,7 +71,7 @@ export class ResultInsuranceComponent implements OnInit {
   */
   public cantInsuranceSelectedUser() {
     this.cantInsurnaceUserSelected = this.insuranceform.value.can_access_vehicleInsurance_userSelected
-      .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
+      .map((v, i) => v ? this.can_access_vehicleInsurance[i].idaseguradora : null)
       .filter(v => v !== null).length;
   }
 
@@ -86,64 +89,77 @@ export class ResultInsuranceComponent implements OnInit {
   */
   ngOnInit() {
 
-    this.insurance_information = JSON.parse(localStorage.getItem('insurance_information'));
-
     window.scrollTo(0, 0);
 
-    this.can_access_vehicleInsurance = [];
-    this.cont_insurances = 0;
-    this.cant_insurances = 0;
-
-    let request: CarInsuranceRequest = {} as CarInsuranceRequest;
-    request.car_year = this.insurance_information.car_year;
-    request.car_id = this.insurance_information.carId;
-
-    if (this.subsc1) {
-      this.subsc1.unsubscribe();
+    /**
+     * Pruebas sin servidor
+     */
+     if (this.can_access_vehicleInsurance) {
+      this.can_access_vehicleInsurance_userSelected.clear()
     }
-    if (this.subsc2 && this.subsc2.length) {
-      for (let entry of this.subsc2)
-        entry.unsubscribe();
-    }
-    this.subsc1 = this.httpService.getAllInsuranceCompanies().subscribe(res => {
-      if (res.status == 200) {
-        let insurances = res.data;
-        this.cant_insurances = insurances.length;
-        for (let entry of insurances) {
-          request.insurancecompany_id = entry.id;
-          this.subsc2.push(
-            this.httpService.getInsuranceInformation(request).subscribe(resp => {
-              this.cont_insurances = this.cont_insurances + 1;
-              if (res.status == 200) {               
-                if (resp.data) {
-                  //console.log(resp.data);
-                  if (this.can_access_vehicleInsurance) {
-                    this.can_access_vehicleInsurance_userSelected.clear()
-                  }
-                  this.can_access_vehicleInsurance.push(resp.data);
-                  this.can_access_vehicleInsurance.forEach((o, i) => {
-                    const control = new FormControl(false);
-                    (this.insuranceform.controls.can_access_vehicleInsurance_userSelected as FormArray).push(control);
-                  });
-                }
-              } else { 
-                console.log('Ah ocurrido un error!' + res.errors);
-              }
-            }, error => {
-              console.log(`Error: `+error);
-            })
-          );
-        }
 
-      } else {
-        console.log(res);
-        console.log('Ah ocurrido un error!' + res.errors);
-      }
-    }, error => {
-      console.log('error');
-      console.log(error);
+    this.can_access_vehicleInsurance.forEach((o, i) => {
+      const control = new FormControl(false);
+      (this.insuranceform.controls.can_access_vehicleInsurance_userSelected as FormArray).push(control);
     });
 
+
+    this.insurance_information = JSON.parse(localStorage.getItem('insurance_information'));
+
+    // this.can_access_vehicleInsurance = [];
+    // this.cont_insurances = 0;
+    // this.cant_insurances = 0;
+
+    // let request: CarInsuranceRequest = {} as CarInsuranceRequest;
+    // request.car_year = this.insurance_information.car_year;
+    // request.car_id = this.insurance_information.carId;
+
+    // if (this.subsc1) {
+    //   this.subsc1.unsubscribe();
+    // }
+    // if (this.subsc2 && this.subsc2.length) {
+    //   for (let entry of this.subsc2)
+    //     entry.unsubscribe();
+    // }
+
+    // this.subsc1 = this.httpService.getAllInsuranceCompanies().subscribe(res => {
+    //   if (res.status == 200) {
+    //     let insurances = res.data;
+    //     this.cant_insurances = insurances.length;
+    //     for (let entry of insurances) {
+    //       request.insurancecompany_id = entry.id;
+    //       this.subsc2.push(
+    //         this.httpService.getInsuranceInformation(request).subscribe(resp => {
+    //           this.cont_insurances = this.cont_insurances + 1;
+    //           if (res.status == 200) {
+    //             if (resp.data) {
+    //               console.log(resp.data);
+    //               if (this.can_access_vehicleInsurance) {
+    //                 this.can_access_vehicleInsurance_userSelected.clear()
+    //               }
+    //               this.can_access_vehicleInsurance.push(resp.data);
+    //               this.can_access_vehicleInsurance.forEach((o, i) => {
+    //                 const control = new FormControl(false);
+    //                 (this.insuranceform.controls.can_access_vehicleInsurance_userSelected as FormArray).push(control);
+    //               });
+    //             }
+    //           } else {
+    //             console.log('Ah ocurrido un error!' + res.errors);
+    //           }
+    //         }, error => {
+    //           console.log(`Error: ` + error);
+    //         })
+    //       );
+    //     }
+
+    //   } else {
+    //     console.log(res);
+    //     console.log('Ah ocurrido un error!' + res.errors);
+    //   }
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
   }
 
   /**
@@ -176,13 +192,13 @@ export class ResultInsuranceComponent implements OnInit {
       this.getEntityNames();
 
       const selectedVehicleInsurance = this.insuranceform.value.can_access_vehicleInsurance_userSelected
-        .map((v, i) => v ? this.can_access_vehicleInsurance[i].id : null)
+        .map((v, i) => v ? this.can_access_vehicleInsurance[i].idaseguradora : null)
         .filter(v => v !== null);
 
       let insurance_selected: Insurance[] = [];
 
       for (let entry of selectedVehicleInsurance) {
-        let aux = this.can_access_vehicleInsurance.find(x => x.id == entry);
+        let aux = this.can_access_vehicleInsurance.find(x => x.idaseguradora == entry);
         let insurance: Insurance = {} as Insurance;
         insurance.insurancecompany_id = aux.id_insurance_entity;
         insurance.anual_fee = aux.total_premium;
@@ -191,10 +207,10 @@ export class ResultInsuranceComponent implements OnInit {
 
       let insurance_options: any = {
         insurance_selected: insurance_selected,
-        insurance_entities : this.insurance_entities
+        insurance_entities: this.insurance_entities
       }
 
-      /** Store credit information in localStorage*/      
+      /** Store credit information in localStorage*/
       localStorage.setItem('insurance_options', JSON.stringify(insurance_options));
       this.router.navigate(['insurance/results/identification']);
     } else {

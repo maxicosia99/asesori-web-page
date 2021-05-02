@@ -39,9 +39,9 @@
                     <li class="nav-item">
                         <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/services" routerLinkActive="active-link">Servicios</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link tittle-10 mt-1" (click)="toggleNavbar()" routerLink="/homepage" routerLinkActive="active-link">Testimonios</a>
-                    </li>
+                    </li> -->
                     <li *ngIf="!loginVerified(); else elseBlock" class="nav-item d-none d-md-block">
                         <button (click)="goTologin()" class="btn-outline tittle-10 mt-1 mb-3 mb-md-0">Iniciar
                             sesión</button>

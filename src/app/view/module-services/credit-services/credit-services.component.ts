@@ -3,6 +3,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormBuilder } from '@angular/forms';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { Router } from '@angular/router';
+import { ICreditTerms } from 'src/app/data/interfaces/icredit.metadata';
+import { CREDIT_TERMS_DATA_ITEMS } from 'src/app/data/constants/credit-terms.const';
 
 @Component({
   selector: 'app-credit-services',
@@ -92,20 +94,14 @@ export class CreditServicesComponent implements OnInit {
     }
   }
 
+
   /**
-   * Variable that stores the types of credits
-   * @type {any[]}
-  */
-  public credits_select: any = [
-    { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños' },
-    { id: 11, name: 'Inmobiliario', description: 'Para tu casa' },
-    { id: 9, name: 'Vehicular', description: 'Para el auto nuevo que quieres' },
-    { id: 9, name: 'Deudas', description: 'Para consolidar las deudas' },
-    { id: 9, name: 'Arreglos del hogar', description: 'Para hacer arreglos en tu casa o local comercial' },
-    { id: 10, name: 'Curso o postgrado', description: 'Créditos de estudio' },
-    { id: 9, name: 'Préstamo rápido', description: 'Cualquier necesitad' },
-    { id: 9, name: 'Urgencias', description: 'Crédito por emergencias' },
-  ];
+   * Para pruebas sin servidor
+   */
+  public data: ICreditTerms[] = CREDIT_TERMS_DATA_ITEMS;
+  public currentCredit: ICreditTerms;
+
+
 
   /**
    * On Init
@@ -113,20 +109,33 @@ export class CreditServicesComponent implements OnInit {
   */
   ngOnInit() {
 
-    this.httpService.getInformationCreditByid(this.creditform.get('credit_type_userSelected').value.split("_")[1]).subscribe(res => {
+    this.currentCredit = this.data.find((b) => b.id === +this.creditform.get('credit_type_userSelected').value.split("_")[1]);
+    this.id_credit = +this.creditform.get('credit_type_userSelected').value.split("_")[1];
+    this.destinedTo = this.creditform.get('credit_type_userSelected').value.split("_")[0];
+    this.credit_name = this.currentCredit.credit_name;
+    this.beneficiaries = this.currentCredit.beneficiaries;
+    this.destination = this.currentCredit.destination;
+    this.terms = this.currentCredit.terms;
+    this.url_photo = this.currentCredit.url_photo;
 
-      this.id_credit = +this.creditform.get('credit_type_userSelected').value.split("_")[1];
-      this.destinedTo = this.creditform.get('credit_type_userSelected').value.split("_")[0];
-      this.credit_name = res.data.credit_name;
-      this.beneficiaries = res.data.beneficiaries;
-      this.destination = res.data.destination;
-      this.terms = res.data.terms;
-      this.url_photo = res.data.url_photo;
 
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+
+
+
+    // this.httpService.getInformationCreditByid(this.creditform.get('credit_type_userSelected').value.split("_")[1]).subscribe(res => {
+
+    //   this.id_credit = +this.creditform.get('credit_type_userSelected').value.split("_")[1];
+    //   this.destinedTo = this.creditform.get('credit_type_userSelected').value.split("_")[0];
+    //   this.credit_name = res.data.credit_name;
+    //   this.beneficiaries = res.data.beneficiaries;
+    //   this.destination = res.data.destination;
+    //   this.terms = res.data.terms;
+    //   this.url_photo = res.data.url_photo;
+
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
 
   }
 
@@ -150,7 +159,7 @@ export class CreditServicesComponent implements OnInit {
    * Filter insurance
    * @return {void} Nothing
   */
-  seguros() {
+   seguros() {
     this.router.navigate(['services/insurance']);
   }
 
@@ -172,20 +181,31 @@ export class CreditServicesComponent implements OnInit {
   */
   onSelectCreditType($event) {
 
-    this.httpService.getInformationCreditByid($event.target.value.split("_")[1]).subscribe(res => {
+    this.currentCredit = this.data.find((b) => b.id === +$event.target.value.split("_")[1]);
+    this.id_credit = +this.creditform.get('credit_type_userSelected').value.split("_")[1];
+    this.destinedTo = this.creditform.get('credit_type_userSelected').value.split("_")[0];
+    this.credit_name = this.currentCredit.credit_name;
+    this.beneficiaries = this.currentCredit.beneficiaries;
+    this.destination = this.currentCredit.destination;
+    this.terms = this.currentCredit.terms;
+    this.url_photo = this.currentCredit.url_photo;
+    
+    
+    
+    // this.httpService.getInformationCreditByid($event.target.value.split("_")[1]).subscribe(res => {
 
-      this.id_credit = +this.creditform.get('credit_type_userSelected').value.split("_")[1];
-      this.destinedTo = this.creditform.get('credit_type_userSelected').value.split("_")[0];
-      this.credit_name = res.data.credit_name;
-      this.beneficiaries = res.data.beneficiaries;
-      this.destination = res.data.destination;
-      this.terms = res.data.terms;
-      this.url_photo = res.data.url_photo;
+    //   this.id_credit = +this.creditform.get('credit_type_userSelected').value.split("_")[1];
+    //   this.destinedTo = this.creditform.get('credit_type_userSelected').value.split("_")[0];
+    //   this.credit_name = res.data.credit_name;
+    //   this.beneficiaries = res.data.beneficiaries;
+    //   this.destination = res.data.destination;
+    //   this.terms = res.data.terms;
+    //   this.url_photo = res.data.url_photo;
 
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
   }
 
   /**

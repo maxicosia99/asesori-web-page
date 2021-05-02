@@ -72,12 +72,29 @@ export class FinalizeRequestComponent implements OnInit {
 
   unir() {
     if (this.loginVerified()) {
+      this.router.navigate(['/tracking']);
       // this.httpService.linkUserOnRequest(this.request_data.id).subscribe(res => {
       //   console.log(res);
       // }, error => {
       //   console.log('error al crear información');
       //   console.log(error);
       // });
+    }else {
+      /**
+       * Para pruebas sin servidor
+       */
+       localStorage.setItem('accessToken', 'eyJhbGciOiJIUzUxMiJ9');
+       localStorage.setItem('currentUser', JSON.stringify({
+         "id": 1,
+         "username": "test@gmail.com",
+         "name": 'testuser',
+         "last_name": 'testuser',
+         "cedula": '0100000000',
+         "address": 'address',
+         "phone1": '0987654321',
+         "phone2": '0987654321'
+       }));
+       this.router.navigate(['/tracking']);
     }
   }
 

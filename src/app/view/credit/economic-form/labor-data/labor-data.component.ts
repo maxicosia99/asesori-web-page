@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { validateRuc } from 'src/app/services/client/validar-ruc';
+import { ICity, IProvince } from 'src/app/data/interfaces/ilocation.metadata';
+import { CITIES_DATA_ITEMS, PROVINCES_DATA_ITEMS } from 'src/app/data/constants/location.const';
 
 export function validateEntryMoney(control: AbstractControl) {
   if (control.value === 0) {
@@ -62,13 +64,15 @@ export class LaborDataComponent implements OnInit {
     * Variable to store all provinces from Ecuador
     * @type {any}
    */
-  public provinces: any;
+  // public provinces: any;
+  public provinces: IProvince[] = PROVINCES_DATA_ITEMS;
 
   /**
    * Variable to store all cities from a province
    * @type {any}
   */
-  public cities: any;
+  // public cities: any;
+  public cities: ICity[] = CITIES_DATA_ITEMS;
 
   laborform = this.formbuilder.group({
     type: new FormControl(null, Validators.required),
@@ -87,7 +91,8 @@ export class LaborDataComponent implements OnInit {
   });
 
   independienteform = this.formbuilder.group({
-    ruc: ['', [Validators.required, validateRuc]],
+    // ruc: ['', [Validators.required, validateRuc]],
+    ruc: ['', [Validators.required]],
     sector: ['', [Validators.required]],
     averageSales: ['', [Validators.required, validateEntryMoney]]
   });
@@ -102,7 +107,8 @@ export class LaborDataComponent implements OnInit {
     city: [null, [Validators.required]],
     address: [''],
     phone: [''],
-    ruc: ['', [Validators.required, validateRuc]],
+    // ruc: ['', [Validators.required, validateRuc]],
+    ruc: ['', [Validators.required]],
     sector: ['', [Validators.required]],
     averageSales: ['', [Validators.required, validateEntryMoney]]
   });
@@ -200,12 +206,12 @@ export class LaborDataComponent implements OnInit {
     this.percentage = +localStorage.getItem('percentage');
 
     /*  Get all provinces. */
-    this.httpService.getProvinces().subscribe(res => {
-      this.provinces = res.data;
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // this.httpService.getProvinces().subscribe(res => {
+    //   this.provinces = res.data;
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
 
     /** Verificar contenido del local storage*/
     this.personal_data = JSON.parse(localStorage.getItem('personal_data'));
@@ -317,15 +323,20 @@ export class LaborDataComponent implements OnInit {
       this.updatePercentageMProvince();
     }
 
-    this.httpService.getCities(event.id).subscribe(res => {
-      this.dependienteform.controls['city'].setValue(null);
-      this.mixtaform.controls['city'].setValue(null);
-      this.cities = []
-      this.cities = res.data;
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    this.dependienteform.controls['city'].setValue(null);
+    this.mixtaform.controls['city'].setValue(null);
+    this.cities = []
+    this.cities = CITIES_DATA_ITEMS;
+
+    // this.httpService.getCities(event.id).subscribe(res => {
+    //   this.dependienteform.controls['city'].setValue(null);
+    //   this.mixtaform.controls['city'].setValue(null);
+    //   this.cities = []
+    //   this.cities = res.data;
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
   }
 
   /**

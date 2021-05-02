@@ -12,7 +12,7 @@
                     <p class="text-light-14 text-center">Hemos enviado tu solicitud de crédito a todos los Bancos, Mutualistas y Cooperativas que has seleccionado, te mantendremos informado a tu correo registrado.
                     </p>
 
-                    <form *ngIf="!loginVerified(); else elseBlock" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+                    <!-- <form *ngIf="!loginVerified(); else elseBlock" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
 
                         <p class="mt-4 mb-3 text-center tittle-7">Crea una cuenta para ver el seguimiento de tu solicitud, o <u class="pointer" routerLink="/login" routerLinkActive="active-link">inicia sesión</u></p>
 
@@ -32,8 +32,8 @@
 
                                 <div class="position-relative mt-4">
                                     <input [type]="show ? 'text' : 'password'" type="password" formControlName="password" class="floating-input form-control" required placeholder=" " [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
-                                    <summary *ngIf="!show" class="ptxt tittle-14 text-uppercase" (click)="password()">Mostrar</summary>
-                                    <summary *ngIf="show" class="ptxt tittle-14 text-uppercase" (click)="password()">Ocultar</summary>
+                                    <span *ngIf="!show" class="ptxt tittle-14 text-uppercase pointer" (click)="password()">Mostrar</span>
+                                    <span *ngIf="show" class="ptxt tittle-14 text-uppercase pointer" (click)="password()">Ocultar</span>
                                     <label class="floating-label">Password*</label>
                                     <div *ngIf="formRegister.password.touched && formRegister.password.errors" class="invalid-feedback">
                                         <div *ngIf="formRegister.password.errors.required">Ingrese su contraseña!
@@ -56,15 +56,22 @@
                                 <button type="submit" [disabled]="registerForm.invalid" class="btn button btn-block">CREAR CUENTA</button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
 
-                    <ng-template #elseBlock>
+                    <!-- <ng-template #elseBlock>
                         <div class="row my-4">
                             <div class="col-12">
                                 <p class="text-light-14 text-center">Revisa el estado de tu solicitud, <span class="pointer color-2 text-14-regular" routerLink="/tracking" (click)="unir()" routerLinkActive="active-link">aquí</span></p>
                             </div>
                         </div>
-                    </ng-template>
+                    </ng-template> -->
+
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <p class="text-light-14 text-center">Revisa el estado de tu solicitud, <span class="pointer color-2 text-14-regular" routerLink="/tracking" (click)="unir()" routerLinkActive="active-link">aquí</span></p>
+                            </div>
+                        </div>
+                    
 
                 </div>
             </div>

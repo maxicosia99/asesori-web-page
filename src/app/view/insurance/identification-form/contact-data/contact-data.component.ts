@@ -186,23 +186,51 @@ export class ContactDataComponent implements OnInit {
   */
   recuperateLoginData() {
     if (this.loginVerified()) {
-      this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
-        this.user_id = this.user.id;
-        if (user) {
-          if (user.email) {
-            this.contactForm.controls['email'].setValue(user.email);
-            this.hasEmail = true;
-            this.updatePercentageEmail();
-          }
-          if (user.phone1) {
-            this.contactForm.controls['phone'].setValue(user.phone1);
-            this.hasPhone1 = true;
-            this.updatePercentagePhone();
-          }
+      // this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
+      //   this.user_id = this.user.id;
+      //   if (user) {
+      //     if (user.email) {
+      //       this.contactForm.controls['email'].setValue(user.email);
+      //       this.hasEmail = true;
+      //       this.updatePercentageEmail();
+      //     }
+      //     if (user.phone1) {
+      //       this.contactForm.controls['phone'].setValue(user.phone1);
+      //       this.hasPhone1 = true;
+      //       this.updatePercentagePhone();
+      //     }
+      //   }
+      // }, (error) => {
+      //   console.log(error);
+      // });
+
+      /**
+       * Para pruebas sin servidor
+       */
+
+      let user: UserInfo = {} as UserInfo;
+
+      this.user_id = this.user.id;
+      user.id = 1;
+      user.username = 'test@gmail.com';
+      user.name = 'testuser';
+      user.last_name = 'testuser';
+      user.cedula = '0100000000';
+      user.address = 'address';
+      user.phone1 = '0987654321';
+
+      if (user) {
+        if (user.email) {
+          this.contactForm.controls['email'].setValue(user.email);
+          this.hasEmail = true;
+          this.updatePercentageEmail();
         }
-      }, (error) => {
-        console.log(error);
-      });
+        if (user.phone1) {
+          this.contactForm.controls['phone'].setValue(user.phone1);
+          this.hasPhone1 = true;
+          this.updatePercentagePhone();
+        }
+      }
     }
   }
 

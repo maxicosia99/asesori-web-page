@@ -61,16 +61,16 @@ export class LoginComponent implements OnInit, OnDestroy {
    * Define login form
   */
   loginForm = this.formBuilder.group({
-    usernameOrEmail: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    usernameOrEmail: ['test@gmail.com', [Validators.required, Validators.email]],
+    password: ['123456', [Validators.required, Validators.minLength(6)]],
   })
 
   /**
    * Define register form
   */
   registerForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    email: ['test@gmail.com', [Validators.required, Validators.email, Validators.maxLength(40)]],
+    password: ['123456', [Validators.required, Validators.minLength(6)]],
   });
 
   ngOnInit() {
@@ -125,36 +125,54 @@ export class LoginComponent implements OnInit, OnDestroy {
   */
   onSubmit() {
 
-    let user: UserAuth = {
-      username: this.form.usernameOrEmail.value,
-      password: this.form.password.value
-    }
+    /**
+     * Para pruebas sin servidor
+     */
+     localStorage.setItem('accessToken', 'eyJhbGciOiJIUzUxMiJ9');
+     localStorage.setItem('currentUser', JSON.stringify({
+       "id": 1,
+       "username": "test@gmail.com",
+       "name": 'testuser',
+       "last_name": 'testuser',
+       "cedula": '0100000000',
+       "address": 'address',
+       "phone1": '0987654321',
+       "phone2": '0987654321'
+     }));
+     this.router.navigate([this.routerExtService.getPreviousUrl()]);
+     this.loginForm.reset();
 
-    console.log(user);
 
-    this.subscription = this.httpService.login(user).subscribe((response) => {
+    // let user: UserAuth = {
+    //   username: this.form.usernameOrEmail.value,
+    //   password: this.form.password.value
+    // }
+
+    // console.log(user);
+
+  //   this.subscription = this.httpService.login(user).subscribe((response) => {
       
-      if (response.status == 200) {
-        this.authService.setSession(response.data);
-        this.router.navigate([this.routerExtService.getPreviousUrl()]);
-        /* ------------------------------ */
-        this.httpService.getDataUserlogin().subscribe(() => {
-          this.authService.functionGetUserData();
-        }, (error) => {
-          console.log(error);
-        });
-        /* ------------------------------ */
+  //     if (response.status == 200) {
+  //       this.authService.setSession(response.data);
+  //       this.router.navigate([this.routerExtService.getPreviousUrl()]);
+  //       /* ------------------------------ */
+  //       this.httpService.getDataUserlogin().subscribe(() => {
+  //         this.authService.functionGetUserData();
+  //       }, (error) => {
+  //         console.log(error);
+  //       });
+  //       /* ------------------------------ */
 
-        //this.bsModalRef.hide();
-        this.loginForm.reset();
-        this.authService.setSession(response.data);
-      } else
-        this.add('La información ingresada es incorrecta, revisa nuevamente; puede ser el correo o la contraseña');
-    }, (error) => {
-      console.log(error);
-      //this.authService.redirectInternalServerError();
-      this.add('La información ingresada es incorrecta, revisa nuevamente; puede ser el correo o la contraseña');
-    });
+  //       //this.bsModalRef.hide();
+  //       this.loginForm.reset();
+  //       this.authService.setSession(response.data);
+  //     } else
+  //       this.add('La información ingresada es incorrecta, revisa nuevamente; puede ser el correo o la contraseña');
+  //   }, (error) => {
+  //     console.log(error);
+  //     //this.authService.redirectInternalServerError();
+  //     this.add('La información ingresada es incorrecta, revisa nuevamente; puede ser el correo o la contraseña');
+  //   });
   }
 
   /**
@@ -163,49 +181,68 @@ export class LoginComponent implements OnInit, OnDestroy {
   */
   onSubmitRegister() {
 
-    let userRegister: UserAuth = {
-      username: this.formRegister.email.value,
-      password: this.formRegister.password.value
-    }
+    /**
+     * Para pruebas sin servidor
+     */
+     localStorage.setItem('accessToken', 'eyJhbGciOiJIUzUxMiJ9');
+     localStorage.setItem('currentUser', JSON.stringify({
+       "id": 1,
+       "username": "test@gmail.com",
+       "name": 'testuser',
+       "last_name": 'testuser',
+       "cedula": '0100000000',
+       "address": 'address',
+       "phone1": '0987654321',
+       "phone2": '0987654321'
+     }));
+     this.router.navigate([this.routerExtService.getPreviousUrl()]);
+     this.loginForm.reset();
 
-    this.subscription = this.httpService.register(userRegister).subscribe((response) => {
-      if (response.status == 200) {
 
-        this.subscription = this.httpService.login(userRegister).subscribe((response) => {
 
-          //console.log(response);
+    // let userRegister: UserAuth = {
+    //   username: this.formRegister.email.value,
+    //   password: this.formRegister.password.value
+    // }
 
-          if (response.status == 200) {
-            this.authService.setSession(response.data);
-            this.router.navigate([this.routerExtService.getPreviousUrl()]);
-            /* ------------------------------ */
-            this.httpService.getDataUserlogin().subscribe(() => {
-              this.authService.functionGetUserData();
-            }, (error) => {
-              console.log(error);
-            });
-            /* ------------------------------ */
+    // this.subscription = this.httpService.register(userRegister).subscribe((response) => {
+    //   if (response.status == 200) {
 
-            //this.bsModalRef.hide();
-            this.registerForm.reset();
-            this.authService.setSession(response.data);
-          } else
-            this.add(response.error);
+    //     this.subscription = this.httpService.login(userRegister).subscribe((response) => {
 
-        }, (error) => {
-          console.log(error);
-          this.authService.redirectInternalServerError();
-          this.add('Servidor no disponible ' + error);
-        });
+    //       //console.log(response);
 
-      } else {
-        this.add(response.error);
-      }
-    }, (error) => {
-      console.log(error);
-      this.authService.redirectInternalServerError();
-      this.add('Servidor no disponible' + error);
-    });
+    //       if (response.status == 200) {
+    //         this.authService.setSession(response.data);
+    //         this.router.navigate([this.routerExtService.getPreviousUrl()]);
+    //         /* ------------------------------ */
+    //         this.httpService.getDataUserlogin().subscribe(() => {
+    //           this.authService.functionGetUserData();
+    //         }, (error) => {
+    //           console.log(error);
+    //         });
+    //         /* ------------------------------ */
+
+    //         //this.bsModalRef.hide();
+    //         this.registerForm.reset();
+    //         this.authService.setSession(response.data);
+    //       } else
+    //         this.add(response.error);
+
+    //     }, (error) => {
+    //       console.log(error);
+    //       this.authService.redirectInternalServerError();
+    //       this.add('Servidor no disponible ' + error);
+    //     });
+
+    //   } else {
+    //     this.add(response.error);
+    //   }
+    // }, (error) => {
+    //   console.log(error);
+    //   this.authService.redirectInternalServerError();
+    //   this.add('Servidor no disponible' + error);
+    // });
   }
 
   /**

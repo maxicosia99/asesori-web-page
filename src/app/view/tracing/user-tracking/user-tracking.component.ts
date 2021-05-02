@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { UserInfo } from 'src/app/models/user-info';
+import { ICreditAplication } from 'src/app/data/interfaces/icredit-application.metadata';
+import { CREDITAPLICATIONS_DATA_ITEMS } from 'src/app/data/constants/credit-applications.const';
 
 @Component({
   selector: 'app-user-tracking',
@@ -27,11 +29,12 @@ export class UserTrackingComponent implements OnInit {
   */
   public user_id: number;
 
-  public credit_data: any[];
+  // public credit_data: any[];
+  public credit_data: ICreditAplication[] = CREDITAPLICATIONS_DATA_ITEMS;
 
   ngOnInit() {
 
-    this.recuperateLoginData();
+    // this.recuperateLoginData();
 
   }
 

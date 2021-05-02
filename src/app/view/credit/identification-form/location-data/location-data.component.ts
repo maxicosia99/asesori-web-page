@@ -5,6 +5,8 @@ import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { UserInfo } from 'src/app/models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
+import { ICity, IProvince } from 'src/app/data/interfaces/ilocation.metadata';
+import { CITIES_DATA_ITEMS, PROVINCES_DATA_ITEMS } from 'src/app/data/constants/location.const';
 
 @Component({
   selector: 'app-location-data',
@@ -79,15 +81,19 @@ export class LocationDataComponent implements OnInit {
 
   /**
     * Variable to store all provinces from Ecuador
+    * para pruebas sin servidor
     * @type {any}
    */
-  public provinces: any;
+  // public provinces: any;
+  public provinces: IProvince[] = PROVINCES_DATA_ITEMS;
 
   /**
    * Variable to store all cities from a province
+   * para pruebas sin servidor
    * @type {any}
   */
-  public cities: any;
+  // public cities: any;
+  public cities: ICity[] = CITIES_DATA_ITEMS;
 
   /**
    * Define address form
@@ -157,50 +163,50 @@ export class LocationDataComponent implements OnInit {
     this.percentage = +localStorage.getItem('percentage');
 
     /*  Get all provinces. */
-    this.httpService.getProvinces().subscribe(res => {
-      this.provinces = res.data;
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // this.httpService.getProvinces().subscribe(res => {
+    //   this.provinces = res.data;
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
 
     /*  Start - Search by location. */
-    this.httpService.getCurrentLocation().subscribe(res => {
-      this.httpService.verifyProvinceExistence(res.region_code).subscribe(resp => {
+    // this.httpService.getCurrentLocation().subscribe(res => {
+    //   this.httpService.verifyProvinceExistence(res.region_code).subscribe(resp => {
 
-        /* In case the location is detected */
-        if (resp.status === 200) {
-          this.region_code = res.region_code;
+    //     /* In case the location is detected */
+    //     if (resp.status === 200) {
+    //       this.region_code = res.region_code;
 
-          let currentprovince = this.provinces.find(x => x.apicode === this.region_code);
+    //       let currentprovince = this.provinces.find(x => x.apicode === this.region_code);
 
-          this.addressForm.controls['province'].setValue({ id: currentprovince.id, name: currentprovince.name });
-          this.updatePercentageProvince();
-          /* the cities of the detected province are loaded */
+    //       this.addressForm.controls['province'].setValue({ id: currentprovince.id, name: currentprovince.name });
+    //       this.updatePercentageProvince();
+    //       /* the cities of the detected province are loaded */
 
-          this.httpService.getCities(currentprovince.id).subscribe(res => {
-            this.cities = []
-            this.cities = res.data;
-            //console.log(this.cities);
-          }, error => {
-            console.log('error');
-            console.log(error);
-          });
-        }
+    //       this.httpService.getCities(currentprovince.id).subscribe(res => {
+    //         this.cities = []
+    //         this.cities = res.data;
+    //         //console.log(this.cities);
+    //       }, error => {
+    //         console.log('error');
+    //         console.log(error);
+    //       });
+    //     }
 
-        /* In case the location is not detected */
-        if (resp.status === 500) {
-          console.log(resp.message); // enviar como un mensaje de error
-        }
+    //     /* In case the location is not detected */
+    //     if (resp.status === 500) {
+    //       console.log(resp.message); // enviar como un mensaje de error
+    //     }
 
-      }, error => {
-        console.log('error');
-        console.log(error);
-      });
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    //   }, error => {
+    //     console.log('error');
+    //     console.log(error);
+    //   });
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
     /*  End - Search by location. */
 
     /* Handling of personal data when logging in */
@@ -256,20 +262,31 @@ export class LocationDataComponent implements OnInit {
       this.percentage += this.increase;
     }
 
-    this.httpService.getCities(event.id).subscribe(res => {
-      this.addressForm.controls['city'].setValue(null);
+    /**
+     * Para pruebas sin servidor
+     */
+    this.addressForm.controls['city'].setValue(null);
+    if (this.percentageCity) {
+      this.percentageCity = false;
+      this.percentage -= this.increase;
+    }
+    this.cities = []
+    this.cities = CITIES_DATA_ITEMS;
 
-      if (this.percentageCity) {
-        this.percentageCity = false;
-        this.percentage -= this.increase;
-      }
+    // this.httpService.getCities(event.id).subscribe(res => {
+    //   this.addressForm.controls['city'].setValue(null);
 
-      this.cities = []
-      this.cities = res.data;
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    //   if (this.percentageCity) {
+    //     this.percentageCity = false;
+    //     this.percentage -= this.increase;
+    //   }
+
+    //   this.cities = []
+    //   this.cities = res.data;
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
   }
 
 
@@ -296,18 +313,45 @@ export class LocationDataComponent implements OnInit {
   */
   recuperateLoginData() {
     if (this.loginVerified()) {
-      this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
-        this.user_id = this.user.id;
-        if (user) {
-          if (user.address) {
-            this.addressForm.controls['address'].setValue(user.address);
-            this.hasAddress = true;
-            this.updatePercentageAddress();
-          }
+      // this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
+      //   this.user_id = this.user.id;
+      //   if (user) {
+      //     if (user.address) {
+      //       this.addressForm.controls['address'].setValue(user.address);
+      //       this.hasAddress = true;
+      //       this.updatePercentageAddress();
+      //     }
+      //   }
+      // }, (error) => {
+      //   console.log(error);
+      // });
+
+
+
+
+
+      /**
+       * Para pruebas sin servidor
+       */
+
+      let user: UserInfo = {} as UserInfo;
+
+      this.user_id = this.user.id;
+      user.id = 1;
+      user.username = 'test@gmail.com';
+      user.name = 'testuser';
+      user.last_name = 'testuser';
+      user.cedula = '0100000000';
+      user.address = 'address';
+      user.phone1 = '0987654321';
+
+      if (user) {
+        if (user.address) {
+          this.addressForm.controls['address'].setValue(user.address);
+          this.hasAddress = true;
+          this.updatePercentageAddress();
         }
-      }, (error) => {
-        console.log(error);
-      });
+      }
     }
   }
 

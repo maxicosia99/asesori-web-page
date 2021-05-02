@@ -1,0 +1,67 @@
+export interface ICompanyInsurance {
+    id:       number;
+    name:     string;
+    photoUrl: string;
+    siteUrl:  string;
+    email:    string;
+    priority: number;
+    isActive: boolean;
+}
+
+export interface IInsuranceFee {
+    idaseguradora:          number;
+    name:                   string;
+    nombre_corto:           string;
+    ranking:                number;
+    puntaje_beneficios:     number;
+    detail:                 number;
+    tasaextras:             number;
+    criesgo:                number;
+    coberturas:             string;
+    deducible:              string;
+    aniovehiculo:           number;
+    totalsumaasegurada:     number;
+    cobertura:              string;
+    responsabilidadcivil:   number;
+    muerte:                 number;
+    gastosmedicos:          string;
+    dpp:                    string;
+    dpp_absoluto:           string;
+    dpp_relativo:           string;
+    dptch:                  string;
+    dptrb:                  string;
+    dptrbsd:                string;
+    deduciblespesados:      string;
+    autosustitutopp:        string;
+    autosustitutopt:        string;
+    beneficiosadicionales1: string;
+    beneficiosadicionales2: string;
+    beneficiosadicionales3: string;
+    beneficiosadicionales4: string;
+    beneficiosadicionales5: string;
+    modopago1:              string;
+    modopago2:              string;
+    modopago3:              string;
+    deducpp:                string;
+    ventaja:                string;
+    detallecoberturas:      string;
+    clausulasadicionales:   string;
+    id_promotor:            number;
+    perfil:                 string;
+    nro_cotizacion:         string;
+    referencial_price:      number;
+    supbancos:              number;
+    ssc:                    number;
+    iva:                    number;
+    supbancos_percentage:   number;
+    ssc_percentage:         number;
+    iva_percentage:         number;
+    net_premium:            number;
+    total_premium:          number;
+    id_insurance_entity:    number;
+    name_insurance_entity:  string;
+    url_photo:              string;
+    url_site:               string;
+    info:                   null;
+    priority:               number;
+}

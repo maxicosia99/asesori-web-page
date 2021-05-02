@@ -24,8 +24,8 @@
                 </div>
                 <div class="position-relative mt-4">
                     <input [type]="show ? 'text' : 'password'" type="password" formControlName="password" class="floating-input form-control" placeholder=" " required [ngClass]="{ 'is-invalid': form.password.touched && form.password.errors }">
-                    <summary *ngIf="!show" class="ptxt tittle-14 text-uppercase" (click)="password()">Mostrar</summary>
-                    <summary *ngIf="show" class="ptxt tittle-14 text-uppercase" (click)="password()">Ocultar</summary>
+                    <a *ngIf="!show" class="ptxt tittle-14 text-uppercase" (click)="password()">Mostrar</a>
+                    <a *ngIf="show" class="ptxt tittle-14 text-uppercase" (click)="password()">Ocultar</a>
                     <label class="floating-label">Contraseña*</label>
                     <div *ngIf="form.password.touched && form.password.errors" class="invalid-feedback">
                         <div *ngIf="form.password.errors.required">Porfavor ingrese su contraseña!</div>
@@ -44,15 +44,14 @@
                             SESIÓN</button>
                     </div>
                     <div class="col-5 align-self-center text-right">
-                        <a href="#" class="color-1 tittle-14">Olvidaste tu contraseña?</a>
+                        <a class="color-1 tittle-14">Olvidaste tu contraseña?</a>
                     </div>
                 </div>
 
                 <div class="row justify-content-center py-5">
                     <div class="col-8 text-center tittle-14">
                         <span>Aun no tienes cuenta, </span>
-                        <summary (click)="changeSectionRegister()" class="color-1 d-inline">Registrate aquí
-                        </summary>
+                        <span (click)="changeSectionRegister()" class="color-1 d-inline" style="cursor: pointer;">Registrate aquí</span>
                     </div>
                 </div>
             </form>
@@ -86,8 +85,8 @@
 
                 <div class="position-relative mt-4">
                     <input [type]="show ? 'text' : 'password'" type="password" formControlName="password" class="floating-input form-control" placeholder=" " required [ngClass]="{ 'is-invalid': formRegister.password.touched && formRegister.password.errors }">
-                    <summary *ngIf="!show" class="ptxt tittle-14 text-uppercase" (click)="password()">Mostrar</summary>
-                    <summary *ngIf="show" class="ptxt tittle-14 text-uppercase" (click)="password()">Ocultar</summary>
+                    <a *ngIf="!show" class="ptxt tittle-14 text-uppercase" (click)="password()">Mostrar</a>
+                    <a *ngIf="show" class="ptxt tittle-14 text-uppercase" (click)="password()">Ocultar</a>
                     <label class="floating-label">Contraseña*</label>
                     <div *ngIf="formRegister.password.touched && formRegister.password.errors" class="invalid-feedback">
                         <div *ngIf="formRegister.password.errors.required">Ingrese su contraseña!
@@ -111,7 +110,7 @@
                 <div class="row justify-content-center py-5">
                     <div class="col-8 text-center tittle-14">
                         <span>Ya tienes cuenta, </span>
-                        <summary (click)="changeSectionLogin()" class="color-1 d-inline">Inicia sesión aquí</summary>
+                        <span (click)="changeSectionLogin()" class="color-1 d-inline pointer">Inicia sesión aquí</span>
                     </div>
                 </div>
             </form>

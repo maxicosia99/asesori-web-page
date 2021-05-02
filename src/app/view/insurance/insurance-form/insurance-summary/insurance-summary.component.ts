@@ -75,57 +75,60 @@ export class InsuranceSummaryComponent implements OnInit {
   */
   onSubmitSummary() {
 
-    let insuranceInformation: InsuranceInformation = {} as InsuranceInformation;
+    this.router.navigate(['insurance/finalize']);
+    localStorage.setItem('percentage', '0');
 
-    insuranceInformation.car_id = this.insurance_information.carId;
-    insuranceInformation.car_year = this.insurance_information.car_year;
-    insuranceInformation.applicant_mail = this.contact_data.email;
-    insuranceInformation.request_city_id = this.insurance_information.request_city_id;
+    // let insuranceInformation: InsuranceInformation = {} as InsuranceInformation;
 
-    insuranceInformation.applicant_dni = this.personal_data.cedula;
-    insuranceInformation.applicant_civil_status = this.personal_data.maritalStatus;
-    insuranceInformation.applicant_name = this.personal_data.name;
-    insuranceInformation.applicant_lastname = this.personal_data.last_name;
-    insuranceInformation.applicant_birthdate = this.personal_data.birthday;
+    // insuranceInformation.car_id = this.insurance_information.carId;
+    // insuranceInformation.car_year = this.insurance_information.car_year;
+    // insuranceInformation.applicant_mail = this.contact_data.email;
+    // insuranceInformation.request_city_id = this.insurance_information.request_city_id;
 
-    insuranceInformation.home_city_id = this.location_data.city.id;
-    insuranceInformation.applicant_home_address = this.location_data.address;
-    insuranceInformation.applicant_home_address_reference = this.location_data.reference;
-    insuranceInformation.applicant_home_address_sector = this.location_data.sector;
+    // insuranceInformation.applicant_dni = this.personal_data.cedula;
+    // insuranceInformation.applicant_civil_status = this.personal_data.maritalStatus;
+    // insuranceInformation.applicant_name = this.personal_data.name;
+    // insuranceInformation.applicant_lastname = this.personal_data.last_name;
+    // insuranceInformation.applicant_birthdate = this.personal_data.birthday;
 
-    insuranceInformation.applicant_phone1 = this.contact_data.phone;
-    insuranceInformation.applicant_phone2 = this.contact_data.phone2;
+    // insuranceInformation.home_city_id = this.location_data.city.id;
+    // insuranceInformation.applicant_home_address = this.location_data.address;
+    // insuranceInformation.applicant_home_address_reference = this.location_data.reference;
+    // insuranceInformation.applicant_home_address_sector = this.location_data.sector;
 
-    insuranceInformation.car_color = this.vehicle_data.vehicleColor.color_name;
-    insuranceInformation.car_license = this.vehicle_data.vehiclePlate;
-    insuranceInformation.car_details = this.vehicle_data.vehicleDetails;
+    // insuranceInformation.applicant_phone1 = this.contact_data.phone;
+    // insuranceInformation.applicant_phone2 = this.contact_data.phone2;
 
-    let selected_options: Insurance[] = this.insurance_options.insurance_selected;
+    // insuranceInformation.car_color = this.vehicle_data.vehicleColor.color_name;
+    // insuranceInformation.car_license = this.vehicle_data.vehiclePlate;
+    // insuranceInformation.car_details = this.vehicle_data.vehicleDetails;
 
-    insuranceInformation.selected_options = selected_options;
+    // let selected_options: Insurance[] = this.insurance_options.insurance_selected;
 
-    this.httpService.createInsuranceInformation(insuranceInformation).subscribe(res => {
-      if (res.status == 200) {
+    // insuranceInformation.selected_options = selected_options;
+
+    // this.httpService.createInsuranceInformation(insuranceInformation).subscribe(res => {
+    //   if (res.status == 200) {
         
-        localStorage.clear();
-        this.router.navigate(['insurance/finalize']);
+    //     localStorage.clear();
+    //     this.router.navigate(['insurance/finalize']);
         
-        // this.httpService.getSendMailInsurance().subscribe(res => {
-        //   console.log(res);
-        // }, error => {
-        //   console.log('error al enviar correo');
-        //   console.log(error);
-        // });
+    //     // this.httpService.getSendMailInsurance().subscribe(res => {
+    //     //   console.log(res);
+    //     // }, error => {
+    //     //   console.log('error al enviar correo');
+    //     //   console.log(error);
+    //     // });
 
-        //this.messageErrorInsurance = null;
+    //     //this.messageErrorInsurance = null;
 
-      } else {
-        console.log('Ah ocurrido un error! ' + res.errors);
-        //this.messageErrorInsurance = res.message;
-      }
-    }, errors => {
-      console.log('error al crear información');
-      console.log(errors);
-    });
+    //   } else {
+    //     console.log('Ah ocurrido un error! ' + res.errors);
+    //     //this.messageErrorInsurance = res.message;
+    //   }
+    // }, errors => {
+    //   console.log('error al crear información');
+    //   console.log(errors);
+    // });
   }
 }

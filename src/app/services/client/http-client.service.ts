@@ -20,8 +20,7 @@ const httpOptions = {
 })
 export class HttpClientService {
 
-  //private SEVER_URL: string = 'http://10.101.214.140:8080';
-  private SEVER_URL: string = 'https://asesori-server.herokuapp.com';
+  private SEVER_URL: string = '';
 
   constructor(private httpClient: HttpClient) { }
 

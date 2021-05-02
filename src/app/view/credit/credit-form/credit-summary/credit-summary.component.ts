@@ -136,149 +136,92 @@ export class CreditSummaryComponent implements OnInit {
   */
   onSubmitSummary() {
 
-    let creditInformation: CreditInformation = {} as CreditInformation;
+    // let creditInformation: CreditInformation = {} as CreditInformation;
 
-    creditInformation.applicant_name = this.personal_data.name;
-    creditInformation.applicant_lastname = this.personal_data.last_name;
-    creditInformation.applicant_dni = this.personal_data.cedula;
-    creditInformation.applicant_civil_status = this.personal_data.maritalStatus;
-    creditInformation.applicant_birthdate = this.personal_data.birthday;
+    // creditInformation.applicant_name = this.personal_data.name;
+    // creditInformation.applicant_lastname = this.personal_data.last_name;
+    // creditInformation.applicant_dni = this.personal_data.cedula;
+    // creditInformation.applicant_civil_status = this.personal_data.maritalStatus;
+    // creditInformation.applicant_birthdate = this.personal_data.birthday;
 
-    creditInformation.home_city_id = this.location_data.city.id;
-    creditInformation.applicant_home_address = this.location_data.address;
-    creditInformation.applicant_home_address_reference = this.location_data.reference;
-    creditInformation.applicant_home_address_sector = this.location_data.sector;
+    // creditInformation.home_city_id = this.location_data.city.id;
+    // creditInformation.applicant_home_address = this.location_data.address;
+    // creditInformation.applicant_home_address_reference = this.location_data.reference;
+    // creditInformation.applicant_home_address_sector = this.location_data.sector;
 
-    creditInformation.applicant_mail = this.contact_data.email;
-    creditInformation.applicant_phone1 = this.contact_data.phone;
-    creditInformation.applicant_phone2 = this.contact_data.phone2;
+    // creditInformation.applicant_mail = this.contact_data.email;
+    // creditInformation.applicant_phone1 = this.contact_data.phone;
+    // creditInformation.applicant_phone2 = this.contact_data.phone2;
 
-    creditInformation.company_name = this.labor_data.companyName;
-    creditInformation.company_position = this.labor_data.positionCompany;
-    creditInformation.monthly_salary = this.labor_data.monthlySalary;
-    creditInformation.other_monthly_value = this.labor_data.otherMonthlyValue;
-    creditInformation.detail_other_monthly_value = this.labor_data.valueDetail;
-    creditInformation.company_city_id = this.labor_data.city.id;
-    creditInformation.company_address = this.labor_data.address;
-    creditInformation.company_phone = this.labor_data.phone;
+    // creditInformation.company_name = this.labor_data.companyName;
+    // creditInformation.company_position = this.labor_data.positionCompany;
+    // creditInformation.monthly_salary = this.labor_data.monthlySalary;
+    // creditInformation.other_monthly_value = this.labor_data.otherMonthlyValue;
+    // creditInformation.detail_other_monthly_value = this.labor_data.valueDetail;
+    // creditInformation.company_city_id = this.labor_data.city.id;
+    // creditInformation.company_address = this.labor_data.address;
+    // creditInformation.company_phone = this.labor_data.phone;
 
-    creditInformation.applicant_ruc = this.labor_data.ruc;
-    creditInformation.commercial_sector = this.labor_data.sector;
-    creditInformation.average_monthly_sales = this.labor_data.averageSales;
+    // creditInformation.applicant_ruc = this.labor_data.ruc;
+    // creditInformation.commercial_sector = this.labor_data.sector;
+    // creditInformation.average_monthly_sales = this.labor_data.averageSales;
 
-    creditInformation.monthly_expenses = this.financial_data.monthlyExpenses;
-    creditInformation.payment_capacity = this.financial_data.paymentCapacity;
+    // creditInformation.monthly_expenses = this.financial_data.monthlyExpenses;
+    // creditInformation.payment_capacity = this.financial_data.paymentCapacity;
 
-    creditInformation.cards_payment = this.economic_data.payments_cards;
-    creditInformation.rental_payment = this.economic_data.rental;
-    creditInformation.loans_payment = this.economic_data.payment_loans;
-    creditInformation.services_payment = this.economic_data.payment_services;
-    creditInformation.housing_type = this.economic_data.housing_type;
-    creditInformation.mortgage_payment = this.economic_data.mortgage_payment;
-    creditInformation.total_assets_appraisal = this.economic_data.total_possessions;
+    // creditInformation.cards_payment = this.economic_data.payments_cards;
+    // creditInformation.rental_payment = this.economic_data.rental;
+    // creditInformation.loans_payment = this.economic_data.payment_loans;
+    // creditInformation.services_payment = this.economic_data.payment_services;
+    // creditInformation.housing_type = this.economic_data.housing_type;
+    // creditInformation.mortgage_payment = this.economic_data.mortgage_payment;
+    // creditInformation.total_assets_appraisal = this.economic_data.total_possessions;
 
-    creditInformation.credit_term = this.term;
-    creditInformation.credittype_id = this.credit_information.credit_id;
-    creditInformation.request_city_id = this.credit_information.city_id;
-    creditInformation.required_amount = this.amountRequest;
-    creditInformation.monthly_income = this.monthlyIncome;
-    creditInformation.initial_amount = this.entryAmount;
-    creditInformation.credit_destination = this.destinedTo;
+    // creditInformation.credit_term = this.term;
+    // creditInformation.credittype_id = this.credit_information.credit_id;
+    // creditInformation.request_city_id = this.credit_information.city_id;
+    // creditInformation.required_amount = this.amountRequest;
+    // creditInformation.monthly_income = this.monthlyIncome;
+    // creditInformation.initial_amount = this.entryAmount;
+    // creditInformation.credit_destination = this.destinedTo;
 
-    let creditos: Creditos[] = this.credit_options.credit_selected;
+    // let creditos: Creditos[] = this.credit_options.credit_selected;
 
-    creditInformation.selected_credits = creditos;
-
-
-
-    let prueba: any = {
-      credittype_id: 11,
-      credit_destination: "Para tu casa",
-      required_amount: 150000,
-      initial_amount: 2000,
-      monthly_income: 4500,
-      credit_term: 180,
-      applicant_mail: "edisson10@gmail.com",
-      request_city_id: 10101,
-
-      applicant_dni: "0105874911",
-      applicant_civil_status: "SOLTERO",
-      applicant_name: "Edisson Fernando",
-      applicant_lastname: "Sigua Loja",
-      applicant_birthdate: "14-07-1996",
-
-      home_city_id: 10101,
-      applicant_home_address: "Panamericana Sur",
-      applicant_home_address_reference: "Estacion Bus",
-      applicant_home_address_sector: "Zhucay",
-
-      applicant_phone1: "0979552994",
-      applicant_phone2: "2884762",
-
-      company_name: "Ucuenca",
-      company_position: "Profesor",
-      monthly_salary: 3500,
-      other_monthly_value: 1500,
-      detail_other_monthly_value: "Venta Ganado",
-      company_city_id: 10101,
-      company_address: "12 de Abril y Avenida Loja",
-      company_phone: "2884563",
-
-      applicant_ruc: "0010105874911",
-      commercial_sector: "Tecnologico",
-      average_monthly_sales: 3500,
-
-      monthly_expenses: 1000,
-      payment_capacity: 3000,
-
-      cards_payment: 1000,
-      mortgage_payment: 1000,
-      loans_payment: 1000,
-      total_assets_appraisal: 100000,
-      services_payment: 600,
-      housing_type: "ARRENDADA",
-      rental_payment: 200,
-      selected_credits: [
-        {
-          financialentity_id: 1,
-          monthly_fee: 450.266541,
-          info: "Necesitas 90.000 $. Tu entrada de 10.000 $ te permite completar tu crédito y solo te será necesario pedir al banco 0 $ para completar la cantidad que necesitas"
-        }
-      ]
-    }
+    // creditInformation.selected_credits = creditos;
 
 
+    this.router.navigate(['credit/finalize']);
+    localStorage.setItem('percentage', '0');
 
 
+    // this.httpService.createCreditInformation(creditInformation).subscribe(res => {
 
-    this.httpService.createCreditInformation(creditInformation).subscribe(res => {
+    //   console.log(res);
 
-      console.log(res);
+    //   if (res.status == 200) {
 
-      if (res.status == 200) {
+    //     //sessionStorage.setItem('request_data', JSON.stringify(res.data));
+    //     //localStorage.clear();
+    //     //this.router.navigate(['credit/finalize']);
 
-        //sessionStorage.setItem('request_data', JSON.stringify(res.data));
-        //localStorage.clear();
-        //this.router.navigate(['credit/finalize']);
+    //     // let application_id = res.data;
+    //     // this.httpService.sendCreditInformation(application_id).subscribe((res) => {
+    //     //   console.log(res);
+    //     // }, (error) => {
+    //     //   console.log('error al enviar información de solicitud con id ' + application_id + " a la nueva bd");
+    //     //   console.log(error);
+    //     // });
 
-        // let application_id = res.data;
-        // this.httpService.sendCreditInformation(application_id).subscribe((res) => {
-        //   console.log(res);
-        // }, (error) => {
-        //   console.log('error al enviar información de solicitud con id ' + application_id + " a la nueva bd");
-        //   console.log(error);
-        // });
+    //     //this.messageErrorCredit = null;
 
-        //this.messageErrorCredit = null;
-
-      } else {
-        console.log('Ah ocurrido un error! ' + res.errors);
-        //this.messageErrorCredit = res.message;
-      }
-    }, error => {
-      console.log('error al crear información');
-      console.log(error);
-    });
+    //   } else {
+    //     console.log('Ah ocurrido un error! ' + res.errors);
+    //     //this.messageErrorCredit = res.message;
+    //   }
+    // }, error => {
+    //   console.log('error al crear información');
+    //   console.log(error);
+    // });
   }
 
 }

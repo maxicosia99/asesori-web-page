@@ -97,7 +97,8 @@ export class PersonalDataComponent implements OnInit {
   personalDataForm = this.formbuilder.group({
     names: ['', Validators.required],
     last_names: ['', Validators.required],
-    dni: ['', [Validators.required,validateCedula]],
+    // dni: ['', [Validators.required, validateCedula]],
+    dni: ['', [Validators.required]],
     maritalStatus: [null, Validators.required],
     birthday: null
   });
@@ -121,7 +122,7 @@ export class PersonalDataComponent implements OnInit {
     );
   }
 
-  verifyDni():  boolean  {
+  verifyDni(): boolean {
     return this.personalDataForm.hasError('validateCedula');
   }
 
@@ -225,28 +226,61 @@ export class PersonalDataComponent implements OnInit {
   */
   recuperateLoginData() {
     if (this.loginVerified()) {
-      this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
-        this.user_id = this.user.id;
-        if (user) {
-          if (user.cedula) {
-            this.personalDataForm.controls['dni'].setValue(user.cedula);
-            this.hasCedula = true;
-            this.updatePercentageDni();
-          }
-          if (user.name) {
-            this.personalDataForm.controls['names'].setValue(user.name);
-            this.hasNames = true;
-            this.updatePercentageNames();
-          }
-          if (user.last_name) {
-            this.personalDataForm.controls['last_names'].setValue(user.last_name);
-            this.hasLastNames = true;
-            this.updatePercentageLast_names();
-          }
+      // this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
+      //   this.user_id = this.user.id;
+      //   if (user) {
+      //     if (user.cedula) {
+      //       this.personalDataForm.controls['dni'].setValue(user.cedula);
+      //       this.hasCedula = true;
+      //       this.updatePercentageDni();
+      //     }
+      //     if (user.name) {
+      //       this.personalDataForm.controls['names'].setValue(user.name);
+      //       this.hasNames = true;
+      //       this.updatePercentageNames();
+      //     }
+      //     if (user.last_name) {
+      //       this.personalDataForm.controls['last_names'].setValue(user.last_name);
+      //       this.hasLastNames = true;
+      //       this.updatePercentageLast_names();
+      //     }
+      //   }
+      // }, (error) => {
+      //   console.log(error);
+      // });
+
+      /**
+       * Para pruebas sin servidor
+       */
+
+      let user: UserInfo = {} as UserInfo;
+
+      this.user_id = this.user.id;
+      user.id = 1;
+      user.username = 'test@gmail.com';
+      user.name = 'testuser';
+      user.last_name = 'testuser';
+      user.cedula = '0100000000';
+      user.address = 'address';
+      user.phone1 = '0987654321';
+
+      if (user) {
+        if (user.cedula) {
+          this.personalDataForm.controls['dni'].setValue(user.cedula);
+          this.hasCedula = true;
+          this.updatePercentageDni();
         }
-      }, (error) => {
-        console.log(error);
-      });
+        if (user.name) {
+          this.personalDataForm.controls['names'].setValue(user.name);
+          this.hasNames = true;
+          this.updatePercentageNames();
+        }
+        if (user.last_name) {
+          this.personalDataForm.controls['last_names'].setValue(user.last_name);
+          this.hasLastNames = true;
+          this.updatePercentageLast_names();
+        }
+      }
     }
   }
 

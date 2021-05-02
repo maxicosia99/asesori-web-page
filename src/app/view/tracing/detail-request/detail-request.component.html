@@ -5,8 +5,8 @@
             <img src="/assets/img/asesori-logo-negative.png" width="90px" height="90px" class="" alt="ASESORI" routerLink="/homepage">
         </div>
         <div class="col-12 mt-4">
-            <summary class="tittle-10 pb-5 color-3" [routerLink]="['/tracking/home']"><i class="fas fa-angle-left"></i> Regresar
-            </summary>
+            <span class="tittle-10 pb-5 color-3" [routerLink]="['/tracking/home']"><i class="fas fa-angle-left"></i> Regresar
+            </span>
             <h2 class="tittle-1 mb-4 text-center color-10 d-none d-md-block">Seguimiento de solicitudes</h2>
             <p class="tittle-7 text-center mb-5 d-block d-md-none">Seguimiento de solicitudes</p>
             <p class="tittle-7 color-1">Tu solicitud</p>
@@ -22,8 +22,8 @@
     <div class="row px-4 py-5">
         <div class="col-12">
             <div class="float-left tittle-8 color-10">Crédito Hipotecario</div>
-            <summary (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" class="float-right"><span *ngIf="isCollapsed" class="tittle-10 color-3">Mostrar</span><span *ngIf="!isCollapsed" class="tittle-10 color-3">Ocultar</span> <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i>
-            </summary>
+            <span (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" class="float-right"><span *ngIf="isCollapsed" class="tittle-10 color-3">Mostrar</span><span *ngIf="!isCollapsed" class="tittle-10 color-3">Ocultar</span> <i *ngIf="!isCollapsed" class="fas fa-angle-up pr-3"></i><i *ngIf="isCollapsed" class="fas fa-angle-down pr-3"></i>
+        </span>
         </div>
     </div>
 
@@ -175,7 +175,7 @@
                         </div>
                         <div class="row pt-4 px-4 justify-content-end d-none d-lg-flex">
                             <div class="col-4">
-                                <summary class="color-1 pointer tittle-18 text-right"><u>Más información</u></summary>
+                                <span class="color-1 pointer tittle-18 text-right"><u>Más información</u></span>
                             </div>
                         </div>
                     </div>
@@ -206,7 +206,7 @@
             </div> -->
             <div class="row py-4 px-4 justify-content-end d-block d-lg-none">
                 <div class="col-12">
-                    <summary class="color-1 pointer tittle-18"><u>Más información</u></summary>
+                    <span class="color-1 pointer tittle-18"><u>Más información</u></span>
                 </div>
             </div>
         </div>

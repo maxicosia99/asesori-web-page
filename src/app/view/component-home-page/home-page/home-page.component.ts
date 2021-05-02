@@ -6,6 +6,10 @@ import { HttpClientService } from 'src/app/services/client/http-client.service';
 import { UserInfo } from '../../../models/user-info';
 import { AuthenticationService } from 'src/app/services/auth/authentication.service';
 import { Router } from '@angular/router';
+import { CITIES_DATA_ITEMS, PROVINCES_DATA_ITEMS } from 'src/app/data/constants/location.const';
+import { ICity, IProvince } from 'src/app/data/interfaces/ilocation.metadata';
+import { IBrand, IDescription, IModel, IYear } from 'src/app/data/interfaces/icar.metadata';
+import { BRANDS_DATA_ITEMS, DESCRIPTION_DATA_ITEMS, MODEL_DATA_ITEMS, YEAR_DATA_ITEMS } from 'src/app/data/constants/car.conts';
 
 
 /** Interface representing a slider model */
@@ -117,15 +121,18 @@ export class HomePageComponent implements OnInit {
 
   /**
     * Variable to store all provinces from Ecuador
+    * para pruebas sin servidor
     * @type {any}
    */
-  public provinces: any;
+  //public provinces: any;
+  public provinces: IProvince[] = PROVINCES_DATA_ITEMS;
 
   /**
    * Variable to store all cities from a province
    * @type {any}
   */
-  public cities: any;
+  //public cities: any;
+  public cities: ICity[] = CITIES_DATA_ITEMS;
 
   /**---------------------------------------------------VARIABLES FOR CREDITS----------------------------------------------------------- */
 
@@ -273,10 +280,20 @@ export class HomePageComponent implements OnInit {
    * @type {any}
   */
   public typeVehicle: any;
-  public vehicleBrand: any;
-  public vehicleModel: any;
-  public vehicleYear: any;
-  public vehicleDescription: any;
+  // public vehicleBrand: any;
+  // public vehicleModel: any;
+  // public vehicleYear: any;
+  // public vehicleDescription: any;
+
+  /**
+   * Para pruebas sin servidor
+   */
+  public vehicleBrand: IBrand[] = BRANDS_DATA_ITEMS;
+  public vehicleModel: IModel[] = MODEL_DATA_ITEMS;
+  public vehicleYear: IYear[] = YEAR_DATA_ITEMS;
+  public vehicleDescription: IDescription[] = DESCRIPTION_DATA_ITEMS;
+
+
 
   /**
    * Variable to store message error
@@ -318,7 +335,7 @@ export class HomePageComponent implements OnInit {
    * Email form (credit, insurance, credit cards, investment policy)
   */
   emailform = this.formbuilder.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['test@gmail.com', [Validators.required, Validators.email]],
     province: [null, [Validators.required]],
     city: [null, [Validators.required]]
   });
@@ -384,7 +401,7 @@ export class HomePageComponent implements OnInit {
       this.router.navigate(['insurance']);
 
       let insurance_information: any = {
-        carId : this.vehicleform.value.vehicleDescription.carId,
+        carId: this.vehicleform.value.vehicleDescription.carId,
         car_year: this.vehicleform.value.vehicleDescription.year,
         request_city_id: this.emailform.value.city.id
       }
@@ -521,49 +538,49 @@ export class HomePageComponent implements OnInit {
     window.scrollTo(0, 0);
 
     /*  Get all provinces. */
-    this.httpService.getProvinces().subscribe(res => {
-      this.provinces = res.data;
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // this.httpService.getProvinces().subscribe(res => {
+    //   this.provinces = res.data;
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
 
     /*  Start - Search by location. */
-    this.httpService.getCurrentLocation().subscribe(res => {
-      this.httpService.verifyProvinceExistence(res.region_code).subscribe(resp => {
+    // this.httpService.getCurrentLocation().subscribe(res => {
+    //   this.httpService.verifyProvinceExistence(res.region_code).subscribe(resp => {
 
-        /* In case the location is detected */
-        if (resp.status === 200) {
-          this.region_code = res.region_code;
-          
-          let currentprovince= this.provinces.find(x => x.apicode === this.region_code);
+    //     /* In case the location is detected */
+    //     if (resp.status === 200) {
+    //       this.region_code = res.region_code;
 
-          this.emailform.controls['province'].setValue({ id: currentprovince.id, name: currentprovince.name });
-          /* the cities of the detected province are loaded */
-          
-          this.httpService.getCities(currentprovince.id).subscribe(res => {
-            this.cities = []
-            this.cities = res.data;
-            //console.log(this.cities);
-          }, error => {
-            console.log('error');
-            console.log(error);
-          });
-        }
+    //       let currentprovince= this.provinces.find(x => x.apicode === this.region_code);
 
-        /* In case the location is not detected */
-        if (resp.status === 500) {
-          console.log(resp.message); // enviar como un mensaje de error
-        }
+    //       this.emailform.controls['province'].setValue({ id: currentprovince.id, name: currentprovince.name });
+    //       /* the cities of the detected province are loaded */
 
-      }, error => {
-        console.log('error');
-        console.log(error);
-      });
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    //       this.httpService.getCities(currentprovince.id).subscribe(res => {
+    //         this.cities = []
+    //         this.cities = res.data;
+    //         //console.log(this.cities);
+    //       }, error => {
+    //         console.log('error');
+    //         console.log(error);
+    //       });
+    //     }
+
+    //     /* In case the location is not detected */
+    //     if (resp.status === 500) {
+    //       console.log(resp.message); // enviar como un mensaje de error
+    //     }
+
+    //   }, error => {
+    //     console.log('error');
+    //     console.log(error);
+    //   });
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
     /*  End - Search by location. */
 
     /* Handling of personal data when logging in */
@@ -579,13 +596,13 @@ export class HomePageComponent implements OnInit {
 
     /* TODO DE SEGUROS */
     /*  Get all car brands. */
-    this.httpService.getAllCarBrands().subscribe(res => {
-      this.vehicleBrand = res.data;
-      //console.log(res.data);
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // this.httpService.getAllCarBrands().subscribe(res => {
+    //   this.vehicleBrand = res.data;
+    //   //console.log(res.data);
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
   }
 
   /**
@@ -616,14 +633,22 @@ export class HomePageComponent implements OnInit {
    * @return {void} Nothing
   */
   changeProvince(event) {
-    this.httpService.getCities(event.id).subscribe(res => {
-      this.emailform.controls['city'].setValue(null);
-      this.cities = []
-      this.cities = res.data;
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // this.httpService.getCities(event.id).subscribe(res => {
+    //   this.emailform.controls['city'].setValue(null);
+    //   this.cities = []
+    //   this.cities = res.data;
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
+
+
+    /**
+     * Para pruebas sin servidor
+     */
+    this.emailform.controls['city'].setValue(null);
+    this.cities = []
+    this.cities = CITIES_DATA_ITEMS;
   }
 
 
@@ -669,20 +694,32 @@ export class HomePageComponent implements OnInit {
    * @return {void} Nothing
   */
   changeCarBrand(event) {
-    let id_brand: number = event.id;
-    this.httpService.getYearByBrand(id_brand).subscribe(res => {
-      this.vehicleform.controls['vehicleModel'].setValue(null);
-      this.vehicleform.controls['vehicleYear'].setValue(null);
-      this.vehicleform.controls['vehicleDescription'].setValue(null);
-      this.vehicleModel = [];
-      this.vehicleYear = [];
-      this.vehicleDescription = [];
-      this.vehicleYear = res.data;
-      //console.log(this.vehicleYear);
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // let id_brand: number = event.id;
+    // this.httpService.getYearByBrand(id_brand).subscribe(res => {
+    //   this.vehicleform.controls['vehicleModel'].setValue(null);
+    //   this.vehicleform.controls['vehicleYear'].setValue(null);
+    //   this.vehicleform.controls['vehicleDescription'].setValue(null);
+    //   this.vehicleModel = [];
+    //   this.vehicleYear = [];
+    //   this.vehicleDescription = [];
+    //   this.vehicleYear = res.data;
+    //   //console.log(this.vehicleYear);
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
+
+
+    /**
+     * Pruebas sin servidor
+     */
+    this.vehicleform.controls['vehicleModel'].setValue(null);
+    this.vehicleform.controls['vehicleYear'].setValue(null);
+    this.vehicleform.controls['vehicleDescription'].setValue(null);
+    this.vehicleModel = [];
+    this.vehicleYear = [];
+    this.vehicleDescription = [];
+    this.vehicleYear = YEAR_DATA_ITEMS;
   }
 
   /**
@@ -691,19 +728,28 @@ export class HomePageComponent implements OnInit {
    * @return {void} Nothing
   */
   changeCarYear(event) {
-    let year: number = event.year;
-    let id_model: number = event.brandId;
-    this.httpService.getModelByYear(id_model, year).subscribe(res => {
-      this.vehicleform.controls['vehicleModel'].setValue(null);
-      this.vehicleform.controls['vehicleDescription'].setValue(null);
-      this.vehicleModel = [];
-      this.vehicleDescription = [];
-      this.vehicleModel = res.data;
-      //console.log(this.vehicleYear);
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // let year: number = event.year;
+    // let id_model: number = event.brandId;
+    // this.httpService.getModelByYear(id_model, year).subscribe(res => {
+    //   this.vehicleform.controls['vehicleModel'].setValue(null);
+    //   this.vehicleform.controls['vehicleDescription'].setValue(null);
+    //   this.vehicleModel = [];
+    //   this.vehicleDescription = [];
+    //   this.vehicleModel = res.data;
+    //   //console.log(this.vehicleYear);
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
+
+    /**
+     * Pruebas sin servidor
+     */
+    this.vehicleform.controls['vehicleModel'].setValue(null);
+    this.vehicleform.controls['vehicleDescription'].setValue(null);
+    this.vehicleModel = [];
+    this.vehicleDescription = [];
+    this.vehicleModel = MODEL_DATA_ITEMS;
   }
 
   /**
@@ -712,19 +758,26 @@ export class HomePageComponent implements OnInit {
    * @return {void} Nothing
   */
   changeCarModel(event) {
-    let id_model: number = event.modelId;
-    let year: number = event.year;
-    let id_brand: number = event.brandId;
-    this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
-      console.log(res.data);
-      this.vehicleform.controls['vehicleDescription'].setValue(null);
-      this.vehicleDescription = [];
-      this.vehicleDescription = res.data;
-      //console.log(this.vehicleYear);
-    }, error => {
-      console.log('error');
-      console.log(error);
-    });
+    // let id_model: number = event.modelId;
+    // let year: number = event.year;
+    // let id_brand: number = event.brandId;
+    // this.httpService.getDescriptionByModel(id_model, id_brand, year).subscribe(res => {
+    //   console.log(res.data);
+    //   this.vehicleform.controls['vehicleDescription'].setValue(null);
+    //   this.vehicleDescription = [];
+    //   this.vehicleDescription = res.data;
+    //   //console.log(this.vehicleYear);
+    // }, error => {
+    //   console.log('error');
+    //   console.log(error);
+    // });
+
+    /**
+     * Pruebas sin servidor
+     */
+    this.vehicleform.controls['vehicleDescription'].setValue(null);
+    this.vehicleDescription = [];
+    this.vehicleDescription = DESCRIPTION_DATA_ITEMS;
   }
 
 
@@ -750,17 +803,37 @@ export class HomePageComponent implements OnInit {
   */
   recuperateLoginData() {
     if (this.loginVerified()) {
-      this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
-        this.user_id = this.user.id;
-        if (user) {
-          if (user.email) {
-            this.emailform.controls['email'].setValue(user.email);
-            this.hasEmail = true;
-          }
-        }
-      }, (error) => {
-        console.log(error);
-      });
+      // this.httpService.getDataUserlogin().subscribe((user: UserInfo) => {
+      //   this.user_id = this.user.id;
+      //   if (user) {
+      //     if (user.email) {
+      //       this.emailform.controls['email'].setValue(user.email);
+      //       this.hasEmail = true;
+      //     }
+      //   }
+      // }, (error) => {
+      //   console.log(error);
+      // });
+
+
+
+      /**
+       * Para pruebas sin servidor
+       */
+
+      let user: UserInfo = {} as UserInfo;
+
+      this.user_id = this.user.id;
+      user.id = 1;
+      user.username = 'test@gmail.com';
+      user.name = 'testuser';
+      user.last_name = 'testuser';
+      user.cedula = '0100000000';
+      user.address = 'address';
+      user.phone1 = '0987654321';
+      this.emailform.controls['email'].setValue('test@gmail.com');
+      this.hasEmail = true;
+      
     }
   }
 }
