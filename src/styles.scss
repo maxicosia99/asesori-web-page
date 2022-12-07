@@ -1,1 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+$theme-colors: ("primary": hsl(198, 100%, 34%), "light": hsl(0, 0%, 96%));
+
+$btn-border-radius: .1875rem;
+$btn-font-weight: 500;
+$btn-font-size: .875rem;
+$nav-link-font-size: .875rem;
+$btn-padding-x: 2rem;
+$btn-padding-y: .75rem;
+$navbar-nav-link-padding-x: 2rem;
+$nav-link-padding-y: .75rem;
+$nav-link-font-weight: 500;
+$font-weight-base: 200;
+$line-height-base: 1.5;
+$pagination-border-width: 0;
+$link-color: hsl(198, 100%, 34%);
+$link-hover-color: hsl(198, 100%, 34%);
+$link-hover-color: hsl(198, 100%, 34%);
+$pagination-active-bg: hsl(198, 100%, 34%);
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.text-extra-small {
+  font-size: .75rem;
+}
