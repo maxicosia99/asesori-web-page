@@ -16,23 +16,20 @@ $link-color: hsl(198, 100%, 34%);
 $link-hover-color: hsl(198, 100%, 34%);
 $link-hover-color: hsl(198, 100%, 34%);
 $pagination-active-bg: hsl(198, 100%, 34%);
+$link-decoration: none;
+$card-border-color: hsl(210, 17%, 98%);
 
 @import "node_modules/bootstrap/scss/bootstrap";
 
-html {
-  box-sizing: border-box;
-  font-size: 100%;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
 body {
-  margin: 0;
   font-family: 'Poppins', sans-serif;
+  padding-top: 6.5rem;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 3.9375rem;
+  }
 }
 
 .text-extra-small {
