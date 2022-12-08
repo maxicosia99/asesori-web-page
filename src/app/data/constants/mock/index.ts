@@ -1,4 +1,4 @@
-import { Benefit, Ranking, Service } from '@data/interfaces';
+import { Benefit, Option, Ranking, Service } from '@data/interfaces';
 
 export const STEPS_DATA_ITEMS: string[] = [
   'Selecciona el crédito al que deseas aplicar',
@@ -98,4 +98,46 @@ export const BENEFITS_DATA_ITEMS: Benefit[] = [
     description:
       'Actuamos de forma independiente al no ser una entidad financiera, ofreciéndote información gratuita.',
   },
+];
+
+export const OPTIONS_DATA_ITEMS: Option[] = [
+  {
+    id: 'credit',
+    name: 'Crédito',
+    icon: '/assets/images/iconos/money.png',
+  },
+  {
+    id: 'insurance',
+    name: 'Seguros',
+    icon: '/assets/images/iconos/family.png',
+  },
+  {
+    id: 'card',
+    name: 'Tarjetas de crédito',
+    icon: '/assets/images/iconos/credit-card.png',
+  },
+  {
+    id: 'investment',
+    name: 'Inversiones',
+    icon: '/assets/images/iconos/graph.png',
+  },
+];
+
+export const CREDITS_DATA_ITEMS: any[] = [
+  { id: 11, name: 'Inmobiliario', description: 'Para tu casa' },
+  { id: 9, name: 'Viaje', description: 'Para el viaje de tu sueños' },
+  { id: 9, name: 'Vehicular', description: 'Para el auto nuevo que quieres' },
+  { id: 9, name: 'Deudas', description: 'Para consolidar las deudas' },
+  {
+    id: 9,
+    name: 'Arreglos del hogar',
+    description: 'Para hacer arreglos en tu casa o local comercial',
+  },
+  { id: 10, name: 'Curso o postgrado', description: 'Créditos de estudio' },
+  { id: 9, name: 'Préstamo rápido', description: 'Cualquier necesitad' },
+  { id: 9, name: 'Urgencias', description: 'Crédito por emergencias' },
+];
+
+export const INSURANCE_DATA_ITEMS: any[] = [
+  { id: 1, name: 'Vehicular', description: 'Para tu auto público o privado' },
 ];

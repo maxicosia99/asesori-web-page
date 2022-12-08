@@ -1,4 +1,11 @@
-$theme-colors: ("primary": hsl(198, 100%, 34%), "light": hsl(0, 0%, 96%));
+$theme-colors: ("primary": hsl(198, 100%, 34%),
+  "light": hsl(0, 0%, 96%),
+  "secondary": #6c757d,
+  "success": #198754,
+  "info": #0dcaf0,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "dark": #212529);
 
 $btn-border-radius: .1875rem;
 $btn-font-weight: 500;
@@ -24,10 +31,8 @@ $card-border-color: hsl(210, 17%, 98%);
 body {
   font-family: 'Poppins', sans-serif;
   padding-top: 6.5rem;
-}
 
-@media (max-width: 768px) {
-  body {
+  @media (max-width: 768px) {
     padding-top: 3.9375rem;
   }
 }

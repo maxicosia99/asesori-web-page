@@ -18,3 +18,9 @@ export interface Benefit {
   title: string;
   description: string;
 }
+
+export interface Option {
+  id: string;
+  name: string;
+  icon: string;
+}

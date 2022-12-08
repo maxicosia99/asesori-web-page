@@ -1,0 +1,7 @@
+<div [class]="'alert alert-'+severity+' alert-dismissible fade show'" role="alert">
+  <ng-container *ngIf="message; else content">{{message}}</ng-container>
+  <ng-template #content>
+    <ng-content></ng-content>
+  </ng-template>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

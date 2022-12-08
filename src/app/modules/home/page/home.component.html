@@ -23,11 +23,11 @@
 <!-- how to works -->
 <section class="container-fluid bg-light mt-5">
   <div class="container">
-    <div class="row py-5 justify-content-between align-items-center">
+    <div class="row g-3 py-5 justify-content-between align-items-center">
       <small class="col-12 col-md-2 text-uppercase fw-bold">¿Como trabaja Asesori?</small>
       <ng-container *ngFor="let step of steps; let i = index">
-        <div class="col-12 col-md-2 d-flex align-items-center px-0">
-          <span class="circle bg-primary text-white rounded-circle me-3">{{i + 1}}</span>
+        <div class="col-12 col-md-2 d-flex align-items-center">
+          <span class="badge bg-primary rounded me-3 p-2">{{i + 1}}</span>
           <small>{{step}}</small>
         </div>
       </ng-container>
@@ -40,64 +40,105 @@
   <div class="row">
     <div class="col-12">
       <h6 class="text-uppercase fw-bold pb-3">Compara las mejores tasas y oportunidades de financiamiento</h6>
-      <p>ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de
+      <p class="mb-0">ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y
+        pólizas de
         inversión que ofrecen los Bancos, Cooperativas o Mutualistas, utiliza nuestra calculadora a continuación y
         compara.</p>
     </div>
   </div>
+
+  <form [formGroup]="form">
+    <app-options-group [items]="selectors" [value]="option" formControlName="type"></app-options-group>
+  </form>
+
+  <ng-container [ngSwitch]="option">
+    <div *ngSwitchCase="'credit'">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-floating credit">
+            <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
+              <option *ngFor="let credit of credits" [ngValue]="credit.id">
+                {{credit.name}} | ({{credit.description}})
+              </option>
+            </select>
+            <label for="select-filter">Opciones de crédito</label>
+          </div>
+        </div>
+      </div>
+      <div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 gy-3">
+        <calculator-input label="monto a solicitar" helpText="Dólares americanos" [required]="true"></calculator-input>
+        <calculator-input label="entrada" helpText="Dólares americanos"></calculator-input>
+        <calculator-input label="ingreso mensual" helpText="Dólares americanos" [required]="true"></calculator-input>
+        <calculator-input label="tiempo plazo" helpText="Meses" [required]="true" [isMoney]="false"></calculator-input>
+      </div>
+    </div>
+    <div *ngSwitchCase="'insurance'" class="row">
+      <div class="col">
+        <div class="form-floating credit">
+          <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
+            <option *ngFor="let insurance of insurances" [ngValue]="insurance.id">
+              {{insurance.name}} | ({{insurance.description}})
+            </option>
+          </select>
+          <label for="select-filter">Opciones de crédito</label>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'card'" class="row">
+      <div class="col">
+        <app-alert severity="warning">
+          El servicio de <strong>Tarjetas de crédito</strong> aún no se encuentra disponible!
+        </app-alert>
+      </div>
+    </div>
+    <div *ngSwitchCase="'investment'" class="row">
+      <div class="col">
+        <app-alert severity="warning">
+          El servicio de <strong>Póliza de inversión</strong> aún no se encuentra disponible!
+        </app-alert>
+      </div>
+    </div>
+    <div *ngSwitchDefault class="row">
+      <div class="col">
+        <small>Selecciona uno de nuestros servicios</small>
+      </div>
+    </div>
+  </ng-container>
 </section>
 
 <!-- ranking -->
 <section class="container mt-5">
   <div class="row">
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-lg-4">
       <h2>Ranking Asesori</h2>
-      <p class="text-16">Te enseñamos una calificación de Asesori hacia las instituciones financieras en base a su tasa
+      <p class="py-2">Te enseñamos una calificación de Asesori hacia las instituciones financieras en base a su tasa
         de interés, Cantidad de trámites y tiempo en aprobación de tu solicitud
       </p>
     </div>
-    <!-- RATING FINANCIAL ENTITY -->
-    <div class="col-12 col-lg-8 my-2 my-lg-0">
-
-      <div class="row justify-content-center justify-content-lg-end">
+    <div class="col-12 col-lg-8">
+      <div class="row pb-4 g-3 justify-content-center justify-content-md-end">
         <div class="col-10 col-md-4">
-          <!-- <ng-select appearance="outline" class="custom" placeholder="filtro" [searchable]="false" [clearable]="false">
-                  <ng-option>Todos</ng-option>
-                  <ng-option>Bancos</ng-option>
-                  <ng-option>Cooperativas</ng-option>
-              </ng-select> -->
+          <div class="form-floating">
+            <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
+              <option value="all" selected>Todos</option>
+              <option value="banks">Bancos</option>
+              <option value="coops">Cooperativas</option>
+            </select>
+            <label for="select-filter">Filtro</label>
+          </div>
         </div>
-        <div class="col-10 col-md-4 mt-3 mt-md-0">
-          <!-- <ng-select appearance="outline" class="custom" placeholder="ordenar por" [searchable]="false" bindLabel="status" [clearable]="false">
-                  <ng-option>Calificación</ng-option>
-                  <ng-option>Tasa</ng-option>
-              </ng-select> -->
+        <div class="col-10 col-md-4">
+          <div class="form-floating">
+            <select class="form-select form-select-sm" id="select-order" aria-label="Ordenar">
+              <option value="rating" selected>Calificación</option>
+              <option value="rate">Tasa</option>
+            </select>
+            <label for="select-order">Ordenar por</label>
+          </div>
         </div>
       </div>
-
-      <ng-container *ngFor="let entity of ranking">
-        <div class="row text-center justify-content-between">
-          <div class="col-md-3">
-            <img [src]="entity.image" class="img-fluid" alt="">
-          </div>
-          <div class="col-6 col-md-2">
-            <span class="text-extra-small">Tasa de interés anual</span>
-            <span class="d-block fw-bold mt-1">{{entity.interestRate}} %</span>
-          </div>
-          <div class="col-6 col-md-2">
-            <small class="text-extra-small">Tiempo de aprobación</small>
-            <span class="d-block fw-bold mt-1">{{entity.approvalTime}} horas</span>
-          </div>
-          <div class="col-6 col-md-2">
-            <small class="text-extra-small">Cantidad de trámites</small>
-            <span class="d-block fw-bold mt-1 text-uppercase">{{entity.procedures}}</span>
-          </div>
-          <div class="col-6 col-md-2">
-            <small class="text-extra-small">Calificación obtenida</small>
-            <!-- <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="true"></rating> -->
-            <span class="d-block fw-bold mt-1">{{entity.rating}}/100</span>
-          </div>
-        </div>
+      <ng-container *ngFor="let row of ranking">
+        <app-ranking-row [row]="row"></app-ranking-row>
         <hr>
       </ng-container>
       <nav class="pt-4" aria-label="Page navigation">
@@ -127,23 +168,12 @@
         diferentes opciones cerca de tu ubicación a través de nuestros socios.</p>
     </div>
   </div>
-  <div class="row py-4 row-cols-1 row-cols-md-3 g-4">
+  <div class="row py-4 row-cols-1 row-cols-md-3 g-3">
     <ng-container *ngFor="let service of services">
-      <div class="col">
-        <div class="card text-center h-100">
-          <img [src]="service.image" class="card-img-top" [alt]="service.id">
-          <div class="card-body">
-            <h5 class="card-title text-uppercase">{{service.title}}</h5>
-            <p class="card-text">{{service.description}}</p>
-          </div>
-          <div class="card-footer bg-transparent border-white pb-4">
-            <a routerLink="/" class="card-link text-uppercase fw-bolder">ver más</a>
-          </div>
-        </div>
-      </div>
+      <app-service [service]="service"></app-service>
     </ng-container>
   </div>
-  <div class="d-grid col-3 mx-auto">
+  <div class="d-grid col-8 col-md-3 mx-auto">
     <a routerLink="/" class="btn btn-primary text-uppercase" role="button">ver todos</a>
   </div>
 </section>
@@ -156,9 +186,9 @@
         <h2>¿Qué beneficios obtengo?</h2>
       </div>
     </div>
-    <div class="row mt-5">
+    <div class="row g-3 pt-4">
       <ng-container *ngFor="let benefit of benefits">
-        <div class="col-md-4 pb-4">
+        <div class="col-md-4">
           <span class="d-block fw-bolder pb-2">{{benefit.title}}</span>
           <small>{{benefit.description}}</small>
         </div>
