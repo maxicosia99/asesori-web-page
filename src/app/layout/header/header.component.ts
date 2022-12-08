@@ -14,7 +14,7 @@ export class HeaderComponent {
   }
 
   loginVerified(): boolean {
-    let accessToken = 'token';
+    const accessToken = 'token';
     if (accessToken) {
       return true;
     }

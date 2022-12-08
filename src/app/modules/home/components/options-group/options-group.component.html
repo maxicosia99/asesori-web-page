@@ -1,0 +1,13 @@
+<div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 gy-3">
+  <ng-container *ngFor="let selector of items; trackBy: trackByItems">
+    <div class="col" role="button" (click)="selectType(selector.id);">
+      <div class="rounded-3 d-flex align-items-center border p-4 position-relative"
+        [ngClass]="{'border-primary' : selector.id === value}">
+        <span *ngIf="selector.id === value"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-primary">✓</span>
+        <img [src]="selector.icon" height="40" width="40" alt="credit">
+        <div class="ms-3">{{selector.name}}</div>
+      </div>
+    </div>
+  </ng-container>
+</div>

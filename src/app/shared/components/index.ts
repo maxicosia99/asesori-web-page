@@ -1,5 +1,5 @@
-// import components
+import { AlertComponent } from './alert/alert.component';
 
-export const components: any[] = [];
+export const components = [AlertComponent];
 
-// export all components
+export * from './alert/alert.component';
