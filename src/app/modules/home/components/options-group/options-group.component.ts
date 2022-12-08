@@ -21,11 +21,13 @@ const TYPE_CONTROL_ACCESSOR = {
   providers: [TYPE_CONTROL_ACCESSOR],
 })
 export class OptionsGroupComponent implements ControlValueAccessor {
+  // TODO: improve and handle types
   @Input() items: any[] = [];
   @Input() value: string = '';
 
   private onTouch = (): void => {};
   private onModelChange = (_: any): void => {};
+  trackByItems = (_: number, item: any): any => item.id;
 
   writeValue(obj: string): void {
     this.value = obj;

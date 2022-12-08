@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Benefit, Option, Ranking, Service } from '@data/interfaces';
+import { Benefit, Item, Option, Ranking, Service } from '@data/interfaces';
 import {
   BENEFITS_DATA_ITEMS,
   CREDITS_DATA_ITEMS,
@@ -36,6 +36,14 @@ export class HomeComponent {
   public services: Service[] = SERVICES_DATA_ITEMS;
   public benefits: Benefit[] = BENEFITS_DATA_ITEMS;
   public selectors: Option[] = OPTIONS_DATA_ITEMS;
-  public credits: any[] = CREDITS_DATA_ITEMS;
-  public insurances: any[] = INSURANCE_DATA_ITEMS;
+  public credits: Item[] = CREDITS_DATA_ITEMS;
+  public insurances: Item[] = INSURANCE_DATA_ITEMS;
+
+  // trackBy functions
+  // syntax: trackBy<name> = (index: number, item: <type>): <type> => item.<type>;
+  trackBySteps = (_: number, item: string): string => item;
+  trackByRanking = (_: number, item: Ranking): number => item.id;
+  trackByServices = (_: number, item: Service): string => item.id;
+  trackByBenefits = (_: number, item: Benefit): number => item.id;
+  trackByItems = (_: number, item: Item): number => item.id;
 }

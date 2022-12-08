@@ -8,6 +8,7 @@ import { Ranking } from '@data/interfaces';
 })
 export class RankingRowComponent {
   @Input() row: Ranking = {
+    id: 0,
     approvalTime: 0,
     entity: '',
     image: '',

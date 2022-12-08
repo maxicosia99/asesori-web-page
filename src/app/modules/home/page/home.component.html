@@ -25,7 +25,7 @@
   <div class="container">
     <div class="row g-3 py-5 justify-content-between align-items-center">
       <small class="col-12 col-md-2 text-uppercase fw-bold">¿Como trabaja Asesori?</small>
-      <ng-container *ngFor="let step of steps; let i = index">
+      <ng-container *ngFor="let step of steps; trackBy: trackBySteps; let i = index">
         <div class="col-12 col-md-2 d-flex align-items-center">
           <span class="badge bg-primary rounded me-3 p-2">{{i + 1}}</span>
           <small>{{step}}</small>
@@ -57,7 +57,7 @@
         <div class="col-12">
           <div class="form-floating credit">
             <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
-              <option *ngFor="let credit of credits" [ngValue]="credit.id">
+              <option *ngFor="let credit of credits; trackBy: trackByItems" [ngValue]="credit.id">
                 {{credit.name}} | ({{credit.description}})
               </option>
             </select>
@@ -76,7 +76,7 @@
       <div class="col">
         <div class="form-floating credit">
           <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
-            <option *ngFor="let insurance of insurances" [ngValue]="insurance.id">
+            <option *ngFor="let insurance of insurances; trackBy: trackByItems" [ngValue]="insurance.id">
               {{insurance.name}} | ({{insurance.description}})
             </option>
           </select>
@@ -137,7 +137,7 @@
           </div>
         </div>
       </div>
-      <ng-container *ngFor="let row of ranking">
+      <ng-container *ngFor="let row of ranking; trackBy: trackByRanking">
         <app-ranking-row [row]="row"></app-ranking-row>
         <hr>
       </ng-container>
@@ -169,7 +169,7 @@
     </div>
   </div>
   <div class="row py-4 row-cols-1 row-cols-md-3 g-3">
-    <ng-container *ngFor="let service of services">
+    <ng-container *ngFor="let service of services; trackBy: trackByServices">
       <app-service [service]="service"></app-service>
     </ng-container>
   </div>
@@ -187,7 +187,7 @@
       </div>
     </div>
     <div class="row g-3 pt-4">
-      <ng-container *ngFor="let benefit of benefits">
+      <ng-container *ngFor="let benefit of benefits; trackBy: trackByBenefits">
         <div class="col-md-4">
           <span class="d-block fw-bolder pb-2">{{benefit.title}}</span>
           <small>{{benefit.description}}</small>
