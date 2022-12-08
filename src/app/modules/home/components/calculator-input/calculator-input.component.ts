@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'calculator-input',
+  selector: 'app-calculator-input',
   templateUrl: './calculator-input.component.html',
   styleUrls: ['./calculator-input.component.scss'],
 })
 export class CalculatorInputComponent {
-  @Input() label: string = '';
-  @Input() helpText: string = '';
-  @Input() required: boolean = false;
-  @Input() isMoney: boolean = true;
+  @Input() label = '';
+  @Input() helpText = '';
+  @Input() required = false;
+  @Input() isMoney = true;
 }

@@ -66,10 +66,13 @@
         </div>
       </div>
       <div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 gy-3">
-        <calculator-input label="monto a solicitar" helpText="Dólares americanos" [required]="true"></calculator-input>
-        <calculator-input label="entrada" helpText="Dólares americanos"></calculator-input>
-        <calculator-input label="ingreso mensual" helpText="Dólares americanos" [required]="true"></calculator-input>
-        <calculator-input label="tiempo plazo" helpText="Meses" [required]="true" [isMoney]="false"></calculator-input>
+        <app-calculator-input label="monto a solicitar" helpText="Dólares americanos"
+          [required]="true"></app-calculator-input>
+        <app-calculator-input label="entrada" helpText="Dólares americanos"></app-calculator-input>
+        <app-calculator-input label="ingreso mensual" helpText="Dólares americanos"
+          [required]="true"></app-calculator-input>
+        <app-calculator-input label="tiempo plazo" helpText="Meses" [required]="true"
+          [isMoney]="false"></app-calculator-input>
       </div>
     </div>
     <div *ngSwitchCase="'insurance'" class="row">

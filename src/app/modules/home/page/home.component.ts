@@ -19,7 +19,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class HomeComponent {
   public form: FormGroup;
-  private _option: string = 'credit'; // you can add a default value: credit | insurance | card | investment
+  private _option = 'credit'; // you can add a default value: credit | insurance | card | investment
 
   constructor(formBuilder: FormBuilder) {
     this.form = formBuilder.group({

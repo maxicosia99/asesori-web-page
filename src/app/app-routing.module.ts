@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: INTERNAL_PATHS.ASESORI_DEFAULT,
-        loadChildren: (): Promise<any> =>
+        loadChildren: () =>
           import('@modules/home/home.module').then(
             (m): typeof HomeModule => m.HomeModule
           ),

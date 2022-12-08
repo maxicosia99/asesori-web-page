@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent {
-  @Input() severity: string = 'primary';
+  @Input() severity = 'primary';
   @Input() message?: string;
 }

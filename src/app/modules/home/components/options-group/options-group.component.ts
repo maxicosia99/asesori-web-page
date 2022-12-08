@@ -21,9 +21,9 @@ const TYPE_CONTROL_ACCESSOR = {
   providers: [TYPE_CONTROL_ACCESSOR],
 })
 export class OptionsGroupComponent implements ControlValueAccessor {
-  // TODO: improve and handle types
+  // TODO: improve and handle types and verify eslint warning
   @Input() items: any[] = [];
-  @Input() value: string = '';
+  @Input() value = '';
 
   private onTouch = (): void => {};
   private onModelChange = (_: any): void => {};
