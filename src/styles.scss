@@ -7,7 +7,7 @@ $theme-colors: ("primary": hsl(198, 100%, 34%),
   "danger": #dc3545,
   "dark": #212529);
 
-$btn-border-radius: .1875rem;
+$btn-border-radius: .25rem;
 $btn-font-weight: 500;
 $btn-font-size: .875rem;
 $nav-link-font-size: .875rem;
@@ -25,6 +25,9 @@ $link-hover-color: hsl(198, 100%, 34%);
 $pagination-active-bg: hsl(198, 100%, 34%);
 $link-decoration: none;
 $card-border-color: hsl(210, 17%, 98%);
+$input-font-size: .875rem;
+$input-font-weight: 500;
+$form-feedback-font-size: .75rem;
 
 @import "node_modules/bootstrap/scss/bootstrap";
 

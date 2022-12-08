@@ -1,49 +1,85 @@
 import { Component } from '@angular/core';
 
-import { Benefit, Item, Option, Ranking, Service } from '@data/interfaces';
+import { Item, Option } from '@data/interfaces';
 import {
-  BENEFITS_DATA_ITEMS,
-  CREDITS_DATA_ITEMS,
-  INSURANCE_DATA_ITEMS,
-  OPTIONS_DATA_ITEMS,
-  RANKING_DATA_ITEMS,
-  SERVICES_DATA_ITEMS,
-  STEPS_DATA_ITEMS,
+	CREDITS_DATA_ITEMS,
+	INSURANCE_DATA_ITEMS,
+	OPTIONS_DATA_ITEMS,
 } from '@data/constants/mock';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators,
+} from '@angular/forms';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  public form: FormGroup;
-  private _option = 'credit'; // you can add a default value: credit | insurance | card | investment
+	// forms
+	public optionsForm: FormGroup;
+	public calculatorForm: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
-    this.form = formBuilder.group({
-      type: this._option,
-    });
-  }
+	// * Other way to implement a form (out the constructor)
+	// public calculatorForm: FormGroup = new FormGroup({
+	// 	amount: new FormControl(0, [Validators.required]),
+	//  ...
+	// });
 
-  get option(): string {
-    return this.form.value.type;
-  }
+	// variables
+	private _option = 'credit'; // you can add a default value: credit | insurance | card | investment
 
-  public steps: string[] = STEPS_DATA_ITEMS;
-  public ranking: Ranking[] = RANKING_DATA_ITEMS;
-  public services: Service[] = SERVICES_DATA_ITEMS;
-  public benefits: Benefit[] = BENEFITS_DATA_ITEMS;
-  public selectors: Option[] = OPTIONS_DATA_ITEMS;
-  public credits: Item[] = CREDITS_DATA_ITEMS;
-  public insurances: Item[] = INSURANCE_DATA_ITEMS;
+	constructor(formBuilder: FormBuilder) {
+		// init forms
+		this.optionsForm = formBuilder.group({
+			type: this._option,
+		});
+		this.calculatorForm = formBuilder.group({
+			amount: new FormControl(0, [Validators.required]),
+			entry: new FormControl(0, [Validators.required]),
+			income: new FormControl(0, [Validators.required]),
+			time: new FormControl(0, [Validators.required]),
+		});
+	}
 
-  // trackBy functions
-  // syntax: trackBy<name> = (index: number, item: <type>): <type> => item.<type>;
-  trackBySteps = (_: number, item: string): string => item;
-  trackByRanking = (_: number, item: Ranking): number => item.id;
-  trackByServices = (_: number, item: Service): string => item.id;
-  trackByBenefits = (_: number, item: Benefit): number => item.id;
-  trackByItems = (_: number, item: Item): number => item.id;
+	// get methods
+	get option(): string {
+		return this.optionsForm.value.type;
+	}
+
+	get calculatorValues(): string {
+		return this.calculatorForm.value;
+	}
+
+	get validateEntry(): boolean {
+		const { amount, entry } = this.calculatorForm.value;
+		return entry > amount * 0.9 ? true : false;
+	}
+
+	get calculatorFormValid(): boolean {
+		const { amount, income, time } = this.calculatorForm.value;
+		const condition =
+			amount == 0 || this.validateEntry || income == 0 || time == 0;
+		return condition ? true : false;
+	}
+
+	// data constants
+	public selectors: Option[] = OPTIONS_DATA_ITEMS;
+	public credits: Item[] = CREDITS_DATA_ITEMS;
+	public insurances: Item[] = INSURANCE_DATA_ITEMS;
+
+	// trackBy functions
+	// syntax: trackBy<name> = (index: number, item: <type>): <type> => item.<type>;
+	trackByItems = (_: number, item: Item): number => item.id;
+
+	// methods
+
+	calculateCredit(): void {
+		// TODO: activate email section
+		// const { amount, income, time, entry } = this.calculatorForm.value;
+		// console.log(this.calculatorForm.value);
+	}
 }

@@ -1,0 +1,13 @@
+<section class="container-fluid bg-light mt-5">
+  <div class="container">
+    <div class="row g-3 py-5 justify-content-between align-items-center">
+      <small class="col-12 col-md-2 text-uppercase fw-bold">¿Como trabaja Asesori?</small>
+      <ng-container *ngFor="let step of steps; trackBy: trackBySteps; let i = index">
+        <div class="col-12 col-md-2 d-flex align-items-center">
+          <span class="badge bg-primary rounded me-3 p-2">{{i + 1}}</span>
+          <small>{{step}}</small>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

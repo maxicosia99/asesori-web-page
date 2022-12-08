@@ -1,39 +1,8 @@
 <!-- hero -->
-<section class="container">
-  <div class="row align-items-center justify-content-center">
-    <div class="col-4 d-block d-md-none text-center">
-      <img src="/assets/images/asesori-logo-negative.png" width="90" height="90" alt="Asesori" routerLink="/homepage">
-    </div>
-    <div class="col-12 col-lg-6">
-      <h1>¿Necesitas un crédito para tu casa?</h1>
-      <p>Asesori te facilita las mejores opciones para que puedas acceder rápido y seguro al
-        crédito que necesites.</p>
-      <div class="text-center text-lg-start pt-2 pt-lg-4">
-        <a routerLink="/" class="btn btn-primary text-uppercase" role="button">Inicia una solicitud</a>
-      </div>
-    </div>
-    <div class="col-12 col-lg-6 pt-4 pt-lg-0">
-      <div class="d-flex bg-img align-items-center justify-content-center">
-        <h5 class="text-white text-uppercase">Trabajamos con</h5>
-      </div>
-    </div>
-  </div>
-</section>
+<app-hero-section></app-hero-section>
 
-<!-- how to works -->
-<section class="container-fluid bg-light mt-5">
-  <div class="container">
-    <div class="row g-3 py-5 justify-content-between align-items-center">
-      <small class="col-12 col-md-2 text-uppercase fw-bold">¿Como trabaja Asesori?</small>
-      <ng-container *ngFor="let step of steps; trackBy: trackBySteps; let i = index">
-        <div class="col-12 col-md-2 d-flex align-items-center">
-          <span class="badge bg-primary rounded me-3 p-2">{{i + 1}}</span>
-          <small>{{step}}</small>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-</section>
+<!-- how it works -->
+<app-how-it-works-section></app-how-it-works-section>
 
 <!-- calculator -->
 <section class="container mt-5">
@@ -47,7 +16,7 @@
     </div>
   </div>
 
-  <form [formGroup]="form">
+  <form [formGroup]="optionsForm">
     <app-options-group [items]="selectors" [value]="option" formControlName="type"></app-options-group>
   </form>
 
@@ -55,36 +24,39 @@
     <div *ngSwitchCase="'credit'">
       <div class="row">
         <div class="col-12">
-          <div class="form-floating credit">
-            <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
-              <option *ngFor="let credit of credits; trackBy: trackByItems" [ngValue]="credit.id">
-                {{credit.name}} | ({{credit.description}})
-              </option>
-            </select>
-            <label for="select-filter">Opciones de crédito</label>
-          </div>
+          <app-custom-select label="Opciones de crédito" [options]="credits"></app-custom-select>
         </div>
       </div>
-      <div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 gy-3">
-        <app-calculator-input label="monto a solicitar" helpText="Dólares americanos"
-          [required]="true"></app-calculator-input>
-        <app-calculator-input label="entrada" helpText="Dólares americanos"></app-calculator-input>
-        <app-calculator-input label="ingreso mensual" helpText="Dólares americanos"
-          [required]="true"></app-calculator-input>
-        <app-calculator-input label="tiempo plazo" helpText="Meses" [required]="true"
-          [isMoney]="false"></app-calculator-input>
-      </div>
+      <form [formGroup]="calculatorForm" (ngSubmit)="calculateCredit()">
+        <div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 gy-3">
+          <app-calculator-input formControlName="amount" key="amount" label="monto a solicitar"
+            helpText="Dólares americanos" [required]="true">
+          </app-calculator-input>
+          <app-calculator-input formControlName="entry" key="entry" label="entrada"
+            helpText="Dólares americanos"></app-calculator-input>
+          <app-calculator-input formControlName="income" key="income" label="ingreso mensual"
+            helpText="Dólares americanos" [required]="true">
+          </app-calculator-input>
+          <app-calculator-input formControlName="time" key="time" label="tiempo plazo" helpText="Meses"
+            [required]="true" [isMoney]="false">
+          </app-calculator-input>
+        </div>
+        <div *ngIf="validateEntry" class="row">
+          <div class="col">
+            <app-alert severity="danger" message="La entrada no puede superar el 90% del valor a solicitar!">
+            </app-alert>
+          </div>
+        </div>
+        <div class="d-grid col-8 col-md-3 mx-auto">
+          <button type="submit" routerLink="/" class="btn btn-primary text-uppercase" [disabled]="calculatorFormValid">
+            Calcular
+          </button>
+        </div>
+      </form>
     </div>
     <div *ngSwitchCase="'insurance'" class="row">
       <div class="col">
-        <div class="form-floating credit">
-          <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
-            <option *ngFor="let insurance of insurances; trackBy: trackByItems" [ngValue]="insurance.id">
-              {{insurance.name}} | ({{insurance.description}})
-            </option>
-          </select>
-          <label for="select-filter">Opciones de crédito</label>
-        </div>
+        <app-custom-select label="Opciones de seguro" [options]="insurances"></app-custom-select>
       </div>
     </div>
     <div *ngSwitchCase="'card'" class="row">
@@ -109,93 +81,33 @@
   </ng-container>
 </section>
 
-<!-- ranking -->
-<section class="container mt-5">
-  <div class="row">
-    <div class="col-12 col-lg-4">
-      <h2>Ranking Asesori</h2>
-      <p class="py-2">Te enseñamos una calificación de Asesori hacia las instituciones financieras en base a su tasa
-        de interés, Cantidad de trámites y tiempo en aprobación de tu solicitud
-      </p>
-    </div>
-    <div class="col-12 col-lg-8">
-      <div class="row pb-4 g-3 justify-content-center justify-content-md-end">
-        <div class="col-10 col-md-4">
-          <div class="form-floating">
-            <select class="form-select form-select-sm" id="select-filter" aria-label="Tipo de entidad">
-              <option value="all" selected>Todos</option>
-              <option value="banks">Bancos</option>
-              <option value="coops">Cooperativas</option>
-            </select>
-            <label for="select-filter">Filtro</label>
-          </div>
+<section class="container-fluid bg-light mt-5 p-5">
+  <div class="container bg-white p-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex align-items-center justify-content-between pb-3">
+          <h6 class="text-uppercase fw-bold">Estas a un solo paso, ingresa tu email</h6>
+          <button type="button" class="btn-close" aria-label="cerrar"></button>
         </div>
-        <div class="col-10 col-md-4">
-          <div class="form-floating">
-            <select class="form-select form-select-sm" id="select-order" aria-label="Ordenar">
-              <option value="rating" selected>Calificación</option>
-              <option value="rate">Tasa</option>
-            </select>
-            <label for="select-order">Ordenar por</label>
-          </div>
-        </div>
+        <p>Antes de conocer las mejores opciones de crédito es importante que ingreses los siguientes datos.</p>
       </div>
-      <ng-container *ngFor="let row of ranking; trackBy: trackByRanking">
-        <app-ranking-row [row]="row"></app-ranking-row>
-        <hr>
-      </ng-container>
-      <nav class="pt-4" aria-label="Page navigation">
-        <ul class="pagination justify-content-end">
-          <li class="page-item disabled">
-            <a class="page-link fw-bolder text-uppercase" routerLink="/" aria-disabled="true">Anterior</a>
-          </li>
-          <li class="page-item active" aria-current="page"><a class="page-link" routerLink="/">1</a></li>
-          <li class="page-item"><a class="page-link" routerLink="/">2</a></li>
-          <li class="page-item"><a class="page-link" routerLink="/">3</a></li>
-          <li class="page-item">
-            <a routerLink="/" class="page-link fw-bolder text-uppercase">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
+      <div class="col-12">
+        <app-custom-input value="test@example.com" label="correo electrónico" type="email"></app-custom-input>
+      </div>
+      <div class="pt-4 d-grid col-8 col-md-3 mx-auto">
+        <button type="submit" routerLink="/" class="btn btn-primary text-uppercase">
+          Continuar
+        </button>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ranking -->
+<app-ranking-section></app-ranking-section>
 
 <!-- services -->
-<section class="container mt-5">
-  <div class="row justify-content-center text-center">
-    <div class="col-12 col-md-8">
-      <p class="text-primary fw-bolder text-uppercase">Servicios</p>
-      <h2>Podemos ayudarte</h2>
-      <p class="pt-2">El crédito puede ser complicado. Pero no tiene que ser así. ASESORI pone a tu disposición
-        diferentes opciones cerca de tu ubicación a través de nuestros socios.</p>
-    </div>
-  </div>
-  <div class="row py-4 row-cols-1 row-cols-md-3 g-3">
-    <ng-container *ngFor="let service of services; trackBy: trackByServices">
-      <app-service [service]="service"></app-service>
-    </ng-container>
-  </div>
-  <div class="d-grid col-8 col-md-3 mx-auto">
-    <a routerLink="/" class="btn btn-primary text-uppercase" role="button">ver todos</a>
-  </div>
-</section>
+<app-services-section></app-services-section>
 
 <!-- benefits -->
-<section class="container-fluid bg-light mt-5">
-  <div class="container py-5">
-    <div class="row text-center justify-content-center">
-      <div class="col-12 col-md-8">
-        <h2>¿Qué beneficios obtengo?</h2>
-      </div>
-    </div>
-    <div class="row g-3 pt-4">
-      <ng-container *ngFor="let benefit of benefits; trackBy: trackByBenefits">
-        <div class="col-md-4">
-          <span class="d-block fw-bolder pb-2">{{benefit.title}}</span>
-          <small>{{benefit.description}}</small>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-</section>
+<app-benefits-section></app-benefits-section>

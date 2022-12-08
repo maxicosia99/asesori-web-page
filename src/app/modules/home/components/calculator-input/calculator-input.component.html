@@ -7,10 +7,11 @@
       </label>
       <div class="input-group">
         <span *ngIf="isMoney" class="input-group-text fw-bold bg-transparent border-0 ps-0 fs-5">$</span>
-        <input class="fw-bold form-control form-control-lg bg-light border-0 ps-1" type="number" placeholder="0"
-          aria-label="Monto a solicitar" aria-describedby="amount">
+        <input [value]="value" (input)="onInput($event)"
+          class="fw-bold form-control form-control-lg bg-light border-0 ps-1" type="number"
+          aria-label="Monto a solicitar" [attr.aria-describedby]="key">
       </div>
-      <div id="amount" class="form-text text-extra-small fw-bolder text-end">
+      <div [id]="key" class="form-text text-extra-small fw-bolder text-end">
         {{helpText}}
       </div>
     </div>

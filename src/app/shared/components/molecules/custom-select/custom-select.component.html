@@ -1,0 +1,8 @@
+<div class="form-floating">
+  <select class="form-select" [id]="key" [attr.aria-label]="label">
+    <option *ngFor="let option of options; trackBy: trackByOptions" [ngValue]="option.id">
+      {{option.name}}
+    </option>
+  </select>
+  <label [for]="key" class="text-uppercase">{{label}}</label>
+</div>

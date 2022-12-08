@@ -1,0 +1,17 @@
+<section class="container-fluid bg-light mt-5">
+  <div class="container py-5">
+    <div class="row text-center justify-content-center">
+      <div class="col-12 col-md-8">
+        <h2>¿Qué beneficios obtengo?</h2>
+      </div>
+    </div>
+    <div class="row g-3 pt-4">
+      <ng-container *ngFor="let benefit of benefits; trackBy: trackByBenefits">
+        <div class="col-md-4">
+          <span class="d-block fw-bolder pb-2">{{benefit.title}}</span>
+          <small>{{benefit.description}}</small>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

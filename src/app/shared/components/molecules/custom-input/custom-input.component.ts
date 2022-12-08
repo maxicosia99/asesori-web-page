@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -8,32 +8,38 @@ import {
 	Input,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { createSlug } from '@shared/utils';
+
+type InputType = 'text' | 'number' | 'email';
 
 const TYPE_CONTROL_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
 	useExisting: forwardRef(
-		(): typeof CalculatorInputComponent => CalculatorInputComponent
+		(): typeof CustomInputComponent => CustomInputComponent
 	),
 	multi: true,
 };
 
 @Component({
-	selector: 'app-calculator-input',
-	templateUrl: './calculator-input.component.html',
-	styleUrls: ['./calculator-input.component.scss'],
+	selector: 'app-custom-input',
+	templateUrl: './custom-input.component.html',
+	styleUrls: ['./custom-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [TYPE_CONTROL_ACCESSOR],
 })
-export class CalculatorInputComponent implements ControlValueAccessor {
+export class CustomInputComponent implements ControlValueAccessor {
 	// input
 	@Input() label = '';
-	@Input() helpText = '';
-	@Input() required = false;
-	@Input() isMoney = true;
-	@Input() key = '';
+	@Input() placeholder = '';
+	@Input() type: InputType = 'text';
+	@Input() value = '';
 
-	public value = 0;
+	public isValid = false;
 	public isDisabled = false;
+
+	get key(): string {
+		return createSlug(this.label);
+	}
 
 	// methods
 	public onChange = (_: any) => {};
@@ -41,16 +47,16 @@ export class CalculatorInputComponent implements ControlValueAccessor {
 
 	onInput(e: Event) {
 		const { value } = e.target as HTMLInputElement;
-		this.value = +value;
+		this.value = value;
 		this.onTouch();
 		this.onChange(this.value);
 	}
 
-	writeValue(obj: number): void {
+	writeValue(obj: string): void {
 		if (obj) {
-			this.value = obj || 0;
+			this.value = obj || '';
 		} else {
-			this.value = 0;
+			this.value = '';
 		}
 	}
 	registerOnChange(fn: any): void {
