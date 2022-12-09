@@ -1,8 +1,15 @@
 <div class="form-floating">
-  <input [value]="value" (input)="onInput($event)" [type]="type" class="form-control"
-    [ngClass]="{'is-invalid' : isValid}" [id]="key" [placeholder]="label" [attr.aria-describedby]="key">
+  <input [id]="key" [value]="value" [name]="key" (input)="onInput($event)" [type]="type" class="form-control"
+    [ngClass]="{'is-invalid' : isValid}" [placeholder]="label" [attr.aria-describedby]="key">
   <label [for]="key" class="text-uppercase">{{label}} *</label>
   <div *ngIf="isValid" [id]="key" class="invalid-feedback text-end">
     Please provide a valid city.
   </div>
 </div>
+
+<!-- <div *ngIf="errors?.['required']">
+  Name is required.
+</div>
+<div *ngIf="errors?.['email']">
+  Email
+</div> -->

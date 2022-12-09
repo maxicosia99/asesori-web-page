@@ -91,9 +91,24 @@
         </div>
         <p>Antes de conocer las mejores opciones de crédito es importante que ingreses los siguientes datos.</p>
       </div>
-      <div class="col-12">
-        <app-custom-input value="test@example.com" label="correo electrónico" type="email"></app-custom-input>
-      </div>
+      <form [formGroup]="emailForm">
+        <div class="col-12">
+          <!-- <app-custom-input value="test@example.com" label="correo electrónico" type="email"></app-custom-input> -->
+          <!-- <app-custom-input formControlName="email" label="correo electrónico" type="email"></app-custom-input> -->
+          <!-- <input type="text" class="form-control" formControlName="email">
+          <div *ngIf="emailControl['email'].invalid && (emailControl['email'].dirty || emailControl['email'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="emailControl['email'].errors?.['required']">
+              email is required.
+            </div>
+            <div *ngIf="emailControl['email'].errors?.['email']">
+              is not a email.
+            </div>
+          </div> -->
+
+        </div>
+      </form>
+      {{ emailFormValues | json }}
       <div class="pt-4 d-grid col-8 col-md-3 mx-auto">
         <button type="submit" routerLink="/" class="btn btn-primary text-uppercase">
           Continuar

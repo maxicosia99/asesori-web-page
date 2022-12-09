@@ -22,6 +22,7 @@ export class HomeComponent {
 	// forms
 	public optionsForm: FormGroup;
 	public calculatorForm: FormGroup;
+	public emailForm: FormGroup;
 
 	// * Other way to implement a form (out the constructor)
 	// public calculatorForm: FormGroup = new FormGroup({
@@ -35,23 +36,36 @@ export class HomeComponent {
 	constructor(formBuilder: FormBuilder) {
 		// init forms
 		this.optionsForm = formBuilder.group({
-			type: this._option,
+			type: [this._option],
 		});
 		this.calculatorForm = formBuilder.group({
-			amount: new FormControl(0, [Validators.required]),
-			entry: new FormControl(0, [Validators.required]),
-			income: new FormControl(0, [Validators.required]),
-			time: new FormControl(0, [Validators.required]),
+			amount: [0, [Validators.required]],
+			entry: [0, [Validators.required]],
+			income: [0, [Validators.required]],
+			time: [0, [Validators.required]],
+		});
+		this.emailForm = formBuilder.group({
+			email: ['', [Validators.required, Validators.email]],
 		});
 	}
+
+	heroForm = FormGroup;
 
 	// get methods
 	get option(): string {
 		return this.optionsForm.value.type;
 	}
 
-	get calculatorValues(): string {
+	get calculatorFormValues(): string {
 		return this.calculatorForm.value;
+	}
+
+	get emailFormValues(): string {
+		return this.emailForm.value;
+	}
+
+	get emailControl() {
+		return this.emailForm.controls;
 	}
 
 	get validateEntry(): boolean {
