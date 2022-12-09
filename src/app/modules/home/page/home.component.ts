@@ -79,6 +79,11 @@ export class HomeComponent {
 
 	calculateCredit(): void {
 		// TODO: activate email section
+		if (this.calculatorForm.valid) {
+			console.log('do something');
+		} else {
+			this.calculatorForm.markAllAsTouched();
+		}
 		// const { amount, income, time, entry } = this.calculatorForm.value;
 		// console.log(this.calculatorForm.value);
 	}
