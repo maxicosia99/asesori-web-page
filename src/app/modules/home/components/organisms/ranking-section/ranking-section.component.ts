@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-	FILTER_DATA_ITEMS,
-	ORDER_DATA_ITEMS,
-	RANKING_DATA_ITEMS,
-} from '@data/constants/mock';
+import { FILTER_DATA_ITEMS, ORDER_DATA_ITEMS, RANKING_DATA_ITEMS } from '@data/constants/mock';
 import { Ranking, SelectOption } from '@data/interfaces';
 
 @Component({

@@ -1,2 +1,6 @@
 dist
-node_modules
+node_modules/*
+package-lock.json
+yarn.lock
+src/*.ts
+src/index.html

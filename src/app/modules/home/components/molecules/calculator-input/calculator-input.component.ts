@@ -1,19 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-	ChangeDetectionStrategy,
-	Component,
-	forwardRef,
-	Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const TYPE_CONTROL_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
-	useExisting: forwardRef(
-		(): typeof CalculatorInputComponent => CalculatorInputComponent
-	),
+	useExisting: forwardRef((): typeof CalculatorInputComponent => CalculatorInputComponent),
 	multi: true,
 };
 
@@ -36,10 +29,10 @@ export class CalculatorInputComponent implements ControlValueAccessor {
 	public isDisabled = false;
 
 	// methods
-	public onChange = (_: any) => {};
-	public onTouch = () => {};
+	public onChange = (_: any): void => {};
+	public onTouch = (): void => {};
 
-	onInput(e: Event) {
+	onInput(e: Event): void {
 		const { value } = e.target as HTMLInputElement;
 		this.value = +value;
 		this.onTouch();

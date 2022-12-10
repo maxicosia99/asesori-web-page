@@ -12,25 +12,14 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SkeletonComponent,
-    FooterComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    CoreModule,
-    SharedModule,
-  ],
-  providers: [
-    {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy,
-    },
-  ],
-  bootstrap: [AppComponent],
+	declarations: [AppComponent, SkeletonComponent, FooterComponent, HeaderComponent],
+	imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, CoreModule, SharedModule],
+	providers: [
+		{
+			provide: LocationStrategy,
+			useClass: PathLocationStrategy,
+		},
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

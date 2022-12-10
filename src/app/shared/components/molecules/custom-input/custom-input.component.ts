@@ -1,17 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	forwardRef,
-	Input,
-	ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import {
 	AbstractControl,
 	ControlValueAccessor,
+	FormControl,
 	NG_VALIDATORS,
 	NG_VALUE_ACCESSOR,
 	ValidationErrors,
@@ -23,17 +15,13 @@ type InputType = 'text' | 'number' | 'email';
 
 const TYPE_CONTROL_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
-	useExisting: forwardRef(
-		(): typeof CustomInputComponent => CustomInputComponent
-	),
+	useExisting: forwardRef((): typeof CustomInputComponent => CustomInputComponent),
 	multi: true,
 };
 
 const TYPE_CONTROL_VALIDATOR = {
 	provide: NG_VALIDATORS,
-	useExisting: forwardRef(
-		(): typeof CustomInputComponent => CustomInputComponent
-	),
+	useExisting: forwardRef((): typeof CustomInputComponent => CustomInputComponent),
 	multi: true,
 };
 
@@ -54,22 +42,24 @@ export class CustomInputComponent implements ControlValueAccessor, Validator {
 
 	public isValid = false;
 	public isDisabled = false;
+	public formControl = new FormControl();
+	public errors?: ValidationErrors = [];
 
 	get key(): string {
 		return createSlug(this.label);
 	}
 
 	// methods
-	public onChange = (_: any): void => {};
-	public onTouch = (): void => {};
-	public onValidationChange = (): void => {};
+	private _onChanged = (_: string): void => {};
+	private _onTouch = (_: string): void => {};
+	private _onValidationChange = (): void => {};
 
 	onInput(e: Event): void {
 		const { value } = e.target as HTMLInputElement;
 		this.value = value;
-		this.onTouch();
-		this.onChange(this.value);
-		this.onValidationChange();
+		this._onTouch(this.value);
+		this._onChanged(this.value);
+		this._onValidationChange();
 	}
 
 	writeValue(value: string): void {
@@ -80,11 +70,12 @@ export class CustomInputComponent implements ControlValueAccessor, Validator {
 		}
 	}
 
-	registerOnChange(fn: () => void): void {
-		this.onChange = fn;
+	registerOnChange(fn: (_: string) => void): void {
+		this._onChanged = fn;
 	}
-	registerOnTouched(fn: () => void): void {
-		this.onTouch = fn;
+
+	registerOnTouched(fn: (_: string) => void): void {
+		this._onTouch = fn;
 	}
 
 	setDisabledState(isDisabled: boolean): void {
@@ -92,11 +83,24 @@ export class CustomInputComponent implements ControlValueAccessor, Validator {
 	}
 
 	registerOnValidatorChange?(fn: () => void): void {
-		this.onValidationChange = fn;
+		this._onValidationChange = fn;
 	}
 
+	// validate(control: AbstractControl<any, any>): ValidationErrors | null {
+	// 	// 1 way
+	// 	// if (control.hasError('email')) {
+	// 	// 	this.formControl.setValidators(Validators.email);
+	// 	// 	this.formControl.updateValueAndValidity();
+	// 	// }
+	// 	// return this.formControl.valid ? null : this.formControl.errors;
+	// 	// 2 way
+	// 	// return control.errors === null ? null : control.errors;
+	// 	return this.formControl.valid ? null : this.formControl.errors;
+	// }
+
 	validate(control: AbstractControl<any, any>): ValidationErrors | null {
-		// console.log(control.errors);
-		return control.errors;
+		this.formControl.setErrors(control.errors);
+		// this.formControl.updateValueAndValidity();
+		return null;
 	}
 }

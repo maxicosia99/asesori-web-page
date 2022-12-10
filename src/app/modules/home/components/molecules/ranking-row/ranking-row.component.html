@@ -1,22 +1,22 @@
 <div class="row text-center justify-content-between">
-  <div class="col-md-3">
-    <img [src]="row.image" class="img-fluid" alt="">
-  </div>
-  <div class="col-6 col-md-2">
-    <span class="text-extra-small">Tasa de interés anual</span>
-    <span class="d-block fw-bold mt-1">{{row.interestRate}} %</span>
-  </div>
-  <div class="col-6 col-md-2">
-    <small class="text-extra-small">Tiempo de aprobación</small>
-    <span class="d-block fw-bold mt-1">{{row.approvalTime}} horas</span>
-  </div>
-  <div class="col-6 col-md-2">
-    <small class="text-extra-small">Cantidad de trámites</small>
-    <span class="d-block fw-bold mt-1 text-uppercase">{{row.procedures}}</span>
-  </div>
-  <div class="col-6 col-md-2">
-    <small class="text-extra-small">Calificación obtenida</small>
-    <!-- <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="true"></rating> -->
-    <span class="d-block fw-bold mt-1">{{row.rating}}/100</span>
-  </div>
+	<div class="col-md-3">
+		<img [src]="row.image" class="img-fluid" alt="" />
+	</div>
+	<div class="col-6 col-md-2">
+		<span class="text-extra-small">Tasa de interés anual</span>
+		<span class="d-block fw-bold mt-1">{{ row.interestRate }} %</span>
+	</div>
+	<div class="col-6 col-md-2">
+		<small class="text-extra-small">Tiempo de aprobación</small>
+		<span class="d-block fw-bold mt-1">{{ row.approvalTime }} horas</span>
+	</div>
+	<div class="col-6 col-md-2">
+		<small class="text-extra-small">Cantidad de trámites</small>
+		<span class="d-block fw-bold mt-1 text-uppercase">{{ row.procedures }}</span>
+	</div>
+	<div class="col-6 col-md-2">
+		<small class="text-extra-small">Calificación obtenida</small>
+		<!-- <rating [(ngModel)]="rate" [max]="max" class="rating" [readonly]="true"></rating> -->
+		<span class="d-block fw-bold mt-1">{{ row.rating }}/100</span>
+	</div>
 </div>

@@ -1,19 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-	Component,
-	forwardRef,
-	ChangeDetectionStrategy,
-	Input,
-} from '@angular/core';
+import { Component, forwardRef, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const TYPE_CONTROL_ACCESSOR = {
 	provide: NG_VALUE_ACCESSOR,
-	useExisting: forwardRef(
-		(): typeof OptionsGroupComponent => OptionsGroupComponent
-	),
+	useExisting: forwardRef((): typeof OptionsGroupComponent => OptionsGroupComponent),
 	multi: true,
 };
 

@@ -1,12 +1,7 @@
 // atoms
 
 // molecules
-import {
-	OptionsGroupComponent,
-	RankingRowComponent,
-	ServiceComponent,
-	CalculatorInputComponent,
-} from './molecules';
+import { OptionsGroupComponent, RankingRowComponent, ServiceComponent, CalculatorInputComponent } from './molecules';
 
 // organisms
 import {

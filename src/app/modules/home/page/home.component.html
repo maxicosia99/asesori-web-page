@@ -6,116 +6,126 @@
 
 <!-- calculator -->
 <section class="container mt-5">
-  <div class="row">
-    <div class="col-12">
-      <h6 class="text-uppercase fw-bold pb-3">Compara las mejores tasas y oportunidades de financiamiento</h6>
-      <p class="mb-0">ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y
-        pólizas de
-        inversión que ofrecen los Bancos, Cooperativas o Mutualistas, utiliza nuestra calculadora a continuación y
-        compara.</p>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-12">
+			<h6 class="text-uppercase fw-bold pb-3">Compara las mejores tasas y oportunidades de financiamiento</h6>
+			<p class="mb-0">
+				ASESORI te permite comparar las diferentes opciones de crédito, seguros, tarjetas de crédito y pólizas de
+				inversión que ofrecen los Bancos, Cooperativas o Mutualistas, utiliza nuestra calculadora a continuación y
+				compara.
+			</p>
+		</div>
+	</div>
 
-  <form [formGroup]="optionsForm">
-    <app-options-group [items]="selectors" [value]="option" formControlName="type"></app-options-group>
-  </form>
+	<form [formGroup]="optionsForm">
+		<app-options-group [items]="selectors" [value]="option" formControlName="type"></app-options-group>
+	</form>
 
-  <ng-container [ngSwitch]="option">
-    <div *ngSwitchCase="'credit'">
-      <div class="row">
-        <div class="col-12">
-          <app-custom-select label="Opciones de crédito" [options]="credits"></app-custom-select>
-        </div>
-      </div>
-      <form [formGroup]="calculatorForm" (ngSubmit)="calculateCredit()">
-        <div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 gy-3">
-          <app-calculator-input formControlName="amount" key="amount" label="monto a solicitar"
-            helpText="Dólares americanos" [required]="true">
-          </app-calculator-input>
-          <app-calculator-input formControlName="entry" key="entry" label="entrada"
-            helpText="Dólares americanos"></app-calculator-input>
-          <app-calculator-input formControlName="income" key="income" label="ingreso mensual"
-            helpText="Dólares americanos" [required]="true">
-          </app-calculator-input>
-          <app-calculator-input formControlName="time" key="time" label="tiempo plazo" helpText="Meses"
-            [required]="true" [isMoney]="false">
-          </app-calculator-input>
-        </div>
-        <div *ngIf="validateEntry" class="row">
-          <div class="col">
-            <app-alert severity="danger" message="La entrada no puede superar el 90% del valor a solicitar!">
-            </app-alert>
-          </div>
-        </div>
-        <div class="d-grid col-8 col-md-3 mx-auto">
-          <button type="submit" routerLink="/" class="btn btn-primary text-uppercase" [disabled]="calculatorFormValid">
-            Calcular
-          </button>
-        </div>
-      </form>
-    </div>
-    <div *ngSwitchCase="'insurance'" class="row">
-      <div class="col">
-        <app-custom-select label="Opciones de seguro" [options]="insurances"></app-custom-select>
-      </div>
-    </div>
-    <div *ngSwitchCase="'card'" class="row">
-      <div class="col">
-        <app-alert severity="warning">
-          El servicio de <strong>Tarjetas de crédito</strong> aún no se encuentra disponible!
-        </app-alert>
-      </div>
-    </div>
-    <div *ngSwitchCase="'investment'" class="row">
-      <div class="col">
-        <app-alert severity="warning">
-          El servicio de <strong>Póliza de inversión</strong> aún no se encuentra disponible!
-        </app-alert>
-      </div>
-    </div>
-    <div *ngSwitchDefault class="row">
-      <div class="col">
-        <small>Selecciona uno de nuestros servicios</small>
-      </div>
-    </div>
-  </ng-container>
+	<ng-container [ngSwitch]="option">
+		<div *ngSwitchCase="'credit'">
+			<div class="row">
+				<div class="col-12">
+					<app-custom-select label="Opciones de crédito" [options]="credits"></app-custom-select>
+				</div>
+			</div>
+			<form [formGroup]="calculatorForm" (ngSubmit)="calculateCredit()">
+				<div class="row py-4 row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 gy-3">
+					<app-calculator-input
+						formControlName="amount"
+						key="amount"
+						label="monto a solicitar"
+						helpText="Dólares americanos"
+						[required]="true"
+					>
+					</app-calculator-input>
+					<app-calculator-input
+						formControlName="entry"
+						key="entry"
+						label="entrada"
+						helpText="Dólares americanos"
+					></app-calculator-input>
+					<app-calculator-input
+						formControlName="income"
+						key="income"
+						label="ingreso mensual"
+						helpText="Dólares americanos"
+						[required]="true"
+					>
+					</app-calculator-input>
+					<app-calculator-input
+						formControlName="time"
+						key="time"
+						label="tiempo plazo"
+						helpText="Meses"
+						[required]="true"
+						[isMoney]="false"
+					>
+					</app-calculator-input>
+				</div>
+				<div *ngIf="validateEntry" class="row">
+					<div class="col">
+						<app-alert severity="danger" message="La entrada no puede superar el 90% del valor a solicitar!">
+						</app-alert>
+					</div>
+				</div>
+				<div class="d-grid col-8 col-md-3 mx-auto">
+					<button type="submit" routerLink="/" class="btn btn-primary text-uppercase" [disabled]="calculatorFormValid">
+						Calcular
+					</button>
+				</div>
+			</form>
+		</div>
+		<div *ngSwitchCase="'insurance'" class="row">
+			<div class="col">
+				<app-custom-select label="Opciones de seguro" [options]="insurances"></app-custom-select>
+			</div>
+		</div>
+		<div *ngSwitchCase="'card'" class="row">
+			<div class="col">
+				<app-alert severity="warning">
+					El servicio de <strong>Tarjetas de crédito</strong> aún no se encuentra disponible!
+				</app-alert>
+			</div>
+		</div>
+		<div *ngSwitchCase="'investment'" class="row">
+			<div class="col">
+				<app-alert severity="warning">
+					El servicio de <strong>Póliza de inversión</strong> aún no se encuentra disponible!
+				</app-alert>
+			</div>
+		</div>
+		<div *ngSwitchDefault class="row">
+			<div class="col">
+				<small>Selecciona uno de nuestros servicios</small>
+			</div>
+		</div>
+	</ng-container>
 </section>
 
 <section class="container-fluid bg-light mt-5 p-5">
-  <div class="container bg-white p-5">
-    <div class="row">
-      <div class="col-12">
-        <div class="d-flex align-items-center justify-content-between pb-3">
-          <h6 class="text-uppercase fw-bold">Estas a un solo paso, ingresa tu email</h6>
-          <button type="button" class="btn-close" aria-label="cerrar"></button>
-        </div>
-        <p>Antes de conocer las mejores opciones de crédito es importante que ingreses los siguientes datos.</p>
-      </div>
-      <form [formGroup]="emailForm">
-        <div class="col-12">
-          <!-- <app-custom-input value="test@example.com" label="correo electrónico" type="email"></app-custom-input> -->
-          <!-- <app-custom-input formControlName="email" label="correo electrónico" type="email"></app-custom-input> -->
-          <!-- <input type="text" class="form-control" formControlName="email">
-          <div *ngIf="emailControl['email'].invalid && (emailControl['email'].dirty || emailControl['email'].touched)"
-            class="alert alert-danger">
-            <div *ngIf="emailControl['email'].errors?.['required']">
-              email is required.
-            </div>
-            <div *ngIf="emailControl['email'].errors?.['email']">
-              is not a email.
-            </div>
-          </div> -->
-
-        </div>
-      </form>
-      {{ emailFormValues | json }}
-      <div class="pt-4 d-grid col-8 col-md-3 mx-auto">
-        <button type="submit" routerLink="/" class="btn btn-primary text-uppercase">
-          Continuar
-        </button>
-      </div>
-    </div>
-  </div>
+	<div class="container bg-white p-5">
+		<div class="row">
+			<div class="col-12">
+				<div class="d-flex align-items-center justify-content-between pb-3">
+					<h6 class="text-uppercase fw-bold">Estas a un solo paso, ingresa tu email</h6>
+					<button type="button" class="btn-close" aria-label="cerrar"></button>
+				</div>
+				<p>Antes de conocer las mejores opciones de crédito es importante que ingreses los siguientes datos.</p>
+			</div>
+			<form [formGroup]="emailForm">
+				<div class="col-12">
+					<app-custom-input formControlName="email" label="correo electrónico" type="email"></app-custom-input>
+					<!-- <div *ngIf="emailForm.controls['email'].hasError('required')" class="invalid-feedback text-end">
+						email is required
+					</div> -->
+				</div>
+			</form>
+			<!-- {{ emailFormValues | json }} -->
+			<div class="pt-4 d-grid col-8 col-md-3 mx-auto">
+				<button type="submit" routerLink="/" class="btn btn-primary text-uppercase">Continuar</button>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- ranking -->

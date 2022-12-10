@@ -1,19 +1,25 @@
 <!-- TODO: add validations (money or correct time) -->
 <div class="col">
-  <div class="rounded-3 d-flex align-items-center border p-4 bg-light">
-    <div>
-      <label for="formFile" class="form-label text-uppercase fw-bold">{{label}}
-        <span *ngIf="required" class="text-danger">*</span>
-      </label>
-      <div class="input-group">
-        <span *ngIf="isMoney" class="input-group-text fw-bold bg-transparent border-0 ps-0 fs-5">$</span>
-        <input [value]="value" (input)="onInput($event)"
-          class="fw-bold form-control form-control-lg bg-light border-0 ps-1" type="number"
-          aria-label="Monto a solicitar" [attr.aria-describedby]="key">
-      </div>
-      <div [id]="key" class="form-text text-extra-small fw-bolder text-end">
-        {{helpText}}
-      </div>
-    </div>
-  </div>
+	<div class="rounded-3 d-flex align-items-center border p-4 bg-light">
+		<div>
+			<label for="formFile" class="form-label text-uppercase fw-bold"
+				>{{ label }}
+				<span *ngIf="required" class="text-danger">*</span>
+			</label>
+			<div class="input-group">
+				<span *ngIf="isMoney" class="input-group-text fw-bold bg-transparent border-0 ps-0 fs-5">$</span>
+				<input
+					[value]="value"
+					(input)="onInput($event)"
+					class="fw-bold form-control form-control-lg bg-light border-0 ps-1"
+					type="number"
+					aria-label="Monto a solicitar"
+					[attr.aria-describedby]="key"
+				/>
+			</div>
+			<div [id]="key" class="form-text text-extra-small fw-bolder text-end">
+				{{ helpText }}
+			</div>
+		</div>
+	</div>
 </div>

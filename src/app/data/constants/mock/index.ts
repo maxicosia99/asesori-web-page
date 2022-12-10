@@ -1,11 +1,4 @@
-import {
-	Benefit,
-	Item,
-	Option,
-	Ranking,
-	SelectOption,
-	Service,
-} from '@data/interfaces';
+import { Benefit, Item, Option, Ranking, SelectOption, Service } from '@data/interfaces';
 
 export const STEPS_DATA_ITEMS: string[] = [
 	'Selecciona el crédito al que deseas aplicar',
@@ -44,8 +37,7 @@ export const RANKING_DATA_ITEMS: Ranking[] = [
 	},
 	{
 		id: 4,
-		image:
-			'/assets/images/financial-entities/cooperativa-jardinAzuayo-188x100.png',
+		image: '/assets/images/financial-entities/cooperativa-jardinAzuayo-188x100.png',
 		interestRate: 10.81,
 		approvalTime: 70,
 		procedures: 'corto',
@@ -65,8 +57,7 @@ export const SERVICES_DATA_ITEMS: Service[] = [
 	{
 		id: 'credits-card',
 		title: 'tarjetas de crédito',
-		description:
-			'Deja atrás lo lento y tedioso que resulta el trámite para poder contar con tu tarjeta de crédito.',
+		description: 'Deja atrás lo lento y tedioso que resulta el trámite para poder contar con tu tarjeta de crédito.',
 		image: '/assets/images/services/3108488@3x.png',
 	},
 	{
@@ -100,8 +91,7 @@ export const BENEFITS_DATA_ITEMS: Benefit[] = [
 	{
 		id: 4,
 		title: 'Reduce el tiempo',
-		description:
-			'Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una tasa menor de interés',
+		description: 'Una vez que nos envíes tus datos nosotros te avisaremos cuando exista una tasa menor de interés',
 	},
 	{
 		id: 5,
@@ -112,8 +102,7 @@ export const BENEFITS_DATA_ITEMS: Benefit[] = [
 	{
 		id: 6,
 		title: 'Transparencia',
-		description:
-			'Actuamos de forma independiente al no ser una entidad financiera, ofreciéndote información gratuita.',
+		description: 'Actuamos de forma independiente al no ser una entidad financiera, ofreciéndote información gratuita.',
 	},
 ];
 

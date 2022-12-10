@@ -1,17 +1,8 @@
 import { Component } from '@angular/core';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CREDITS_DATA_ITEMS, INSURANCE_DATA_ITEMS, OPTIONS_DATA_ITEMS } from '@data/constants/mock';
 import { Item, Option } from '@data/interfaces';
-import {
-	CREDITS_DATA_ITEMS,
-	INSURANCE_DATA_ITEMS,
-	OPTIONS_DATA_ITEMS,
-} from '@data/constants/mock';
-import {
-	FormBuilder,
-	FormControl,
-	FormGroup,
-	Validators,
-} from '@angular/forms';
 
 @Component({
 	selector: 'app-home',
@@ -64,7 +55,7 @@ export class HomeComponent {
 		return this.emailForm.value;
 	}
 
-	get emailControl() {
+	get emailControl(): any {
 		return this.emailForm.controls;
 	}
 
@@ -75,8 +66,7 @@ export class HomeComponent {
 
 	get calculatorFormValid(): boolean {
 		const { amount, income, time } = this.calculatorForm.value;
-		const condition =
-			amount == 0 || this.validateEntry || income == 0 || time == 0;
+		const condition = amount == 0 || this.validateEntry || income == 0 || time == 0;
 		return condition ? true : false;
 	}
 
