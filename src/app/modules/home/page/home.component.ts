@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CREDITS_DATA_ITEMS, INSURANCE_DATA_ITEMS, OPTIONS_DATA_ITEMS } from '@data/constants/mock';
 import { Item, Option } from '@data/interfaces';
 
@@ -40,8 +40,6 @@ export class HomeComponent {
 		});
 	}
 
-	heroForm = FormGroup;
-
 	// get methods
 	get option(): string {
 		return this.optionsForm.value.type;
@@ -51,12 +49,8 @@ export class HomeComponent {
 		return this.calculatorForm.value;
 	}
 
-	get emailFormValues(): string {
-		return this.emailForm.value;
-	}
-
-	get emailControl(): any {
-		return this.emailForm.controls;
+	get email(): FormControl {
+		return this.emailForm.get('email') as FormControl;
 	}
 
 	get validateEntry(): boolean {
@@ -82,6 +76,7 @@ export class HomeComponent {
 	// methods
 
 	calculateCredit(): void {
+		this.calculatorForm.markAllAsTouched();
 		// TODO: activate email section
 		if (this.calculatorForm.valid) {
 			console.log('do something');

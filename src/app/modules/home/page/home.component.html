@@ -114,9 +114,29 @@
 			</div>
 			<form [formGroup]="emailForm">
 				<div class="col-12">
-					<app-custom-input formControlName="email" label="correo electrónico" type="email"></app-custom-input>
-					<!-- <div *ngIf="emailForm.controls['email'].hasError('required')" class="invalid-feedback text-end">
-						email is required
+					<app-custom-input
+						formControlName="email"
+						label="correo electrónico"
+						type="email"
+						[parentForm]="emailForm"
+						fieldName="email"
+					></app-custom-input>
+					<!-- <hr />
+					<div class="form-floating">
+						<input
+							type="text"
+							class="form-control"
+							formControlName="email"
+							placeholder="hola"
+							[ngClass]="{ 'is-invalid': email.invalid && (email.dirty || email.touched) }"
+						/>
+						<label class="text-uppercase">Email *</label>
+						<ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+							<div *ngIf="email.errors?.['required']" class="invalid-feedback">email is required.</div>
+							<div *ngIf="email.errors?.['email']" class="invalid-feedback">
+								email must be at least 4 characters long.
+							</div>
+						</ng-container>
 					</div> -->
 				</div>
 			</form>

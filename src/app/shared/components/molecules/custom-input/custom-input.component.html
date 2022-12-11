@@ -1,17 +1,37 @@
-<div class="form-floating">
+<!-- <div class="form-floating">
 	<input
-		[formControl]="formControl"
-		[id]="key"
+		[id]="fieldName"
 		[value]="value"
-		[name]="key"
+		[name]="fieldName"
 		(input)="onInput($event)"
 		[type]="type"
 		class="form-control"
-		[ngClass]="{ 'is-invalid': formControl.errors }"
+		[ngClass]="{ 'is-invalid': formField.invalid && (formField.dirty || formField.touched) }"
 		[placeholder]="label"
-		[attr.aria-describedby]="key"
+		[attr.aria-describedby]="fieldName"
 	/>
-	<label [for]="key" class="text-uppercase">{{ label }} *</label>
-	<div *ngIf="formControl.hasError('required')" [id]="key" class="invalid-feedback">email is required</div>
-	<div *ngIf="formControl.hasError('email')" [id]="key" class="invalid-feedback">is not a email</div>
+	<label [for]="fieldName" class="text-uppercase">{{ label }} *</label>
+	<ng-container *ngIf="formField.invalid && (formField.dirty || formField.touched)">
+		<div *ngIf="formField.errors?.['required']" [id]="fieldName" class="invalid-feedback">email is required</div>
+		<div *ngIf="formField.errors?.['email']" [id]="fieldName" class="invalid-feedback">is not a email</div>
+	</ng-container>
+</div> -->
+
+<div class="form-floating">
+	<input
+		[id]="fieldName"
+		[name]="fieldName"
+		type="text"
+		class="form-control"
+		[value]="value"
+		(input)="onInput($event)"
+		[placeholder]="label"
+		[disabled]="isDisabled"
+		[ngClass]="{ 'is-invalid': formField.invalid && formField.touched }"
+	/>
+	<label [for]="fieldName" class="text-uppercase">{{ label }}. *</label>
+	<ng-container *ngIf="formField.invalid && formField.touched">
+		<div *ngIf="formField.errors?.['required']" class="invalid-feedback">formField. is required.</div>
+		<div *ngIf="formField.errors?.['email']" class="invalid-feedback">email is invalid</div>
+	</ng-container>
 </div>
