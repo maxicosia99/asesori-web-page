@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-# Esta configuración hace que el formateo se aplique a todos los archivos del proyecto
-npm run format &&  ng lint --fix  && git add .
+# Esta configuración hace que el formateo se aplique a todos los archivos del proyecto, es recomendable usar este comando en la primera vez
+# npm run format &&  ng lint --fix  && git add .
+
+# Con pretty quick se aplica el formateo y linting solo a los archivos modificados
+npm run format-pretty-quick  && ng lint --fix
