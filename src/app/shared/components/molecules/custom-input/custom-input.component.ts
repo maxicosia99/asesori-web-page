@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -10,11 +11,11 @@ const TYPE_CONTROL_ACCESSOR = {
 	multi: true,
 };
 
-const TYPE_CONTROL_VALIDATOR = {
-	provide: NG_VALIDATORS,
-	useExisting: forwardRef((): typeof CustomInputComponent => CustomInputComponent),
-	multi: true,
-};
+// const TYPE_CONTROL_VALIDATOR = {
+// 	provide: NG_VALIDATORS,
+// 	useExisting: forwardRef((): typeof CustomInputComponent => CustomInputComponent),
+// 	multi: true,
+// };
 
 @Component({
 	selector: 'app-custom-input',

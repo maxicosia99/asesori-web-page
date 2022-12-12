@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 # Esta configuración hace que el formateo se aplique a todos los archivos del proyecto
-# npm run format &&  ng lint --fix  && git add .
+npm run format &&  ng lint --fix  && git add .
