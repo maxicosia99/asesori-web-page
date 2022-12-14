@@ -1,0 +1,53 @@
+<div class="row mb-5 shadow d-flex text-center justify-content-center align-items-center bg-primary" role="button">
+	<div class="col-12 col-lg-10 bg-white">
+		<div class="row">
+			<div class="col-lg-3">
+				<img [src]="credit.photoUrl" class="img-fluid" [alt]="credit.financialentityName" />
+			</div>
+			<div class="col-lg-9 pt-2">
+				<div class="row g-2 justify-content-center">
+					<div class="col-6 col-md-4">
+						<small class="d-block text-uppercase fw-bold">Monto a solicitar</small>
+						<h2 class="my-0">{{ credit.borrowedAmount | currency }}</h2>
+						<div class="form-text text-extra-small fw-bolder text-uppercase">Dólares americanos</div>
+					</div>
+					<div class="col-6 col-md-4">
+						<small class="d-block text-uppercase fw-bold">Entrada</small>
+						<h2 class="my-0">{{ credit.userInitialAmount | currency }}</h2>
+						<div class="form-text text-extra-small fw-bolder text-uppercase">valor opcional</div>
+					</div>
+					<div class="col-6 col-md-4">
+						<small class="d-block text-uppercase fw-bold">tiempo plazo</small>
+						<h2 class="my-0">{{ credit.numericalTerm }}</h2>
+						<div class="form-text text-extra-small fw-bolder text-uppercase">{{ credit.textTerm }}</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row g-2 pb-3 pb-lg-0">
+					<div class="col-6 col-md-3">
+						<div class="form-text text-extra-small fw-bolder text-uppercase">tasa anual</div>
+						<h5 class="text-muted mb-0">{{ credit.loanRate }}%</h5>
+					</div>
+					<div class="col-6 col-md-3">
+						<div class="form-text text-extra-small fw-bolder text-uppercase">financiamiento</div>
+						<h5 class="text-muted mb-0">{{ credit.financing }}%</h5>
+					</div>
+					<div class="col-6 col-md-3">
+						<div class="form-text text-extra-small fw-bolder text-uppercase">monto de crédito</div>
+						<h5 class="text-muted mb-0">{{ credit.loanAmount | currency }}</h5>
+					</div>
+					<div class="col-6 col-md-3">
+						<div class="form-text text-extra-small fw-bolder text-uppercase">crédito bancario</div>
+						<h5 class="text-muted mb-0">{{ credit.bankBorrow | currency }}</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-lg-2 text-white py-3 py-lg-0">
+		<small class="d-block text-uppercase fw-bold">cuota estimada</small>
+		<h2 class="my-0">{{ credit.monthlyPayment | currency }}</h2>
+		<div class="form-text text-white text-extra-small fw-bolder text-uppercase pb-3">mensual</div>
+		<a routerLink="/" class="fw-bolder text-white text-uppercase">Más información</a>
+	</div>
+</div>

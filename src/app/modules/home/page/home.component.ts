@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CREDITS_DATA_ITEMS, INSURANCE_DATA_ITEMS, OPTIONS_DATA_ITEMS } from '@data/constants/mock';
+import { Router } from '@angular/router';
 import { Item, Option } from '@data/interfaces';
+import { INTERNAL_ROUTES } from '@data/constants/routes';
+import { CREDITS_DATA_ITEMS, INSURANCE_DATA_ITEMS, OPTIONS_DATA_ITEMS } from '@data/constants/mock';
 
 @Component({
 	selector: 'app-home',
@@ -24,7 +26,7 @@ export class HomeComponent {
 	// variables
 	private _option = 'credit'; // you can add a default value: credit | insurance | card | investment
 
-	constructor(formBuilder: FormBuilder) {
+	constructor(private formBuilder: FormBuilder, private router: Router) {
 		// init forms
 		this.optionsForm = formBuilder.group({
 			type: [this._option],
@@ -68,20 +70,25 @@ export class HomeComponent {
 	public selectors: Option[] = OPTIONS_DATA_ITEMS;
 	public credits: Item[] = CREDITS_DATA_ITEMS;
 	public insurances: Item[] = INSURANCE_DATA_ITEMS;
+	public INTERNAL_ROUTES = INTERNAL_ROUTES;
 
 	// trackBy functions
 	// syntax: trackBy<name> = (index: number, item: <type>): <type> => item.<type>;
 	trackByItems = (_: number, item: Item): number => item.id;
 
 	// methods
-
-	calculateCredit(): void {
-		this.calculatorForm.markAllAsTouched();
-		// TODO: activate email section
-		if (this.calculatorForm.valid) {
-			console.log('do something');
-		} else {
-			this.calculatorForm.markAllAsTouched();
+	calculate(): void {
+		// TODO: validate this function
+		switch (this.option) {
+			case 'credit':
+				if (!this.calculatorForm.valid) return;
+				this.router.navigate([INTERNAL_ROUTES.ASESORI_CREDIT_RESULTS]);
+				break;
+			case 'insurance':
+				console.log('insurance');
+				break;
+			default:
+				break;
 		}
 		// const { amount, income, time, entry } = this.calculatorForm.value;
 		// console.log(this.calculatorForm.value);

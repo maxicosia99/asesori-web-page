@@ -37,3 +37,24 @@ export interface SelectOption {
 	id: number;
 	name: string;
 }
+
+export interface Credit {
+	id: number;
+	loanRate: number;
+	financing: number;
+	loanAmount: number;
+	bankBorrow: number;
+	userInitialAmount: number;
+	borrowedAmount: number;
+	initialAmountNeeded: number;
+	monthlyPayment: number;
+	numericalTerm: number;
+	textTerm: string;
+	financialentityId: number;
+	financialentityName: string;
+	financialentityType: number;
+	photoUrl: string;
+	info: string;
+	paymentTermination: string;
+	priority: number;
+}
