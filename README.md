@@ -4,7 +4,7 @@ ASESORI is a web platform within the FINTECH scope, which allows people to make 
 
 ## Installation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
 
 Clone this repository
 
